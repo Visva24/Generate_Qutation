@@ -11,10 +11,10 @@ export class AuthenticationController {
     constructor(
         private readonly authenticationService: AuthenticationService,  
       ) { }
-
+      
   @Post("sign-in")
-  async signIn(@Query('user_email') user_email: string,@Query('user_password') user_password: string) {
-    return this.authenticationService.signIn( user_email,user_password)
+  async signIn(@Body() userData: {user_email: string,user_password: string}) {
+    return this.authenticationService.signIn( userData.user_email,userData.user_password)
   }
 
   

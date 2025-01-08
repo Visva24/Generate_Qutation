@@ -8,6 +8,8 @@ import { UserRepository } from './modules/authentication/entity/users.entity';
 import { Sequelize } from 'sequelize';
 import generateSequelizeOptions from './common/db-config/db.const';
 import { JwtService } from '@nestjs/jwt';
+import { QuotationModule } from './modules/quotation/quotation.module';
+
 
 
 
@@ -17,6 +19,7 @@ import { JwtService } from '@nestjs/jwt';
     SequelizeModule.forRootAsync({
       useFactory: generateSequelizeOptions,
     }),
+    QuotationModule,
   ],
   
   controllers: [AppController],
