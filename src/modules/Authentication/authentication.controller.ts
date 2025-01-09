@@ -2,8 +2,8 @@ import { Body, Controller, Post, Query } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { ApiResponse } from 'src/common/util/helper.config';
 import { AuthenticationService } from './authentication.service';
-import { EmployeeSignUpDto } from './dto/create-user.dto';
-import { saveSignUpDetails } from './sample/user.sample';
+import { EmployeeSignInDto, EmployeeSignUpDto } from './dto/create-user.dto';
+import { saveSignInDetails, saveSignUpDetails } from './sample/user.sample';
 
 @ApiTags('Users')
 @Controller('authentication')
@@ -12,8 +12,20 @@ export class AuthenticationController {
         private readonly authenticationService: AuthenticationService,  
       ) { }
       
+
+  @ApiBody({
+    schema: {
+      type: 'array'
+    },
+    examples: {
+      example: {
+        value: saveSignInDetails
+      }
+    }
+
+  })
   @Post("sign-in")
-  async signIn(@Body() userData: {user_email: string,user_password: string}) {
+  async signIn(@Body() userData: EmployeeSignInDto) {
     return this.authenticationService.signIn( userData.user_email,userData.user_password)
   }
 

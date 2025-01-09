@@ -4,6 +4,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import * as moment from 'moment-timezone';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as bodyParser from 'body-parser';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const port = 5000;
@@ -23,12 +24,15 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
   app.use(bodyParser.json({ limit: '10mb' }));
   app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+
   // app.useGlobalPipes(new ValidationPipe({
-  //   transform: true,               // Automatically transform incoming data to DTO objects
-  //   whitelist: true,               // Strips non-whitelisted properties from incoming DTO objects
+  //      transform: true,               // Automatically transform incoming data to DTO objects
+  //      whitelist: true,               // Strips non-whitelisted properties from incoming DTO objects
   //   forbidNonWhitelisted: true,    // Throws an error if unexpected properties are found in incoming DTO objects
   //   forbidUnknownValues: true     // Throws an error if unexpected query parameters are found in request URLs
-  // }));
+  
+    // }));
+  
   await app.listen(port, () => console.log(`app listening on port ${port}!`));
  
 }

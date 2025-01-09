@@ -57,28 +57,37 @@ export class AuthenticationService {
           )
           
         }
-      }
+    }
 
     async signIn(email: string, user_password: string): Promise<ApiResponse> {
         try {
 
           let condition: any = {};
          
+          let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          let isEmail = emailRegex.test(email)
           condition = { user_email: (email).toUpperCase().trim() }
+
+          if (isEmail == false)
+            return  responseMessageGenerator(
+               'failure',
+               "Invalid email address. Please enter a valid email",
+               []
+             );
     
           const user = await this.userModel.findOne({ where: condition });
           if (!user)
-            responseMessageGenerator(
+           return  responseMessageGenerator(
               'failure',
-              "Invalid Employee code or Email ID",
+              "Invalid email address. Please enter a valid email",
               []
             );
     
           const comparing = compareSync(user_password, user.password);
           if (!comparing) {
-            responseMessageGenerator(
-            'failure',
-              "Invalid Password",
+            return responseMessageGenerator(
+             'failure',
+              "Invalid password. Please try again",
               []
             );
           }
@@ -103,10 +112,10 @@ export class AuthenticationService {
           const data = {
             access_token: accessToken,
             refresh_token: refreshToken,
-            user: {
-              user_email: user.user_email,
-              user_name: user.user_name,
-            },
+            // user: {
+            //   user_email: user.user_email,
+            //   user_name: user.user_name,
+            // },
           };
         
           return await responseMessageGenerator(
@@ -116,7 +125,11 @@ export class AuthenticationService {
           );
         } catch (error) {
           console.log(error);
-         
+          return await responseMessageGenerator(
+            "success",
+            "something went wrong",
+            []
+          );
         }
-      }
+    }
 }

@@ -1,3 +1,5 @@
+import { IsEmail, IsNotEmpty } from 'class-validator';
+
 export class userDto{
     user_name:string
     user_email:string    
@@ -12,4 +14,12 @@ export class EmployeeSignUpDto {
     user_email: string
     phone_number: number;
     password: string
+}
+export class EmployeeSignInDto {  
+    @IsNotEmpty({ message: 'Email is required.' })
+    @IsEmail({}, { message: 'Invalid email address. Please enter a valid email.' })
+    user_email: string
+
+    @IsNotEmpty({ message: 'Password is required.' })
+    user_password: string
 }
