@@ -16,7 +16,8 @@ export class AuthenticationController {
       type:"array"
     },examples:{
       example:{
-        value:{user_email:"qg123@gmail.com",
+        value:{
+          user_email:"qg123@gmail.com",
           user_password: "Abs@123123"
       }
     }
