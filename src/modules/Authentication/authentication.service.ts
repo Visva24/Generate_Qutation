@@ -27,7 +27,7 @@ export class AuthenticationService {
     
           if (userData) {
             return await responseMessageGenerator('failure',
-              "This email ID already exists in our database. Please log in with the same ID or use a different email to sign up for Think",
+              "Email already exists. Please try logging in or use a different email.",
               []
             )
           }
@@ -38,20 +38,23 @@ export class AuthenticationService {
             user_name: signUpDetails.user_name,
             user_email: signUpDetails.user_email,
             user_password: hashedPassword,
-            status: 1,
-            active_status: 1,
+            phone_number: signUpDetails.phone_number,
             is_owner: true
           }
     
-          const saveUserData = await this.userModel.create(UserData)
+          await this.userModel.create(UserData)
     
           return await responseMessageGenerator('success',
-            "Congratulations! Welcome to our Think family! We are preparing your customized world-class HR technology application",
-            { }
+            "Signup successful! You can now log in to your account",
+            []
           )
     
         } catch (error) {
-          console.error((error as Error).message);
+          console.log(error);
+          return await responseMessageGenerator('failure',
+            "something went wrong",
+            []
+          )
           
         }
       }
