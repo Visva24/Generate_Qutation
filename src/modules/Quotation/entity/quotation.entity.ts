@@ -1,6 +1,7 @@
 import { InferAttributes, InferCreationAttributes } from "sequelize";
 import { AutoIncrement, BelongsTo, Column, DataType, ForeignKey, Table,Model, HasMany } from "sequelize-typescript";
-import { cashType, paymentModeType } from "../enum/quotation.enum";
+import { cashType, documentType, paymentModeType } from "../enum/quotation.enum";
+import { UserRepository } from "src/modules/authentication/entity/users.entity";
 
 
 @Table({tableName:"quotation_form"})
@@ -63,44 +64,172 @@ export class QuotationFormRepository extends Model <InferCreationAttributes<Quot
     @Column(DataType.DECIMAL)
     grand_total:number
 
-    @Column(DataType.JSON)
-    quotation_list:any
+    @BelongsTo(()=>UserRepository,{as:"users",foreignKey:'created_user_id'})
+    users:UserRepository
+    @ForeignKey(()=>UserRepository)
+    @Column
+    created_user_id:number
 
+    @HasMany(() => QuotationItemRepository)
+    quotation_items: QuotationItemRepository[];
     
 }
 
-@Table({tableName:"quotation_list"})
-export class QuotationListRepository extends Model <InferCreationAttributes<QuotationListRepository>,InferAttributes<QuotationListRepository>>{
+
+interface QuotationItem {
+    quotation_id: number;
+    item_number: number;
+    description: string;
+    quantity: number;
+    units: string;
+    price: number;
+    discount: number;
+    tax: number;
+    amount:number
+  }
+
+@Table({tableName:"document_details"})
+export class documentDetailRepository extends Model <InferCreationAttributes<documentDetailRepository>,InferAttributes<documentDetailRepository>>{
 
     @Column({ autoIncrement: true, primaryKey: true })
     id:number
 
-    @BelongsTo(() => QuotationFormRepository, { as: 'quotation_form' })
-    quotation_form: QuotationFormRepository;
-
-    @ForeignKey(() => QuotationFormRepository)
     @Column
-    quotation_id:number
+    doc_number:string
 
-    @Column
-    item_number:number
+    @Column(DataType.ENUM(...Object.values(documentType)))
+    doc_type:string
 
     @Column
-    description:string
-
-    @Column
-    quantity:number
-
-    @Column
-    units:string
-
-    @Column(DataType.DECIMAL)
-    price:number
-
-    @Column(DataType.DECIMAL)
-    discount:number
-
-    @Column(DataType.DECIMAL)
-    tax:number
+    is_deleted:boolean
  
+}
+
+@Table({tableName: 'quotation_items'})
+export class QuotationItemRepository extends Model <InferCreationAttributes<QuotationItemRepository>,InferAttributes<QuotationItemRepository>>{
+    @Column({
+      autoIncrement: true,
+      primaryKey: true,
+    })
+    id: number;
+  
+    @ForeignKey(() => QuotationFormRepository)
+    @Column({
+      type: DataType.INTEGER,
+      allowNull: false,
+    })
+    quotation_id: number;
+  
+    @BelongsTo(() => QuotationFormRepository)
+    quotation_form: QuotationFormRepository;
+  
+    @Column({
+      type: DataType.STRING,
+      allowNull: false,
+    })
+    item_number: string;
+  
+    @Column({
+      type: DataType.STRING,
+      allowNull: false,
+    })
+    description: string;
+  
+    @Column({
+      type: DataType.INTEGER,
+      allowNull: false,
+    })
+    quantity: number;
+  
+    @Column({
+      type: DataType.STRING,
+      allowNull: false,
+    })
+    units: string;
+  
+    @Column({
+      type: DataType.DECIMAL(10, 2),
+      allowNull: false,
+    })
+    price: number;
+  
+    @Column({
+      type: DataType.DECIMAL(5, 2),
+      defaultValue: 0,
+    })
+    discount: number;
+  
+    @Column({
+      type: DataType.DECIMAL(5, 2),
+      defaultValue: 0,
+    })
+    tax: number;
+  
+    @Column({
+      type: DataType.DECIMAL(10, 2),
+      allowNull: false,
+    })
+    amount: number;
+}
+@Table({tableName: 'temp_quotation_items'})
+export class TempQuotationItemRepository extends Model <InferCreationAttributes<TempQuotationItemRepository>,InferAttributes<TempQuotationItemRepository>>{
+    @Column({
+      autoIncrement: true,
+      primaryKey: true,
+    })
+    id: number;
+    
+    @Column({
+      type: DataType.STRING,
+      allowNull: false,
+    })
+    item_number: string;
+
+    @Column({
+      type: DataType.STRING,
+      allowNull: false,
+    })
+    doc_number: string;
+  
+    @Column({
+      type: DataType.STRING,
+      allowNull: false,
+    })
+    description: string;
+  
+    @Column({
+      type: DataType.INTEGER,
+      allowNull: false,
+    })
+    quantity: number;
+  
+    @Column({
+      type: DataType.STRING,
+      allowNull: false,
+    })
+    units: string;
+  
+    @Column({
+      type: DataType.DECIMAL(10, 2),
+      allowNull: false,
+    })
+    price: number;
+  
+    @Column({
+      type: DataType.DECIMAL(5, 2),
+      defaultValue: 0,
+    })
+    discount: number;
+  
+    @Column({
+      type: DataType.DECIMAL(5, 2),
+      defaultValue: 0,
+    })
+    tax: number;
+  
+    @Column({
+      type: DataType.DECIMAL(10, 2),
+      allowNull: false,
+    })
+    amount: number;
 }

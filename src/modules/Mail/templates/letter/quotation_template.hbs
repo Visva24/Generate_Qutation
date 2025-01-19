@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 10px;
+        }
+        .header img {
+            height: 100px;
+        }
+        .header .title {
+            text-align: right;
+        }
+        .header .title h1 {
+            margin: 0;
+            color: #333;
+        }
+        .header .title h3 {
+            margin: 0;
+            color: #f4aa00;
+        }
+        .details {
+            margin: 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .details div {
+            width: 48%;
+            margin-bottom: 10px;
+        }
+        .details span {
+            display: block;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .table th, .table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        .table th {
+            background: #f4aa00;
+            color: white;
+        }
+        .table tfoot td {
+            font-weight: bold;
+        }
+        .remarks {
+            margin: 20px 0;
+        }
+        .remarks span {
+            display: block;
+        }
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 2px solid #ccc;
+            padding-top: 10px;
+        }
+        .footer div {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <img src="logo-placeholder.png" alt="Shadow Trading W.L.L">
+            <div class="title">
+                <h1>SHADOW TRADING W.L.L</h1>
+                <h3>QUOTATION</h3>
+            </div>
+        </div>
+
+        <!-- Details -->
+        <div class="details">
+            <div>
+                <span><strong>Customer:</strong> ABSHrms</span>
+                <span><strong>Contact Person:</strong> Mohammed Abdul Wahith</span>
+                <span><strong>E-mail:</strong> abdulwahith@abshrms.com</span>
+                <span><strong>Contact No:</strong> +91 987654321</span>
+                <span><strong>Address:</strong> ABC Enterprises 1234 Elm Street, Suite 567, Springfield, California, 90210, USA.</span>
+            </div>
+            <div>
+                <span><strong>Document No:</strong> 9876543212345</span>
+                <span><strong>Document Date:</strong> 12/12/2025</span>
+                <span><strong>Customer Reference:</strong> NFS Camp Kitchen</span>
+                <span><strong>Currency:</strong> QAR</span>
+                <span><strong>Payment Method:</strong> E-CASH / CDC</span>
+                <span><strong>Validity:</strong> 30 Days</span>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>S.NO</th>
+                    <th>Item No.</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Unit</th>
+                    <th>Price</th>
+                    <th>Dis%</th>
+                    <th>Tax%</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>1234</td>
+                    <td>Carbon Fiber Rolls</td>
+                    <td>12</td>
+                    <td>Nos</td>
+                    <td>30.00</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>349.00</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>1234</td>
+                    <td>Glass Panels</td>
+                    <td>13</td>
+                    <td>Nos</td>
+                    <td>30.00</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>3323.00</td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="8">SubTotal:</td>
+                    <td>67,544.00</td>
+                </tr>
+                <tr>
+                    <td colspan="8">Discount:</td>
+                    <td>0.00</td>
+                </tr>
+                <tr>
+                    <td colspan="8">Tax:</td>
+                    <td>0.00</td>
+                </tr>
+                <tr>
+                    <td colspan="8">Grand Total:</td>
+                    <td>67,544.00</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <!-- Remarks -->
+        <div class="remarks">
+            <span><strong>Remark Brand:</strong> ABC Enterprises</span>
+            <span><strong>Delivery:</strong> Ex-Stock Prior Sale</span>
+            <span><strong>Amount in Word:</strong> One thousand two hundred thirty-four Qatari Riyals and fifty dirhams.</span>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div>
+                <p>+974 3052 3041<br>+974 3052 3084</p>
+            </div>
+            <div>
+                <p>sales@shadowgroupqatar.com</p>
+            </div>
+            <div>
+                <p>Building No: 171, 6th Floor<br>Street No: 150, Zone: 38, Doha-Qatar</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

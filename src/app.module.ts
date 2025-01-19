@@ -9,6 +9,7 @@ import { Sequelize } from 'sequelize';
 import generateSequelizeOptions from './common/db-config/db.const';
 import { JwtService } from '@nestjs/jwt';
 import { QuotationModule } from './modules/quotation/quotation.module';
+import { HelperService } from './common/services/helper/helper.service';
 
 
 
@@ -23,7 +24,7 @@ import { QuotationModule } from './modules/quotation/quotation.module';
   ],
   
   controllers: [AppController],
-  providers: [AppService,JwtService],
+  providers: [AppService,JwtService, HelperService],
 
 
 })

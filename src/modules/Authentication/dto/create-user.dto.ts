@@ -4,7 +4,7 @@ export class userDto{
     user_name:string
     user_email:string    
     password:string
-    phone_number: number;
+    phone_number: string;
     user_temp_password: string
     verification_code: number;
 }
@@ -12,7 +12,7 @@ export class userDto{
 export class EmployeeSignUpDto {
     user_name: string
     user_email: string
-    phone_number: number;
+    phone_number: string;
     password: string
 }
 export class EmployeeSignInDto {  

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="x-apple-disable-message-reformatting">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no, url=no">
+    <meta name="color-scheme" content="light dark">
+    <meta name="supported-color-schemes" content="light dark">
+    <title>Quotation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Poppins&display=swap');
+        @import url('C:\Roveena\hrms-backend\src\modules\mail-config\templates\mail\payslip\logo_abs-copy copy.png');
+
+        * {
+            font-family: 'Poppins' !important;
+        }
+
+        .super {
+            color: black;
+        }
+
+        .brand {
+            color: slategrey;
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+
+        @page {
+            size: A4 portrait;
+        }
+
+        table {
+            page-break-inside: avoid;
+        }
+
+        @media (max-width: 600px) {
+            .sm-w-full {
+                width: 100% !important
+            }
+
+            .sm-px-0 {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+
+            .sm-px-2 {
+                padding-left: 8px !important;
+                padding-right: 8px !important
+            }
+
+            .sm-px-6 {
+                padding-left: 24px !important;
+                padding-right: 24px !important;
+            }
+
+            .sm-py-3 {
+                padding-top: 12px !important;
+                padding-bottom: 12px !important;
+            }
+
+            .sm-text-sm {
+                font-size: 14px !important;
+            }
+
+            .sm-text-v-sm {
+                font-weight: 100;
+            }
+
+            .sm-text-name {
+                font-size: 24px !important;
+            }
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: auto auto;
+
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div style="margin: 0; width: 100%; padding: 0; text-align: center; background-color:#f6f6f6; height:100%">
+        <div style="padding:10px 0px;">
+            <div style="text-align: center; width: 100%;">
+                <div style="width: 80%; margin: 0 auto; background-color: #FFFFFF;padding: 20px; border-radius: 8px;">
+
+                    <div class="grid-container" style="">
+                         <div>
+                            <img style=" position: absolute; bottom: 10px; right:0;"
+                                src={}
+                                alt="" width="200px" height="70px">
+                        </div>
+                         <div style="position: relative; width:200px; font-size:medium; text-align: end;">
+                            {{!-- <h3 style="text-align: left; font-size: 18px; font-weight:bolder;" class="super">
+                                Quotation <span style="font-weight: 100;color:grey">{{client_data.date}}</span>
+                            </h3> --}}
+                            <h1 style="  font-size: 24px; margin: 0;">SHADOW TRADING W.L.L</h1>
+                            <p style="text-align: left; font-size: 12px; font-weight: bold;" class="super">
+                             QUOTATION</p>
+                             
+                            {{!-- <p style="width: 50% ;text-align: left; ; font-size: 10px;">
+                                {{client_data.client_address}}</p> --}}
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <table style="width:100%">
+                        <tr style="width:100%; text-align:left; font-size: 10px;">
+                            <th style="width:33%">Customer :</th>
+                            <th style="width:33%">Document No :</th>
+                            <th style="width:33%">Document Date :</th>
+                        </tr>
+                        <tr style=" text-align: left;  font-size: 10px; font-weight: 600;">
+                            <td style="width:33%">{{customer_name}}</td>
+                            <td style="width:33%">{{doc_number}}</td>
+                            <td style="width:33%">{{doc_date}}</td>
+                        </tr>
+                    </table>
+
+
+
+                    <hr>
+                    <table style="width:100%">
+                        <tr style="width:100%;  text-align:left; font-size: 10px;">
+                          <th style="width:33%">Contact Person :</th>
+                          <th style="width:33%">E-mail :</th>
+                                                    <th style="width:33%">Contact Number :</th>
+                        </tr>
+                        <tr style=" text-align: left;  font-size: 10px; font-weight: 600;">
+                            <td style="width:33%">{{contact_person}}</td>
+                            <td style="width:33%">{{email}}</td>
+                            <td style="width:33%">{{contact_number}}</td>
+                        </tr>
+                    </table>
+
+                    <hr>
+                    <table style="width:100%">
+                        <tr style="  text-align:left;  font-size: 10px;">
+                            <th style="width:33%">Customer Reference :</th>
+                          <th style="width:33%">Currency:</th>
+                          <th style="width:33%">Payment Method :</th>
+                        </tr>
+                        <tr style=" text-align: left;  font-size: 10px; font-weight: 600;">
+                            <td style="width:33%">{{customer_reference}}</td>
+                            <td style="width:33%">{{payment_mode}}</td>
+                            <td style="width:33%">{{currency}}</td>
+                        </tr>
+                    </table>
+                    <hr>
+                    <table style="width:100%">
+                        <tr style="  text-align:left;  font-size: 10px;">
+                            <th style="width:50%">Address :</th>
+                          <th style="width:50%">Validity:</th>
+                       
+                        </tr>
+                        <tr style=" text-align: left;  font-size: 10px; font-weight: 600;">
+                            <td style="width:50%">{{address}}</td>
+                            <td style="width:50%">{{quotation_validity}}</td>
+                        </tr>
+                    </table>
+                    <hr>
+
+                    <h4 style="text-align: left; font-size: 12px; font-weight: bold;">SALARY DETAILS</h4>
+
+                    <hr>
+
+
+                    <table style="width:100%">
+                        <tr style="width:100%; text-align:left;  font-size: 10px;">
+                            <td style="width:25%">ACTUAL PAYABLE DAYS</td>
+                            <td style="width:25%">TOTAL WORKING DAYS</td>
+                            <td style="width:25%">LOSS OF PAY DAYS</td>
+                            <td style="width:25%">ARREARS DAYS PAYABLE</td>
+                        </tr>
+                        <tr style=" text-align: left;  font-size: 10px; font-weight: 600;">
+                            <td style="width:25%">{{working_details.payable_days}}</td>
+                            <td style="width:25%">{{working_details.working_days}}</td>
+                            <td style="width:25%">{{working_details.lop_days}}</td>
+                            <td style="width:25%">{{working_details.arrear_days}}</td>
+                        </tr>
+                    </table>
+
+                    <hr>
+
+                    <div style="width:100%;" class="grid-container">
+                        
+                            <table style="height:5px;">
+                                <tr style="text-align:left;  font-size: 10px;  font-weight: 600;">
+                                    <td style="width:10%; ">S.No</td>
+                                    <td style="width:20%; ">Item No.</td>
+                                    <td style="width:10%;  ">Description</td>
+                                    <td style="width:10%; ">Quantity</td>
+                                    <td style="width:10%; ">Unit</td>
+                                    <td style="width:10%; ">Price</td>
+                                    <td style="width:10%; ">Discount%</td>
+                                    <td style="width:10%; ">Tax%</td>
+                                    <td style="width:10%; ">Total</td>
+
+                                </tr>
+                                {{#each quotation_items}}
+                                <tr style="text-align: left; font-size: 10px;">
+                                    <td style="width:10%; height:10%;">{{"1"}}</td>
+                                    <td style="width:10%; height:10%;">{{this.item_number}}</td>
+                                    <td style="width:20%; height:10%;">{{this.description}}</td>
+                                    <td style="width:20%; height:10%;">{{this.quantity}}</td>
+                                    <td style="width:20%; height:10%;">{{this.units}}</td>
+                                    <td style="width:20%; height:10%;">{{this.price}}</td>
+                                    <td style="width:20%; height:10%;">{{this.tax}}</td>
+                                    <td style="width:20%; height:10%;">{{this.amount}}</td>
+                                </tr>
+                                <hr>
+                                {{/each}}
+
+                            </table>
+                    </div>
+                 
+                    <div>
+                        <table>
+                            <div style=" width: 100%; " class="grid-container">
+                                <tr style="  text-align: left;padding-left: 5px; ">
+                                    <td style="width:25%; font-size: 12px; ">Remark Brand</td>
+                                    <td style=" width: 25%; text-align: left; font-weight: 600;font-size: 12px; "> {{remark_brand}}</td>
+
+
+                                </tr>
+                                <tr style=" text-align: left;padding-left: 5px; font-size: 10px; ">
+                                    <td style="width:25%; font-weight: 100;  font-size: 12px;">Delivery</td>
+                                    <td style="text-align: left; width:25%; font-weight: 600; ">
+                                        {{delivery}}</td>
+
+
+                                </tr>
+                            </div>
+                        </table>
+                        <div style="position:relative,margin: right 10px; width: 100%;padding-left:5px ">
+                             <table>
+                            <div style=" width: 100%; " class="grid-container">
+                                <div style=" border-right: 1px solid black;" class="grid-container"></div>
+                                <tr style="  text-align: left;padding-left: 5px; ">
+                                    <td style="width:25%; font-size: 12px; ">SubTotal</td>
+                                    <td style=" width: 25%; text-align: left; font-weight: 600;font-size: 12px; "> {{sub_total}}</td>
+
+
+                                </tr>
+                                <tr style=" text-align: left;padding-left: 5px; font-size: 10px; ">
+                                    <td style="width:25%; font-weight: 100;  font-size: 12px;">Discount</td>
+                                    <td style="text-align: left; width:25%; font-weight: 600; ">
+                                        {{total_discount}}</td>
+
+
+                                </tr>
+                                <tr style="  text-align: left;padding-left: 5px; ">
+                                    <td style="width:25%; font-size: 12px; ">Tax</td>
+                                    <td style=" width: 25%; text-align: left; font-weight: 600;font-size: 12px; "> {{total_tax}}</td>
+
+
+                                </tr>
+                                <tr style=" text-align: left;padding-left: 5px; font-size: 10px; ">
+                                    <td style="width:25%; font-weight: 100;  font-size: 12px;">Grand Total</td>
+                                    <td style="text-align: left; width:25%; font-weight: 600; ">
+                                        {{grand_total}}</td>
+
+
+                                </tr>
+                            </div>
+                        </div>
+                        </table>
+                        </div>
+                        <div style="margin-top:20px; !important">
+                            <table>
+                                <div style="  " class="grid-container">
+                                    <tr style="text-align: left; padding-left: 5px; font-size: 10px;">
+                                        <td style="font-weight: 600;">Amount In Words : </td>
+                                        <td style="text-align: left;  ">{{"Amount In Words"}}</td>
+                                    </tr>
+
+                                </div>
+                            </table>
+                            {{!-- <!-- <h4 style="text-align:  left; font-size: 14px; font-weight: 300;">**Note : All amounts displayed in this payslip are in INR</h4> --> --}}
+                            <div class="grid-container">
+                                <h4 style="text-align: left; font-size: 8px; font-weight: 300; ">*This is computer
+                                    generated statement, does not require signature</h4>
+
+                                <span style="display: inline; font-size:12px; text-align: end;">Generated by
+                                    <img src="https://abs-hrms-dev.s3.ap-south-1.amazonaws.com/ardens_business_solutions_private_limited/assets/logo/company_logo.png"
+                                        alt="" style="display: inline" width="100px" height="50px">
+                                </span>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</body>
+
+
+</html>

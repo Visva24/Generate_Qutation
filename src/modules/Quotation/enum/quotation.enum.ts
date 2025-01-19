@@ -4,6 +4,13 @@ export enum paymentModeType {
   Cash="cash"
 }
 export enum cashType {
-    INR ="INR",
-    QAR ="QAR"
+    QAR ="QAR",
+    SAR ="SAR",
+    USD ="USD"
+}
+export enum documentType {
+    Quotation="quotation",
+    Sales="sales",
+    Delivery="delivery",
+  
 }

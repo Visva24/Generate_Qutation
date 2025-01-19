@@ -1,0 +1,1 @@
+export const QUOTATION_UPLOAD_DIRECTORY = "quotation"

@@ -2,13 +2,15 @@ import { Module } from '@nestjs/common';
 import { QuotationController } from './quotation.controller';
 import { QuotationService } from './quotation.service';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { QuotationFormRepository, QuotationListRepository } from './entity/quotation.entity';
+import { documentDetailRepository, QuotationFormRepository, QuotationItemRepository, TempQuotationItemRepository } from './entity/quotation.entity';
+import { HelperService } from 'src/common/services/helper/helper.service';
+import { UserRepository } from '../authentication/entity/users.entity';
 
 @Module({
    imports:[
-      SequelizeModule.forFeature([QuotationFormRepository,QuotationListRepository]),
+      SequelizeModule.forFeature([QuotationFormRepository,documentDetailRepository,QuotationItemRepository,UserRepository,TempQuotationItemRepository]),
     ],
   controllers: [QuotationController],
-  providers: [QuotationService]
+  providers: [QuotationService,HelperService]
 })
 export class QuotationModule {}

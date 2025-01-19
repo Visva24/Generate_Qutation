@@ -1,16 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { ApiResponse, jwtConstants, responseMessageGenerator } from 'src/common/util/helper.config';
 import { UserRepository } from './entity/users.entity';
+import { JwtService } from "@nestjs/jwt";
 import { InjectModel } from '@nestjs/sequelize';
 import { genSaltSync, hashSync, compareSync } from "bcrypt";
 import { EmployeeSignUpDto } from './dto/create-user.dto';
 
 @Injectable()
 export class AuthenticationService {
-    jwtService: any;
+    
 
     constructor(
-        @InjectModel(UserRepository) private userModel : typeof UserRepository
+        @InjectModel(UserRepository) private userModel : typeof UserRepository,
+        private readonly JwtService :JwtService
     ){
 
     }
@@ -37,7 +39,7 @@ export class AuthenticationService {
           const UserData = {
             user_name: signUpDetails.user_name,
             user_email: signUpDetails.user_email,
-            user_password: hashedPassword,
+            password: hashedPassword,
             phone_number: signUpDetails.phone_number,
             is_owner: true
           }
@@ -61,9 +63,9 @@ export class AuthenticationService {
 
     async signIn(email: string, user_password: string): Promise<ApiResponse> {
         try {
-
+     
           let condition: any = {};
-         
+          
           let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           let isEmail = emailRegex.test(email)
           condition = { user_email: (email).toUpperCase().trim() }
@@ -76,13 +78,14 @@ export class AuthenticationService {
              );
     
           const user = await this.userModel.findOne({ where: condition });
-          if (!user)
+          if (!user){
            return  responseMessageGenerator(
               'failure',
               "Invalid email address. Please enter a valid email",
               []
             );
-    
+          }
+         
           const comparing = compareSync(user_password, user.password);
           if (!comparing) {
             return responseMessageGenerator(
@@ -100,11 +103,11 @@ export class AuthenticationService {
             is_owner:user.is_owner,
           };
     
-          const accessToken = await this.jwtService.signAsync(accessTokenPayload, {
+          const accessToken = await this.JwtService.signAsync(accessTokenPayload, {
             expiresIn: "1h",
             secret: jwtConstants.secret,
           });
-          const refreshToken = await this.jwtService.signAsync(accessTokenPayload, {
+          const refreshToken = await this.JwtService.signAsync(accessTokenPayload, {
             expiresIn: "7d",
             secret: jwtConstants.secret,
           });
@@ -112,10 +115,11 @@ export class AuthenticationService {
           const data = {
             access_token: accessToken,
             refresh_token: refreshToken,
-            // user: {
-            //   user_email: user.user_email,
-            //   user_name: user.user_name,
-            // },
+            user: {
+              user_id: user.id,
+              user_email: user.user_email,
+              user_name: user.user_name,
+            },
           };
         
           return await responseMessageGenerator(

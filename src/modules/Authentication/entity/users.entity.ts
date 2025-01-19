@@ -12,8 +12,14 @@ export class UserRepository extends Model<InferCreationAttributes<UserRepository
     @Column
     user_email: string;
 
-    @Column
-    phone_number: number;
+    @Column({
+        type: DataType.STRING(15), // Length of 15 to support international numbers
+        allowNull: false, // Phone number is mandatory
+        validate: {
+          is: /^\+?[0-9\- ]+$/, // Regex for phone number validation
+        },
+      })
+    phone_number: string;
   
     @Column
     password: string;
