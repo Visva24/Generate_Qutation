@@ -229,7 +229,6 @@ export class QuotationService {
                      ...singleData,
                      doc_number:doc_number
                 }))
-                return formatedData
                 let createQuotation = await this.tempQuotationItemModel.bulkCreate(formatedData)
             }
 
