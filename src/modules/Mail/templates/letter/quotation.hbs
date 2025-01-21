@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template</title>
+    <style>
+        body {
+            font-family: "Roboto", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        table {
+            font-size: 12px;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body style="margin: 0; width: 100%;height:1115px; padding: 0; -webkit-font-smoothing: antialiased; word-break: break-word;position:relative;">
+     <div style="position: absolute; top:0;left:0;">
+        <img src="../images/sidebar.png" alt="">
+    </div>
+    <!-- {{!-- <div style="position: absolute; bottom:0 !important;margin-top: 70px;width: 100%;">
+        <div style=" background-color: #fca524; height: 90px;">
+            ajhidu
+        </div>
+    </div> --}} -->
+     <div style="position: absolute; bottom:0;left:0; width: 100%;">
+        <img src="../images/footer.png" alt="" width="100px">
+    </div>
+    <div style="padding: 40px; ">
+        <table style=" width:100%;border-bottom:none;">
+            <tr style="height: 60px;">
+                <td style=" width: 40%;text-align: center;padding-left:10px">
+                    <div style="display: flex;align-items: center;justify-content:center; gap: 30px;">
+                        <img src="" alt="logo">
+                        <p style="font-size: 18px;font-weight: 600;">New Shadow Trading W.L.L</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%; border-bottom:none;">
+            <tr style="height: 40px;">  
+                 <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
+                <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;"> <p style="height: 20px;width:4px;background-color:#fca524;"></p>  <p> QUOTATION</p></div>
+                </td>
+            </tr>
+        </table>
+        <table style="margin-left: 20px; width: 100%;">
+            <tbody>
+                <tr style="width: 100%;text-align: left;">
+                    <td style="width: 33%;">Customer</td>
+                    <td style="width: 33%;">Document Number</td>
+                    <td style="width: 33%;">Document Date</td>
+                </tr>
+                <tr style="width: 100%;text-align: left;">
+                    <td style="width: 33%;">{{customer}}</td>
+                    <td style="width: 33%;">{{customer}}</td>
+                    <td style="width: 33%;">{{customer}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr style="margin-left: 20px; color:#000 !important">
+        <table style="margin-left: 20px; width: 100%; border-bottom:none;">
+            <tbody>
+                <tr style="width: 100%;text-align: left;">
+                    <td style="width: 33%;">Contact Person</td>
+                    <td style="width: 33%;">Email</td>
+                    <td style="width: 33%;">Contact Number</td>
+                </tr>
+                <tr style="width: 100%;text-align: left;">
+                    <td style="width: 33%;">{{customer}}</td>
+                    <td style="width: 33%;">{{customer}}</td>
+                    <td style="width: 33%;">{{customer}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr style="margin-left: 20px; color:#000 !important">
+        <table style="margin-left: 20px; width: 100%; border-bottom:none;">
+            <tbody>
+                <tr style="width: 100%;text-align: left;">
+                    <td style="width: 33%;">Contact Reference</td>
+                    <td style="width: 33%;">Payment Method</td>
+                    <td style="width: 33%;">Currency</td>
+                </tr>
+                <tr style="width: 100%;text-align: left;">
+                    <td style="width: 33%;">{{customer}}</td>
+                    <td style="width: 33%;">{{customer}}</td>
+                    <td style="width: 33%;">{{customer}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr style="margin-left: 20px; color:#000 !important">
+        <table style="margin-left: 20px; width: 100%; border-bottom:none;">
+            <tbody>
+                <tr style="width: 100%;text-align: left;">
+                    <td style="width: 33%;">Address</td>
+                    <td style="width: 33%;">Validity</td>
+                    <td style="width: 33%;"></td>
+                </tr>
+                <tr style="width: 100%;text-align: left;">
+                    <td style="width: 33%;">{{customer}}</td>
+                    <td style="width: 33%;">{{customer}}</td>
+                    <td style="width: 33%;"></td>
+                    
+                </tr>
+            </tbody>
+        </table>
+        <hr style="margin-left: 20px; color:#000 !important">
+        
+        <table style="width: 100%;  border-bottom:none;">
+            <tbody>
+                <tr style="background-color: #f2f3f4">
+                    <th style="width: 5%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;">S.No.</th>
+                    <th style="width: 10%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;">Item No.</th>
+                    <th style="width: 20%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;">Description</th>
+                    <th style="width: 10%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;">Quantity</th>
+                    <th style="width: 10%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;">Unit</th>
+                    <th style="width: 10%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;">Price</th>
+                    <th style="width: 10%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;">Tax(%)</th>
+                    <th style="width: 10%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;">Dis(%)</th>
+                    <th style="width: 10%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;">Total</th>
+                </tr>
+              
+                <!-- {{#each quotation_product_list}} -->
+                <tr>
+                    <td style="text-align: center;border: 1px solid #c7c7c7;">{{displayIndex}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7; color:#999999;">{{name}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7;">{{hsn_code}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7;">{{quantity}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7;">{{sell_price}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7;">{{gst_percentage}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7;">{{gst_amt}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7;">{{total_value}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7;">{{total_value}}</td>
+                </tr>
+                <!-- {{/each}} -->
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <tr>
+                <td style="width: 60%; vertical-align: top;">
+                    <table>
+                        <tr style="height: 25px;padding-left: 4px;">
+                            <td>Total In Words</td>
+                        </tr>
+                        <tr style="height: 25px;">
+                            <td style="font-weight: 600;padding-left: 4px;">{{totalAmountInWords}}</td>
+                        </tr>
+                        <tr style="height: 25px;">
+                            <td><span style="font-weight: 600;padding-left: 4px;">Notes: </span>Looking forward for your
+                                business.</td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="width: 40%;">
+                    <table>
+                        <tr style="height: 20px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                Sub Total
+                            </td>
+                            <td style="width: 30%;text-align: right;">
+                                {{totalAmount}}
+                            </td>
+                        </tr>
+                        <tr style="height: 20px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                GST
+                            </td>
+                            <td style="width: 30%;text-align: right;">
+                                {{totalGst}}
+                            </td>
+                        </tr>
+                         <tr style="height: 20px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                TAX
+                            </td>
+                            <td style="width: 30%;text-align: right;">
+                                {{totalGst}}
+                            </td>
+                        </tr>
+                        <tr style="height: 20px;">
+                            <td style="width: 20%;text-align: right;font-weight: 600;padding-left: 4px;">
+                                Total
+                            </td>
+                            <td style="width: 30%;text-align: right;font-weight: 600;">
+                                {{overallTotal}}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>
