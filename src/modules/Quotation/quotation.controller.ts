@@ -32,6 +32,10 @@ export class QuotationController {
       async getSingleQuotationList(@Query('record_id') record_id:number):Promise<any> {
         return this.quotationService.getSingleQuotationList(record_id)
       }
+      @Get("get-all-quotation-list")
+      async getAllQuotationList(@Query('doc_number') doc_number:string):Promise<any> {
+        return this.quotationService.getAllQuotationList(doc_number)
+      }
 
       @ApiBody({
         schema: {
@@ -44,9 +48,14 @@ export class QuotationController {
         }
     
       })
-      @Post("get-and-save-quotation-list")
-      async getAndSaveQuotationList(@Body() data:{doc_number:string,Quotation_list:QuotationListDto[],record_id?:number} ) :Promise<any> {
-        return this.quotationService.getAndSaveQuotationList(data.doc_number,data.Quotation_list,data.record_id)
+      @Post("save-or-update-quotation-list")
+      async SaveOrUpdateQuotationList(@Body() data:{doc_number:string,Quotation_list:QuotationListDto[],record_id?:number} ) :Promise<any> {
+        return this.quotationService.SaveOrUpdateQuotationList(data.doc_number,data.Quotation_list,data.record_id)
+      }
+
+      @Get("delete-quotation-list")
+      async deleteQuotationList(@Query('record_id') record_id:number) :Promise<any> {
+        return this.quotationService.deleteQuotationList(record_id)
       }
 
       @ApiBody({
