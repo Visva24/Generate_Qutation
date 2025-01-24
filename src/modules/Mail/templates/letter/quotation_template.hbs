@@ -1,201 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quotation</title>
+    <title>Template</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f8f8;
+            font-family: "Roboto", sans-serif;
+            font-weight: 400;
+            font-style: normal;
         }
-        .container {
-            width: 80%;
-            margin: 20px auto;
-            background: white;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #ccc;
-            padding-bottom: 10px;
-        }
-        .header img {
-            height: 100px;
-        }
-        .header .title {
-            text-align: right;
-        }
-        .header .title h1 {
-            margin: 0;
-            color: #333;
-        }
-        .header .title h3 {
-            margin: 0;
-            color: #f4aa00;
-        }
-        .details {
-            margin: 20px 0;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        .details div {
-            width: 48%;
-            margin-bottom: 10px;
-        }
-        .details span {
-            display: block;
-        }
-        .table {
-            width: 100%;
+
+        table {
+            font-size: 12px;
             border-collapse: collapse;
-            margin-top: 20px;
-        }
-        .table th, .table td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
-        .table th {
-            background: #f4aa00;
-            color: white;
-        }
-        .table tfoot td {
-            font-weight: bold;
-        }
-        .remarks {
-            margin: 20px 0;
-        }
-        .remarks span {
-            display: block;
-        }
-        .footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 2px solid #ccc;
-            padding-top: 10px;
-        }
-        .footer div {
-            text-align: center;
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <img src="logo-placeholder.png" alt="Shadow Trading W.L.L">
-            <div class="title">
-                <h1>SHADOW TRADING W.L.L</h1>
-                <h3>QUOTATION</h3>
-            </div>
-        </div>
 
-        <!-- Details -->
-        <div class="details">
-            <div>
-                <span><strong>Customer:</strong> ABSHrms</span>
-                <span><strong>Contact Person:</strong> Mohammed Abdul Wahith</span>
-                <span><strong>E-mail:</strong> abdulwahith@abshrms.com</span>
-                <span><strong>Contact No:</strong> +91 987654321</span>
-                <span><strong>Address:</strong> ABC Enterprises 1234 Elm Street, Suite 567, Springfield, California, 90210, USA.</span>
-            </div>
-            <div>
-                <span><strong>Document No:</strong> 9876543212345</span>
-                <span><strong>Document Date:</strong> 12/12/2025</span>
-                <span><strong>Customer Reference:</strong> NFS Camp Kitchen</span>
-                <span><strong>Currency:</strong> QAR</span>
-                <span><strong>Payment Method:</strong> E-CASH / CDC</span>
-                <span><strong>Validity:</strong> 30 Days</span>
-            </div>
+<body style="margin: 0; width: 100%;height:1115px; padding: 0; -webkit-font-smoothing: antialiased; word-break: break-word;position:relative;">
+     <div style="position: absolute; top:0;left:0;">
+        <img src="../images/sidebar.png" alt="">
+    </div>
+    <!-- {{!-- <div style="position: absolute; bottom:0 !important;margin-top: 70px;width: 100%;">
+        <div style=" background-color: #fca524; height: 90px;">
+            ajhidu
         </div>
-
-        <!-- Table -->
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>S.NO</th>
-                    <th>Item No.</th>
-                    <th>Description</th>
-                    <th>Quantity</th>
-                    <th>Unit</th>
-                    <th>Price</th>
-                    <th>Dis%</th>
-                    <th>Tax%</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>1234</td>
-                    <td>Carbon Fiber Rolls</td>
-                    <td>12</td>
-                    <td>Nos</td>
-                    <td>30.00</td>
-                    <td>0.00</td>
-                    <td>0.00</td>
-                    <td>349.00</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>1234</td>
-                    <td>Glass Panels</td>
-                    <td>13</td>
-                    <td>Nos</td>
-                    <td>30.00</td>
-                    <td>0.00</td>
-                    <td>0.00</td>
-                    <td>3323.00</td>
-                </tr>
-                <!-- Add more rows as needed -->
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="8">SubTotal:</td>
-                    <td>67,544.00</td>
-                </tr>
-                <tr>
-                    <td colspan="8">Discount:</td>
-                    <td>0.00</td>
-                </tr>
-                <tr>
-                    <td colspan="8">Tax:</td>
-                    <td>0.00</td>
-                </tr>
-                <tr>
-                    <td colspan="8">Grand Total:</td>
-                    <td>67,544.00</td>
-                </tr>
-            </tfoot>
+    </div> --}} -->
+     <div style="position: absolute; bottom:0;left:0; width: 100%;">
+        <img src="../images/footer.png" alt="" width="100px">
+    </div>
+    <div style="padding: 40px; ">
+        <table style=" width:100%;border-bottom:none;">
+            <tr style="height: 60px;">
+                <td style=" width: 40%;text-align: center;padding-left:10px">
+                    <div style="display: flex;align-items: center;justify-content:center; gap: 30px;">
+                        <img src="" alt="logo">
+                        <p style="font-size: 18px;font-weight: 600;">New Shadow Trading W.L.L</p>
+                    </div>
+                </td>
+            </tr>
         </table>
-
-        <!-- Remarks -->
-        <div class="remarks">
-            <span><strong>Remark Brand:</strong> ABC Enterprises</span>
-            <span><strong>Delivery:</strong> Ex-Stock Prior Sale</span>
-            <span><strong>Amount in Word:</strong> One thousand two hundred thirty-four Qatari Riyals and fifty dirhams.</span>
-        </div>
-
-        <!-- Footer -->
-        <div class="footer">
-            <div>
-                <p>+974 3052 3041<br>+974 3052 3084</p>
-            </div>
-            <div>
-                <p>sales@shadowgroupqatar.com</p>
-            </div>
-            <div>
-                <p>Building No: 171, 6th Floor<br>Street No: 150, Zone: 38, Doha-Qatar</p>
-            </div>
-        </div>
+        <table style="width: 100%; border-bottom:none;">
+            <tr style="height: 40px;">  
+                 <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
+                <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;"> <p style="height: 20px;width:4px;background-color:#fca524;"></p>  <p> QUOTATION</p></div>
+                </td>
+            </tr>
+        </table>
+        <table style="margin-left: 20px; width: 100%;">
+            <tbody>
+                <tr style="width: 100%;text-align: left;">
+                    <td style="width: 33%;">Customer</td>
+                    <td style="width: 33%;">Document Number</td>
+                    <td style="width: 33%;">Document Date</td>
+                </tr>
+                <tr style="width: 100%;text-align: left;">
+                    <td style="width: 33%;">{{customer_name}}</td>
+                    <td style="width: 33%;">{{doc_number}}</td>
+                    <td style="width: 33%;">{{doc_date}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr style="margin-left: 20px; color:#000 !important">
+        <table style="margin-left: 20px; width: 100%; border-bottom:none;">
+            <tbody>
+                <tr style="width: 100%;text-align: left;">
+                    <td style="width: 33%;">Contact Person</td>
+                    <td style="width: 33%;">Email</td>
+                    <td style="width: 33%;">Contact Number</td>
+                </tr>
+                <tr style="width: 100%;text-align: left;">
+                    <td style="width: 33%;">{{contact_person}}</td>
+                    <td style="width: 33%;">{{email}}</td>
+                    <td style="width: 33%;">{{contact_number}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr style="margin-left: 20px; color:#000 !important">
+        <table style="margin-left: 20px; width: 100%; border-bottom:none;">
+            <tbody>
+                <tr style="width: 100%;text-align: left;">
+                    <td style="width: 33%;">Contact Reference</td>
+                    <td style="width: 33%;">Payment Method</td>
+                    <td style="width: 33%;">Currency</td>
+                </tr>
+                <tr style="width: 100%;text-align: left;">
+                    <td style="width: 33%;">{{customer_reference}}</td>
+                    <td style="width: 33%;">{{payment_mode}}</td>
+                    <td style="width: 33%;">{{currency}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr style="margin-left: 20px; color:#000 !important">
+        <table style="margin-left: 20px; width: 100%; border-bottom:none;">
+            <tbody>
+                <tr style="width: 100%;text-align: left;">
+                    <td style="width: 33%;">Address</td>
+                    <td style="width: 33%;">Validity</td>
+                    <td style="width: 33%;"></td>
+                </tr>
+                <tr style="width: 100%;text-align: left;">
+                    <td style="width: 33%;">{{address}}</td>
+                    <td style="width: 33%;">{{quotation_validity}}</td>
+                    <td style="width: 33%;"></td>
+                    
+                </tr>
+            </tbody>
+        </table>
+        <hr style="margin-left: 20px; color:#000 !important">
+        
+        <table style="width: 100%;  border-bottom:none;">
+            <tbody>
+                <tr style="background-color: #f2f3f4">
+                    <th style="width: 5%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;">S.No.</th>
+                    <th style="width: 10%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;">Item No.</th>
+                    <th style="width: 20%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;">Description</th>
+                    <th style="width: 10%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;">Quantity</th>
+                    <th style="width: 10%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;">Unit</th>
+                    <th style="width: 10%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;">Price</th>
+                    <th style="width: 10%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;">Tax(%)</th>
+                    <th style="width: 10%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;">Dis(%)</th>
+                    <th style="width: 10%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;">Total</th>
+                </tr>
+              
+                 {{#each quotation_items}} 
+                <tr>
+                    <td style="text-align: center;border: 1px solid #c7c7c7;">{{"1"}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7; color:#999999;">{{this.item_number}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7;">{{this.description}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7;">{{this.quantity}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7;">{{this.units}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7;">{{this.price}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7;">{{this.discount}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7;">{{this.tax}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7;">{{this.amount}}</td>
+                </tr>
+              {{/each}} 
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <tr>
+                <td style="width: 60%; vertical-align: top;">
+                    <table>
+                        <tr style="height: 25px;padding-left: 4px;">
+                            <td>Remark Brand</td>
+                        </tr>
+                        <tr style="height: 25px;">
+                            <td style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</td>
+                        </tr>
+                        <tr style="height: 25px;padding-left: 4px;">
+                            <td>Delivery</td>
+                        </tr>
+                        <tr style="height: 25px;">
+                            <td style="font-weight: 600;padding-left: 4px;">{{delivery}}</td>
+                        </tr>
+                        <tr style="height: 25px;padding-left: 4px;">
+                            <td>Total In Words</td>
+                        </tr>
+                        <tr style="height: 25px;">
+                            <td style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</td>
+                        </tr>
+                        <tr style="height: 25px;">
+                            <td><span style="font-weight: 600;padding-left: 4px;">Notes: </span>Looking forward for your
+                                business.</td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="width: 40%;">
+                    <table>
+                        <tr style="height: 20px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                Sub Total
+                            </td>
+                            <td style="width: 30%;text-align: right;">
+                                {{sub_total}}
+                            </td>
+                        </tr>
+                        <tr style="height: 20px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                Discount
+                            </td>
+                            <td style="width: 30%;text-align: right;">
+                                {{total_discount}}
+                            </td>
+                        </tr>
+                         <tr style="height: 20px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                TAX
+                            </td>
+                            <td style="width: 30%;text-align: right;">
+                                {{total_tax}}
+                            </td>
+                        </tr>
+                        <tr style="height: 20px;">
+                            <td style="width: 20%;text-align: right;font-weight: 600;padding-left: 4px;">
+                                Total
+                            </td>
+                            <td style="width: 30%;text-align: right;font-weight: 600;">
+                                {{grand_total}}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
     </div>
 </body>
+
 </html>

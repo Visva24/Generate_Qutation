@@ -33,6 +33,7 @@ export class QuotationService {
                 {association:"quotation_items"}
             ]
         })
+       
        return responseMessageGenerator('success','data fetched successfully',getQuotationData) 
 
         }catch(error){
@@ -199,9 +200,20 @@ export class QuotationService {
             if(QuotationData.status =="failure"){
                 return QuotationData 
             }
-            let formData =QuotationData.data[0]
-            //  return res.json(formData) 
-            const generatePayslip = await this.helperService.generatePdfFromTemplate(QUOTATION_UPLOAD_DIRECTORY, templateName, formData, 'payslip');
+          
+                let numberInWords = await this.numberToWord(QuotationData.data[0].grand_total)
+              let  formData = QuotationData.data.map(singleData=>({
+                         ...singleData.dataValues,
+                         amount_in_words:numberInWords
+                }))
+                
+            /*Handlebars is blocking access to object properties inherited from the prototype chain for security reasons. This behavior was introduced to prevent prototype pollution vulnerabilities.*/
+            /*By serializing and deserializing the object, you ensure that only own properties are kept, eliminating any issues with prototype access restrictions*/
+            const plainContext = JSON.parse(JSON.stringify(formData[0]));
+
+            //  return res.json(plainContext) 
+        
+            const generatePayslip = await this.helperService.generatePdfFromTemplate(QUOTATION_UPLOAD_DIRECTORY, templateName, plainContext, 'payslip');
             const base64Data = generatePayslip.replace(/^data:application\/pdf;base64,/, '');
 
                  const pdfBuffer = Buffer.from(base64Data, 'base64');
