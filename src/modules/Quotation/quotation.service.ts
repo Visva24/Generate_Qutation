@@ -9,6 +9,8 @@ import * as moment from 'moment';
 import { HelperService } from 'src/common/services/helper/helper.service';
 import { QUOTATION_UPLOAD_DIRECTORY } from 'src/common/app.constant';
 import { UserRepository } from '../authentication/entity/users.entity';
+import { readFileSync } from 'fs';
+
 
 @Injectable()
 export class QuotationService {
@@ -90,8 +92,7 @@ export class QuotationService {
     async createQuotationForm(QuotationForm: QuotationFormDto): Promise<any> {
         try {
 
-            QuotationForm.created_user_id = 1
-
+            
 
             let getTempQuotationList = await this.tempQuotationItemModel.findAll({
                 where: { doc_number: QuotationForm.doc_number },
@@ -239,35 +240,91 @@ export class QuotationService {
 
         }
     }
-    async generateQuotationTemplate(res: any, id: number): Promise<any> {
-        try {
+    async generateQuotationTemplate(res:any,id:number):Promise<any>{
+        try{
 
-            let fileName = "Quatation1" + "_" + moment().format('MMM_YYYY') + ".pdf"
-            let templateName = "quotation_template"
+          
+           let templateName ="quotation_template"
             let QuotationData = await this.getQuotationFormData(id)
-            if (QuotationData.status == "failure") {
-                return QuotationData
+            if(QuotationData.status =="failure"){
+                 return res.json(QuotationData)   
             }
-            let formData = QuotationData.data[0]
-            //  return res.json(formData) 
-            const generatePayslip = await this.helperService.generatePdfFromTemplate(QUOTATION_UPLOAD_DIRECTORY, templateName, formData, 'payslip');
+             
+                let numberInWords = await this.numberToWord(QuotationData.data.grand_total)
+              let  formData = [QuotationData.data].map(singleData=>({
+                         ...singleData,
+                         amount_in_words:numberInWords
+                }))
+                // return res.json(formData) 
+            let fileName = QuotationData.data.customer_name + "_" + QuotationData.data.doc_number + "_" +moment().format('MMM_YYYY') + ".pdf" 
+            /*Handlebars is blocking access to object properties inherited from the prototype chain for security reasons. This behavior was introduced to prevent prototype pollution vulnerabilities.*/
+            /*By serializing and deserializing the object, you ensure that only own properties are kept, eliminating any issues with prototype access restrictions*/
+            const plainContext = JSON.parse(JSON.stringify(formData[0]));
+
+            //   return res.json(plainContext) 
+        
+            const generatePayslip = await this.helperService.generatePdfFromTemplate(QUOTATION_UPLOAD_DIRECTORY, templateName, plainContext, 'payslip');
             const base64Data = generatePayslip.replace(/^data:application\/pdf;base64,/, '');
 
-            const pdfBuffer = Buffer.from(base64Data, 'base64');
+                 const pdfBuffer = Buffer.from(base64Data, 'base64');
+   
+               //  Set headers and send the PDF as a response
+               res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
+               res.setHeader('Content-Type', 'application/pdf');
+               res.send(pdfBuffer);
+          
+            //    return responseMessageGenerator('success','Quotation downloaded successfully', { "base64Data": base64Data, "fileName": fileName })
 
-            //  Set headers and send the PDF as a response
-            res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
-            res.setHeader('Content-Type', 'application/pdf');
-            res.send(pdfBuffer);
-            return responseMessageGenerator('success', 'Quotation downloaded successfully', [])
-
-        } catch (error) {
+        }catch(error){
             console.log(error);
-            return responseMessageGenerator('failure', 'something went wrong', error.message)
+            return responseMessageGenerator('failure','something went wrong',error.message)
+            
 
+        }
+    }
+    async downloadQuotationTemplate(id:number):Promise<any>{
+        try{
 
-        }
-    }
+          
+           let templateName ="quotation_template"
+            let QuotationData = await this.getQuotationFormData(id)
+            if(QuotationData.status =="failure"){
+                 return QuotationData 
+            }
+           
+                const logBase64Image = readFileSync('public/images/logo.png', 'base64');
+                const footerBase64Image = readFileSync('public/images/shadow-trading-footer-with-data.png', 'base64');
+                const sideLogoBase64Image = readFileSync('public/images/sideLogo.png', 'base64');
+                const logo = `data:image/png;base64,${logBase64Image}`;
+                const footer = `data:image/png;base64,${footerBase64Image}`;
+                const sidelogo = `data:image/png;base64,${sideLogoBase64Image}`;
+          
+                let numberInWords = await this.numberToWord(QuotationData.data.grand_total)
+              let  formData = [QuotationData.data].map(singleData=>({
+                         ...singleData, 
+                         amount_in_words:numberInWords,
+                         logo:logo,
+                         footer:footer,
+                         sidelogo:sidelogo,
+                }))
+
+            let fileName = QuotationData.data.customer_name + "_" + QuotationData.data.doc_number + "_" +moment().format('MMM_YYYY') + ".pdf" 
+            /*Handlebars is blocking access to object properties inherited from the prototype chain for security reasons. This behavior was introduced to prevent prototype pollution vulnerabilities.*/
+            /*By serializing and deserializing the object, you ensure that only own properties are kept, eliminating any issues with prototype access restrictions*/
+            const plainContext = JSON.parse(JSON.stringify(formData[0]));
+
+            
+            const generatePayslip = await this.helperService.generatePdfFromTemplate(QUOTATION_UPLOAD_DIRECTORY, templateName, plainContext, 'payslip');
+            const base64Data = generatePayslip.replace(/^data:application\/pdf;base64,/, '');
+            return responseMessageGenerator('success','Quotation downloaded successfully', { "base64Data": base64Data, "fileName": fileName })
+
+        }catch(error){
+            console.log(error);
+            return responseMessageGenerator('failure','something went wrong',error.message)
+            
+
+        }
+    }
     async SaveOrUpdateQuotationList(doc_number: string, Quotation_list: QuotationListDto[], record_id?: number): Promise<any> {
         try {
 
