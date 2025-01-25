@@ -9,6 +9,8 @@ import * as moment from 'moment';
 import { HelperService } from 'src/common/services/helper/helper.service';
 import { QUOTATION_UPLOAD_DIRECTORY } from 'src/common/app.constant';
 import { UserRepository } from '../authentication/entity/users.entity';
+import { readFileSync } from 'fs';
+
 
 @Injectable()
 export class QuotationService {
@@ -27,16 +29,36 @@ export class QuotationService {
     async getQuotationFormData(quotation_id):Promise<ApiResponse>{
         try{
 
-        let getQuotationData =  await this.QuotationFormModel.findAll({
-            where:{id:quotation_id},
-            include:[
-                {association:"quotation_items"}
-            ]
-        })
-       
-       return responseMessageGenerator('success','data fetched successfully',getQuotationData) 
+            let getQuotationData = await this.QuotationFormModel.findAll({
+                where: { id: quotation_id },
+                include: [
+                    { association: "quotation_items" }
+                ],
+            })
+            let modifiedListData = []
+            let i = 1
+            for (let singleData of getQuotationData[0].quotation_items) {
+                let obj = {}
+                Object.assign(obj, {
+                    ...singleData.dataValues
+                })
+                obj['serial_no'] = i
+                i++
+                modifiedListData.push(obj)
+            }
 
-        }catch(error){
+            let modifiedOverAllData = await Promise.all(getQuotationData.map(async singleData => {
+                return {
+                    ...singleData.dataValues,
+                    doc_date: moment(singleData.doc_date).format('DD-MMM-YYYY'),
+                    quotation_items: modifiedListData
+                }
+            }))
+
+
+            return responseMessageGenerator('success', 'data fetched successfully', modifiedOverAllData[0])
+
+        } catch (error) {
             console.log(error);
             return responseMessageGenerator('failure','something went wrong',error.message) 
         }
@@ -47,21 +69,21 @@ export class QuotationService {
             let userName = async (user_id)=>{
                 let userData = await this.userModel.findOne({where:{id:user_id}})
                 return userData?.user_name
-            }
-            
-        let getQuotationData =  await this.QuotationFormModel.findAll()
-        let modifiedData = await Promise.all(getQuotationData.map( async singleData =>{
-            return {
-            id:singleData.id,
-            Date:moment(singleData.doc_date).format('DD/M/YYYY'),
-            remarks:singleData.remark_brand,
-            total_amount:singleData.grand_total,
-            document_number:singleData.doc_number,
-            created_by: await userName(singleData.created_user_id),
-        }}))
-       return responseMessageGenerator('success','data fetched successfully',modifiedData) 
+            } 
+            let getQuotationData = await this.QuotationFormModel.findAll({ order: [['id', 'DESC']] })
+            let modifiedData = await Promise.all(getQuotationData.map(async singleData => {
+                return {
+                    id: singleData.id,
+                    Date: moment(singleData.doc_date).format('DD/M/YYYY'),
+                    remarks: singleData.remark_brand,
+                    total_amount: singleData.grand_total,
+                    document_number: singleData.doc_number,
+                    created_by: await userName(singleData.created_user_id),
+                }
+            }))
+            return responseMessageGenerator('success', 'data fetched successfully', modifiedData)
 
-        }catch(error){
+        } catch (error) {
             console.log(error);
             return responseMessageGenerator('failure','something went wrong',error.message) 
         }
@@ -69,17 +91,35 @@ export class QuotationService {
     async createQuotationForm(QuotationForm:QuotationFormDto):Promise<any>{
         try{
 
-             let createQuotation = await this.QuotationFormModel.create(QuotationForm)
 
-            if(createQuotation){
-                let quotationId =createQuotation.id
-                for(let singleData of QuotationForm.quotation_list_array){
-                    let obj ={}
-                    Object.assign(obj,{
-                        ...singleData,
-                        quotation_id:quotationId
+
+            let getTempQuotationList = await this.tempQuotationItemModel.findAll({
+                where: { doc_number: QuotationForm.doc_number },
+                attributes: ["item_number", "description", "quantity", "units", "price", "discount", "tax", "amount"],
+                order: [["id", "ASC"]]
+            })
+
+            let totalAmount = getTempQuotationList.reduce((acc, sum) => acc + +sum.amount, 0)
+            let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
+            let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
+            QuotationForm.total_discount = totalDiscount
+            QuotationForm.total_tax = totalTax
+            QuotationForm.sub_total = totalAmount
+            QuotationForm.grand_total = totalAmount
+            let createQuotation = await this.QuotationFormModel.create(QuotationForm)
+
+            if (createQuotation) {
+                let quotationId = createQuotation.id
+
+                for (let singleData of getTempQuotationList) {
+                    let obj = {}
+                    Object.assign(obj, {
+                        ...singleData.dataValues,
+                        quotation_id: quotationId
                     })
+
                     let createQuotation = await this.QuotationListModel.create(obj)
+
                 }
              }
              return responseMessageGenerator('success','data saved successfully',[])
@@ -194,25 +234,26 @@ export class QuotationService {
     async generateQuotationTemplate(res:any,id:number):Promise<any>{
         try{
 
-           let fileName = "Quatation1" + "_" + moment().format('MMM_YYYY') + ".pdf"
-           let templateName ="quotation_template"
+
+            let templateName = "quotation_template"
             let QuotationData = await this.getQuotationFormData(id)
-            if(QuotationData.status =="failure"){
-                return QuotationData 
+            if (QuotationData.status == "failure") {
+                return res.json(QuotationData)
             }
-          
-                let numberInWords = await this.numberToWord(QuotationData.data[0].grand_total)
-              let  formData = QuotationData.data.map(singleData=>({
-                         ...singleData.dataValues,
-                         amount_in_words:numberInWords
-                }))
-                
+
+            let numberInWords = await this.numberToWord(QuotationData.data.grand_total)
+            let formData = [QuotationData.data].map(singleData => ({
+                ...singleData,
+                amount_in_words: numberInWords
+            }))
+            // return res.json(formData) 
+            let fileName = QuotationData.data.customer_name + "_" + QuotationData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
             /*Handlebars is blocking access to object properties inherited from the prototype chain for security reasons. This behavior was introduced to prevent prototype pollution vulnerabilities.*/
             /*By serializing and deserializing the object, you ensure that only own properties are kept, eliminating any issues with prototype access restrictions*/
             const plainContext = JSON.parse(JSON.stringify(formData[0]));
 
-            //  return res.json(plainContext) 
-        
+            //   return res.json(plainContext) 
+
             const generatePayslip = await this.helperService.generatePdfFromTemplate(QUOTATION_UPLOAD_DIRECTORY, templateName, plainContext, 'payslip');
             const base64Data = generatePayslip.replace(/^data:application\/pdf;base64,/, '');
 
@@ -224,7 +265,52 @@ export class QuotationService {
                res.send(pdfBuffer);
                return responseMessageGenerator('success','Quotation downloaded successfully',[])
 
-        }catch(error){
+            //    return responseMessageGenerator('success','Quotation downloaded successfully', { "base64Data": base64Data, "fileName": fileName })
+
+        } catch (error) {
+            console.log(error);
+            return responseMessageGenerator('failure', 'something went wrong', error.message)
+
+
+        }
+    }
+    async downloadQuotationTemplate(id: number): Promise<any> {
+        try {
+
+
+            let templateName = "quotation_template"
+            let QuotationData = await this.getQuotationFormData(id)
+            if (QuotationData.status == "failure") {
+                return QuotationData
+            }
+
+            const logBase64Image = readFileSync('public/images/logo.png', 'base64');
+            const footerBase64Image = readFileSync('public/images/shadow-trading-footer-with-data.png', 'base64');
+            const sideLogoBase64Image = readFileSync('public/images/sideLogo.png', 'base64');
+            const logo = `data:image/png;base64,${logBase64Image}`;
+            const footer = `data:image/png;base64,${footerBase64Image}`;
+            const sidelogo = `data:image/png;base64,${sideLogoBase64Image}`;
+
+            let numberInWords = await this.numberToWord(QuotationData.data.grand_total)
+            let formData = [QuotationData.data].map(singleData => ({
+                ...singleData,
+                amount_in_words: numberInWords,
+                logo: logo,
+                footer: footer,
+                sidelogo: sidelogo,
+            }))
+
+            let fileName = QuotationData.data.customer_name + "_" + QuotationData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
+            /*Handlebars is blocking access to object properties inherited from the prototype chain for security reasons. This behavior was introduced to prevent prototype pollution vulnerabilities.*/
+            /*By serializing and deserializing the object, you ensure that only own properties are kept, eliminating any issues with prototype access restrictions*/
+            const plainContext = JSON.parse(JSON.stringify(formData[0]));
+
+
+            const generatePayslip = await this.helperService.generatePdfFromTemplate(QUOTATION_UPLOAD_DIRECTORY, templateName, plainContext, 'payslip');
+            const base64Data = generatePayslip.replace(/^data:application\/pdf;base64,/, '');
+            return responseMessageGenerator('success', 'Quotation downloaded successfully', { "base64Data": base64Data, "fileName": fileName })
+
+        } catch (error) {
             console.log(error);
             return responseMessageGenerator('failure','something went wrong',error.message)
             

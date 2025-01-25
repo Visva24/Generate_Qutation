@@ -19,24 +19,24 @@
     </style>
 </head>
 
-<body style="margin: 0; width: 100%;height:1115px; padding: 0; -webkit-font-smoothing: antialiased; word-break: break-word;position:relative;">
+<body style="margin: 0; width: 100%;height:1122px; padding: 0; -webkit-font-smoothing: antialiased; word-break: break-word;position:relative;">
      <div style="position: absolute; top:0;left:0;">
-        <img src="../images/sidebar.png" alt="">
+        <img src={{sidelogo}} alt="">
     </div>
     <!-- {{!-- <div style="position: absolute; bottom:0 !important;margin-top: 70px;width: 100%;">
         <div style=" background-color: #fca524; height: 90px;">
             ajhidu
         </div>
     </div> --}} -->
-     <div style="position: absolute; bottom:0;left:0; width: 100%;">
-        <img src="../images/footer.png" alt="" width="100px">
+     <div style="position: absolute; bottom:0;left:0;">
+        <img src={{footer}} alt="" width="794px">
     </div>
     <div style="padding: 40px; ">
         <table style=" width:100%;border-bottom:none;">
             <tr style="height: 60px;">
-                <td style=" width: 40%;text-align: center;padding-left:10px">
-                    <div style="display: flex;align-items: center;justify-content:center; gap: 30px;">
-                        <img src="" alt="logo">
+                <td style=" width: 40%;text-align: left;padding-left:40px">
+                    <div style="display: flex;align-items: center; gap: 30px;">
+                        <img src={{logo}} alt="logo">
                         <p style="font-size: 18px;font-weight: 600;">New Shadow Trading W.L.L</p>
                     </div>
                 </td>
@@ -52,9 +52,9 @@
         <table style="margin-left: 20px; width: 100%;">
             <tbody>
                 <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;">Customer</td>
-                    <td style="width: 33%;">Document Number</td>
-                    <td style="width: 33%;">Document Date</td>
+                    <td style="width: 33%;font-weight:600;">Customer:</td>
+                    <td style="width: 33%;font-weight:600;">Document Number:</td>
+                    <td style="width: 33%;font-weight:600;">Document Date:</td>
                 </tr>
                 <tr style="width: 100%;text-align: left;">
                     <td style="width: 33%;">{{customer_name}}</td>
@@ -67,9 +67,9 @@
         <table style="margin-left: 20px; width: 100%; border-bottom:none;">
             <tbody>
                 <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;">Contact Person</td>
-                    <td style="width: 33%;">Email</td>
-                    <td style="width: 33%;">Contact Number</td>
+                    <td style="width: 33%;font-weight:600;">Contact Person:</td>
+                    <td style="width: 33%;font-weight:600;">Email:</td>
+                    <td style="width: 33%;font-weight:600;">Contact Number:</td>
                 </tr>
                 <tr style="width: 100%;text-align: left;">
                     <td style="width: 33%;">{{contact_person}}</td>
@@ -82,9 +82,9 @@
         <table style="margin-left: 20px; width: 100%; border-bottom:none;">
             <tbody>
                 <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;">Contact Reference</td>
-                    <td style="width: 33%;">Payment Method</td>
-                    <td style="width: 33%;">Currency</td>
+                    <td style="width: 33%;font-weight:600;">Contact Reference:</td>
+                    <td style="width: 33%;font-weight:600;">Payment Method:</td>
+                    <td style="width: 33%;font-weight:600;">Currency:</td>
                 </tr>
                 <tr style="width: 100%;text-align: left;">
                     <td style="width: 33%;">{{customer_reference}}</td>
@@ -97,8 +97,8 @@
         <table style="margin-left: 20px; width: 100%; border-bottom:none;">
             <tbody>
                 <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;">Address</td>
-                    <td style="width: 33%;">Validity</td>
+                    <td style="width: 33%;font-weight:600;">Address:</td>
+                    <td style="width: 33%;font-weight:600;">Validity:</td>
                     <td style="width: 33%;"></td>
                 </tr>
                 <tr style="width: 100%;text-align: left;">
@@ -111,7 +111,7 @@
         </table>
         <hr style="margin-left: 20px; color:#000 !important">
         
-        <table style="width: 100%;  border-bottom:none;">
+        <table style="width: 100%;  border-bottom:none; margin-top:10px !important;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th style="width: 5%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;">S.No.</th>
@@ -127,54 +127,43 @@
               
                  {{#each quotation_items}} 
                 <tr>
-                    <td style="text-align: center;border: 1px solid #c7c7c7;">{{"1"}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; color:#999999;">{{this.item_number}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7;">{{serial_no}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7;">{{this.item_number}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7;">{{this.description}}</td>
                     <td style="text-align: right;border: 1px solid #c7c7c7;">{{this.quantity}}</td>
                     <td style="text-align: right;border: 1px solid #c7c7c7;">{{this.units}}</td>
                     <td style="text-align: right;border: 1px solid #c7c7c7;">{{this.price}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7;">{{this.discount}}</td>
                     <td style="text-align: right;border: 1px solid #c7c7c7;">{{this.tax}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7;">{{this.discount}}</td>
                     <td style="text-align: right;border: 1px solid #c7c7c7;">{{this.amount}}</td>
                 </tr>
               {{/each}} 
             </tbody>
         </table>
-        <table style="width: 100%;">
+        <table style="width: 100%; margin-top:10px !important;">
             <tr>
-                <td style="width: 60%; vertical-align: top;">
+                <td style="width: 80%; vertical-align: top;">
                     <table>
                         <tr style="height: 25px;padding-left: 4px;">
-                            <td>Remark Brand</td>
+                            <td>Remark Brand: <span style="font-weight: 600;padding-left: 4px;" >{{remark_brand}}</span></td>
                         </tr>
-                        <tr style="height: 25px;">
-                            <td style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</td>
-                        </tr>
+                      
                         <tr style="height: 25px;padding-left: 4px;">
-                            <td>Delivery</td>
+                            <td>Delivery: <span style="font-weight: 600;padding-left: 4px;" >{{delivery}}</span></td>
                         </tr>
-                        <tr style="height: 25px;">
-                            <td style="font-weight: 600;padding-left: 4px;">{{delivery}}</td>
-                        </tr>
+                    
                         <tr style="height: 25px;padding-left: 4px;">
-                            <td>Total In Words</td>
-                        </tr>
-                        <tr style="height: 25px;">
-                            <td style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</td>
-                        </tr>
-                        <tr style="height: 25px;">
-                            <td><span style="font-weight: 600;padding-left: 4px;">Notes: </span>Looking forward for your
-                                business.</td>
+                            <td>Total In Words: <span style="font-weight: 600;padding-left: 4px;" >{{amount_in_words}}</span></td>
                         </tr>
                     </table>
                 </td>
-                <td style="width: 40%;">
+                <td style="width: 20%;">
                     <table>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;">
                                 Sub Total
                             </td>
-                            <td style="width: 30%;text-align: right;">
+                            <td style="width: 20%;text-align: right;">
                                 {{sub_total}}
                             </td>
                         </tr>
@@ -182,23 +171,23 @@
                             <td style="width: 20%;text-align: right; padding-left: 4px;">
                                 Discount
                             </td>
-                            <td style="width: 30%;text-align: right;">
-                                {{total_discount}}
+                            <td style="width: 20%;text-align: right;">
+                                {{total_discount}}%
                             </td>
                         </tr>
                          <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;">
                                 TAX
                             </td>
-                            <td style="width: 30%;text-align: right;">
-                                {{total_tax}}
+                            <td style="width: 20%;text-align: right;">
+                                {{total_tax}}%
                             </td>
                         </tr>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right;font-weight: 600;padding-left: 4px;">
                                 Total
                             </td>
-                            <td style="width: 30%;text-align: right;font-weight: 600;">
+                            <td style="width: 20%;text-align: right;font-weight: 600;">
                                 {{grand_total}}
                             </td>
                         </tr>

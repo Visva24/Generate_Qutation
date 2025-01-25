@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { existsSync, mkdirSync, readFileSync } from 'fs';
 import handlebars, { log } from 'handlebars';
-import puppeteer from 'puppeteer';
+// import puppeteer from 'puppeteer';
 import { promises as fsPromises } from 'fs';
 import { join } from 'path';
 import { InjectModel } from '@nestjs/sequelize';
 import { UserRepository } from 'src/modules/authentication/entity/users.entity';
 import { ApiResponse, responseMessageGenerator } from 'src/common/util/helper.config';
+import puppeteer from 'puppeteer';
 
 
 @Injectable()
@@ -76,4 +77,22 @@ export class HelperService {
      }
  
   }
+  async getShortName(fullName: string): Promise<any> {
+    const nameParts = fullName?.split(' ');
+    if (!nameParts) return '';
+
+    let shortName = '';
+
+    if (nameParts.length === 1) {
+        // Case 1: Single-word name
+        shortName = nameParts[0]?.substring(0, 2).toUpperCase();
+    } else if (nameParts.length >= 2) {
+        // Case 2 and 3: Two or more words
+        const firstNameInitial = nameParts[0]?.charAt(0).toUpperCase() || '';
+        const secondNameInitial = nameParts[1]?.charAt(0).toUpperCase() || '';
+        shortName = `${firstNameInitial}${secondNameInitial}`;
+    }
+
+    return shortName;
+    }
 }
