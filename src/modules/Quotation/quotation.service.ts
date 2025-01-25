@@ -327,9 +327,7 @@ export class QuotationService {
     }
     async SaveOrUpdateQuotationList(doc_number: string, Quotation_list: QuotationListDto[], record_id?: number): Promise<any> {
         try {
-
             if (record_id) {
-
                 let getListTotalAmount = (row) => {
                     return (row.price * row.quantity +
                         (row.price * row.quantity * row.tax) / 100 -
@@ -375,6 +373,7 @@ export class QuotationService {
     }
     async getAllQuotationList(doc_number: string): Promise<any> {
         try {
+            
             let getTempQuotationList = await this.tempQuotationItemModel.findAll({ where: { doc_number: doc_number }, order: [["id", "ASC"]] })
             let totalAmount = getTempQuotationList.reduce((acc, sum) => acc + +sum.amount, 0)
             let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
