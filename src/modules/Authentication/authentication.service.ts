@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { ApiResponse, jwtConstants, responseMessageGenerator } from 'src/common/util/helper.config';
 import { UserRepository } from './entity/users.entity';
-import { JwtService } from "@nestjs/jwt";
 import { InjectModel } from '@nestjs/sequelize';
 import { genSaltSync, hashSync, compareSync } from "bcrypt";
 import { EmployeeSignUpDto } from './dto/create-user.dto';
 
 @Injectable()
 export class AuthenticationService {
+   
     
 
     constructor(
@@ -61,15 +62,15 @@ export class AuthenticationService {
         }
     }
 
-    async signIn(email: string, user_password: string): Promise<ApiResponse> {
+    async signIn(user_email: string, user_password: string): Promise<ApiResponse> {
         try {
      
           let condition: any = {};
           
-          let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          let isEmail = emailRegex.test(email)
-          condition = { user_email: (email).toUpperCase().trim() }
-
+         
+            let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            let isEmail = emailRegex.test(user_email);
+          condition = { user_email: (user_email).toUpperCase().trim() }
           if (isEmail == false)
             return  responseMessageGenerator(
                'failure',
@@ -78,8 +79,8 @@ export class AuthenticationService {
              );
     
           const user = await this.userModel.findOne({ where: condition });
-          if (!user){
-           return  responseMessageGenerator(
+          if (user == null){
+            return responseMessageGenerator(
               'failure',
               "Invalid email address. Please enter a valid email",
               []
