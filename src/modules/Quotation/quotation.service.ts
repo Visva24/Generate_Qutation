@@ -317,15 +317,39 @@ export class QuotationService {
 
         }
     }
-    async getAndSaveQuotationList(doc_number:string,Quotation_list:QuotationListDto[],record_id?:number):Promise<any>{
-        try{
+    async SaveOrUpdateQuotationList(doc_number: string, Quotation_list: QuotationListDto[], record_id?: number): Promise<any> {
+        try {
+            if (record_id) {
+                let getListTotalAmount = (row) => {
+                    return (row.price * row.quantity +
+                        (row.price * row.quantity * row.tax) / 100 -
+                        (row.price * row.quantity * row.discount) / 100)
+                }
 
-            if(record_id){
-                let createQuotation = await this.tempQuotationItemModel.update(Quotation_list[0],{where:{id:record_id}})
-            }else{
-                let formatedData = Quotation_list.map(singleData=>({
-                     ...singleData,
-                     doc_number:doc_number
+                let totalAmount = getListTotalAmount(Quotation_list[0])
+
+                let formatedData = Quotation_list.map(singleData => ({
+                    ...singleData,
+                    doc_number: doc_number,
+                    amount: totalAmount
+                }))
+
+                let updateQuotation = await this.tempQuotationItemModel.update(formatedData[0], { where: { id: record_id } })
+            }
+            else if (Quotation_list.length > 0) {
+
+                let getListTotalAmount = (row) => {
+                    return (row.price * row.quantity +
+                        (row.price * row.quantity * row.tax) / 100 -
+                        (row.price * row.quantity * row.discount) / 100)
+                }
+
+                let totalAmount = getListTotalAmount(Quotation_list[0])
+
+                let formatedData = Quotation_list.map(singleData => ({
+                    ...singleData,
+                    doc_number: doc_number,
+                    amount: totalAmount
                 }))
                 let createQuotation = await this.tempQuotationItemModel.bulkCreate(formatedData)
             }
@@ -340,10 +364,32 @@ export class QuotationService {
 
         }
     }
-    async getSingleQuotationList(record_id:number):Promise<any>{
-        try{
+    async getAllQuotationList(doc_number: string): Promise<any> {
+        try {
+            
+            let getTempQuotationList = await this.tempQuotationItemModel.findAll({ where: { doc_number: doc_number }, order: [["id", "ASC"]] })
+            let totalAmount = getTempQuotationList.reduce((acc, sum) => acc + +sum.amount, 0)
+            let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
+            let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
+            let modifiedData = []
+            let i = 1
+            for (let singleData of getTempQuotationList) {
+                let obj = {}
+                Object.assign(obj, {
+                    ...singleData.dataValues
+                })
+                obj['serial_no'] = i
+                i++
+                modifiedData.push(obj)
+            }
+            let objData = {
+                "total_discount": totalDiscount,
+                "total_tax": totalTax,
+                "sub_total": totalAmount,
+                "grand_total": totalAmount,
+                list: modifiedData,
+            }
 
-            let getTempQuotationList = await this.tempQuotationItemModel.findOne({where:{id:record_id}})
             return responseMessageGenerator('success','data fetched successfully',getTempQuotationList)
 
         }catch(error){
@@ -353,6 +399,7 @@ export class QuotationService {
 
         }
     }
+    
     async resetTempQuotationData(doc_number:string):Promise<any>{
         try{
 
