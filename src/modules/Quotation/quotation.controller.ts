@@ -111,4 +111,9 @@ export class QuotationController {
       async generateQuotationTemplate(  @Res() res:Response,@Query('id') id :number) {
         return this.quotationService.generateQuotationTemplate(res,id)
       }
+     
+      @Get("download-quotation-template")
+      async downloadQuotationTemplate( @Query('id') id :number) {
+        return this.quotationService.downloadQuotationTemplate(id)
+      }
 }

@@ -5,6 +5,8 @@ import * as moment from 'moment-timezone';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as bodyParser from 'body-parser';
 import { ValidationPipe } from '@nestjs/common';
+import { join } from 'path';
+import * as express from 'express';
 
 async function bootstrap() {
   const port = 5000;
@@ -23,6 +25,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
   app.use(bodyParser.json({ limit: '10mb' }));
+  app.use('/public', express.static(join(__dirname, '..', 'public')));
   app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
   // app.useGlobalPipes(new ValidationPipe({
