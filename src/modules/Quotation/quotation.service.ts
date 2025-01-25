@@ -15,19 +15,19 @@ import { readFileSync } from 'fs';
 @Injectable()
 export class QuotationService {
     constructor(
-        @InjectModel(QuotationFormRepository) private QuotationFormModel : typeof QuotationFormRepository,
-        @InjectModel(documentDetailRepository) private documentDetailModel : typeof documentDetailRepository,
-        @InjectModel(QuotationItemRepository) private QuotationListModel : typeof QuotationItemRepository,
-        @InjectModel(TempQuotationItemRepository) private tempQuotationItemModel : typeof TempQuotationItemRepository,
+        @InjectModel(QuotationFormRepository) private QuotationFormModel: typeof QuotationFormRepository,
+        @InjectModel(documentDetailRepository) private documentDetailModel: typeof documentDetailRepository,
+        @InjectModel(QuotationItemRepository) private QuotationListModel: typeof QuotationItemRepository,
+        @InjectModel(TempQuotationItemRepository) private tempQuotationItemModel: typeof TempQuotationItemRepository,
         @InjectModel(UserRepository) private userModel: typeof UserRepository,
-        private readonly helperService:HelperService
-       
-    ){
+        private readonly helperService: HelperService
+
+    ) {
 
     }
 
-    async getQuotationFormData(quotation_id):Promise<ApiResponse>{
-        try{
+    async getQuotationFormData(quotation_id): Promise<ApiResponse> {
+        try {
 
             let getQuotationData = await this.QuotationFormModel.findAll({
                 where: { id: quotation_id },
@@ -60,16 +60,17 @@ export class QuotationService {
 
         } catch (error) {
             console.log(error);
-            return responseMessageGenerator('failure','something went wrong',error.message) 
+            return responseMessageGenerator('failure', 'something went wrong', error.message)
         }
     }
-    async getQuotationFormHistory():Promise<ApiResponse>{
-        try{
+    async getQuotationFormHistory(): Promise<ApiResponse> {
+        try {
 
-            let userName = async (user_id)=>{
-                let userData = await this.userModel.findOne({where:{id:user_id}})
+            let userName = async (user_id) => {
+                let userData = await this.userModel.findOne({ where: { id: user_id } })
                 return userData?.user_name
-            } 
+            }
+
             let getQuotationData = await this.QuotationFormModel.findAll({ order: [['id', 'DESC']] })
             let modifiedData = await Promise.all(getQuotationData.map(async singleData => {
                 return {
@@ -85,11 +86,11 @@ export class QuotationService {
 
         } catch (error) {
             console.log(error);
-            return responseMessageGenerator('failure','something went wrong',error.message) 
+            return responseMessageGenerator('failure', 'something went wrong', error.message)
         }
     }
-    async createQuotationForm(QuotationForm:QuotationFormDto):Promise<any>{
-        try{
+    async createQuotationForm(QuotationForm: QuotationFormDto): Promise<any> {
+        try {
 
 
 
@@ -121,118 +122,126 @@ export class QuotationService {
                     let createQuotation = await this.QuotationListModel.create(obj)
 
                 }
-             }
-             return responseMessageGenerator('success','data saved successfully',[])
+            }
+            //reset the temp data
+            await this.resetTempQuotationData(QuotationForm.doc_number)
+            return responseMessageGenerator('success', 'data saved successfully', [])
 
-        }catch(error){
+        } catch (error) {
             console.log(error);
-            return responseMessageGenerator('failure','something went wrong',error.message)
-            
+            return responseMessageGenerator('failure', 'something went wrong', error.message)
+
 
         }
     }
-    async updateQuotationForm(id:number,UpdateQuotationForm:UpdateQuotationFormDto):Promise<any>{
-        try{
+    async updateQuotationForm(id: number, UpdateQuotationForm: UpdateQuotationFormDto): Promise<any> {
+        try {
 
-             let updateQuotation = await this.QuotationFormModel.update({...UpdateQuotationForm},{where:{id:id}})
-               if(updateQuotation){
-                
-                for(let singleData of UpdateQuotationForm.quotation_list_array){
-                    let obj ={}
-                    Object.assign(obj,{
-                        ...singleData,
-                        quotation_id:id
+            let updateQuotation = await this.QuotationFormModel.update({ ...UpdateQuotationForm }, { where: { id: id } })
+            let getTempQuotationList = await this.tempQuotationItemModel.findAll({
+                where: { doc_number: UpdateQuotationForm.doc_number },
+                attributes: ["item_number", "description", "quantity", "units", "price", "discount", "tax", "amount"],
+                order: [["id", "ASC"]]
+            })
+
+            if (updateQuotation) {
+
+                for (let singleData of getTempQuotationList) {
+                    let obj = {}
+                    Object.assign(obj, {
+                        ...singleData.dataValues,
+                        quotation_id: id
                     })
                     let update = await this.QuotationListModel.create(obj)
                 }
-             }
-            
-             return responseMessageGenerator('success','data updated successfully',[])
+            }
 
-        }catch(error){
+            return responseMessageGenerator('success', 'data updated successfully', [])
+
+        } catch (error) {
             console.log(error);
-            return responseMessageGenerator('failure','something went wrong',error.message)
-            
+            return responseMessageGenerator('failure', 'something went wrong', error.message)
+
 
         }
     }
-    async generateDynamicDocNumber(doc_type:string):Promise<any>{
-        try{
-             let docNumber
-             let getDocumentData = await this.documentDetailModel.findOne({where:{doc_type:doc_type}})
-           
-              let repoObject ={
-                 "quotation":this.QuotationFormModel
-              }
-              let Quotation = await repoObject[doc_type].findOne({order:[["id","DESC"]]})  
-             
-              if(Quotation){
-                 let incrementDocNumber
-                 if(Quotation.doc_number != null ){
-                     incrementDocNumber = await this.incrementLastDigit( Quotation.doc_number )
-                 }
-                 docNumber = incrementDocNumber
-              }else{
-                docNumber = getDocumentData?.doc_number
-              }
-              
-              
-             return responseMessageGenerator('success','data fetched successfully',docNumber)
+    async generateDynamicDocNumber(doc_type: string): Promise<any> {
+        try {
+            let docNumber
+            let getDocumentData = await this.documentDetailModel.findOne({ where: { doc_type: doc_type } })
 
-        }catch(error){
+            let repoObject = {
+                "quotation": this.QuotationFormModel
+            }
+            let Quotation = await repoObject[doc_type].findOne({ order: [["id", "DESC"]] })
+
+            if (Quotation) {
+                let incrementDocNumber
+                if (Quotation.doc_number != null) {
+                    incrementDocNumber = await this.incrementLastDigit(Quotation.doc_number)
+                }
+                docNumber = incrementDocNumber
+            } else {
+                docNumber = getDocumentData?.doc_number
+            }
+
+
+            return responseMessageGenerator('success', 'data fetched successfully', docNumber)
+
+        } catch (error) {
             console.log(error);
-            return responseMessageGenerator('failure','something went wrong',error.message)
-            
+            return responseMessageGenerator('failure', 'something went wrong', error.message)
+
 
         }
     }
     async incrementLastDigit(invoiceNumber: string): Promise<any> {
-        try{
+        try {
 
-       // Use regex to extract the last numeric part of the string
-        const match = invoiceNumber.match(/(\d+)$/);
-        
-        if (!match) {
-          throw new Error("No numeric part found in the input string");
-        }
-        const lastNumber = parseInt(match[1], 10); // Get the last number
-        const incrementedNumber = lastNumber + 1; // Increment the number
-      
-        // Replace the last number with the incremented number
-        const updatedInvoiceNumber = invoiceNumber.replace(
-          new RegExp(`${lastNumber}$`),
-          incrementedNumber.toString()
-        );
-      
-        return updatedInvoiceNumber;
+            // Use regex to extract the last numeric part of the string
+            const match = invoiceNumber.match(/(\d+)$/);
 
-        }catch(error){
+            if (!match) {
+                throw new Error("No numeric part found in the input string");
+            }
+            const lastNumber = parseInt(match[1], 10); // Get the last number
+            const incrementedNumber = lastNumber + 1; // Increment the number
+
+            // Replace the last number with the incremented number
+            const updatedInvoiceNumber = invoiceNumber.replace(
+                new RegExp(`${lastNumber}$`),
+                incrementedNumber.toString()
+            );
+
+            return updatedInvoiceNumber;
+
+        } catch (error) {
             console.log(error);
             return " "
 
         }
-        
-        
-    }
-    async createOrUpdateDocument(documentData:documentsDto[]):Promise<any>{
-        try{
-             
-            for(let singleData of documentData){
-                
-                let isREcordExist = await this.documentDetailModel.findOne({where:{doc_number:singleData.doc_number,doc_type:singleData.doc_type}})
-                await this.documentDetailModel.upsert({id:isREcordExist?.id,...singleData})
-            }
-             return responseMessageGenerator('success','data saved successfully',[])
 
-        }catch(error){
+
+    }
+    async createOrUpdateDocument(documentData: documentsDto[]): Promise<any> {
+        try {
+
+            for (let singleData of documentData) {
+
+                let isREcordExist = await this.documentDetailModel.findOne({ where: { doc_number: singleData.doc_number, doc_type: singleData.doc_type } })
+                await this.documentDetailModel.upsert({ id: isREcordExist?.id, ...singleData })
+            }
+            return responseMessageGenerator('success', 'data saved successfully', [])
+
+        } catch (error) {
             console.log(error);
-            return responseMessageGenerator('failure','something went wrong',error.message)
-            
+            return responseMessageGenerator('failure', 'something went wrong', error.message)
+
 
         }
     }
-    async generateQuotationTemplate(res:any,id:number):Promise<any>{
-        try{
+    async generateQuotationTemplate(res: any, id: number): Promise<any> {
+        try {
 
 
             let templateName = "quotation_template"
@@ -257,13 +266,12 @@ export class QuotationService {
             const generatePayslip = await this.helperService.generatePdfFromTemplate(QUOTATION_UPLOAD_DIRECTORY, templateName, plainContext, 'payslip');
             const base64Data = generatePayslip.replace(/^data:application\/pdf;base64,/, '');
 
-                 const pdfBuffer = Buffer.from(base64Data, 'base64');
-   
-               //  Set headers and send the PDF as a response
-               res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
-               res.setHeader('Content-Type', 'application/pdf');
-               res.send(pdfBuffer);
-               return responseMessageGenerator('success','Quotation downloaded successfully',[])
+            const pdfBuffer = Buffer.from(base64Data, 'base64');
+
+            //  Set headers and send the PDF as a response
+            res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
+            res.setHeader('Content-Type', 'application/pdf');
+            res.send(pdfBuffer);
 
             //    return responseMessageGenerator('success','Quotation downloaded successfully', { "base64Data": base64Data, "fileName": fileName })
 
@@ -312,8 +320,8 @@ export class QuotationService {
 
         } catch (error) {
             console.log(error);
-            return responseMessageGenerator('failure','something went wrong',error.message)
-            
+            return responseMessageGenerator('failure', 'something went wrong', error.message)
+
 
         }
     }
@@ -354,13 +362,12 @@ export class QuotationService {
                 let createQuotation = await this.tempQuotationItemModel.bulkCreate(formatedData)
             }
 
-            let getTempQuotationList = await this.tempQuotationItemModel.findAll({where:{doc_number:doc_number},order:[["id","ASC"]]})
-            return responseMessageGenerator('success','data saved successfully',getTempQuotationList)
+            return responseMessageGenerator('success', 'data saved successfully', [])
 
-        }catch(error){
+        } catch (error) {
             console.log(error);
-            return responseMessageGenerator('failure','something went wrong',error.message)
-            
+            return responseMessageGenerator('failure', 'something went wrong', error.message)
+
 
         }
     }
@@ -390,26 +397,52 @@ export class QuotationService {
                 list: modifiedData,
             }
 
-            return responseMessageGenerator('success','data fetched successfully',getTempQuotationList)
+            return responseMessageGenerator('success', 'data fetched successfully', objData)
 
-        }catch(error){
+        } catch (error) {
             console.log(error);
-            return responseMessageGenerator('failure','something went wrong',error.message)
-            
+            return responseMessageGenerator('failure', 'something went wrong', error.message)
+
 
         }
     }
-    
-    async resetTempQuotationData(doc_number:string):Promise<any>{
-        try{
+    async deleteQuotationList(record_id: number): Promise<any> {
+        try {
 
-            let getTempQuotationList = await this.tempQuotationItemModel.destroy({where:{doc_number:doc_number}})
-            return responseMessageGenerator('success','data reset successfully',getTempQuotationList)
+            let dropTempQuotationList = await this.tempQuotationItemModel.destroy({ where: { id: record_id } })
+            return responseMessageGenerator('success', 'data deleted successfully', [])
 
-        }catch(error){
+        } catch (error) {
             console.log(error);
-            return responseMessageGenerator('failure','something went wrong',error.message)
-            
+            return responseMessageGenerator('failure', 'something went wrong', error.message)
+
+
+        }
+    }
+
+    async getSingleQuotationList(record_id: number): Promise<any> {
+        try {
+
+            let getTempQuotationList = await this.tempQuotationItemModel.findOne({ where: { id: record_id } })
+            return responseMessageGenerator('success', 'data fetched successfully', getTempQuotationList)
+
+        } catch (error) {
+            console.log(error);
+            return responseMessageGenerator('failure', 'something went wrong', error.message)
+
+
+        }
+    }
+    async resetTempQuotationData(doc_number: string): Promise<any> {
+        try {
+
+            let getTempQuotationList = await this.tempQuotationItemModel.destroy({ where: { doc_number: doc_number } })
+            return responseMessageGenerator('success', 'data reset successfully', getTempQuotationList)
+
+        } catch (error) {
+            console.log(error);
+            return responseMessageGenerator('failure', 'something went wrong', error.message)
+
 
         }
     }
@@ -498,6 +531,6 @@ export class QuotationService {
         }
 
         return convertToWords(num) + " rupees only";
-       
+
     }
 }
