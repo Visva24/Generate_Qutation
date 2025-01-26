@@ -48,7 +48,7 @@ export class QuotationService {
                 if(type =="revision"){
                      let revisedDocNumber =  await this.generateRevisionDocNumber(getQuotationData[0].id)
                      Object.assign(obj, {
-                        doc_number:revisedDocNumber
+                        doc_number:revisedDocNumber.data
                     })
                     await this.SaveOrUpdateQuotationList(revisedDocNumber,[obj],null)
 
@@ -147,12 +147,16 @@ export class QuotationService {
                 attributes: ["item_number", "description", "quantity", "units", "price", "discount", "tax", "amount"],
                 order: [["id", "ASC"]]
             })
+            let Quotation = await this.QuotationFormModel.findOne({ where: { id: id } })
+            let revisionCount = Quotation.revision_count + 1 
             
             let totalAmount = getTempQuotationList.reduce((acc, sum) => acc + +sum.amount, 0)
             // let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
             // let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
             // QuotationForm.total_discount = totalDiscount
             // QuotationForm.total_tax = totalTax
+            UpdateQuotationForm.revision_count = revisionCount
+            UpdateQuotationForm.is_revised = true
             UpdateQuotationForm.sub_total = totalAmount
             UpdateQuotationForm.grand_total = totalAmount
           
@@ -507,10 +511,10 @@ export class QuotationService {
             let Quotation = await this.QuotationFormModel.findOne({ where: { id: record_id } })
             let revisionCount = Quotation.revision_count + 1 
             let   revisedDocNumber = Quotation.doc_number +"-R"+revisionCount
-            return revisedDocNumber
+            return responseMessageGenerator('success','data fetched successfully',revisedDocNumber)
         } catch (error) {
             console.log(error);
-            return ""
+            return responseMessageGenerator('failure',error.message,"")
         }
     }
 

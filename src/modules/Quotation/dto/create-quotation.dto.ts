@@ -18,6 +18,8 @@ export class QuotationFormDto {
         total_discount:number
         total_tax:number
         grand_total:number
+        is_revised:boolean
+        revision_count:number
         created_user_id:number
         quotation_list_array:QuotationListDto[]
 }
