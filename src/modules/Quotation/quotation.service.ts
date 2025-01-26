@@ -29,6 +29,7 @@ export class QuotationService {
     async getQuotationFormData(quotation_id:number,type:string): Promise<ApiResponse> {
         try {
 
+            let revisedDocNumber = null
             let getQuotationData = await this.QuotationFormModel.findAll({
                 where: { id: quotation_id },
                 include: [
@@ -37,6 +38,9 @@ export class QuotationService {
             })
             let modifiedListData = []
             let i = 1
+            if(type =="revision"){
+                 revisedDocNumber =  (await this.generateRevisionDocNumber(getQuotationData[0].id)).data
+            }
             for (let singleData of getQuotationData[0].quotation_items) {
                 let obj :any = {}
                 Object.assign(obj, {
@@ -45,13 +49,22 @@ export class QuotationService {
                 obj['serial_no'] = i
                 i++
                 modifiedListData.push(obj)
-                if(type =="revision"){
-                     let revisedDocNumber =  await this.generateRevisionDocNumber(getQuotationData[0].id)
-                     Object.assign(obj, {
-                        doc_number:revisedDocNumber.data
+                if(revisedDocNumber){
+                     let revisionObj:any ={}
+                     Object.assign(revisionObj, {
+                        ...singleData.dataValues
                     })
-                    await this.SaveOrUpdateQuotationList(revisedDocNumber,[obj],null)
-
+                    revisionObj['doc_number']=revisedDocNumber
+                    delete revisionObj.id
+                    delete revisionObj.createdAt
+                    delete revisionObj.updatedAt
+               
+                    // return obj
+                    let existingQuotationItem = await this.tempQuotationItemModel.findOne({where:{doc_number:revisedDocNumber,item_number:revisionObj.item_number,description:revisionObj.description}})
+                    if(existingQuotationItem == null){
+                        let savedData =   await this.SaveOrUpdateQuotationList(revisedDocNumber,[revisionObj],null)
+                    }
+                 
                 }
             }
 
@@ -59,6 +72,7 @@ export class QuotationService {
                 return {
                     ...singleData.dataValues,
                     doc_date: moment(singleData.doc_date).format('DD-MMM-YYYY'),
+                    doc_number:revisedDocNumber,
                     quotation_items: modifiedListData
                 }
             }))
@@ -161,12 +175,11 @@ export class QuotationService {
             UpdateQuotationForm.grand_total = totalAmount
           
             let updateQuotation = await this.QuotationFormModel.update({ ...UpdateQuotationForm }, { where: { id: id } })
-
-            if (updateQuotation) {
-
+            //  let itemCount = getTempQuotationList.length
+            if (updateQuotation && getTempQuotationList.length >0)  {
+                await this.QuotationListModel.destroy({where:{quotation_id:id}})
                 for (let singleData of getTempQuotationList) {
                     /* destroy previous data*/
-                    await this.QuotationListModel.destroy({where:{quotation_id:id}})
                     let obj = {}
                     Object.assign(obj, {
                         ...singleData.dataValues,
@@ -199,7 +212,7 @@ export class QuotationService {
                 let incrementDocNumber
                 if (Quotation.doc_number != null) {
                     let docNum =  Quotation.doc_number
-                    Quotation.is_revised = true  && (docNum = docNum.replace(/(\d+).*/, '$1'))
+                    Quotation.is_revised == true  && (docNum = docNum.replace(/(\d+).*/, '$1'))
                     /*
                         \d+: Matches one or more digits (dynamic part).
                         .*: Matches everything after the digits.
@@ -510,11 +523,13 @@ export class QuotationService {
         try {
             let Quotation = await this.QuotationFormModel.findOne({ where: { id: record_id } })
             let revisionCount = Quotation.revision_count + 1 
-            let   revisedDocNumber = Quotation.doc_number +"-R"+revisionCount
+            let docNum =  Quotation.doc_number
+            Quotation.is_revised == true  && (docNum = docNum.replace(/(\d+).*/, '$1'))
+            let   revisedDocNumber = docNum +"-R"+revisionCount
             return responseMessageGenerator('success','data fetched successfully',revisedDocNumber)
         } catch (error) {
             console.log(error);
-            return responseMessageGenerator('failure',error.message,"")
+            return responseMessageGenerator('failure',error.message,null)
         }
     }
 
