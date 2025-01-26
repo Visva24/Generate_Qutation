@@ -12,7 +12,7 @@ const generateSequelizeOptions = async (): Promise<SequelizeModuleOptions> => {
             port: 3306,
             username: "root",
             password: "",
-            database: "qg",
+            database: "quotation_generator",
             autoLoadModels: true,
             synchronize: true,
             // logging:false,

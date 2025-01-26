@@ -5,6 +5,7 @@ import { UserRepository } from './entity/users.entity';
 import { InjectModel } from '@nestjs/sequelize';
 import { genSaltSync, hashSync, compareSync } from "bcrypt";
 import { EmployeeSignUpDto } from './dto/create-user.dto';
+import { HelperService } from 'src/common/services/helper/helper.service';
 
 @Injectable()
 export class AuthenticationService {
@@ -13,7 +14,8 @@ export class AuthenticationService {
 
     constructor(
         @InjectModel(UserRepository) private userModel : typeof UserRepository,
-        private readonly JwtService :JwtService
+        private readonly JwtService :JwtService,
+        private readonly helperService :HelperService
     ){
 
     }
@@ -112,6 +114,7 @@ export class AuthenticationService {
             expiresIn: "7d",
             secret: jwtConstants.secret,
           });
+          let shortName = await this.helperService.getShortName(user.user_name)
     
           const data = {
             access_token: accessToken,
@@ -120,6 +123,11 @@ export class AuthenticationService {
               user_id: user.id,
               user_email: user.user_email,
               user_name: user.user_name,
+              employee: {
+                user_name: user.user_name,
+                avatar_type: 'short_name',
+                avatar_value: shortName
+              },
             },
           };
         

@@ -250,10 +250,20 @@ export class QuotationService {
                 return res.json(QuotationData)
             }
 
+            const logBase64Image = readFileSync('public/images/logo.png', 'base64');
+            const footerBase64Image = readFileSync('public/images/shadow-trading-footer-with-data.png', 'base64');
+            const sideLogoBase64Image = readFileSync('public/images/sideLogo.png', 'base64');
+            const logo = `data:image/png;base64,${logBase64Image}`;
+            const footer = `data:image/png;base64,${footerBase64Image}`;
+            const sidelogo = `data:image/png;base64,${sideLogoBase64Image}`;
+
             let numberInWords = await this.numberToWord(QuotationData.data.grand_total)
             let formData = [QuotationData.data].map(singleData => ({
                 ...singleData,
-                amount_in_words: numberInWords
+                amount_in_words: numberInWords,
+                logo: logo,
+                footer: footer,
+                sidelogo: sidelogo,
             }))
             // return res.json(formData) 
             let fileName = QuotationData.data.customer_name + "_" + QuotationData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
@@ -389,11 +399,13 @@ export class QuotationService {
                 i++
                 modifiedData.push(obj)
             }
+            let amountInWords = await this.numberToWord(totalAmount)
             let objData = {
                 "total_discount": totalDiscount,
                 "total_tax": totalTax,
                 "sub_total": totalAmount,
                 "grand_total": totalAmount,
+                "amount_in_words":amountInWords ,
                 list: modifiedData,
             }
 
@@ -444,6 +456,27 @@ export class QuotationService {
             return responseMessageGenerator('failure', 'something went wrong', error.message)
 
 
+        }
+    }
+    async generateSerialNumber(QuotationList: any): Promise<any> {
+        try {
+
+            let modifiedData = []
+            let i = 1
+            for (let singleData of QuotationList) {
+                let obj = {}
+                Object.assign(obj, {
+                    ...singleData
+                })
+                obj['serial_no'] = i
+                i++
+                modifiedData.push(obj)
+            }
+            return modifiedData
+
+        } catch (error) {
+            console.log(error);
+            return []
         }
     }
 
