@@ -26,7 +26,7 @@ export class QuotationService {
 
     }
 
-    async getQuotationFormData(quotation_id): Promise<ApiResponse> {
+    async getQuotationFormData(quotation_id:number,type:string): Promise<ApiResponse> {
         try {
 
             let getQuotationData = await this.QuotationFormModel.findAll({
@@ -38,13 +38,21 @@ export class QuotationService {
             let modifiedListData = []
             let i = 1
             for (let singleData of getQuotationData[0].quotation_items) {
-                let obj = {}
+                let obj :any = {}
                 Object.assign(obj, {
                     ...singleData.dataValues
                 })
                 obj['serial_no'] = i
                 i++
                 modifiedListData.push(obj)
+                if(type =="revision"){
+                     let revisedDocNumber =  await this.generateRevisionDocNumber(getQuotationData[0].id)
+                     Object.assign(obj, {
+                        doc_number:revisedDocNumber
+                    })
+                    await this.SaveOrUpdateQuotationList(revisedDocNumber,[obj],null)
+
+                }
             }
 
             let modifiedOverAllData = await Promise.all(getQuotationData.map(async singleData => {
@@ -91,9 +99,6 @@ export class QuotationService {
     }
     async createQuotationForm(QuotationForm: QuotationFormDto): Promise<any> {
         try {
-
-
-
             let getTempQuotationList = await this.tempQuotationItemModel.findAll({
                 where: { doc_number: QuotationForm.doc_number },
                 attributes: ["item_number", "description", "quantity", "units", "price", "discount", "tax", "amount"],
@@ -101,10 +106,10 @@ export class QuotationService {
             })
 
             let totalAmount = getTempQuotationList.reduce((acc, sum) => acc + +sum.amount, 0)
-            let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
-            let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
-            QuotationForm.total_discount = totalDiscount
-            QuotationForm.total_tax = totalTax
+            // let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
+            // let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
+            // QuotationForm.total_discount = totalDiscount
+            // QuotationForm.total_tax = totalTax
             QuotationForm.sub_total = totalAmount
             QuotationForm.grand_total = totalAmount
             let createQuotation = await this.QuotationFormModel.create(QuotationForm)
@@ -137,16 +142,27 @@ export class QuotationService {
     async updateQuotationForm(id: number, UpdateQuotationForm: UpdateQuotationFormDto): Promise<any> {
         try {
 
-            let updateQuotation = await this.QuotationFormModel.update({ ...UpdateQuotationForm }, { where: { id: id } })
             let getTempQuotationList = await this.tempQuotationItemModel.findAll({
                 where: { doc_number: UpdateQuotationForm.doc_number },
                 attributes: ["item_number", "description", "quantity", "units", "price", "discount", "tax", "amount"],
                 order: [["id", "ASC"]]
             })
+            
+            let totalAmount = getTempQuotationList.reduce((acc, sum) => acc + +sum.amount, 0)
+            // let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
+            // let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
+            // QuotationForm.total_discount = totalDiscount
+            // QuotationForm.total_tax = totalTax
+            UpdateQuotationForm.sub_total = totalAmount
+            UpdateQuotationForm.grand_total = totalAmount
+          
+            let updateQuotation = await this.QuotationFormModel.update({ ...UpdateQuotationForm }, { where: { id: id } })
 
             if (updateQuotation) {
 
                 for (let singleData of getTempQuotationList) {
+                    /* destroy previous data*/
+                    await this.QuotationListModel.destroy({where:{quotation_id:id}})
                     let obj = {}
                     Object.assign(obj, {
                         ...singleData.dataValues,
@@ -155,7 +171,7 @@ export class QuotationService {
                     let update = await this.QuotationListModel.create(obj)
                 }
             }
-
+            await this.resetTempQuotationData(UpdateQuotationForm.doc_number)
             return responseMessageGenerator('success', 'data updated successfully', [])
 
         } catch (error) {
@@ -178,7 +194,14 @@ export class QuotationService {
             if (Quotation) {
                 let incrementDocNumber
                 if (Quotation.doc_number != null) {
-                    incrementDocNumber = await this.incrementLastDigit(Quotation.doc_number)
+                    let docNum =  Quotation.doc_number
+                    Quotation.is_revised = true  && (docNum = docNum.replace(/(\d+).*/, '$1'))
+                    /*
+                        \d+: Matches one or more digits (dynamic part).
+                        .*: Matches everything after the digits.
+                        Replace: Replace the match with $1, which refers to the captured digits.
+                    */
+                    incrementDocNumber = await this.incrementLastDigit(docNum)
                 }
                 docNumber = incrementDocNumber
             } else {
@@ -245,7 +268,7 @@ export class QuotationService {
 
 
             let templateName = "quotation_template"
-            let QuotationData = await this.getQuotationFormData(id)
+            let QuotationData = await this.getQuotationFormData(id,"view")
             if (QuotationData.status == "failure") {
                 return res.json(QuotationData)
             }
@@ -297,7 +320,7 @@ export class QuotationService {
 
 
             let templateName = "quotation_template"
-            let QuotationData = await this.getQuotationFormData(id)
+            let QuotationData = await this.getQuotationFormData(id,"view")
             if (QuotationData.status == "failure") {
                 return QuotationData
             }
@@ -386,8 +409,8 @@ export class QuotationService {
             
             let getTempQuotationList = await this.tempQuotationItemModel.findAll({ where: { doc_number: doc_number }, order: [["id", "ASC"]] })
             let totalAmount = getTempQuotationList.reduce((acc, sum) => acc + +sum.amount, 0)
-            let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
-            let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
+            // let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
+            // let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
             let modifiedData = []
             let i = 1
             for (let singleData of getTempQuotationList) {
@@ -401,8 +424,8 @@ export class QuotationService {
             }
             let amountInWords = await this.numberToWord(totalAmount)
             let objData = {
-                "total_discount": totalDiscount,
-                "total_tax": totalTax,
+                "total_discount": "0.00",
+                "total_tax": "0.00",
                 "sub_total": totalAmount,
                 "grand_total": totalAmount,
                 "amount_in_words":amountInWords ,
@@ -477,6 +500,17 @@ export class QuotationService {
         } catch (error) {
             console.log(error);
             return []
+        }
+    }
+    async generateRevisionDocNumber(record_id: number): Promise<any> {
+        try {
+            let Quotation = await this.QuotationFormModel.findOne({ where: { id: record_id } })
+            let revisionCount = Quotation.revision_count + 1 
+            let   revisedDocNumber = Quotation.doc_number +"-R"+revisionCount
+            return revisedDocNumber
+        } catch (error) {
+            console.log(error);
+            return ""
         }
     }
 

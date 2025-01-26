@@ -64,6 +64,12 @@ export class QuotationFormRepository extends Model <InferCreationAttributes<Quot
     @Column(DataType.DECIMAL)
     grand_total:number
 
+    @Column({defaultValue:false})
+    is_revised:boolean
+
+    @Column({defaultValue:0})
+    revision_count:number
+
     @BelongsTo(()=>UserRepository,{as:"users",foreignKey:'created_user_id'})
     users:UserRepository
     @ForeignKey(()=>UserRepository)

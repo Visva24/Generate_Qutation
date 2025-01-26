@@ -15,8 +15,8 @@ export class QuotationController {
           ) { }
     
       @Get("get-quotation-form-data")
-      async getQuotationFormData(@Query("quotation_id") quotation_id:number):Promise<any>  {
-        return await this.quotationService.getQuotationFormData(quotation_id)
+      async getQuotationFormData(@Query("quotation_id") quotation_id:number,@Query("type") type:string):Promise<any>  {
+        return await this.quotationService.getQuotationFormData(quotation_id,type)
       }
       @Get("get-quotation-form-history")
       async getQuotationFormHistory():Promise<any>  {
@@ -26,6 +26,10 @@ export class QuotationController {
       @Get("generate-dynamic-doc-number")
       async generateDynamicDocNumber(@Query('doc_type') doc_type:string):Promise<any> {
         return this.quotationService.generateDynamicDocNumber(doc_type)
+      }
+      @Get("generate-revision-doc-number")
+      async generateRevisionDocNumber(@Query('record_id') record_id:number):Promise<any> {
+        return this.quotationService.generateRevisionDocNumber(record_id)
       }
       
       @Get("get-single-quotation-list")
