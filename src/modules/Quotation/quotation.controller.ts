@@ -89,8 +89,8 @@ export class QuotationController {
         }
     
       })
-      @Patch("update-quotation-form/:id")
-      async updateQuotationForm(@Param('id')id :number,@Body() QuotationForm:QuotationFormDto) {
+      @Post("update-quotation-form")
+      async updateQuotationForm(@Query('id')id :number,@Body() QuotationForm:QuotationFormDto) {
         return this.quotationService.updateQuotationForm(id,QuotationForm)
       }
       

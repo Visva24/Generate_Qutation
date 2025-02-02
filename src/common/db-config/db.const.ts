@@ -12,11 +12,11 @@ const generateSequelizeOptions = async (): Promise<SequelizeModuleOptions> => {
             port: 3306,
             username: "root",
             password: "",
-            database: "quotation_generator",
+            database: "qg",
             autoLoadModels: true,
             synchronize: true,
             // logging:false,
-            sync: { alter: true }, // Uncomment if needed for migrations
+            // sync: { alter: true }, // Uncomment if needed for migrations
         };
         return databaseConfig;
     } catch (error) {

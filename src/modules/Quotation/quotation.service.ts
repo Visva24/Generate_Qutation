@@ -42,7 +42,7 @@ export class QuotationService {
             })
             let modifiedListData = []
             let i = 1
-            if(type =="revision"){
+            if(type =="revised"){
                  revisedDocNumber =  (await this.generateRevisionDocNumber(getQuotationData[0].id)).data
             }
             for (let singleData of getQuotationData[0].quotation_items) {
@@ -76,13 +76,14 @@ export class QuotationService {
                 return {
                     ...singleData.dataValues,
                     doc_date: moment(singleData.doc_date).format('DD-MMM-YYYY'),
-                    doc_number:revisedDocNumber,
-                    quotation_items: modifiedListData
+                   ...(type =="revised" && {doc_number:revisedDocNumber}),
+                   quotation_items: modifiedListData
                 }
             }))
 
 
             return responseMessageGenerator('success', 'data fetched successfully', modifiedOverAllData[0])
+           
 
         } catch (error) {
             console.log(error);
@@ -126,8 +127,8 @@ export class QuotationService {
             let totalAmount = getTempQuotationList.reduce((acc, sum) => acc + +sum.amount, 0)
             // let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
             // let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
-            // QuotationForm.total_discount = totalDiscount
-            // QuotationForm.total_tax = totalTax
+            // QuotationForm.total_discount = 0
+            // QuotationForm.total_tax = 0
             QuotationForm.sub_total = totalAmount
             QuotationForm.grand_total = totalAmount
             let createQuotation = await this.QuotationFormModel.create(QuotationForm)
