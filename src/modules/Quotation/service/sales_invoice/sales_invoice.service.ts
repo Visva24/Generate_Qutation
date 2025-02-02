@@ -4,7 +4,7 @@ import { ApiResponse, responseMessageGenerator } from 'src/common/util/helper.co
 import { InjectModel } from '@nestjs/sequelize';
 import * as moment from 'moment';
 import { HelperService } from 'src/common/services/helper/helper.service';
-import { DELIVERY_CHALLAN_UPLOAD_DIRECTORY, QUOTATION_UPLOAD_DIRECTORY, SALES_INVOICE_UPLOAD_DIRECTORY } from 'src/common/app.constant';
+import {  QUOTATION_UPLOAD_DIRECTORY, SALES_INVOICE_UPLOAD_DIRECTORY } from 'src/common/app.constant';
 
 import { readFileSync } from 'fs';
 import { deliveryChallanRepository, DeliveryItemRepository, TempDeliveryItemRepository } from '../../entity/delivery_challan.entity';
