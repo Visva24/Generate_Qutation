@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { log } from 'node:console';
 import { ApiResponse, responseMessageGenerator } from 'src/common/util/helper.config';
-import { documentsDto, QuotationFormDto, QuotationListDto } from './dto/create-quotation.dto';
+import { deliveryChallanFormDto, documentsDto, QuotationFormDto, QuotationListDto } from './dto/create-quotation.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { documentDetailRepository, QuotationFormRepository, QuotationItemRepository, TempQuotationItemRepository } from './entity/quotation.entity';
 import { UpdateQuotationFormDto } from './dto/update-quotation.dto';
@@ -10,6 +10,8 @@ import { HelperService } from 'src/common/services/helper/helper.service';
 import { QUOTATION_UPLOAD_DIRECTORY } from 'src/common/app.constant';
 import { UserRepository } from '../authentication/entity/users.entity';
 import { readFileSync } from 'fs';
+import { SalesInvoiceFormRepository } from './entity/sales_invoice.entity';
+import { deliveryChallanRepository } from './entity/delivery_challan.entity';
 
 
 @Injectable()
@@ -18,6 +20,8 @@ export class QuotationService {
         @InjectModel(QuotationFormRepository) private QuotationFormModel: typeof QuotationFormRepository,
         @InjectModel(documentDetailRepository) private documentDetailModel: typeof documentDetailRepository,
         @InjectModel(QuotationItemRepository) private QuotationListModel: typeof QuotationItemRepository,
+        @InjectModel(SalesInvoiceFormRepository) private SalesInvoiceFormModel: typeof SalesInvoiceFormRepository,
+        @InjectModel(deliveryChallanRepository) private deliveryChallanModel: typeof deliveryChallanRepository,
         @InjectModel(TempQuotationItemRepository) private tempQuotationItemModel: typeof TempQuotationItemRepository,
         @InjectModel(UserRepository) private userModel: typeof UserRepository,
         private readonly helperService: HelperService
@@ -204,10 +208,12 @@ export class QuotationService {
             let getDocumentData = await this.documentDetailModel.findOne({ where: { doc_type: doc_type } })
 
             let repoObject = {
-                "quotation": this.QuotationFormModel
+                "quotation": this.QuotationFormModel,
+                "delivery": this.deliveryChallanModel,
+                "sales": this.SalesInvoiceFormModel
             }
             let Quotation = await repoObject[doc_type].findOne({ order: [["id", "DESC"]] })
-
+           
             if (Quotation) {
                 let incrementDocNumber
                 if (Quotation.doc_number != null) {

@@ -12,6 +12,8 @@ import { UserRepository } from 'src/modules/authentication/entity/users.entity';
 import { UpdateDeliveryChallanFormDto, UpdateQuotationFormDto } from '../../dto/update-quotation.dto';
 import { ChallanListDto, deliveryChallanFormDto, documentsDto, QuotationFormDto, QuotationListDto } from '../../dto/create-quotation.dto';
 import { documentDetailRepository, QuotationFormRepository, QuotationItemRepository, TempQuotationItemRepository  } from '../../entity/quotation.entity';
+import { documentType } from '../../enum/quotation.enum';
+import { QuotationService } from '../../quotation.service';
 
 @Injectable()
 export class DeliveryChallanService {
@@ -25,7 +27,8 @@ export class DeliveryChallanService {
             @InjectModel(DeliveryItemRepository) private DeliveryItemModel: typeof DeliveryItemRepository,
             @InjectModel(TempDeliveryItemRepository) private TempDeliveryItemModel: typeof TempDeliveryItemRepository,
             @InjectModel(UserRepository) private userModel: typeof UserRepository,
-            private readonly helperService: HelperService
+            private readonly helperService: HelperService,
+            private readonly quotationService: QuotationService
     
         ) {
     
@@ -384,6 +387,7 @@ export class DeliveryChallanService {
                         { association: "quotation_items" }
                     ],
                 })
+                  getQuotationData[0]['doc_number'] = (await this.quotationService.generateDynamicDocNumber(documentType.Delivery)).data
                 let createDeliveryChallan = await this.deliveryChallanModel.create(getQuotationData[0])
                 for (let singleData of getQuotationData[0].quotation_items) {
                     let doc_number = createDeliveryChallan.doc_number

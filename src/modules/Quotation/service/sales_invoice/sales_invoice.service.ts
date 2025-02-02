@@ -13,6 +13,8 @@ import { UpdateDeliveryChallanFormDto, UpdateInvoiceFormDto, UpdateQuotationForm
 import { ChallanListDto, deliveryChallanFormDto, documentsDto, InvoiceFormDto, InvoiceListDto, QuotationFormDto, QuotationListDto } from '../../dto/create-quotation.dto';
 import { documentDetailRepository, QuotationFormRepository, QuotationItemRepository, TempQuotationItemRepository } from '../../entity/quotation.entity';
 import { SalesInvoiceFormRepository, SalesItemRepository, TempSalesItemRepository } from '../../entity/sales_invoice.entity';
+import { QuotationService } from '../../quotation.service';
+import { documentType } from '../../enum/quotation.enum';
 
 @Injectable()
 export class SalesInvoiceService {
@@ -27,11 +29,13 @@ export class SalesInvoiceService {
                 @InjectModel(SalesItemRepository) private SalesItemModel: typeof SalesItemRepository,
                 @InjectModel(TempSalesItemRepository) private TempSalesItemModel: typeof TempSalesItemRepository,
                 @InjectModel(UserRepository) private userModel: typeof UserRepository,
-                private readonly helperService: HelperService
+                private readonly helperService: HelperService,
+                private readonly quotationService: QuotationService
         
             ) {
         
             }
+         
             async getSalesInvoiceFormData(Invoice_id:number,type:string): Promise<ApiResponse> {
                 try {
         
@@ -386,6 +390,7 @@ export class SalesInvoiceService {
                             { association: "quotation_items" }
                         ],
                     })
+                    getQuotationData[0]['doc_number'] = (await this.quotationService.generateDynamicDocNumber(documentType.Sales)).data
                     let createSalesInvoice = await this.SalesInvoiceFormModel.create(getQuotationData[0])
                     for (let singleData of getQuotationData[0].quotation_items) {
                         let doc_number = createSalesInvoice.doc_number
