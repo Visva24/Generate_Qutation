@@ -79,7 +79,8 @@ export class DeliveryChallanService {
                     return {
                         ...singleData.dataValues,
                         doc_date: moment(singleData.doc_date).format('DD-MMM-YYYY'),
-                        doc_number:revisedDocNumber,
+                        reference_date: moment(singleData.reference_date).format('DD-MMM-YYYY'),
+                        doc_number:singleData.doc_number,
                         delivery_items: modifiedListData
                     }
                 }))
@@ -291,7 +292,7 @@ export class DeliveryChallanService {
                         doc_number: doc_number,
                     }))
     
-                    let updateQuotation = await this.DeliveryItemModel.update(formatedData[0], { where: { id: record_id } })
+                    let updateQuotation = await this.TempDeliveryItemModel.update(formatedData[0], { where: { id: record_id } })
                 }
                 else if (challan_list.length > 0) {
     

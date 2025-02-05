@@ -81,8 +81,8 @@ export class SalesInvoiceService {
                     let modifiedOverAllData = await Promise.all(getInvoiceData.map(async singleData => {
                         return {
                             ...singleData.dataValues,
-                            doc_date: moment(singleData.doc_date).format('DD-MMM-YYYY'),
-                            doc_number:revisedDocNumber,
+                            reference_date: moment(singleData.reference_date).format('DD-MMM-YYYY'),
+                            // doc_number:singleData.doc_number,
                             sales_items: modifiedListData
                         }
                     }))
@@ -294,7 +294,7 @@ export class SalesInvoiceService {
                             doc_number: doc_number,
                         }))
         
-                        let updateInvoice = await this.SalesItemModel.update(formatedData[0], { where: { id: record_id } })
+                        let updateInvoice = await this.TempSalesItemModel.update(formatedData[0], { where: { id: record_id } })
                     }
                     else if (invoice_list.length > 0) {
         
