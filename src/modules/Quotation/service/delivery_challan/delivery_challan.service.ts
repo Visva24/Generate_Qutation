@@ -382,14 +382,39 @@ export class DeliveryChallanService {
         async moveForwardDeliveryChallan(quotation_id:number): Promise<any> {
             try {
               
-                let getQuotationData = await this.QuotationFormModel.findAll({
+                let getQuotationData :any = await this.QuotationFormModel.findAll({
                     where: { id: quotation_id },
                     include: [
-                        { association: "quotation_items" }
+                        { association: "quotation_items" ,attributes:[ "item_number","description",
+                            "quantity","units"  ]}
                     ],
                 })
-                  getQuotationData[0]['doc_number'] = (await this.quotationService.generateDynamicDocNumber(documentType.Delivery)).data
-                let createDeliveryChallan = await this.deliveryChallanModel.create(getQuotationData[0])
+
+                let isRecordExists = await this.deliveryChallanModel.findOne({where:{quotation_id:getQuotationData[0].id,customer_name:getQuotationData[0].customer_name}})
+                if(isRecordExists){
+                    getQuotationData = await Promise.all(getQuotationData.map(singleData =>{
+                        return { 
+                            ...singleData.dataValues,
+                            quotation_id:singleData.dataValues.id
+                      }
+                      }))
+                }else{
+
+                    let dc_doc_number = (await this.quotationService.generateDynamicDocNumber(documentType.Delivery))?.data
+                    getQuotationData = await Promise.all(getQuotationData.map(singleData =>{
+                       return { 
+                           ...singleData.dataValues,
+                           doc_number:dc_doc_number,
+                           quotation_id:singleData.dataValues.id
+                     }
+                     }))
+                    delete getQuotationData[0]['id']
+
+                }
+                
+                 
+                let [createDeliveryChallan,update] = await this.deliveryChallanModel.upsert({id:isRecordExists?.id,...getQuotationData[0]})
+                
                 for (let singleData of getQuotationData[0].quotation_items) {
                     let doc_number = createDeliveryChallan.doc_number
                     let object ={

@@ -121,8 +121,7 @@ export class QuotationItemRepository extends Model <InferCreationAttributes<Quot
   
     @ForeignKey(() => QuotationFormRepository)
     @Column({
-      type: DataType.INTEGER,
-      allowNull: false,
+      type: DataType.INTEGER
     })
     quotation_id: number;
   
@@ -130,32 +129,27 @@ export class QuotationItemRepository extends Model <InferCreationAttributes<Quot
     quotation_form: QuotationFormRepository;
   
     @Column({
-      type: DataType.STRING,
-      allowNull: false,
+      type: DataType.STRING
     })
     item_number: string;
   
     @Column({
-      type: DataType.STRING,
-      allowNull: false,
+      type: DataType.STRING
     })
     description: string;
   
     @Column({
-      type: DataType.INTEGER,
-      allowNull: false,
+      type: DataType.INTEGER
     })
     quantity: number;
   
     @Column({
-      type: DataType.STRING,
-      allowNull: false,
+      type: DataType.STRING
     })
     units: string;
   
     @Column({
-      type: DataType.DECIMAL(10, 2),
-      allowNull: false,
+      type: DataType.DECIMAL(10, 2)
     })
     price: number;
   
@@ -172,8 +166,7 @@ export class QuotationItemRepository extends Model <InferCreationAttributes<Quot
     tax: number;
   
     @Column({
-      type: DataType.DECIMAL(10, 2),
-      allowNull: false,
+      type: DataType.DECIMAL(10, 2)
     })
     amount: number;
 }
@@ -186,38 +179,32 @@ export class TempQuotationItemRepository extends Model <InferCreationAttributes<
     id: number;
     
     @Column({
-      type: DataType.STRING,
-      allowNull: false,
+      type: DataType.STRING
     })
     item_number: string;
 
     @Column({
-      type: DataType.STRING,
-      allowNull: false,
+      type: DataType.STRING
     })
     doc_number: string;
   
     @Column({
-      type: DataType.STRING,
-      allowNull: false,
+      type: DataType.STRING
     })
     description: string;
   
     @Column({
-      type: DataType.INTEGER,
-      allowNull: false,
+      type: DataType.INTEGER
     })
     quantity: number;
   
     @Column({
-      type: DataType.STRING,
-      allowNull: false,
+      type: DataType.STRING
     })
     units: string;
   
     @Column({
-      type: DataType.DECIMAL(10, 2),
-      allowNull: false,
+      type: DataType.DECIMAL(10, 2)
     })
     price: number;
   
@@ -234,8 +221,7 @@ export class TempQuotationItemRepository extends Model <InferCreationAttributes<
     tax: number;
   
     @Column({
-      type: DataType.DECIMAL(10, 2),
-      allowNull: false,
+      type: DataType.DECIMAL(10, 2)
     })
     amount: number;
 }

@@ -96,19 +96,19 @@ export class DeliveryItemRepository extends Model <InferCreationAttributes<Deliv
     id: number;
   
     @ForeignKey(() => deliveryChallanRepository)
-    @Column({type: DataType.INTEGER,allowNull: false})
+    @Column({type: DataType.INTEGER})
     delivery_id: number;
   
     @BelongsTo(() => deliveryChallanRepository)
     delivery_challan: deliveryChallanRepository;
   
-    @Column({type: DataType.STRING,allowNull: false})
+    @Column({type: DataType.STRING})
     item_number: string;
   
     @Column({type: DataType.STRING, allowNull: false})
     description: string;
   
-    @Column({type: DataType.INTEGER,allowNull: false,})
+    @Column({type: DataType.INTEGER,})
     quantity: number;
   
     @Column({type: DataType.STRING, allowNull: false})
@@ -120,16 +120,16 @@ export class TempDeliveryItemRepository extends Model <InferCreationAttributes<T
     @Column({autoIncrement: true,primaryKey: true})
     id: number;
     
-    @Column({type: DataType.STRING,allowNull: false})
+    @Column({type: DataType.STRING})
     item_number: string;
 
     @Column({type: DataType.STRING, allowNull: false})
     doc_number: string;
   
-    @Column({ type: DataType.STRING,allowNull: false})
+    @Column({ type: DataType.STRING})
     description: string;
   
-    @Column({type: DataType.INTEGER,allowNull: false})
+    @Column({type: DataType.INTEGER})
     quantity: number;
   
     @Column({ type: DataType.STRING, allowNull: false})

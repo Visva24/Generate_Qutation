@@ -12,6 +12,7 @@ import { UserRepository } from '../authentication/entity/users.entity';
 import { readFileSync } from 'fs';
 import { SalesInvoiceFormRepository } from './entity/sales_invoice.entity';
 import { deliveryChallanRepository } from './entity/delivery_challan.entity';
+import { Op, Sequelize } from 'sequelize';
 
 
 @Injectable()
@@ -30,6 +31,25 @@ export class QuotationService {
 
     }
 
+    async getQuotationCustomerDropDown(): Promise<ApiResponse> {
+        try {
+
+            let revisedDocNumber = null;
+            let getQuotationData = await this.QuotationFormModel.findAll({
+                where:{customer_name:{[Op.not]:null}},
+                attributes: [
+                    [Sequelize.fn('DISTINCT', Sequelize.col('customer_name')), 'customer_name'],"id"
+                  ],
+            })
+            
+            return responseMessageGenerator('success', 'data fetched successfully', getQuotationData)
+           
+
+        } catch (error) {
+            console.log(error);
+            return responseMessageGenerator('failure', 'something went wrong', error.message)
+        }
+    }
     async getQuotationFormData(quotation_id:number,type:string): Promise<ApiResponse> {
         try {
 
@@ -106,6 +126,7 @@ export class QuotationService {
                     remarks: singleData.remark_brand,
                     total_amount: singleData.grand_total,
                     document_number: singleData.doc_number,
+                    symbol: singleData.currency,
                     created_by: await userName(singleData.created_user_id),
                 }
             }))
@@ -213,7 +234,7 @@ export class QuotationService {
                 "delivery": this.deliveryChallanModel,
                 "sales": this.SalesInvoiceFormModel
             }
-            let Quotation = await repoObject[doc_type].findOne({ order: [["id", "DESC"]] })
+            let Quotation = await repoObject[doc_type].findOne({ where:{doc_number:{[Op.not]:null}}, order: [["id", "DESC"]] })
            
             if (Quotation) {
                 let incrementDocNumber

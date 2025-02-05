@@ -1,12 +1,12 @@
 import { Body, Controller, Get, Param, Patch, Post, Query, Res } from '@nestjs/common';
 import { QuotationService } from './quotation.service';
 import { documentsDto, QuotationFormDto, QuotationListDto } from './dto/create-quotation.dto';
-import { ApiBody } from '@nestjs/swagger';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { saveDocumentDetails } from '../authentication/sample/user.sample';
 import { saveQuotationFormData, saveQuotationListData } from './sample/quotation.sample';
 
 
-
+@ApiTags('quotation')
 @Controller('quotation')
 export class QuotationController {
 
@@ -14,6 +14,10 @@ export class QuotationController {
             private readonly quotationService: QuotationService,  
           ) { }
     
+      @Get("get-customer-dropdown")
+      async getQuotationCustomerDropDown():Promise<any>  {
+        return await this.quotationService.getQuotationCustomerDropDown()
+      }
       @Get("get-quotation-form-data")
       async getQuotationFormData(@Query("quotation_id") quotation_id:number,@Query("type") type:string):Promise<any>  {
         return await this.quotationService.getQuotationFormData(quotation_id,type)

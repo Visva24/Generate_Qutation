@@ -123,22 +123,22 @@ export class SalesItemRepository extends Model <InferCreationAttributes<SalesIte
     id: number;
   
     @ForeignKey(() => SalesInvoiceFormRepository)
-    @Column({type: DataType.INTEGER,allowNull: false})
+    @Column({type: DataType.INTEGER})
     invoice_id: number;
   
     @BelongsTo(() => SalesInvoiceFormRepository)
     sales_invoice: SalesInvoiceFormRepository;
   
-    @Column({type: DataType.STRING,allowNull: false})
+    @Column({type: DataType.STRING})
     item_number: string;
   
-    @Column({type: DataType.STRING,allowNull: false})
+    @Column({type: DataType.STRING})
     description: string;
   
-    @Column({type: DataType.INTEGER,allowNull: false})
+    @Column({type: DataType.INTEGER})
     quantity: number;
 
-    @Column({type: DataType.STRING,allowNull: false})
+    @Column({type: DataType.STRING})
     units: string;
   
     @Column({type: DataType.DECIMAL(10, 2), allowNull: false})
@@ -155,19 +155,19 @@ export class TempSalesItemRepository extends Model <InferCreationAttributes<Temp
     @Column({autoIncrement: true, primaryKey: true})
     id: number;
     
-    @Column({type: DataType.STRING,allowNull: false})
+    @Column({type: DataType.STRING})
     item_number: string;
 
-    @Column({type: DataType.STRING,allowNull: false})
+    @Column({type: DataType.STRING})
     doc_number: string;
   
-    @Column({type: DataType.STRING,allowNull: false})
+    @Column({type: DataType.STRING})
     description: string;
   
-    @Column({type: DataType.INTEGER,allowNull: false})
+    @Column({type: DataType.INTEGER})
     quantity: number;
   
-    @Column({type: DataType.STRING,allowNull: false})
+    @Column({type: DataType.STRING})
     units: string;
   
     @Column({type: DataType.DECIMAL(10, 2), allowNull: false})

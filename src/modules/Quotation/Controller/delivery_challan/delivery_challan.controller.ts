@@ -1,11 +1,11 @@
 import { Body, Controller, Get, Param, Patch, Post, Query, Res } from '@nestjs/common';
-import { ApiBody } from '@nestjs/swagger';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { DeliveryChallanService } from '../../service/delivery_challan/delivery_challan.service';
 import { ChallanListDto, deliveryChallanFormDto } from '../../dto/create-quotation.dto';
 import { saveChallanListData, saveDeliveryChallanFormData, saveQuotationFormData, saveQuotationListData } from '../../sample/quotation.sample';
 import { UpdateDeliveryChallanFormDto } from '../../dto/update-quotation.dto';
 
-
+@ApiTags('delivery_challan/delivery-challan')
 @Controller('delivery-challan')
 export class DeliveryChallanController {
 

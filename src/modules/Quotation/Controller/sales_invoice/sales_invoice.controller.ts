@@ -1,10 +1,11 @@
 import { Body, Controller, Get, Param, Patch, Post, Query, Res } from '@nestjs/common';
-import { ApiBody } from '@nestjs/swagger';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { SalesInvoiceService } from '../../service/sales_invoice/sales_invoice.service';
 import { saveChallanListData, saveDeliveryChallanFormData, saveInvoiceFormData, saveInvoiceListData } from '../../sample/quotation.sample';
 import { InvoiceFormDto, InvoiceListDto } from '../../dto/create-quotation.dto';
 import { UpdateInvoiceFormDto } from '../../dto/update-quotation.dto';
 
+@ApiTags('sales_invoice/sales-invoice')
 @Controller('sales-invoice')
 export class SalesInvoiceController {
 
