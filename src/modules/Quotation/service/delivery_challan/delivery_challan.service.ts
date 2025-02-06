@@ -426,7 +426,9 @@ export class DeliveryChallanService {
                         let savedData =   await this.SaveOrUpdateDeliveryChallanList(doc_number,[object],null)
                     }
                     }
-                return responseMessageGenerator('success', 'data saved successfully', [])
+
+                    let deliveryChallanData =   await this.deliveryChallanModel.findAll({where:{id:createDeliveryChallan.id}})
+                return responseMessageGenerator('success', 'data saved successfully', deliveryChallanData)
     
             } catch (error) {
                 console.log(error);

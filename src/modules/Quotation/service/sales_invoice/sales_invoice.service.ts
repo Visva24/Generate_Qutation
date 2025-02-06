@@ -429,7 +429,10 @@ export class SalesInvoiceService {
                             let savedData =   await this.SaveOrUpdateSalesInvoiceList(doc_number,[object],null)
                         }
                         }
-                    return responseMessageGenerator('success', 'data saved successfully', [])
+
+                        let SalesInvoiceData =   await this.SalesInvoiceFormModel.findAll({where:{id:createSalesInvoice.id}})
+             
+                    return responseMessageGenerator('success', 'data saved successfully', SalesInvoiceData)
         
                 } catch (error) {
                     console.log(error);
