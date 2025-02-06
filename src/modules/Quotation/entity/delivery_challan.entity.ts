@@ -105,13 +105,13 @@ export class DeliveryItemRepository extends Model <InferCreationAttributes<Deliv
     @Column({type: DataType.STRING})
     item_number: string;
   
-    @Column({type: DataType.STRING, allowNull: false})
+    @Column({type: DataType.STRING})
     description: string;
   
     @Column({type: DataType.INTEGER,})
     quantity: number;
   
-    @Column({type: DataType.STRING, allowNull: false})
+    @Column({type: DataType.STRING})
     units: string;
 
 }
@@ -123,7 +123,7 @@ export class TempDeliveryItemRepository extends Model <InferCreationAttributes<T
     @Column({type: DataType.STRING})
     item_number: string;
 
-    @Column({type: DataType.STRING, allowNull: false})
+    @Column({type: DataType.STRING})
     doc_number: string;
   
     @Column({ type: DataType.STRING})
@@ -132,6 +132,6 @@ export class TempDeliveryItemRepository extends Model <InferCreationAttributes<T
     @Column({type: DataType.INTEGER})
     quantity: number;
   
-    @Column({ type: DataType.STRING, allowNull: false})
+    @Column({ type: DataType.STRING})
     units: string;
 }

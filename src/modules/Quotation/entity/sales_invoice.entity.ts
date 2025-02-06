@@ -141,13 +141,13 @@ export class SalesItemRepository extends Model <InferCreationAttributes<SalesIte
     @Column({type: DataType.STRING})
     units: string;
   
-    @Column({type: DataType.DECIMAL(10, 2), allowNull: false})
+    @Column({type: DataType.DECIMAL(10, 2)})
     price: number;
   
-    @Column({type: DataType.DECIMAL(10, 2), allowNull: false})
+    @Column({type: DataType.DECIMAL(10, 2)})
     discount: number;
   
-    @Column({type: DataType.DECIMAL(10, 2), allowNull: false})
+    @Column({type: DataType.DECIMAL(10, 2)})
     amount: number;
 }
 @Table({tableName: 'temp_sales_items'})
@@ -170,12 +170,12 @@ export class TempSalesItemRepository extends Model <InferCreationAttributes<Temp
     @Column({type: DataType.STRING})
     units: string;
   
-    @Column({type: DataType.DECIMAL(10, 2), allowNull: false})
+    @Column({type: DataType.DECIMAL(10, 2)})
     price: number;
   
-    @Column({type: DataType.DECIMAL(10, 2), allowNull: false})
+    @Column({type: DataType.DECIMAL(10, 2)})
     discount: number;
   
-    @Column({type: DataType.DECIMAL(10, 2), allowNull: false})
+    @Column({type: DataType.DECIMAL(10, 2)})
     amount: number;
 }

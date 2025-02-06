@@ -38,7 +38,7 @@ export class AuthenticationService {
           }
          
           const salt = genSaltSync(10);
-          const hashedPassword = hashSync(signUpDetails.password, salt);
+          const hashedPassword = hashSync(signUpDetails.user_password, salt);
           const UserData = {
             user_name: signUpDetails.user_name,
             user_email: signUpDetails.user_email,
