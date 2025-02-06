@@ -115,7 +115,13 @@ export class QuotationService {
 
             let userName = async (user_id) => {
                 let userData = await this.userModel.findOne({ where: { id: user_id } })
-                return userData?.user_name
+                let shortName = await this.helperService.getShortName(userData.user_name)
+                let  employee = {
+                    user_name: userData.user_name,
+                    avatar_type: 'short_name',
+                    avatar_value: shortName
+                  }
+                return employee
             }
 
             let getQuotationData = await this.QuotationFormModel.findAll({ order: [['id', 'DESC']] })

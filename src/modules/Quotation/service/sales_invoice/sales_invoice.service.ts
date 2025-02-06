@@ -100,7 +100,13 @@ export class SalesInvoiceService {
         
                     let userName = async (user_id) => {
                         let userData = await this.userModel.findOne({ where: { id: user_id } })
-                        return userData?.user_name
+                        let shortName = await this.helperService.getShortName(userData.user_name)
+                        let  employee = {
+                            user_name: userData.user_name,
+                            avatar_type: 'short_name',
+                            avatar_value: shortName
+                          }
+                        return employee
                     }
         
                     let getInvoiceData = await this.SalesInvoiceFormModel.findAll({ order: [['id', 'DESC']] })
