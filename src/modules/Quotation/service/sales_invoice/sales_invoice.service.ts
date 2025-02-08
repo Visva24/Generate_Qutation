@@ -157,6 +157,14 @@ export class SalesInvoiceService {
                     })
         
                     let SalesInvoiceData = await this.SalesInvoiceFormModel.findOne({where:{doc_number:InvoiceForm.doc_number}})
+
+                    let totalAmount = getTempInvoiceList.reduce((acc, sum) => acc + +sum.amount, 0)
+                    // let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
+                    // let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
+                    // QuotationForm.total_discount = 0
+                    // QuotationForm.total_tax = 0
+                    InvoiceForm.sub_total = totalAmount
+                    InvoiceForm.grand_total = totalAmount
                   
                     let [createSalesInvoice,update] = await this.SalesInvoiceFormModel.upsert({id:SalesInvoiceData?.id,...InvoiceForm})
                     
@@ -194,6 +202,14 @@ export class SalesInvoiceService {
                         attributes: ["item_number", "description", "quantity", "units"],
                         order: [["id", "ASC"]]
                     })
+
+                    let totalAmount = getTempInvoiceList.reduce((acc, sum) => acc + +sum.amount, 0)
+                    // let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
+                    // let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
+                    // QuotationForm.total_discount = 0
+                    // QuotationForm.total_tax = 0
+                    UpdateInvoiceForm.sub_total = totalAmount
+                    UpdateInvoiceForm.grand_total = totalAmount
                   
                     let updateInvoice = await this.deliveryChallanModel.update({ ...UpdateInvoiceForm }, { where: { id: id } })
                     //  let itemCount = getTempQuotationList.length
@@ -319,19 +335,35 @@ export class SalesInvoiceService {
                 try {
                     if (record_id) {
                        
+                        let getListTotalAmount = (row) => {
+                            return (row.price * row.quantity +
+                                (row.price * row.quantity * row.tax) / 100 -
+                                (row.price * row.quantity * row.discount) / 100)
+                        }
+        
+                        let totalAmount = getListTotalAmount(invoice_list[0])
         
                         let formatedData = invoice_list.map(singleData => ({
                             ...singleData,
                             doc_number: doc_number,
+                            amount:totalAmount
                         }))
         
                         let updateInvoice = await this.TempSalesItemModel.update(formatedData[0], { where: { id: record_id } })
                     }
                     else if (invoice_list.length > 0) {
+                        let getListTotalAmount = (row) => {
+                            return (row.price * row.quantity +
+                                (row.price * row.quantity * row.tax) / 100 -
+                                (row.price * row.quantity * row.discount) / 100)
+                        }
+        
+                        let totalAmount = getListTotalAmount(invoice_list[0])
         
                         let formatedData = invoice_list.map(singleData => ({
                             ...singleData,
                             doc_number: doc_number,
+                            amount:totalAmount
                         }))
                         let createInvoice = await this.TempSalesItemModel.bulkCreate(formatedData)
                     }
@@ -350,6 +382,7 @@ export class SalesInvoiceService {
                     
                     let getInvoiceList = await this.TempSalesItemModel.findAll({ where: { doc_number: doc_number }, order: [["id", "ASC"]] })
                     let modifiedData = []
+                    let totalAmount = getInvoiceList.reduce((acc, sum) => acc + +sum.amount, 0)
                     let i = 1
                     for (let singleData of getInvoiceList) {
                         let obj = {}
@@ -360,7 +393,13 @@ export class SalesInvoiceService {
                         i++
                         modifiedData.push(obj)
                     }
+                    let amountInWords = await this.numberToWord(totalAmount)
                     let objData = {
+                     "total_discount": "0.00",
+                            "total_tax": "0.00",
+                            "sub_total": totalAmount,
+                            "grand_total": totalAmount,
+                            "amount_in_words":amountInWords ,
                         list: modifiedData,
                     }
         

@@ -1,7 +1,8 @@
 export enum paymentModeType {
   BankTransfer="Bank_transfer",
   Cheque="Cheque",
-  Cash="Cash"
+  Cash="Cash",
+  Credit="Credit"
 }
 export enum cashType {
     QAR ="QAR",
