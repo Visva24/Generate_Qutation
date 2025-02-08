@@ -14,6 +14,7 @@ import { ChallanListDto, deliveryChallanFormDto, documentsDto, QuotationFormDto,
 import { documentDetailRepository, QuotationFormRepository, QuotationItemRepository, TempQuotationItemRepository  } from '../../entity/quotation.entity';
 import { documentType } from '../../enum/quotation.enum';
 import { QuotationService } from '../../quotation.service';
+import { Op, Sequelize } from 'sequelize';
 
 @Injectable()
 export class DeliveryChallanService {
@@ -33,6 +34,25 @@ export class DeliveryChallanService {
         ) {
     
         }
+         async getDeliveryChallanCustomerDropDown(): Promise<ApiResponse> {
+                try {
+        
+                    let revisedDocNumber = null;
+                    let getChallanData = await this.deliveryChallanModel.findAll({
+                        where:{customer_name:{[Op.not]:null}},
+                        attributes: [
+                            [Sequelize.fn('DISTINCT', Sequelize.col('customer_name')), 'customer_name'],"id"
+                          ],
+                    })
+                    
+                    return responseMessageGenerator('success', 'data fetched successfully', getChallanData)
+                   
+        
+                } catch (error) {
+                    console.log(error);
+                    return responseMessageGenerator('failure', 'something went wrong', error.message)
+                }
+         }
         async getDeliveryChallanFormData(challan_id:number,type:string): Promise<ApiResponse> {
             try {
     
@@ -98,9 +118,9 @@ export class DeliveryChallanService {
     
                 let userName = async (user_id) => {
                     let userData = await this.userModel.findOne({ where: { id: user_id } })
-                    let shortName = await this.helperService.getShortName(userData.user_name)
+                    let shortName = userData?.user_name ? await this.helperService.getShortName(userData.user_name) :userData?.user_name
                     let  employee = {
-                        user_name: userData.user_name,
+                        user_name: userData?.user_name,
                         avatar_type: 'short_name',
                         avatar_value: shortName
                       }
@@ -131,8 +151,10 @@ export class DeliveryChallanService {
                     attributes: ["item_number", "description", "quantity", "units"],
                     order: [["id", "ASC"]]
                 })
-    
-                let createDeliveryChallan = await this.deliveryChallanModel.create(ChallanForm)
+
+                let SalesInvoiceData = await this.deliveryChallanModel.findOne({where:{doc_number:ChallanForm.doc_number}})
+                  
+                let [createDeliveryChallan,update] = await this.deliveryChallanModel.upsert({id:SalesInvoiceData?.id,...ChallanForm})
     
                 if (createDeliveryChallan) {
                     let delivery_id= createDeliveryChallan.id
@@ -385,7 +407,7 @@ export class DeliveryChallanService {
     
             }
         }
-        async moveForwardDeliveryChallan(quotation_id:number): Promise<any> {
+        async moveForwardDeliveryChallan(quotation_id:number,current_user_id :number): Promise<any> {
             try {
               
                 let getQuotationData :any = await this.QuotationFormModel.findAll({
@@ -396,30 +418,27 @@ export class DeliveryChallanService {
                     ],
                 })
 
-                let isRecordExists = await this.deliveryChallanModel.findOne({where:{quotation_id:getQuotationData[0].id,customer_name:getQuotationData[0].customer_name}})
-                if(isRecordExists){
-                    getQuotationData = await Promise.all(getQuotationData.map(singleData =>{
-                        return { 
-                            ...singleData.dataValues,
-                            quotation_id:singleData.dataValues.id
-                      }
-                      }))
+                let createDeliveryChallan
+                let dc_doc_number = (await this.quotationService.generateDynamicDocNumber(documentType.Delivery))?.data
+               
+                let isRecordExists = await this.deliveryChallanModel.findAll({where:{quotation_id:getQuotationData[0].id,doc_number:dc_doc_number,customer_name:getQuotationData[0].customer_name}})
+                if(isRecordExists.length >0){
+                    createDeliveryChallan = isRecordExists[0]
                 }else{
-
-                    let dc_doc_number = (await this.quotationService.generateDynamicDocNumber(documentType.Delivery))?.data
                     getQuotationData = await Promise.all(getQuotationData.map(singleData =>{
                        return { 
                            ...singleData.dataValues,
                            doc_number:dc_doc_number,
-                           quotation_id:singleData.dataValues.id
+                           quotation_id:singleData.dataValues.id,
+                           is_form_move_forward:true,
+                           current_user_id:current_user_id,
                      }
                      }))
                     delete getQuotationData[0]['id']
+                    createDeliveryChallan = await this.deliveryChallanModel.create(getQuotationData[0])
 
                 }
-                
-                 
-                let [createDeliveryChallan,update] = await this.deliveryChallanModel.upsert({id:isRecordExists?.id,...getQuotationData[0]})
+                // return getQuotationData
                 
                 for (let singleData of getQuotationData[0].quotation_items) {
                     let doc_number = createDeliveryChallan.doc_number

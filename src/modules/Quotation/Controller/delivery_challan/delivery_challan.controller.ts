@@ -13,6 +13,10 @@ export class DeliveryChallanController {
                 private readonly deliveryChallanService: DeliveryChallanService,  
               ) { }
         
+          @Get("delivery-challan-customer-dropdown")
+          async getDeliveryChallanCustomerDropDown():Promise<any>  {
+            return await this.deliveryChallanService.getDeliveryChallanCustomerDropDown()
+          }
           @Get("get-delivery-challan-form-data")
           async getDeliveryChallanFormData(@Query("challan_id") challan_id:number,@Query("type") type:string):Promise<any>  {
             return await this.deliveryChallanService.getDeliveryChallanFormData(challan_id,type)
@@ -106,8 +110,8 @@ export class DeliveryChallanController {
             return this.deliveryChallanService.resetTempDeliveryChallanData(doc_number)
           }
           @Get("move-forward-delivery-challan")
-          async moveForwardDeliveryChallan(@Query('quotation_id') quotation_id:number):Promise<any> {
-            return this.deliveryChallanService.moveForwardDeliveryChallan(quotation_id)
+          async moveForwardDeliveryChallan(@Query('quotation_id') quotation_id:number,@Query('current_user_id') current_user_id:number):Promise<any> {
+            return this.deliveryChallanService.moveForwardDeliveryChallan(quotation_id,current_user_id)
           }
 
 }

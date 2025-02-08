@@ -13,6 +13,10 @@ export class SalesInvoiceController {
                     private readonly SalesInvoiceService: SalesInvoiceService,  
                   ) { }
             
+              @Get("invoice-customer-dropdown")
+              async getSalesInvoiceCustomerDropDown():Promise<any>  {
+                return await this.SalesInvoiceService.getSalesInvoiceCustomerDropDown()
+              }
               @Get("get-sales-invoice-form-data")
               async getSalesInvoiceFormData(@Query("Invoice_id") Invoice_id:number,@Query("type") type:string):Promise<any>  {
                 return await this.SalesInvoiceService.getSalesInvoiceFormData(Invoice_id,type)
@@ -106,8 +110,8 @@ export class SalesInvoiceController {
                 return this.SalesInvoiceService.resetTempSalesInvoiceData(doc_number)
               }
               @Get("move-forward-sales-invoice")
-              async moveForwardSalesInvoice(@Query('quotation_id') quotation_id:number):Promise<any> {
-                return this.SalesInvoiceService.moveForwardSalesInvoice(quotation_id)
+              async moveForwardSalesInvoice(@Query('quotation_id') quotation_id:number,@Query('current_user_id') current_user_id:number):Promise<any> {
+                return this.SalesInvoiceService.moveForwardSalesInvoice(quotation_id,current_user_id)
               }
     
 }

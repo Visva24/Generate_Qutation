@@ -75,6 +75,12 @@ export class deliveryChallanRepository extends Model <InferCreationAttributes<de
     @HasMany(() => DeliveryItemRepository)
     delivery_items: DeliveryItemRepository[];
     
+    @Column({defaultValue:false})
+    is_form_move_forward:boolean
+
+    @Column({defaultValue:false})
+    is_record_saved:boolean
+    
 }
 
 

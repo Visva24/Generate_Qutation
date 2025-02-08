@@ -115,6 +115,12 @@ export class SalesInvoiceFormRepository extends Model <InferCreationAttributes<S
 
     @HasMany(() => SalesItemRepository)
     sales_items: SalesItemRepository[];
+
+    @Column({defaultValue:false})
+    is_form_move_forward:boolean
+
+    @Column({defaultValue:false})
+    is_record_saved:boolean
     
 }
 @Table({tableName: 'sales_items'})

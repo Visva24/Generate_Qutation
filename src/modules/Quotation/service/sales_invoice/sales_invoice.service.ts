@@ -15,6 +15,7 @@ import { documentDetailRepository, QuotationFormRepository, QuotationItemReposit
 import { SalesInvoiceFormRepository, SalesItemRepository, TempSalesItemRepository } from '../../entity/sales_invoice.entity';
 import { QuotationService } from '../../quotation.service';
 import { documentType } from '../../enum/quotation.enum';
+import { Op, Sequelize } from 'sequelize';
 
 @Injectable()
 export class SalesInvoiceService {
@@ -36,6 +37,25 @@ export class SalesInvoiceService {
         
             }
          
+            async getSalesInvoiceCustomerDropDown(): Promise<ApiResponse> {
+                            try {
+                    
+                                let revisedDocNumber = null;
+                                let getInvoiceData = await this.deliveryChallanModel.findAll({
+                                    where:{customer_name:{[Op.not]:null}},
+                                    attributes: [
+                                        [Sequelize.fn('DISTINCT', Sequelize.col('customer_name')), 'customer_name'],"id"
+                                      ],
+                                })
+                                
+                                return responseMessageGenerator('success', 'data fetched successfully', getInvoiceData)
+                               
+                    
+                            } catch (error) {
+                                console.log(error);
+                                return responseMessageGenerator('failure', 'something went wrong', error.message)
+                            }
+            }
             async getSalesInvoiceFormData(Invoice_id:number,type:string): Promise<ApiResponse> {
                 try {
         
@@ -100,9 +120,9 @@ export class SalesInvoiceService {
         
                     let userName = async (user_id) => {
                         let userData = await this.userModel.findOne({ where: { id: user_id } })
-                        let shortName = await this.helperService.getShortName(userData.user_name)
+                        let shortName = userData?.user_name ? await this.helperService.getShortName(userData.user_name) :userData?.user_name
                         let  employee = {
-                            user_name: userData.user_name,
+                            user_name: userData?.user_name,
                             avatar_type: 'short_name',
                             avatar_value: shortName
                           }
@@ -135,7 +155,10 @@ export class SalesInvoiceService {
                         order: [["id", "ASC"]]
                     })
         
-                    let createSalesInvoice = await this.SalesInvoiceFormModel.create(InvoiceForm)
+                    let SalesInvoiceData = await this.SalesInvoiceFormModel.findOne({where:{doc_number:InvoiceForm.doc_number}})
+                  
+                    let [createSalesInvoice,update] = await this.SalesInvoiceFormModel.upsert({id:SalesInvoiceData?.id,...InvoiceForm})
+                    
         
                     if (createSalesInvoice) {
                         let invoice_id= createSalesInvoice.id
@@ -388,41 +411,36 @@ export class SalesInvoiceService {
         
                 }
             }
-            async moveForwardSalesInvoice(quotation_id:number): Promise<any> {
+            async moveForwardSalesInvoice(quotation_id:number, current_user_id:number): Promise<any> {
                 try {
                   
+
                     let getQuotationData :any = await this.QuotationFormModel.findAll({
                         where: { id: quotation_id },
                         include: [
-                            { association: "quotation_items" ,attributes:[ "item_number","description",
-                                "quantity","units"  ]}
+                            { association: "quotation_items" ,attributes:[  "item_number", "description","quantity", "units", "price", "discount", "tax", "amount"]}
                         ],
                     })
-                    let isRecordExists = await this.SalesInvoiceFormModel.findOne({where:{quotation_id:getQuotationData[0].id,customer_name:getQuotationData[0].customer_name}})
-                    if(isRecordExists){
-                        getQuotationData = await Promise.all(getQuotationData.map(singleData =>{
-                            return { 
-                                ...singleData.dataValues,
-                                quotation_id:singleData.dataValues.id
-                          }
-                          }))
+                    let sales_doc_number = (await this.quotationService.generateDynamicDocNumber(documentType.Sales))?.data
+                    let isRecordExists = await this.SalesInvoiceFormModel.findAll({where:{quotation_id:getQuotationData[0].id,doc_number:sales_doc_number,customer_name:getQuotationData[0].customer_name}})
+                    let createSalesInvoice 
+                    if(isRecordExists.length > 0){
+                        createSalesInvoice =isRecordExists[0]
                     }else{
-    
-                        let dc_doc_number = (await this.quotationService.generateDynamicDocNumber(documentType.Sales))?.data
                         getQuotationData = await Promise.all(getQuotationData.map(singleData =>{
                            return { 
                                ...singleData.dataValues,
-                               doc_number:dc_doc_number,
-                               quotation_id:singleData.dataValues.id
+                               doc_number:sales_doc_number,
+                               quotation_id:singleData.dataValues.id,
+                               is_form_move_forward:true,
+                               current_user_id:current_user_id
                          }
                          }))
-                        delete getQuotationData[0]['id']
+                         delete getQuotationData[0]['id']
+                         createSalesInvoice= await this.SalesInvoiceFormModel.create(getQuotationData[0])
     
                     }
-                    
-                     
-                    let [createSalesInvoice,update] = await this.SalesInvoiceFormModel.upsert({id:isRecordExists?.id,...getQuotationData[0]})
-                
+                   
                     for (let singleData of getQuotationData[0].quotation_items) {
                         let doc_number = createSalesInvoice.doc_number
                         let object ={

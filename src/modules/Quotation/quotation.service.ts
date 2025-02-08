@@ -31,6 +31,7 @@ export class QuotationService {
 
     }
 
+
     async getQuotationCustomerDropDown(): Promise<ApiResponse> {
         try {
 
@@ -115,9 +116,10 @@ export class QuotationService {
 
             let userName = async (user_id) => {
                 let userData = await this.userModel.findOne({ where: { id: user_id } })
-                let shortName = await this.helperService.getShortName(userData.user_name)
+                let shortName = userData?.user_name ? await this.helperService.getShortName(userData.user_name) :userData?.user_name
+              
                 let  employee = {
-                    user_name: userData.user_name,
+                    user_name: userData?.user_name,
                     avatar_type: 'short_name',
                     avatar_value: shortName
                   }
@@ -230,7 +232,7 @@ export class QuotationService {
 
         }
     }
-    async generateDynamicDocNumber(doc_type: string): Promise<any> {
+      async generateDynamicDocNumber(doc_type: string): Promise<any> {
         try {
             let docNumber
             let getDocumentData = await this.documentDetailModel.findOne({ where: { doc_type: doc_type } })
@@ -243,6 +245,12 @@ export class QuotationService {
             let Quotation = await repoObject[doc_type].findOne({ where:{doc_number:{[Op.not]:null}}, order: [["id", "DESC"]] })
            
             if (Quotation) {
+
+                if(doc_type=="delivery" &&  Quotation?.is_form_move_forward && Quotation?.is_record_saved == false){
+                    docNumber = Quotation?.doc_number
+                }else if(doc_type=="sales" &&  Quotation?.is_form_move_forward && Quotation?.is_record_saved == false){
+                    docNumber = Quotation?.doc_number
+                }else{
                 let incrementDocNumber
                 if (Quotation.doc_number != null) {
                     let docNum =  Quotation.doc_number
@@ -255,6 +263,7 @@ export class QuotationService {
                     incrementDocNumber = await this.incrementLastDigit(docNum)
                 }
                 docNumber = incrementDocNumber
+             }
             } else {
                 docNumber = getDocumentData?.doc_number
             }

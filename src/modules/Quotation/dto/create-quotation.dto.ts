@@ -65,6 +65,8 @@ export class deliveryChallanFormDto {
             revision_count:number
             created_user_id:number
             quotation_id:number
+            is_form_move_forward:boolean
+            is_record_saved:boolean
 }
 export class InvoiceFormDto {
             customer_name:string
@@ -97,6 +99,8 @@ export class InvoiceFormDto {
             amount_in_words:string
             payment_mode:string
             currency:string
+            is_form_move_forward:boolean
+            is_record_saved:boolean
 }
 
 export class InvoiceListDto {
