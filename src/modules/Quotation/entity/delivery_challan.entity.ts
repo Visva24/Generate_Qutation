@@ -47,8 +47,8 @@ export class deliveryChallanRepository extends Model <InferCreationAttributes<de
     @Column(DataType.JSON)
     auth_signature:any
 
-    @Column
-    delivery_by:string
+    // @Column
+    // delivery:string
 
     @Column
     receiver_sign_stamp:string

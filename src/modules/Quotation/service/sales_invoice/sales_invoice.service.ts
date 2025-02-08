@@ -155,7 +155,7 @@ export class SalesInvoiceService {
                         attributes: ["item_number", "description", "quantity", "units"],
                         order: [["id", "ASC"]]
                     })
-        
+                    InvoiceForm.is_record_saved = true;
                     let SalesInvoiceData = await this.SalesInvoiceFormModel.findOne({where:{doc_number:InvoiceForm.doc_number}})
 
                     let totalAmount = getTempInvoiceList.reduce((acc, sum) => acc + +sum.amount, 0)

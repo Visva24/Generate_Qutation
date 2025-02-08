@@ -82,7 +82,7 @@ export class SalesInvoiceFormRepository extends Model <InferCreationAttributes<S
     auth_signature:any
 
     @Column
-    delivery_by:string
+    delivery:string
 
     @Column
     receiver_sign_stamp:string

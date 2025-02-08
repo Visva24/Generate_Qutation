@@ -99,7 +99,7 @@ export class DeliveryChallanService {
                     return {
                         ...singleData.dataValues,
                         doc_date: moment(singleData.doc_date).format('DD-MMM-YYYY'),
-                        reference_date: moment(singleData.reference_date).format('DD-MMM-YYYY'),
+                        reference_date: singleData.reference_date ? moment(singleData.reference_date).format('DD-MMM-YYYY') :singleData.reference_date,
                         doc_number:singleData.doc_number,
                         delivery_items: modifiedListData
                     }
@@ -151,10 +151,10 @@ export class DeliveryChallanService {
                     attributes: ["item_number", "description", "quantity", "units"],
                     order: [["id", "ASC"]]
                 })
-
-                let SalesInvoiceData = await this.deliveryChallanModel.findOne({where:{doc_number:ChallanForm.doc_number}})
+                ChallanForm.is_record_saved = true;
+                let deliveryChallanData = await this.deliveryChallanModel.findOne({where:{doc_number:ChallanForm.doc_number}})
                   
-                let [createDeliveryChallan,update] = await this.deliveryChallanModel.upsert({id:SalesInvoiceData?.id,...ChallanForm})
+                let [createDeliveryChallan,update] = await this.deliveryChallanModel.upsert({id:deliveryChallanData?.id,...ChallanForm})
     
                 if (createDeliveryChallan) {
                     let delivery_id= createDeliveryChallan.id
@@ -218,7 +218,7 @@ export class DeliveryChallanService {
             try {
     
     
-                let templateName = "quotation_template"
+                let templateName = "delivery_challan"
                 let deliveryChalanData = await this.getDeliveryChallanFormData(id,"view")
                 if (deliveryChalanData.status == "failure") {
                     return res.json(deliveryChalanData)
@@ -270,7 +270,7 @@ export class DeliveryChallanService {
             try {
     
     
-                let templateName = "quotation_template"
+                let templateName = "delivery_challan"
                 let deliveryChalanData = await this.getDeliveryChallanFormData(id,"view")
                 if (deliveryChalanData.status == "failure") {
                     return deliveryChalanData
@@ -283,15 +283,15 @@ export class DeliveryChallanService {
                 const footer = `data:image/png;base64,${footerBase64Image}`;
                 const sidelogo = `data:image/png;base64,${sideLogoBase64Image}`;
     
-                let numberInWords = await this.numberToWord(deliveryChalanData.data.grand_total)
+                // let numberInWords = await this.numberToWord(deliveryChalanData.data.grand_total)
                 let formData = [deliveryChalanData.data].map(singleData => ({
                     ...singleData,
-                    amount_in_words: numberInWords,
+                    // amount_in_words: numberInWords,
                     logo: logo,
                     footer: footer,
                     sidelogo: sidelogo,
                 }))
-    
+             
                 let fileName = deliveryChalanData.data.customer_name + "_" + deliveryChalanData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
                 /*Handlebars is blocking access to object properties inherited from the prototype chain for security reasons. This behavior was introduced to prevent prototype pollution vulnerabilities.*/
                 /*By serializing and deserializing the object, you ensure that only own properties are kept, eliminating any issues with prototype access restrictions*/

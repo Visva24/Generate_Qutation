@@ -59,7 +59,7 @@ export class deliveryChallanFormDto {
             remark_brand:string
             reference_date:Date
             auth_signature:any
-            delivery_by:string
+        //     delivery:string
             receiver_sign_stamp:string
             is_revised:boolean
             revision_count:number
@@ -81,7 +81,7 @@ export class InvoiceFormDto {
             remark_brand:string
             reference_date:Date
             auth_signature:any
-            delivery_by:string
+            delivery:string
             receiver_sign_stamp:string
             is_revised:boolean
             revision_count:number
