@@ -422,9 +422,9 @@ export class QuotationService {
         try {
             if (record_id) {
                 let getListTotalAmount = (row) => {
-                    return (row.price * row.quantity +
-                        (row.price * row.quantity * row.tax) / 100 -
-                        (row.price * row.quantity * row.discount) / 100)
+                    return  (row.price * row.quantity +
+                        (row?.tax ? (row.price * row.quantity * row.tax) / 100 : 0) -
+                       (row?.discount ? (row.price * row.quantity * row.discount) / 100 : 0))
                 }
 
                 let totalAmount = getListTotalAmount(Quotation_list[0])
@@ -440,9 +440,9 @@ export class QuotationService {
             else if (Quotation_list.length > 0) {
 
                 let getListTotalAmount = (row) => {
-                    return (row.price * row.quantity +
-                        (row.price * row.quantity * row.tax) / 100 -
-                        (row.price * row.quantity * row.discount) / 100)
+                    return  (row.price * row.quantity +
+                        (row?.tax ? (row.price * row.quantity * row.tax) / 100 : 0) -
+                       (row?.discount ? (row.price * row.quantity * row.discount) / 100 : 0))
                 }
 
                 let totalAmount = getListTotalAmount(Quotation_list[0])

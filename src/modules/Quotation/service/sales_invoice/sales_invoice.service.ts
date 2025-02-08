@@ -335,10 +335,11 @@ export class SalesInvoiceService {
                 try {
                     if (record_id) {
                        
+                      
                         let getListTotalAmount = (row) => {
-                            return (row.price * row.quantity +
-                                (row.price * row.quantity * row.tax) / 100 -
-                                (row.price * row.quantity * row.discount) / 100)
+                            return  (row.price * row.quantity +
+                                (row?.tax ? (row.price * row.quantity * row.tax) / 100 : 0) -
+                               (row?.discount ? (row.price * row.quantity * row.discount) / 100 : 0))
                         }
         
                         let totalAmount = getListTotalAmount(invoice_list[0])
@@ -354,10 +355,11 @@ export class SalesInvoiceService {
                     else if (invoice_list.length > 0) {
                         let getListTotalAmount = (row) => {
                             return (row.price * row.quantity +
-                                (row.price * row.quantity * row.tax) / 100 -
-                                (row.price * row.quantity * row.discount) / 100)
+                                (row?.tax ? (row.price * row.quantity * row.tax) / 100 : 0) -
+                               (row?.discount ? (row.price * row.quantity * row.discount) / 100 : 0))
                         }
         
+                     
                         let totalAmount = getListTotalAmount(invoice_list[0])
         
                         let formatedData = invoice_list.map(singleData => ({
