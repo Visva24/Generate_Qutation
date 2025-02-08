@@ -102,6 +102,7 @@ export class SalesInvoiceService {
                         return {
                             ...singleData.dataValues,
                             reference_date: moment(singleData.reference_date).format('DD-MMM-YYYY'),
+                            doc_date: moment(singleData.doc_date).format('DD-MMM-YYYY'),
                             // doc_number:singleData.doc_number,
                             sales_items: modifiedListData
                         }
