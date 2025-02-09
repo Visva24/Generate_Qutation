@@ -124,4 +124,9 @@ export class QuotationController {
       async downloadQuotationTemplate( @Query('id') id :number) {
         return this.quotationService.downloadQuotationTemplate(id)
       }
+
+      @Get("reset-quotation-list")
+      async resetTempQuotationData( @Query('doc_number') doc_number :string) {
+        return this.quotationService.resetTempQuotationData(doc_number)
+      }
 }
