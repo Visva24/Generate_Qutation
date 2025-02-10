@@ -46,7 +46,7 @@ export class SalesInvoiceFormRepository extends Model <InferCreationAttributes<S
     reference_date:Date
 
     @Column
-    dn_number:number
+    dn_number:string
 
     @Column
     quotation_validity:string

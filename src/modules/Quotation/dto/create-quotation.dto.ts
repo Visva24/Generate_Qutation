@@ -92,7 +92,7 @@ export class InvoiceFormDto {
             total_discount:number
             total_tax:number
             grand_total:number
-            dn_number:number
+            dn_number:string
             quotation_validity:string
             payment_terms:string
             sales_employee:string

@@ -98,7 +98,8 @@ export class QuotationService {
                     ...singleData.dataValues,
                     doc_date: moment(singleData.doc_date).format('DD-MMM-YYYY'),
                    ...(type =="revised" && {doc_number:revisedDocNumber}),
-                   quotation_items: modifiedListData
+                   quotation_items: modifiedListData,
+                   amount_in_words: await this.numberToWord(singleData.grand_total)
                 }
             }))
 
@@ -253,8 +254,9 @@ export class QuotationService {
                 }else{
                 let incrementDocNumber
                 if (Quotation.doc_number != null) {
-                    let docNum =  Quotation.doc_number
-                    Quotation.is_revised == true  && (docNum = docNum.replace(/(\d+).*/, '$1'))
+                   
+                    
+                   let docNum = (Quotation.is_revised == true && doc_type=="quotation") ?  Quotation.doc_number.replace(/(\d+).*/, '$1')  : Quotation.doc_number
                     /*
                         \d+: Matches one or more digits (dynamic part).
                         .*: Matches everything after the digits.
@@ -287,15 +289,18 @@ export class QuotationService {
             if (!match) {
                 throw new Error("No numeric part found in the input string");
             }
-            const lastNumber = parseInt(match[1], 10); // Get the last number
-            const incrementedNumber = lastNumber + 1; // Increment the number
+            // const lastNumber = parseInt(match[1], 10); // Get the last number
+            // const incrementedNumber = lastNumber + 1; // Increment the number
 
-            // Replace the last number with the incremented number
-            const updatedInvoiceNumber = invoiceNumber.replace(
-                new RegExp(`${lastNumber}$`),
-                incrementedNumber.toString()
-            );
+            // // Replace the last number with the incremented number
+            // const updatedInvoiceNumber = invoiceNumber.replace(
+            //     new RegExp(`${lastNumber}$`),
+            //     incrementedNumber.toString()
+            // );
 
+           let updatedInvoiceNumber =  invoiceNumber.replace(/(\d+)(?!.*\d)/, (match) => {
+                return (parseInt(match) + 1).toString().padStart(match.length, '0');
+            });
             return updatedInvoiceNumber;
 
         } catch (error) {

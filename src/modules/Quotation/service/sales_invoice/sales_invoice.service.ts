@@ -104,7 +104,8 @@ export class SalesInvoiceService {
                             reference_date: moment(singleData.reference_date).format('DD-MMM-YYYY'),
                             doc_date: moment(singleData.doc_date).format('DD-MMM-YYYY'),
                             // doc_number:singleData.doc_number,
-                            sales_items: modifiedListData
+                            sales_items: modifiedListData,
+                            amount_in_words: await this.numberToWord(singleData.grand_total)
                         }
                     }))
         
@@ -152,7 +153,7 @@ export class SalesInvoiceService {
                 try {
                     let getTempInvoiceList = await this.TempSalesItemModel.findAll({
                         where: { doc_number: InvoiceForm.doc_number },
-                        attributes: ["item_number", "description", "quantity", "units"],
+                        attributes: [  "item_number", "description","quantity", "units", "price", "discount", "amount"],
                         order: [["id", "ASC"]]
                     })
                     InvoiceForm.is_record_saved = true;
