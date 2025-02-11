@@ -240,7 +240,7 @@ export class SalesInvoiceService {
                 try {
         
         
-                    let templateName = "quotation_template"
+                    let templateName = "sale_invoice"
                     let invoiceData = await this.getSalesInvoiceFormData(id,"view")
                     if (invoiceData.status == "failure") {
                         return res.json(invoiceData)
