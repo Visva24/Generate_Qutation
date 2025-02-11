@@ -39,6 +39,9 @@ export class UserRepository extends Model<InferCreationAttributes<UserRepository
   
     @Column({ defaultValue: false })
     is_owner: boolean;
+
+    @Column
+    user_signature: string;
   
     @Column({ defaultValue: false })
     is_deleted: boolean;

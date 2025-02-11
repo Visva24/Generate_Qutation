@@ -3,7 +3,7 @@ import { QuotationService } from './quotation.service';
 import { documentsDto, QuotationFormDto, QuotationListDto } from './dto/create-quotation.dto';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { saveDocumentDetails } from '../authentication/sample/user.sample';
-import { saveQuotationFormData, saveQuotationListData } from './sample/quotation.sample';
+import { saveQuotationFormData, saveQuotationListData, saveSignatureData } from './sample/quotation.sample';
 
 
 @ApiTags('quotation')
@@ -128,5 +128,26 @@ export class QuotationController {
       @Get("reset-quotation-list")
       async resetTempQuotationData( @Query('doc_number') doc_number :string) {
         return this.quotationService.resetTempQuotationData(doc_number)
+      }
+      @Get("get-user-Profile-details")
+      async getUserProfileDetails( @Query('user_id') user_id :number) {
+        return this.quotationService.getUserProfileDetails(user_id)
+      }
+
+      @ApiBody({
+        schema: {
+          type: 'array'
+        },
+        examples: {
+          example: {
+            value: saveSignatureData
+          }
+        }
+    
+      })
+      @Post('upload-user-details')
+      async uploadUserDetails(@Body() signature: { user_id: string; signature: string,user_name:string }) {
+        const filePath = await this.quotationService.uploadUserDetails(signature.user_id, signature.signature,signature.user_name);
+        return await filePath;
       }
 }

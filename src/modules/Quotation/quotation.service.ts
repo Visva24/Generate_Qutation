@@ -13,6 +13,11 @@ import { readFileSync } from 'fs';
 import { SalesInvoiceFormRepository } from './entity/sales_invoice.entity';
 import { deliveryChallanRepository } from './entity/delivery_challan.entity';
 import { Op, Sequelize } from 'sequelize';
+import { writeFileSync } from 'fs';
+import { join } from 'path';
+import * as path from 'path';
+import * as fs from 'fs';
+import { promises } from 'node:dns';
 
 
 @Injectable()
@@ -31,6 +36,7 @@ export class QuotationService {
 
     }
 
+    private readonly uploadPath = 'public/uploads/signatures';
 
     async getQuotationCustomerDropDown(): Promise<ApiResponse> {
         try {
@@ -580,6 +586,107 @@ export class QuotationService {
             return responseMessageGenerator('failure',error.message,null)
         }
     }
+
+    async getUserProfileDetails( user_id: number):Promise<any> {
+        try {
+            let userData = await this.userModel.findOne({where:{id:user_id}})
+         
+            let userSignature = await this.getSignatureAsBase64(userData.user_signature)
+            if(userSignature.status =="failure"){
+                  return userSignature
+            }
+            let resData ={
+                user_id:userData.id,
+                user_name:userData.user_name,
+                user_role:"Manager",
+                user_signature:userSignature.data,
+            }
+
+            return  responseMessageGenerator('success', 'data fetch successfully',resData);
+          
+        } catch (error) {
+          console.error('Error fetching image:', error);
+          responseMessageGenerator('failure',"Error fetching image",null)
+        
+        }
+    }
+    async getSignatureAsBase64( filename: string):Promise<any> {
+        try {
+          // Define the file path
+          const filePath = filename
+    
+          // Check if file exists
+          if (!fs.existsSync(filePath)) {
+            return responseMessageGenerator('failure',"File not found",null)
+          }
+    
+          // Read file and convert to Base64
+          const fileBuffer = fs.readFileSync(filePath);
+          const base64Image = fileBuffer.toString('base64');
+    
+          // Return the Base64 response
+          return  responseMessageGenerator('success', 'data fetch successfully',`data:image/png;base64,${base64Image}` );
+        } catch (error) {
+          console.error('Error fetching image:', error);
+          responseMessageGenerator('failure',"Error fetching image",null)
+        
+        }
+    }
+    async uploadUserDetails(userId: string, base64Image: string,user_name:string): Promise<any> {
+        try {
+          // Extract base64 data
+          const matches = base64Image.match(/^data:image\/(\w+);base64,(.+)$/);
+          if (!matches)  return responseMessageGenerator('failure',"Invalid image format",null)
+
+            let userData = await this.userModel.findOne({where:{id:userId}})
+
+            if (userData && userData.user_signature) {
+                const oldSignaturePath = path.join(__dirname, '..', '..', userData.user_signature);
+        
+                // Delete old signature file if it exists
+                if (fs.existsSync(oldSignaturePath)) {
+                  fs.unlinkSync(oldSignaturePath);
+                }
+              }
+
+            let saveSignature = await this.saveSignature(userId, base64Image)
+            if(saveSignature.status =='failure'){
+                   return saveSignature
+            }
+            let condition ={}
+            user_name && (condition['user_name'] =saveSignature?.data)
+            condition['user_signature'] =saveSignature?.data
+            let updateUserData = await this.userModel.update(condition,{where:{id:userId}})
+            return responseMessageGenerator('success',"image saved successfully",[])
+        } catch (error) {
+            console.log(error);
+            return responseMessageGenerator('failure',error.message,null)
+        }
+    }
+    async saveSignature(userId: string, base64Image: string): Promise<any> {
+        try {
+          // Extract base64 data
+          const matches = base64Image.match(/^data:image\/(\w+);base64,(.+)$/);
+          if (!matches) throw new Error('Invalid image format');
+    
+          const extension = matches[1];
+          const buffer = Buffer.from(matches[2], 'base64');
+    
+          let userData = await this.userModel.findOne({where:{id:userId}})
+          // Define file path
+          const fileName = `${(userData.user_name).toLowerCase()}_${userId}_signature.${extension}`;
+          const filePath = join(this.uploadPath, fileName);
+    
+          // Save image
+          writeFileSync(filePath, buffer);
+    
+          return responseMessageGenerator('success',"image saved successfully",filePath)
+        } catch (error) {
+            console.log(error);
+            return responseMessageGenerator('failure',error.message,null)
+        }
+    }
+
 
     /*helper function*/
     async numberToWord(num) {

@@ -25,6 +25,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
   app.use(bodyParser.json({ limit: '10mb' }));
+  app.use('/public/uploads/signatures', express.static('public/uploads/signatures'));
   app.use('/public', express.static(join(__dirname, '..', 'public')));
   app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
