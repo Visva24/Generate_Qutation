@@ -105,7 +105,7 @@ export class SalesInvoiceService {
                             doc_date: moment(singleData.doc_date).format('DD-MMM-YYYY'),
                             // doc_number:singleData.doc_number,
                             sales_items: modifiedListData,
-                            amount_in_words: await this.numberToWord(singleData.grand_total)
+                            amount_in_words: await this.helperService.numberToWord(singleData.grand_total,singleData.currency)
                         }
                     }))
         
@@ -139,6 +139,7 @@ export class SalesInvoiceService {
                             remarks: singleData.remark_brand,
                             document_number: singleData.doc_number,
                             symbol: singleData.currency,
+                            customer_name: singleData.customer_name,
                             created_by: await userName(singleData.created_user_id),
                         }
                     }))
@@ -253,7 +254,7 @@ export class SalesInvoiceService {
                     const footer = `data:image/png;base64,${footerBase64Image}`;
                     const sidelogo = `data:image/png;base64,${sideLogoBase64Image}`;
         
-                    let numberInWords = await this.numberToWord(invoiceData.data.grand_total)
+                    let numberInWords = await this.helperService.numberToWord(invoiceData.data.grand_total,invoiceData.data.currency)
                     let formData = [invoiceData.data].map(singleData => ({
                         ...singleData,
                         amount_in_words: numberInWords,
@@ -305,7 +306,7 @@ export class SalesInvoiceService {
                     const footer = `data:image/png;base64,${footerBase64Image}`;
                     const sidelogo = `data:image/png;base64,${sideLogoBase64Image}`;
         
-                    let numberInWords = await this.numberToWord(invoiceData.data.grand_total)
+                    let numberInWords = await this.helperService.numberToWord(invoiceData.data.grand_total,invoiceData.data.currency)
                     let formData = [invoiceData.data].map(singleData => ({
                         ...singleData,
                         amount_in_words: numberInWords,
@@ -380,7 +381,7 @@ export class SalesInvoiceService {
         
                 }
             }
-            async getAllSalesInvoiceList(doc_number: string): Promise<any> {
+            async getAllSalesInvoiceList(doc_number: string,currency:string): Promise<any> {
                 try {
                     
                     let getInvoiceList = await this.TempSalesItemModel.findAll({ where: { doc_number: doc_number }, order: [["id", "ASC"]] })
@@ -396,7 +397,7 @@ export class SalesInvoiceService {
                         i++
                         modifiedData.push(obj)
                     }
-                    let amountInWords = await this.numberToWord(totalAmount)
+                    let amountInWords = await this.helperService.numberToWord(Math.floor(totalAmount),currency)
                     let objData = {
                      "total_discount": "0.00",
                             "total_tax": "0.00",

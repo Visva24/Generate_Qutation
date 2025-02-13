@@ -52,6 +52,9 @@ export class QuotationFormRepository extends Model <InferCreationAttributes<Quot
     @Column
     delivery:string
 
+    @Column
+    payment_terms:string
+
     @Column(DataType.DECIMAL)
     sub_total:number
 

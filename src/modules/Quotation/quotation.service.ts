@@ -105,7 +105,7 @@ export class QuotationService {
                     doc_date: moment(singleData.doc_date).format('DD-MMM-YYYY'),
                    ...(type =="revised" && {doc_number:revisedDocNumber}),
                    quotation_items: modifiedListData,
-                   amount_in_words: await this.numberToWord(singleData.grand_total)
+                   amount_in_words: await this.helperService.numberToWord(singleData.grand_total,singleData.currency)
                 }
             }))
 
@@ -142,6 +142,7 @@ export class QuotationService {
                     total_amount: singleData.grand_total,
                     document_number: singleData.doc_number,
                     symbol: singleData.currency,
+                    customer_name: singleData.customer_name,
                     created_by: await userName(singleData.created_user_id),
                 }
             }))
@@ -351,7 +352,7 @@ export class QuotationService {
             const footer = `data:image/png;base64,${footerBase64Image}`;
             const sidelogo = `data:image/png;base64,${sideLogoBase64Image}`;
 
-            let numberInWords = await this.numberToWord(QuotationData.data.grand_total)
+            let numberInWords = await this.helperService.numberToWord(QuotationData.data.grand_total,QuotationData.data.currency)
             let formData = [QuotationData.data].map(singleData => ({
                 ...singleData,
                 amount_in_words: numberInWords,
@@ -403,7 +404,7 @@ export class QuotationService {
             const footer = `data:image/png;base64,${footerBase64Image}`;
             const sidelogo = `data:image/png;base64,${sideLogoBase64Image}`;
 
-            let numberInWords = await this.numberToWord(QuotationData.data.grand_total)
+            let numberInWords = await this.helperService.numberToWord(QuotationData.data.grand_total,QuotationData.data.currency)
             let formData = [QuotationData.data].map(singleData => ({
                 ...singleData,
                 amount_in_words: numberInWords,
@@ -475,7 +476,7 @@ export class QuotationService {
 
         }
     }
-    async getAllQuotationList(doc_number: string): Promise<any> {
+    async getAllQuotationList(doc_number: string,currency:string): Promise<any> {
         try {
             
             let getTempQuotationList = await this.tempQuotationItemModel.findAll({ where: { doc_number: doc_number }, order: [["id", "ASC"]] })
@@ -493,7 +494,7 @@ export class QuotationService {
                 i++
                 modifiedData.push(obj)
             }
-            let amountInWords = await this.numberToWord(totalAmount)
+            let amountInWords = await this.helperService.numberToWord(Math.floor(totalAmount),currency)
             let objData = {
                 "total_discount": "0.00",
                 "total_tax": "0.00",
@@ -689,89 +690,92 @@ export class QuotationService {
 
 
     /*helper function*/
-    async numberToWord(num) {
-        const singleDigits = [
-            "", "One", "Two", "Three", "Four", "Five", "six", "Seven", "Eight", "Nine"
-        ];
-        const teens = [
-            "Ten", "Eleven", "Twelve", "Thirteen", "fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"
-        ];
-        const tens = [
-            "", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"
-        ];
-        const thousands = ["", "Thousand", "Lakh", "Crore"];
+    // async numberToWord(num) {
+    //     const singleDigits = [
+    //         "", "One", "Two", "Three", "Four", "Five", "six", "Seven", "Eight", "Nine"
+    //     ];
+    //     const teens = [
+    //         "Ten", "Eleven", "Twelve", "Thirteen", "fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"
+    //     ];
+    //     const tens = [
+    //         "", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"
+    //     ];
+    //     const thousands = ["", "Thousand", "Lakh", "Crore"];
 
-        function convertHundred(num: number): string {
-            let str = "";
-            if (num > 99) {
-                str += singleDigits[Math.floor(num / 100)] + " hundred ";
-                num = num % 100;
-            }
-            if (num > 9 && num < 20) {
-                str += teens[num - 10] + " ";
-            } else {
-                str += tens[Math.floor(num / 10)] + " " + singleDigits[num % 10] + " ";
-            }
-            return str.trim();
-        }
+    //     function convertHundred(num: number): string {
+    //         let str = "";
+    //         if (num > 99) {
+    //             str += singleDigits[Math.floor(num / 100)] + " hundred ";
+    //             num = num % 100;
+    //         }
+    //         if (num > 9 && num < 20) {
+    //             str += teens[num - 10] + " ";
+    //         } else {
+    //             str += tens[Math.floor(num / 10)] + " " + singleDigits[num % 10] + " ";
+    //         }
+    //         return str.trim();
+    //     }
 
-        function convertToWords(num: number): string {
-            if (num === 0) return "zero";
-            let word = "";
-            let isCrore = false;
-            let isLakhs = false;
-            let isThousands = false;
+    //     function convertToWords(num: number): string {
+    //         if (num === 0) return "zero";
+    //         let word = "";
+    //         let isCrore = false;
+    //         let isLakhs = false;
+    //         let isThousands = false;
 
-            // Special handling for Indian Numbering System (splitting based on lakh and crore)
-            const parts = [];
-            if (num >= 10000000) { // Crores
-                parts.push(Math.floor(num / 10000000));
-                isCrore = true
-                num = num % 10000000;
-            }
-            if (num >= 100000) { // Lakhs
-                parts.push(Math.floor(num / 100000))
-                isLakhs = true
-                num = num % 100000;
-            }
-            if (num >= 1000) { // Thousands
-                parts.push(Math.floor(num / 1000));
-                isThousands = true
-                num = num % 1000;
-            }
-            parts.push(num); // The remaining hundreds or below
+    //         // Special handling for Indian Numbering System (splitting based on lakh and crore)
+    //         const parts = [];
+    //         if (num >= 10000000) { // Crores
+    //             parts.push(Math.floor(num / 10000000));
+    //             isCrore = true
+    //             num = num % 10000000;
+    //         }
+    //         if (num >= 100000) { // Lakhs
+    //             parts.push(Math.floor(num / 100000))
+    //             isLakhs = true
+    //             num = num % 100000;
+    //         }
+    //         if (num >= 1000) { // Thousands
+    //             parts.push(Math.floor(num / 1000));
+    //             isThousands = true
+    //             num = num % 1000;
+    //         }
+    //         parts.push(num); // The remaining hundreds or below
 
 
-            // Convert each part to words
-            for (let i = 0; i < parts.length; i++) {
-                if (parts[i] > 0) {
+    //         // Convert each part to words
+    //         for (let i = 0; i < parts.length; i++) {
+    //             if (parts[i] > 0) {
 
-                    if (isCrore) {
-                        word += convertHundred(parts[i]) + " " + thousands[3] + " ";
-                        isCrore = false
-                        continue;
-                    } else if (isLakhs) {
-                        word += convertHundred(parts[i]) + " " + thousands[2] + " ";
-                        console.log("lakhs" + i);
-                        isLakhs = false
-                        continue;
-                    } else if (isThousands) {
-                        word += convertHundred(parts[i]) + " " + thousands[1] + " ";
-                        console.log("thousand" + i);
-                        isThousands = false
-                        continue;
-                    } else {
-                        word += convertHundred(parts[i]) + " " + thousands[0] + " ";
-                        console.log(" " + i);
-                    }
+    //                 if (isCrore) {
+    //                     word += convertHundred(parts[i]) + " " + thousands[3] + " ";
+    //                     isCrore = false
+    //                     continue;
+    //                 } else if (isLakhs) {
+    //                     word += convertHundred(parts[i]) + " " + thousands[2] + " ";
+    //                     console.log("lakhs" + i);
+    //                     isLakhs = false
+    //                     continue;
+    //                 } else if (isThousands) {
+    //                     word += convertHundred(parts[i]) + " " + thousands[1] + " ";
+    //                     console.log("thousand" + i);
+    //                     isThousands = false
+    //                     continue;
+    //                 } else {
+    //                     word += convertHundred(parts[i]) + " " + thousands[0] + " ";
+    //                     console.log(" " + i);
+    //                 }
 
-                }
-            }
+    //             }
+    //         }
 
-            return word.trim();
-        }
+    //         return word.trim();
+    //     }
 
-        return convertToWords(num) + " rupees only";
+    //     return convertToWords(num) + " rupees only";
 
-    }
+    // }
+
+   
+    
 }

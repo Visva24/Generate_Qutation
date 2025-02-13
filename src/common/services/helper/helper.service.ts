@@ -8,6 +8,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { UserRepository } from 'src/modules/authentication/entity/users.entity';
 import { ApiResponse, responseMessageGenerator } from 'src/common/util/helper.config';
 import puppeteer from 'puppeteer';
+import { cashType } from 'src/modules/quotation/enum/quotation.enum';
 
 
 @Injectable()
@@ -95,4 +96,220 @@ export class HelperService {
 
     return shortName;
     }
+
+
+//    async numberToWord(num: number, currency: string = "INR"): Promise<string> {
+//         const singleDigits = [
+//             "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"
+//         ];
+//         const teens = [
+//             "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"
+//         ];
+//         const tens = [
+//             "", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"
+//         ];
+        
+//         // Define number units based on the currency type
+//         const thousands = currency === "INR" ? ["", "Thousand", "Lakh", "Crore"] : ["", "Thousand", "Million", "Billion"];
+    
+//         function convertHundred(num: number): string {
+//             let str = "";
+//             if (num > 99) {
+//                 str += singleDigits[Math.floor(num / 100)] + " Hundred ";
+//                 num = num % 100;
+//             }
+//             if (num > 9 && num < 20) {
+//                 str += teens[num - 10] + " ";
+//             } else {
+//                 str += tens[Math.floor(num / 10)] + " " + singleDigits[num % 10] + " ";
+//             }
+//             return str.trim();
+//         }
+    
+//         function convertToWords(num: number): string {
+//             if (num === 0) return "Zero";
+//             let word = "";
+//             let isBillion = false;
+//             let isMillion = false;
+//             let isThousands = false;
+    
+//             const parts = [];
+//             if (currency !== "INR") {
+//                 if (num >= 1000000000) { // Billions
+//                     parts.push(Math.floor(num / 1000000000));
+//                     isBillion = true;
+//                     num = num % 1000000000;
+//                 }
+//                 if (num >= 1000000) { // Millions
+//                     parts.push(Math.floor(num / 1000000));
+//                     isMillion = true;
+//                     num = num % 1000000;
+//                 }
+//             } else {
+//                 if (num >= 10000000) { // Crores
+//                     parts.push(Math.floor(num / 10000000));
+//                     isBillion = true;
+//                     num = num % 10000000;
+//                 }
+//                 if (num >= 100000) { // Lakhs
+//                     parts.push(Math.floor(num / 100000));
+//                     isMillion = true;
+//                     num = num % 100000;
+//                 }
+//             }
+    
+//             if (num >= 1000) { // Thousands
+//                 parts.push(Math.floor(num / 1000));
+//                 isThousands = true;
+//                 num = num % 1000;
+//             }
+//             parts.push(num); // Remaining hundreds or below
+    
+//             for (let i = 0; i < parts.length; i++) {
+//                 if (parts[i] > 0) {
+//                     if (isBillion) {
+//                         word += convertHundred(parts[i]) + " " + thousands[3] + " ";
+//                         isBillion = false;
+//                         continue;
+//                     } else if (isMillion) {
+//                         word += convertHundred(parts[i]) + " " + thousands[2] + " ";
+//                         isMillion = false;
+//                         continue;
+//                     } else if (isThousands) {
+//                         word += convertHundred(parts[i]) + " " + thousands[1] + " ";
+//                         isThousands = false;
+//                         continue;
+//                     } else {
+//                         word += convertHundred(parts[i]) + " ";
+//                     }
+//                 }
+//             }
+    
+//             return word.trim();
+//         }
+    
+//         // Determine currency label
+//         let currencyLabel = "Rupees";
+//         if (currency === "QAR") {
+//             currencyLabel = "Qatari Riyals";
+//         } else if (currency === "SAR") {
+//             currencyLabel = "Saudi Riyals";
+//         }
+    
+//         return convertToWords(num) + ` ${currencyLabel} only`;
+//     }
+
+async numberToWord(num: number, currency: string ): Promise<string> {
+    const singleDigits = [
+        "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"
+    ];
+    const teens = [
+        "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"
+    ];
+    const tens = [
+        "", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"
+    ];
+
+    // Define numbering system based on currency type
+    const thousands = (currency === "INR") 
+        ? ["", "Thousand", "Lakh", "Crore"] 
+        : ["", "Thousand", "Million", "Billion"];
+
+    function convertHundred(num: number): string {
+        let str = "";
+        if (num > 99) {
+            str += singleDigits[Math.floor(num / 100)] + " Hundred ";
+            num = num % 100;
+        }
+        if (num > 9 && num < 20) {
+            str += teens[num - 10] + " ";
+        } else {
+            str += tens[Math.floor(num / 10)] + " " + singleDigits[num % 10] + " ";
+        }
+        return str.trim();
+    }
+
+    function convertToWords(num: number): string {
+        if (num === 0) return "Zero";
+        let word = "";
+        let isBillion = false;
+        let isMillion = false;
+        let isThousands = false;
+
+        const parts = [];
+
+        if (currency !== "INR") {
+            // USD, QAR, SAR -> Millions/Billions format
+            if (num >= 1000000000) { // Billions
+                parts.push(Math.floor(num / 1000000000));
+                isBillion = true;
+                num = num % 1000000000;
+            }
+            if (num >= 1000000) { // Millions
+                parts.push(Math.floor(num / 1000000));
+                isMillion = true;
+                num = num % 1000000;
+            }
+        } else {
+            // INR -> Lakhs/Crores format
+            if (num >= 10000000) { // Crores
+                parts.push(Math.floor(num / 10000000));
+                isBillion = true;
+                num = num % 10000000;
+            }
+            if (num >= 100000) { // Lakhs
+                parts.push(Math.floor(num / 100000));
+                isMillion = true;
+                num = num % 100000;
+            }
+        }
+
+        if (num >= 1000) { // Thousands
+            parts.push(Math.floor(num / 1000));
+            isThousands = true;
+            num = num % 1000;
+        }
+        console.log(num);
+       
+        
+        parts.push(num); // Remaining hundreds or below
+
+        for (let i = 0; i < parts.length; i++) {
+            if (parts[i] > 0) {
+                if (isBillion) {
+                    word += convertHundred(parts[i]) + " " + thousands[3] + " ";
+                    isBillion = false;
+                    continue;
+                } else if (isMillion) {
+                    word += convertHundred(parts[i]) + " " + thousands[2] + " ";
+                    isMillion = false;
+                    continue;
+                } else if (isThousands) {
+                    word += convertHundred(parts[i]) + " " + thousands[1] + " ";
+                    isThousands = false;
+                    continue;
+                } else {
+                    word += convertHundred(parts[i]) + " ";
+                }
+            }
+            console.log(word);
+            
+        }
+
+        return word.trim();
+    }
+
+    // Determine currency label
+    let currencyLabel = "Rupees";
+    if (currency === cashType.QAR) {
+        currencyLabel = "Qatari Riyals";
+    } else if (currency === cashType.SAR) {
+        currencyLabel = "Saudi Riyals";
+    } else if (currency === cashType.USD) {
+        currencyLabel = "US Dollars";
+    }
+    //   return convertToWords(num)
+    return convertToWords(num) + ` ${currencyLabel} only`;
+}
+
 }

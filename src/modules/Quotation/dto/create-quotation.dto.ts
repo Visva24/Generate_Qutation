@@ -21,6 +21,7 @@ export class QuotationFormDto {
         is_revised:boolean
         revision_count:number
         created_user_id:number
+        payment_terms:string
         quotation_list_array:QuotationListDto[]
 }
 export class QuotationListDto {

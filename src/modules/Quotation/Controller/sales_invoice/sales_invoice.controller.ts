@@ -90,8 +90,8 @@ export class SalesInvoiceController {
               }
     
               @Get("get-all-sales-invoice-list")
-              async getAllSalesInvoiceList(@Query('doc_number') doc_number:string):Promise<any> {
-                return this.SalesInvoiceService.getAllSalesInvoiceList(doc_number)
+              async getAllSalesInvoiceList(@Query('doc_number') doc_number:string,@Query('currency') currency:string):Promise<any> {
+                return this.SalesInvoiceService.getAllSalesInvoiceList(doc_number,currency)
               }
         
               

@@ -41,8 +41,8 @@ export class QuotationController {
         return this.quotationService.getSingleQuotationList(record_id)
       }
       @Get("get-all-quotation-list")
-      async getAllQuotationList(@Query('doc_number') doc_number:string):Promise<any> {
-        return this.quotationService.getAllQuotationList(doc_number)
+      async getAllQuotationList(@Query('doc_number') doc_number:string,@Query('currency') currency:string):Promise<any> {
+        return this.quotationService.getAllQuotationList(doc_number,currency)
       }
 
       @ApiBody({

@@ -134,6 +134,7 @@ export class DeliveryChallanService {
                         Date: moment(singleData.doc_date).format('DD/M/YYYY'),
                         remarks: singleData.remark_brand,
                         document_number: singleData.doc_number,
+                        customer_name: singleData.customer_name,
                         created_by: await userName(singleData.created_user_id),
                     }
                 }))
@@ -231,10 +232,9 @@ export class DeliveryChallanService {
                 const footer = `data:image/png;base64,${footerBase64Image}`;
                 const sidelogo = `data:image/png;base64,${sideLogoBase64Image}`;
     
-                let numberInWords = await this.numberToWord(deliveryChalanData.data.grand_total)
+               
                 let formData = [deliveryChalanData.data].map(singleData => ({
                     ...singleData,
-                    amount_in_words: numberInWords,
                     logo: logo,
                     footer: footer,
                     sidelogo: sidelogo,

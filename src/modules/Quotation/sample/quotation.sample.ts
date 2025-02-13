@@ -51,7 +51,7 @@ export const saveQuotationFormData = {
 export const saveSignatureData = {
         user_id:1,
         signature:null , 
-        user_name:null , 
+        user_name:null ,
          
 }
 export const saveQuotationListData = {
