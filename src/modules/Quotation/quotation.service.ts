@@ -8,7 +8,6 @@ import { UpdateQuotationFormDto } from './dto/update-quotation.dto';
 import * as moment from 'moment';
 import { HelperService } from 'src/common/services/helper/helper.service';
 import { QUOTATION_UPLOAD_DIRECTORY } from 'src/common/app.constant';
-import { UserRepository } from '../authentication/entity/users.entity';
 import { readFileSync } from 'fs';
 import { SalesInvoiceFormRepository } from './entity/sales_invoice.entity';
 import { deliveryChallanRepository } from './entity/delivery_challan.entity';
@@ -18,6 +17,7 @@ import { join } from 'path';
 import * as path from 'path';
 import * as fs from 'fs';
 import { promises } from 'node:dns';
+import { UserRepository } from '../Authentication/entity/users.entity';
 
 
 @Injectable()
@@ -43,21 +43,21 @@ export class QuotationService {
 
             let revisedDocNumber = null;
             let getQuotationData = await this.QuotationFormModel.findAll({
-                where:{customer_name:{[Op.not]:null}},
+                where: { customer_name: { [Op.not]: null } },
                 attributes: [
-                    [Sequelize.fn('DISTINCT', Sequelize.col('customer_name')), 'customer_name'],"id"
-                  ],
+                    [Sequelize.fn('DISTINCT', Sequelize.col('customer_name')), 'customer_name'], "id"
+                ],
             })
-            
+
             return responseMessageGenerator('success', 'data fetched successfully', getQuotationData)
-           
+
 
         } catch (error) {
             console.log(error);
             return responseMessageGenerator('failure', 'something went wrong', error.message)
         }
     }
-    async getQuotationFormData(quotation_id:number,type:string): Promise<ApiResponse> {
+    async getQuotationFormData(quotation_id: number, type: string): Promise<ApiResponse> {
         try {
 
             let revisedDocNumber = null
@@ -69,33 +69,33 @@ export class QuotationService {
             })
             let modifiedListData = []
             let i = 1
-            if(type =="revised"){
-                 revisedDocNumber =  (await this.generateRevisionDocNumber(getQuotationData[0].id)).data
+            if (type == "revised") {
+                revisedDocNumber = (await this.generateRevisionDocNumber(getQuotationData[0].id)).data
             }
             for (let singleData of getQuotationData[0].quotation_items) {
-                let obj :any = {}
+                let obj: any = {}
                 Object.assign(obj, {
                     ...singleData.dataValues
                 })
                 obj['serial_no'] = i
                 i++
                 modifiedListData.push(obj)
-                if(revisedDocNumber){
-                     let revisionObj:any ={}
-                     Object.assign(revisionObj, {
+                if (revisedDocNumber) {
+                    let revisionObj: any = {}
+                    Object.assign(revisionObj, {
                         ...singleData.dataValues
                     })
-                    revisionObj['doc_number']=revisedDocNumber
+                    revisionObj['doc_number'] = revisedDocNumber
                     delete revisionObj.id
                     delete revisionObj.createdAt
                     delete revisionObj.updatedAt
-               
+
                     // return obj
-                    let existingQuotationItem = await this.tempQuotationItemModel.findOne({where:{doc_number:revisedDocNumber,item_number:revisionObj.item_number,description:revisionObj.description}})
-                    if(existingQuotationItem == null){
-                        let savedData =   await this.SaveOrUpdateQuotationList(revisedDocNumber,[revisionObj],null)
+                    let existingQuotationItem = await this.tempQuotationItemModel.findOne({ where: { doc_number: revisedDocNumber, item_number: revisionObj.item_number, description: revisionObj.description } })
+                    if (existingQuotationItem == null) {
+                        let savedData = await this.SaveOrUpdateQuotationList(revisedDocNumber, [revisionObj], null)
                     }
-                 
+
                 }
             }
 
@@ -103,15 +103,15 @@ export class QuotationService {
                 return {
                     ...singleData.dataValues,
                     doc_date: moment(singleData.doc_date).format('DD-MMM-YYYY'),
-                   ...(type =="revised" && {doc_number:revisedDocNumber}),
-                   quotation_items: modifiedListData,
-                   amount_in_words: await this.helperService.numberToWord(singleData.grand_total,singleData.currency)
+                    ...(type == "revised" && { doc_number: revisedDocNumber }),
+                    quotation_items: modifiedListData,
+                    amount_in_words: await this.helperService.numberToWord(singleData.grand_total, singleData.currency)
                 }
             }))
 
 
             return responseMessageGenerator('success', 'data fetched successfully', modifiedOverAllData[0])
-           
+
 
         } catch (error) {
             console.log(error);
@@ -123,13 +123,13 @@ export class QuotationService {
 
             let userName = async (user_id) => {
                 let userData = await this.userModel.findOne({ where: { id: user_id } })
-                let shortName = userData?.user_name ? await this.helperService.getShortName(userData.user_name) :userData?.user_name
-              
-                let  employee = {
+                let shortName = userData?.user_name ? await this.helperService.getShortName(userData.user_name) : userData?.user_name
+
+                let employee = {
                     user_name: userData?.user_name,
                     avatar_type: 'short_name',
                     avatar_value: shortName
-                  }
+                }
                 return employee
             }
 
@@ -204,8 +204,8 @@ export class QuotationService {
                 order: [["id", "ASC"]]
             })
             let Quotation = await this.QuotationFormModel.findOne({ where: { id: id } })
-            let revisionCount = Quotation.revision_count + 1 
-            
+            let revisionCount = Quotation.revision_count + 1
+
             let totalAmount = getTempQuotationList.reduce((acc, sum) => acc + +sum.amount, 0)
             // let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
             // let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
@@ -215,11 +215,11 @@ export class QuotationService {
             UpdateQuotationForm.is_revised = true
             UpdateQuotationForm.sub_total = totalAmount
             UpdateQuotationForm.grand_total = totalAmount
-          
+
             let updateQuotation = await this.QuotationFormModel.update({ ...UpdateQuotationForm }, { where: { id: id } })
             //  let itemCount = getTempQuotationList.length
-            if (updateQuotation && getTempQuotationList.length >0)  {
-                await this.QuotationListModel.destroy({where:{quotation_id:id}})
+            if (updateQuotation && getTempQuotationList.length > 0) {
+                await this.QuotationListModel.destroy({ where: { quotation_id: id } })
                 for (let singleData of getTempQuotationList) {
                     /* destroy previous data*/
                     let obj = {}
@@ -240,7 +240,7 @@ export class QuotationService {
 
         }
     }
-      async generateDynamicDocNumber(doc_type: string): Promise<any> {
+    async generateDynamicDocNumber(doc_type: string): Promise<any> {
         try {
             let docNumber
             let getDocumentData = await this.documentDetailModel.findOne({ where: { doc_type: doc_type } })
@@ -250,29 +250,29 @@ export class QuotationService {
                 "delivery": this.deliveryChallanModel,
                 "sales": this.SalesInvoiceFormModel
             }
-            let Quotation = await repoObject[doc_type].findOne({ where:{doc_number:{[Op.not]:null}}, order: [["id", "DESC"]] })
-           
+            let Quotation = await repoObject[doc_type].findOne({ where: { doc_number: { [Op.not]: null } }, order: [["id", "DESC"]] })
+
             if (Quotation) {
 
-                if(doc_type=="delivery" &&  Quotation?.is_form_move_forward && Quotation?.is_record_saved == false){
+                if (doc_type == "delivery" && Quotation?.is_form_move_forward && Quotation?.is_record_saved == false) {
                     docNumber = Quotation?.doc_number
-                }else if(doc_type=="sales" &&  Quotation?.is_form_move_forward && Quotation?.is_record_saved == false){
+                } else if (doc_type == "sales" && Quotation?.is_form_move_forward && Quotation?.is_record_saved == false) {
                     docNumber = Quotation?.doc_number
-                }else{
-                let incrementDocNumber
-                if (Quotation.doc_number != null) {
-                   
-                    
-                   let docNum = (Quotation.is_revised == true && doc_type=="quotation") ?  Quotation.doc_number.replace(/(\d+).*/, '$1')  : Quotation.doc_number
-                    /*
-                        \d+: Matches one or more digits (dynamic part).
-                        .*: Matches everything after the digits.
-                        Replace: Replace the match with $1, which refers to the captured digits.
-                    */
-                    incrementDocNumber = await this.incrementLastDigit(docNum)
+                } else {
+                    let incrementDocNumber
+                    if (Quotation.doc_number != null) {
+
+
+                        let docNum = (Quotation.is_revised == true && doc_type == "quotation") ? Quotation.doc_number.replace(/(\d+).*/, '$1') : Quotation.doc_number
+                        /*
+                            \d+: Matches one or more digits (dynamic part).
+                            .*: Matches everything after the digits.
+                            Replace: Replace the match with $1, which refers to the captured digits.
+                        */
+                        incrementDocNumber = await this.incrementLastDigit(docNum)
+                    }
+                    docNumber = incrementDocNumber
                 }
-                docNumber = incrementDocNumber
-             }
             } else {
                 docNumber = getDocumentData?.doc_number
             }
@@ -305,7 +305,7 @@ export class QuotationService {
             //     incrementedNumber.toString()
             // );
 
-           let updatedInvoiceNumber =  invoiceNumber.replace(/(\d+)(?!.*\d)/, (match) => {
+            let updatedInvoiceNumber = invoiceNumber.replace(/(\d+)(?!.*\d)/, (match) => {
                 return (parseInt(match) + 1).toString().padStart(match.length, '0');
             });
             return updatedInvoiceNumber;
@@ -340,7 +340,7 @@ export class QuotationService {
 
 
             let templateName = "quotation_template"
-            let QuotationData = await this.getQuotationFormData(id,"view")
+            let QuotationData = await this.getQuotationFormData(id, "view")
             if (QuotationData.status == "failure") {
                 return res.json(QuotationData)
             }
@@ -352,7 +352,7 @@ export class QuotationService {
             const footer = `data:image/png;base64,${footerBase64Image}`;
             const sidelogo = `data:image/png;base64,${sideLogoBase64Image}`;
 
-            let numberInWords = await this.helperService.numberToWord(QuotationData.data.grand_total,QuotationData.data.currency)
+            let numberInWords = await this.helperService.numberToWord(QuotationData.data.grand_total, QuotationData.data.currency)
             let formData = [QuotationData.data].map(singleData => ({
                 ...singleData,
                 amount_in_words: numberInWords,
@@ -392,7 +392,7 @@ export class QuotationService {
 
 
             let templateName = "quotation_template"
-            let QuotationData = await this.getQuotationFormData(id,"view")
+            let QuotationData = await this.getQuotationFormData(id, "view")
             if (QuotationData.status == "failure") {
                 return QuotationData
             }
@@ -404,7 +404,7 @@ export class QuotationService {
             const footer = `data:image/png;base64,${footerBase64Image}`;
             const sidelogo = `data:image/png;base64,${sideLogoBase64Image}`;
 
-            let numberInWords = await this.helperService.numberToWord(QuotationData.data.grand_total,QuotationData.data.currency)
+            let numberInWords = await this.helperService.numberToWord(QuotationData.data.grand_total, QuotationData.data.currency)
             let formData = [QuotationData.data].map(singleData => ({
                 ...singleData,
                 amount_in_words: numberInWords,
@@ -434,9 +434,9 @@ export class QuotationService {
         try {
             if (record_id) {
                 let getListTotalAmount = (row) => {
-                    return  (row.price * row.quantity +
+                    return (row.price * row.quantity +
                         (row?.tax ? (row.price * row.quantity * row.tax) / 100 : 0) -
-                       (row?.discount ? (row.price * row.quantity * row.discount) / 100 : 0))
+                        (row?.discount ? (row.price * row.quantity * row.discount) / 100 : 0))
                 }
 
                 let totalAmount = getListTotalAmount(Quotation_list[0])
@@ -452,9 +452,9 @@ export class QuotationService {
             else if (Quotation_list.length > 0) {
 
                 let getListTotalAmount = (row) => {
-                    return  (row.price * row.quantity +
+                    return (row.price * row.quantity +
                         (row?.tax ? (row.price * row.quantity * row.tax) / 100 : 0) -
-                       (row?.discount ? (row.price * row.quantity * row.discount) / 100 : 0))
+                        (row?.discount ? (row.price * row.quantity * row.discount) / 100 : 0))
                 }
 
                 let totalAmount = getListTotalAmount(Quotation_list[0])
@@ -476,9 +476,9 @@ export class QuotationService {
 
         }
     }
-    async getAllQuotationList(doc_number: string,currency:string): Promise<any> {
+    async getAllQuotationList(doc_number: string, currency: string): Promise<any> {
         try {
-            
+
             let getTempQuotationList = await this.tempQuotationItemModel.findAll({ where: { doc_number: doc_number }, order: [["id", "ASC"]] })
             let totalAmount = getTempQuotationList.reduce((acc, sum) => acc + +sum.amount, 0)
             // let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
@@ -494,13 +494,13 @@ export class QuotationService {
                 i++
                 modifiedData.push(obj)
             }
-            let amountInWords = await this.helperService.numberToWord(Math.floor(totalAmount),currency)
+            let amountInWords = await this.helperService.numberToWord(Math.floor(totalAmount), currency)
             let objData = {
                 "total_discount": "0.00",
                 "total_tax": "0.00",
                 "sub_total": totalAmount,
                 "grand_total": totalAmount,
-                "amount_in_words":amountInWords ,
+                "amount_in_words": amountInWords,
                 list: modifiedData,
             }
 
@@ -577,114 +577,114 @@ export class QuotationService {
     async generateRevisionDocNumber(record_id: number): Promise<any> {
         try {
             let Quotation = await this.QuotationFormModel.findOne({ where: { id: record_id } })
-            let revisionCount = Quotation.revision_count + 1 
-            let docNum =  Quotation.doc_number
-            Quotation.is_revised == true  && (docNum = docNum.replace(/(\d+).*/, '$1'))
-            let   revisedDocNumber = docNum +"-R"+revisionCount
-            return responseMessageGenerator('success','data fetched successfully',revisedDocNumber)
+            let revisionCount = Quotation.revision_count + 1
+            let docNum = Quotation.doc_number
+            Quotation.is_revised == true && (docNum = docNum.replace(/(\d+).*/, '$1'))
+            let revisedDocNumber = docNum + "-R" + revisionCount
+            return responseMessageGenerator('success', 'data fetched successfully', revisedDocNumber)
         } catch (error) {
             console.log(error);
-            return responseMessageGenerator('failure',error.message,null)
+            return responseMessageGenerator('failure', error.message, null)
         }
     }
 
-    async getUserProfileDetails( user_id: number):Promise<any> {
+    async getUserProfileDetails(user_id: number): Promise<any> {
         try {
-            let userData = await this.userModel.findOne({where:{id:user_id}})
-         
+            let userData = await this.userModel.findOne({ where: { id: user_id } })
+
             let userSignature = await this.getSignatureAsBase64(userData.user_signature)
-            if(userSignature.status =="failure"){
-                  return userSignature
+            if (userSignature.status == "failure") {
+                return userSignature
             }
-            let resData ={
-                user_id:userData.id,
-                user_name:userData.user_name,
-                user_role:"Manager",
-                user_signature:userSignature.data,
+            let resData = {
+                user_id: userData.id,
+                user_name: userData.user_name,
+                user_role: "Manager",
+                user_signature: userSignature.data,
             }
 
-            return  responseMessageGenerator('success', 'data fetch successfully',resData);
-          
-        } catch (error) {
-          console.error('Error fetching image:', error);
-          responseMessageGenerator('failure',"Error fetching image",null)
-        
-        }
-    }
-    async getSignatureAsBase64( filename: string):Promise<any> {
-        try {
-          // Define the file path
-          const filePath = filename
-    
-          // Check if file exists
-          if (!fs.existsSync(filePath)) {
-            return responseMessageGenerator('failure',"File not found",null)
-          }
-    
-          // Read file and convert to Base64
-          const fileBuffer = fs.readFileSync(filePath);
-          const base64Image = fileBuffer.toString('base64');
-    
-          // Return the Base64 response
-          return  responseMessageGenerator('success', 'data fetch successfully',`data:image/png;base64,${base64Image}` );
-        } catch (error) {
-          console.error('Error fetching image:', error);
-          responseMessageGenerator('failure',"Error fetching image",null)
-        
-        }
-    }
-    async uploadUserDetails(userId: string, base64Image: string,user_name:string): Promise<any> {
-        try {
-          // Extract base64 data
-          const matches = base64Image.match(/^data:image\/(\w+);base64,(.+)$/);
-          if (!matches)  return responseMessageGenerator('failure',"Invalid image format",null)
+            return responseMessageGenerator('success', 'data fetch successfully', resData);
 
-            let userData = await this.userModel.findOne({where:{id:userId}})
+        } catch (error) {
+            console.error('Error fetching image:', error);
+            responseMessageGenerator('failure', "Error fetching image", null)
+
+        }
+    }
+    async getSignatureAsBase64(filename: string): Promise<any> {
+        try {
+            // Define the file path
+            const filePath = filename
+
+            // Check if file exists
+            if (!fs.existsSync(filePath)) {
+                return responseMessageGenerator('failure', "File not found", null)
+            }
+
+            // Read file and convert to Base64
+            const fileBuffer = fs.readFileSync(filePath);
+            const base64Image = fileBuffer.toString('base64');
+
+            // Return the Base64 response
+            return responseMessageGenerator('success', 'data fetch successfully', `data:image/png;base64,${base64Image}`);
+        } catch (error) {
+            console.error('Error fetching image:', error);
+            responseMessageGenerator('failure', "Error fetching image", null)
+
+        }
+    }
+    async uploadUserDetails(userId: string, base64Image: string, user_name: string): Promise<any> {
+        try {
+            // Extract base64 data
+            const matches = base64Image.match(/^data:image\/(\w+);base64,(.+)$/);
+            if (!matches) return responseMessageGenerator('failure', "Invalid image format", null)
+
+            let userData = await this.userModel.findOne({ where: { id: userId } })
 
             if (userData && userData.user_signature) {
                 const oldSignaturePath = path.join(__dirname, '..', '..', userData.user_signature);
-        
+
                 // Delete old signature file if it exists
                 if (fs.existsSync(oldSignaturePath)) {
-                  fs.unlinkSync(oldSignaturePath);
+                    fs.unlinkSync(oldSignaturePath);
                 }
-              }
+            }
 
             let saveSignature = await this.saveSignature(userId, base64Image)
-            if(saveSignature.status =='failure'){
-                   return saveSignature
+            if (saveSignature.status == 'failure') {
+                return saveSignature
             }
-            let condition ={}
-            user_name && (condition['user_name'] =saveSignature?.data)
-            condition['user_signature'] =saveSignature?.data
-            let updateUserData = await this.userModel.update(condition,{where:{id:userId}})
-            return responseMessageGenerator('success',"image saved successfully",[])
+            let condition = {}
+            user_name && (condition['user_name'] = saveSignature?.data)
+            condition['user_signature'] = saveSignature?.data
+            let updateUserData = await this.userModel.update(condition, { where: { id: userId } })
+            return responseMessageGenerator('success', "image saved successfully", [])
         } catch (error) {
             console.log(error);
-            return responseMessageGenerator('failure',error.message,null)
+            return responseMessageGenerator('failure', error.message, null)
         }
     }
     async saveSignature(userId: string, base64Image: string): Promise<any> {
         try {
-          // Extract base64 data
-          const matches = base64Image.match(/^data:image\/(\w+);base64,(.+)$/);
-          if (!matches) throw new Error('Invalid image format');
-    
-          const extension = matches[1];
-          const buffer = Buffer.from(matches[2], 'base64');
-    
-          let userData = await this.userModel.findOne({where:{id:userId}})
-          // Define file path
-          const fileName = `${(userData.user_name).toLowerCase()}_${userId}_signature.${extension}`;
-          const filePath = join(this.uploadPath, fileName);
-    
-          // Save image
-          writeFileSync(filePath, buffer);
-    
-          return responseMessageGenerator('success',"image saved successfully",filePath)
+            // Extract base64 data
+            const matches = base64Image.match(/^data:image\/(\w+);base64,(.+)$/);
+            if (!matches) throw new Error('Invalid image format');
+
+            const extension = matches[1];
+            const buffer = Buffer.from(matches[2], 'base64');
+
+            let userData = await this.userModel.findOne({ where: { id: userId } })
+            // Define file path
+            const fileName = `${(userData.user_name).toLowerCase()}_${userId}_signature.${extension}`;
+            const filePath = join(this.uploadPath, fileName);
+
+            // Save image
+            writeFileSync(filePath, buffer);
+
+            return responseMessageGenerator('success', "image saved successfully", filePath)
         } catch (error) {
             console.log(error);
-            return responseMessageGenerator('failure',error.message,null)
+            return responseMessageGenerator('failure', error.message, null)
         }
     }
 
@@ -776,6 +776,6 @@ export class QuotationService {
 
     // }
 
-   
-    
+
+
 }
