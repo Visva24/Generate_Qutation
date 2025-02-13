@@ -655,7 +655,7 @@ export class QuotationService {
                 return saveSignature
             }
             let condition = {}
-            user_name && (condition['user_name'] = saveSignature?.data)
+            user_name && (condition['user_name'] =user_name )
             condition['user_signature'] = saveSignature?.data
             let updateUserData = await this.userModel.update(condition, { where: { id: userId } })
             return responseMessageGenerator('success', "image saved successfully", [])
