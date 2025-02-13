@@ -8,6 +8,7 @@ const generateSequelizeOptions = async (): Promise<SequelizeModuleOptions> => {
 
 
             dialect: "mysql",
+            host: "194.164.149.189", // Add your database host here 
             timezone: '+05:30', // Indian Standard Time (IST) timezone offset
             port: 3306,
             username: "test",
