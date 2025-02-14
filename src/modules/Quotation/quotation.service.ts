@@ -348,10 +348,11 @@ export class QuotationService {
             const logBase64Image = readFileSync('public/images/logo.png', 'base64');
             const footerBase64Image = readFileSync('public/images/shadow-trading-footer-with-data.png', 'base64');
             const sideLogoBase64Image = readFileSync('public/images/sideLogo.png', 'base64');
+            const waterMarkBase64Image = readFileSync('public/images/watermark.png', 'base64');
             const logo = `data:image/png;base64,${logBase64Image}`;
             const footer = `data:image/png;base64,${footerBase64Image}`;
             const sidelogo = `data:image/png;base64,${sideLogoBase64Image}`;
-
+            const watermark = `data:image/png;base64,${waterMarkBase64Image}`;
             let numberInWords = await this.helperService.numberToWord(QuotationData.data.grand_total, QuotationData.data.currency)
             let formData = [QuotationData.data].map(singleData => ({
                 ...singleData,
@@ -359,6 +360,7 @@ export class QuotationService {
                 logo: logo,
                 footer: footer,
                 sidelogo: sidelogo,
+                watermark: watermark, 
             }))
             // return res.json(formData) 
             let fileName = QuotationData.data.customer_name + "_" + QuotationData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
@@ -400,9 +402,11 @@ export class QuotationService {
             const logBase64Image = readFileSync('public/images/logo.png', 'base64');
             const footerBase64Image = readFileSync('public/images/shadow-trading-footer-with-data.png', 'base64');
             const sideLogoBase64Image = readFileSync('public/images/sideLogo.png', 'base64');
+            const waterMarkBase64Image = readFileSync('public/images/watermark.png', 'base64');
             const logo = `data:image/png;base64,${logBase64Image}`;
             const footer = `data:image/png;base64,${footerBase64Image}`;
             const sidelogo = `data:image/png;base64,${sideLogoBase64Image}`;
+            const watermark = `data:image/png;base64,${waterMarkBase64Image}`;
 
             let numberInWords = await this.helperService.numberToWord(QuotationData.data.grand_total, QuotationData.data.currency)
             let formData = [QuotationData.data].map(singleData => ({
@@ -411,6 +415,7 @@ export class QuotationService {
                 logo: logo,
                 footer: footer,
                 sidelogo: sidelogo,
+                watermark: watermark, 
             }))
 
             let fileName = QuotationData.data.customer_name + "_" + QuotationData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
