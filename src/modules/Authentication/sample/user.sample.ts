@@ -23,3 +23,9 @@ export const saveDocumentDetails=[
             'doc_number':"STG/DN-01"
             }
 ]
+export const filterDataSample={
+    filter_data :{
+        date:null
+    }
+   
+}

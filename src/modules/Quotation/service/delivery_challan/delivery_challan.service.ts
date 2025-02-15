@@ -9,7 +9,7 @@ import { DELIVERY_CHALLAN_UPLOAD_DIRECTORY, QUOTATION_UPLOAD_DIRECTORY } from 's
 import { readFileSync } from 'fs';
 import { deliveryChallanRepository, DeliveryItemRepository, TempDeliveryItemRepository } from '../../entity/delivery_challan.entity';
 import { UpdateDeliveryChallanFormDto, UpdateQuotationFormDto } from '../../dto/update-quotation.dto';
-import { ChallanListDto, deliveryChallanFormDto, documentsDto, QuotationFormDto, QuotationListDto } from '../../dto/create-quotation.dto';
+import { ChallanListDto, deliveryChallanFormDto, documentsDto, filterData, QuotationFormDto, QuotationListDto } from '../../dto/create-quotation.dto';
 import { documentDetailRepository, QuotationFormRepository, QuotationItemRepository, TempQuotationItemRepository } from '../../entity/quotation.entity';
 import { documentType } from '../../enum/quotation.enum';
 import { QuotationService } from '../../quotation.service';
@@ -113,7 +113,7 @@ export class DeliveryChallanService {
             return responseMessageGenerator('failure', 'something went wrong', error.message)
         }
     }
-    async getDeliveryChallanFormHistory(): Promise<ApiResponse> {
+    async getDeliveryChallanFormHistory(filter:filterData): Promise<ApiResponse> {
         try {
 
             let userName = async (user_id) => {
@@ -127,7 +127,10 @@ export class DeliveryChallanService {
                 return employee
             }
 
-            let getQuotationData = await this.deliveryChallanModel.findAll({ order: [['id', 'DESC']] })
+            let condition ={}
+
+            filter?.date && ( condition['doc_date'] =  filter.date )
+            let getQuotationData = await this.deliveryChallanModel.findAll({where:condition, order: [['id', 'DESC']] })
             let modifiedData = await Promise.all(getQuotationData.map(async singleData => {
                 return {
                     id: singleData.id,
@@ -153,6 +156,11 @@ export class DeliveryChallanService {
                 order: [["id", "ASC"]]
             })
             ChallanForm.is_record_saved = true;
+            let doc_number =  await this.quotationService.generateDynamicDocNumber('delivery')
+            if(doc_number?.data != null && doc_number?.data != ChallanForm.doc_number){
+                ChallanForm.doc_number = doc_number?.data
+                ChallanForm.is_doc_num_differ = true
+            }
             let deliveryChallanData = await this.deliveryChallanModel.findOne({ where: { doc_number: ChallanForm.doc_number } })
 
             let [createDeliveryChallan, update] = await this.deliveryChallanModel.upsert({ id: deliveryChallanData?.id, ...ChallanForm })
@@ -243,7 +251,7 @@ export class DeliveryChallanService {
                 watermark: watermark, 
             }))
             // return res.json(formData) 
-            let fileName = deliveryChalanData.data.customer_name + "_" + deliveryChalanData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
+            let fileName = (deliveryChalanData.data.customer_name?.trim()?.replace(/ /g, '_')) + "_" + deliveryChalanData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
             /*Handlebars is blocking access to object properties inherited from the prototype chain for security reasons. This behavior was introduced to prevent prototype pollution vulnerabilities.*/
             /*By serializing and deserializing the object, you ensure that only own properties are kept, eliminating any issues with prototype access restrictions*/
             const plainContext = JSON.parse(JSON.stringify(formData[0]));
@@ -298,7 +306,7 @@ export class DeliveryChallanService {
                 watermark: watermark, 
             }))
 
-            let fileName = deliveryChalanData.data.customer_name + "_" + deliveryChalanData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
+            let fileName =(deliveryChalanData.data.customer_name?.trim()?.replace(/ /g, '_')) + "_" + deliveryChalanData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
             /*Handlebars is blocking access to object properties inherited from the prototype chain for security reasons. This behavior was introduced to prevent prototype pollution vulnerabilities.*/
             /*By serializing and deserializing the object, you ensure that only own properties are kept, eliminating any issues with prototype access restrictions*/
             const plainContext = JSON.parse(JSON.stringify(formData[0]));

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { log } from 'node:console';
 import { ApiResponse, responseMessageGenerator } from 'src/common/util/helper.config';
-import { deliveryChallanFormDto, documentsDto, QuotationFormDto, QuotationListDto } from './dto/create-quotation.dto';
+import { deliveryChallanFormDto, documentsDto, filterData, QuotationFormDto, QuotationListDto } from './dto/create-quotation.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { documentDetailRepository, QuotationFormRepository, QuotationItemRepository, TempQuotationItemRepository } from './entity/quotation.entity';
 import { UpdateQuotationFormDto } from './dto/update-quotation.dto';
@@ -18,6 +18,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { promises } from 'node:dns';
 import { UserRepository } from '../Authentication/entity/users.entity';
+import { cashType } from './enum/quotation.enum';
 
 
 @Injectable()
@@ -118,7 +119,7 @@ export class QuotationService {
             return responseMessageGenerator('failure', 'something went wrong', error.message)
         }
     }
-    async getQuotationFormHistory(): Promise<ApiResponse> {
+    async getQuotationFormHistory(filter:filterData): Promise<ApiResponse> {
         try {
 
             let userName = async (user_id) => {
@@ -132,8 +133,9 @@ export class QuotationService {
                 }
                 return employee
             }
-
-            let getQuotationData = await this.QuotationFormModel.findAll({ order: [['id', 'DESC']] })
+            let condition = {}
+            filter?.date && ( condition['doc_date'] =  filter.date )
+            let getQuotationData = await this.QuotationFormModel.findAll({where:condition, order: [['id', 'DESC']] })
             let modifiedData = await Promise.all(getQuotationData.map(async singleData => {
                 return {
                     id: singleData.id,
@@ -162,10 +164,18 @@ export class QuotationService {
             })
 
             let totalAmount = getTempQuotationList.reduce((acc, sum) => acc + +sum.amount, 0)
+            
             // let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
             // let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
             // QuotationForm.total_discount = 0
             // QuotationForm.total_tax = 0
+            let doc_number =  await this.generateDynamicDocNumber('quotation')
+          
+            if(doc_number?.data != null && doc_number?.data != QuotationForm.doc_number){
+                QuotationForm.doc_number = doc_number?.data
+                QuotationForm.is_doc_num_differ = true
+            }
+           
             QuotationForm.sub_total = totalAmount
             QuotationForm.grand_total = totalAmount
             let createQuotation = await this.QuotationFormModel.create(QuotationForm)
@@ -361,9 +371,10 @@ export class QuotationService {
                 footer: footer,
                 sidelogo: sidelogo,
                 watermark: watermark, 
+                is_vat_enable:singleData.currency  == cashType.SAR  ? true:false
             }))
             // return res.json(formData) 
-            let fileName = QuotationData.data.customer_name + "_" + QuotationData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
+            let fileName = (QuotationData.data.customer_name?.trim()?.replace(/ /g, '_')) + "_" + QuotationData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
             /*Handlebars is blocking access to object properties inherited from the prototype chain for security reasons. This behavior was introduced to prevent prototype pollution vulnerabilities.*/
             /*By serializing and deserializing the object, you ensure that only own properties are kept, eliminating any issues with prototype access restrictions*/
             const plainContext = JSON.parse(JSON.stringify(formData[0]));
@@ -416,9 +427,10 @@ export class QuotationService {
                 footer: footer,
                 sidelogo: sidelogo,
                 watermark: watermark, 
+                is_vat_enable:singleData.currency  == cashType.SAR  ? true:false
             }))
-
-            let fileName = QuotationData.data.customer_name + "_" + QuotationData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
+               
+            let fileName =  (QuotationData.data.customer_name?.trim()?.replace(/ /g, '_')) + "_" + QuotationData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
             /*Handlebars is blocking access to object properties inherited from the prototype chain for security reasons. This behavior was introduced to prevent prototype pollution vulnerabilities.*/
             /*By serializing and deserializing the object, you ensure that only own properties are kept, eliminating any issues with prototype access restrictions*/
             const plainContext = JSON.parse(JSON.stringify(formData[0]));

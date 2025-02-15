@@ -22,6 +22,7 @@ export class QuotationFormDto {
         revision_count:number
         created_user_id:number
         payment_terms:string
+        is_doc_num_differ:boolean
         quotation_list_array:QuotationListDto[]
 }
 export class QuotationListDto {
@@ -52,6 +53,7 @@ export class deliveryChallanFormDto {
             customer_reference_id:string
             doc_number:string
             doc_date:Date
+            is_doc_num_differ:boolean
             contact_person:string
             email:string
             contact_number:string
@@ -102,6 +104,8 @@ export class InvoiceFormDto {
             currency:string
             is_form_move_forward:boolean
             is_record_saved:boolean
+           
+           is_doc_num_differ: boolean
 }
 
 export class InvoiceListDto {
@@ -127,3 +131,7 @@ export class ChallanListDto {
           quantity: number;
           units: string;        
 }
+
+export class filterData {
+        date :Date
+     }

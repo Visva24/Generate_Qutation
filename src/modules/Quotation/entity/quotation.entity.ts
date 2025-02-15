@@ -52,6 +52,9 @@ export class QuotationFormRepository extends Model<InferCreationAttributes<Quota
   @Column
   delivery: string
 
+  @Column({defaultValue:false})
+  is_doc_num_differ: boolean
+
   @Column
   payment_terms: string
 

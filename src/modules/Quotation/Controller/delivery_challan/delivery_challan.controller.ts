@@ -1,9 +1,10 @@
 import { Body, Controller, Get, Param, Patch, Post, Query, Res } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { DeliveryChallanService } from '../../service/delivery_challan/delivery_challan.service';
-import { ChallanListDto, deliveryChallanFormDto } from '../../dto/create-quotation.dto';
+import { ChallanListDto, deliveryChallanFormDto, filterData } from '../../dto/create-quotation.dto';
 import { saveChallanListData, saveDeliveryChallanFormData, saveQuotationFormData, saveQuotationListData } from '../../sample/quotation.sample';
 import { UpdateDeliveryChallanFormDto } from '../../dto/update-quotation.dto';
+import { filterDataSample } from 'src/modules/Authentication/sample/user.sample';
 
 @ApiTags('delivery_challan/delivery-challan')
 @Controller('delivery-challan')
@@ -22,9 +23,20 @@ export class DeliveryChallanController {
             return await this.deliveryChallanService.getDeliveryChallanFormData(challan_id,type)
           }
 
+          @ApiBody({
+            schema: {
+              type: 'array'
+            },
+            examples: {
+              example: {
+                value: filterDataSample
+              }
+            }
+        
+          })
           @Get("get-delivery-challan-form-history")
-          async getDeliveryChallanFormHistory():Promise<any>  {
-            return  await this.deliveryChallanService.getDeliveryChallanFormHistory()
+          async getDeliveryChallanFormHistory(@Body('filter_data') filter_data:filterData):Promise<any>  {
+            return  await this.deliveryChallanService.getDeliveryChallanFormHistory(filter_data)
           }
          
                   
