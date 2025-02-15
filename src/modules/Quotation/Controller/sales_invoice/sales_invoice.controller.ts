@@ -34,7 +34,7 @@ export class SalesInvoiceController {
                 }
             
               })
-              @Get("get-sales-invoice-form-history")
+              @Post("get-sales-invoice-form-history")
               async getSalesInvoiceFormHistory(@Body('filter_data') filter_data:filterData):Promise<any>  {
                 return  await this.SalesInvoiceService.getSalesInvoiceFormHistory(filter_data)
               }
