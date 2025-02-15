@@ -63,6 +63,9 @@ export class SalesInvoiceFormRepository extends Model<InferCreationAttributes<Sa
     @Column
     sales_employee: string
 
+    @Column({defaultValue:false})
+    is_doc_num_differ: boolean
+
     @Column
     amount_in_words: string
 

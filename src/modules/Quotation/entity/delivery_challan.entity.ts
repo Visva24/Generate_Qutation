@@ -50,6 +50,9 @@ export class deliveryChallanRepository extends Model<InferCreationAttributes<del
     // @Column
     // delivery:string
 
+    @Column({defaultValue:false})
+    is_doc_num_differ: boolean
+
     @Column
     receiver_sign_stamp: string
 

@@ -9,7 +9,7 @@ import { QUOTATION_UPLOAD_DIRECTORY, SALES_INVOICE_UPLOAD_DIRECTORY } from 'src/
 import { readFileSync } from 'fs';
 import { deliveryChallanRepository, DeliveryItemRepository, TempDeliveryItemRepository } from '../../entity/delivery_challan.entity';
 import { UpdateDeliveryChallanFormDto, UpdateInvoiceFormDto, UpdateQuotationFormDto } from '../../dto/update-quotation.dto';
-import { ChallanListDto, deliveryChallanFormDto, documentsDto, InvoiceFormDto, InvoiceListDto, QuotationFormDto, QuotationListDto } from '../../dto/create-quotation.dto';
+import { ChallanListDto, deliveryChallanFormDto, documentsDto, filterData, InvoiceFormDto, InvoiceListDto, QuotationFormDto, QuotationListDto } from '../../dto/create-quotation.dto';
 import { documentDetailRepository, QuotationFormRepository, QuotationItemRepository, TempQuotationItemRepository } from '../../entity/quotation.entity';
 import { SalesInvoiceFormRepository, SalesItemRepository, TempSalesItemRepository } from '../../entity/sales_invoice.entity';
 import { QuotationService } from '../../quotation.service';
@@ -117,7 +117,7 @@ export class SalesInvoiceService {
             return responseMessageGenerator('failure', 'something went wrong', error.message)
         }
     }
-    async getSalesInvoiceFormHistory(): Promise<ApiResponse> {
+    async getSalesInvoiceFormHistory(filter:filterData): Promise<ApiResponse> {
         try {
 
             let userName = async (user_id) => {
@@ -130,8 +130,10 @@ export class SalesInvoiceService {
                 }
                 return employee
             }
+            let condition ={}
 
-            let getInvoiceData = await this.SalesInvoiceFormModel.findAll({ order: [['id', 'DESC']] })
+            filter?.date && ( condition['doc_date'] =  filter.date )
+            let getInvoiceData = await this.SalesInvoiceFormModel.findAll({where:condition, order: [['id', 'DESC']] })
             let modifiedData = await Promise.all(getInvoiceData.map(async singleData => {
                 return {
                     id: singleData.id,
@@ -159,7 +161,11 @@ export class SalesInvoiceService {
             })
             InvoiceForm.is_record_saved = true;
             let SalesInvoiceData = await this.SalesInvoiceFormModel.findOne({ where: { doc_number: InvoiceForm.doc_number } })
-
+            let doc_number =  await this.quotationService.generateDynamicDocNumber('sales')
+            if(doc_number?.data != null && doc_number?.data != InvoiceForm.doc_number){
+                InvoiceForm.doc_number = doc_number?.data
+                InvoiceForm.is_doc_num_differ = true
+            }
             let totalAmount = getTempInvoiceList.reduce((acc, sum) => acc + +sum.amount, 0)
             // let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
             // let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
@@ -250,9 +256,11 @@ export class SalesInvoiceService {
             const logBase64Image = readFileSync('public/images/logo.png', 'base64');
             const footerBase64Image = readFileSync('public/images/shadow-trading-footer-with-data.png', 'base64');
             const sideLogoBase64Image = readFileSync('public/images/sideLogo.png', 'base64');
+            const waterMarkBase64Image = readFileSync('public/images/watermark.png', 'base64');
             const logo = `data:image/png;base64,${logBase64Image}`;
             const footer = `data:image/png;base64,${footerBase64Image}`;
             const sidelogo = `data:image/png;base64,${sideLogoBase64Image}`;
+            const watermark = `data:image/png;base64,${waterMarkBase64Image}`;
 
             let numberInWords = await this.helperService.numberToWord(invoiceData.data.grand_total, invoiceData.data.currency)
             let formData = [invoiceData.data].map(singleData => ({
@@ -261,9 +269,10 @@ export class SalesInvoiceService {
                 logo: logo,
                 footer: footer,
                 sidelogo: sidelogo,
+                watermark: watermark, 
             }))
             // return res.json(formData) 
-            let fileName = invoiceData.data.customer_name + "_" + invoiceData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
+            let fileName = (invoiceData.data.customer_name?.trim()?.replace(/ /g, '_')) + "_" + invoiceData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
             /*Handlebars is blocking access to object properties inherited from the prototype chain for security reasons. This behavior was introduced to prevent prototype pollution vulnerabilities.*/
             /*By serializing and deserializing the object, you ensure that only own properties are kept, eliminating any issues with prototype access restrictions*/
             const plainContext = JSON.parse(JSON.stringify(formData[0]));
@@ -302,9 +311,11 @@ export class SalesInvoiceService {
             const logBase64Image = readFileSync('public/images/logo.png', 'base64');
             const footerBase64Image = readFileSync('public/images/shadow-trading-footer-with-data.png', 'base64');
             const sideLogoBase64Image = readFileSync('public/images/sideLogo.png', 'base64');
+            const waterMarkBase64Image = readFileSync('public/images/watermark.png', 'base64');
             const logo = `data:image/png;base64,${logBase64Image}`;
             const footer = `data:image/png;base64,${footerBase64Image}`;
             const sidelogo = `data:image/png;base64,${sideLogoBase64Image}`;
+            const watermark = `data:image/png;base64,${waterMarkBase64Image}`;
 
             let numberInWords = await this.helperService.numberToWord(invoiceData.data.grand_total, invoiceData.data.currency)
             let formData = [invoiceData.data].map(singleData => ({
@@ -313,9 +324,10 @@ export class SalesInvoiceService {
                 logo: logo,
                 footer: footer,
                 sidelogo: sidelogo,
+                watermark: watermark, 
             }))
 
-            let fileName = invoiceData.data.customer_name + "_" + invoiceData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
+            let fileName =(invoiceData.data.customer_name?.trim()?.replace(/ /g, '_'))  + "_" + invoiceData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
             /*Handlebars is blocking access to object properties inherited from the prototype chain for security reasons. This behavior was introduced to prevent prototype pollution vulnerabilities.*/
             /*By serializing and deserializing the object, you ensure that only own properties are kept, eliminating any issues with prototype access restrictions*/
             const plainContext = JSON.parse(JSON.stringify(formData[0]));

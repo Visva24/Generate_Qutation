@@ -244,3 +244,6 @@ export const saveInvoiceListData = {
         ],
         record_id:null
 }
+export const filterData  = {
+       date:null
+}

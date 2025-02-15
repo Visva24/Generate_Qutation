@@ -2,8 +2,9 @@ import { Body, Controller, Get, Param, Patch, Post, Query, Res } from '@nestjs/c
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { SalesInvoiceService } from '../../service/sales_invoice/sales_invoice.service';
 import { saveChallanListData, saveDeliveryChallanFormData, saveInvoiceFormData, saveInvoiceListData } from '../../sample/quotation.sample';
-import { InvoiceFormDto, InvoiceListDto } from '../../dto/create-quotation.dto';
+import { filterData, InvoiceFormDto, InvoiceListDto } from '../../dto/create-quotation.dto';
 import { UpdateInvoiceFormDto } from '../../dto/update-quotation.dto';
+import { filterDataSample } from 'src/modules/Authentication/sample/user.sample';
 
 @ApiTags('sales_invoice/sales-invoice')
 @Controller('sales-invoice')
@@ -22,9 +23,20 @@ export class SalesInvoiceController {
                 return await this.SalesInvoiceService.getSalesInvoiceFormData(Invoice_id,type)
               }
     
+              @ApiBody({
+                schema: {
+                  type: 'array'
+                },
+                examples: {
+                  example: {
+                    value: filterDataSample
+                  }
+                }
+            
+              })
               @Get("get-sales-invoice-form-history")
-              async getSalesInvoiceFormHistory():Promise<any>  {
-                return  await this.SalesInvoiceService.getSalesInvoiceFormHistory()
+              async getSalesInvoiceFormHistory(@Body('filter_data') filter_data:filterData):Promise<any>  {
+                return  await this.SalesInvoiceService.getSalesInvoiceFormHistory(filter_data)
               }
              
                       

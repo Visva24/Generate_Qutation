@@ -1,9 +1,9 @@
 import { Body, Controller, Get, Param, Patch, Post, Query, Res } from '@nestjs/common';
 import { QuotationService } from './quotation.service';
-import { documentsDto, QuotationFormDto, QuotationListDto } from './dto/create-quotation.dto';
+import { documentsDto, filterData, QuotationFormDto, QuotationListDto } from './dto/create-quotation.dto';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { saveQuotationFormData, saveQuotationListData, saveSignatureData } from './sample/quotation.sample';
-import { saveDocumentDetails } from '../Authentication/sample/user.sample';
+import { filterDataSample, saveDocumentDetails } from '../Authentication/sample/user.sample';
 
 
 @ApiTags('quotation')
@@ -22,9 +22,21 @@ export class QuotationController {
   async getQuotationFormData(@Query("quotation_id") quotation_id: number, @Query("type") type: string): Promise<any> {
     return await this.quotationService.getQuotationFormData(quotation_id, type)
   }
-  @Get("get-quotation-form-history")
-  async getQuotationFormHistory(): Promise<any> {
-    return await this.quotationService.getQuotationFormHistory()
+  @ApiBody({
+    schema: {
+      type: 'array'
+    },
+    examples: {
+      example: {
+        value: filterDataSample
+      }
+    }
+
+  })
+  @Post("get-quotation-form-history")
+  async getQuotationFormHistory(@Body('filter_data') filter_data:filterData): Promise<any> {
+    
+    return await this.quotationService.getQuotationFormHistory(filter_data)
   }
 
   @Get("generate-dynamic-doc-number")
@@ -151,3 +163,6 @@ export class QuotationController {
     return await filePath;
   }
 }
+
+
+
