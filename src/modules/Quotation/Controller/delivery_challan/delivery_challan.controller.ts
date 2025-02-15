@@ -34,7 +34,7 @@ export class DeliveryChallanController {
             }
         
           })
-          @Get("get-delivery-challan-form-history")
+          @Post("get-delivery-challan-form-history")
           async getDeliveryChallanFormHistory(@Body('filter_data') filter_data:filterData):Promise<any>  {
             return  await this.deliveryChallanService.getDeliveryChallanFormHistory(filter_data)
           }
