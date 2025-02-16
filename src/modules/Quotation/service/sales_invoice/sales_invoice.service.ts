@@ -458,6 +458,7 @@ export class SalesInvoiceService {
         try {
 
             let dropTempInvoiceList = await this.TempSalesItemModel.destroy({ where: { doc_number: doc_number } })
+            let dropInvoiceFormAgainstDoc = await this.SalesInvoiceFormModel.destroy({ where: { doc_number: doc_number } })
             return responseMessageGenerator('success', 'data reset successfully', dropTempInvoiceList)
 
         } catch (error) {
@@ -477,8 +478,10 @@ export class SalesInvoiceService {
                     { association: "quotation_items", attributes: ["item_number", "description", "quantity", "units", "price", "discount", "tax", "amount"] }
                 ],
             })
+           
             let sales_doc_number = (await this.quotationService.generateDynamicDocNumber(documentType.Sales))?.data
             let isRecordExists = await this.SalesInvoiceFormModel.findAll({ where: { quotation_id: getQuotationData[0].id, doc_number: sales_doc_number, customer_name: getQuotationData[0].customer_name } })
+           
             let createSalesInvoice
             if (isRecordExists.length > 0) {
                 createSalesInvoice = isRecordExists[0]
