@@ -89,7 +89,7 @@ export class HelperService {
         // Generate PDF
         const browser = await puppeteer.launch({
             headless: true,
-            executablePath: '/snap/bin/chromium', // Use Snap's Chromium
+            // executablePath: '/snap/bin/chromium', // Use Snap's Chromium
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
