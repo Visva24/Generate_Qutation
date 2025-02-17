@@ -382,6 +382,9 @@ export class QuotationService {
             //   return res.json(plainContext) 
 
             const generatePayslip = await this.helperService.generatePdfFromTemplate(QUOTATION_UPLOAD_DIRECTORY, templateName, plainContext, 'payslip');
+
+            console.log("generatePayslip "+generatePayslip);
+           
             const base64Data = generatePayslip.replace(/^data:application\/pdf;base64,/, '');
 
             const pdfBuffer = Buffer.from(base64Data, 'base64');
@@ -437,12 +440,13 @@ export class QuotationService {
 
 
             const generatePayslip = await this.helperService.generatePdfFromTemplate(QUOTATION_UPLOAD_DIRECTORY, templateName, plainContext, 'payslip');
-            const base64Data = generatePayslip.replace(/^data:application\/pdf;base64,/, '');
-            return responseMessageGenerator('success', 'Quotation downloaded successfully', { "base64Data": base64Data, "fileName": fileName })
+
+            // const base64Data = generatePayslip.replace(/^data:application\/pdf;base64,/, '');
+            return responseMessageGenerator('success', 'Quotation downloaded successfully', { "base64Data": generatePayslip, "fileName": fileName })
 
         } catch (error) {
             console.log(error);
-            return responseMessageGenerator('failure', 'something went wrong', error.message)
+            return responseMessageGenerator('failure', 'something went wrong', error)
 
 
         }
