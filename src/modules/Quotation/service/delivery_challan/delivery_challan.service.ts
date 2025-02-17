@@ -412,6 +412,7 @@ export class DeliveryChallanService {
         try {
 
             let getTempChallanList = await this.TempDeliveryItemModel.destroy({ where: { doc_number: doc_number } })
+            let dropChallanFormAgainstDoc = await this.deliveryChallanModel.destroy({ where: { doc_number: doc_number } })
             return responseMessageGenerator('success', 'data reset successfully', getTempChallanList)
 
         } catch (error) {
