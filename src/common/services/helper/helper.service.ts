@@ -17,56 +17,112 @@ export class HelperService {
 
     }
 
+    // async generatePdfFromTemplate(uploadDir: string, templateName: string, data: any, file: string): Promise<any> {
+    //     try {
+    //         // Ensure directory exists
+    //         const quotationDir = `${uploadDir}`;
+    //         if (!existsSync(quotationDir)) {
+    //             mkdirSync(quotationDir, { recursive: true });
+    //             console.log('Directory created successfully!');
+    //         }
+
+    //         // Load and compile Handlebars template
+    //         // const templateHtml = readFileSync(`/app/dist/modules/Mail/templates/letter/${templateName}.hbs`, 'utf-8');
+    //         const templateHtml = readFileSync(`src/modules/Mail/templates/letter/${templateName}.hbs`, 'utf-8');
+    //         const compiledTemplate = handlebars.compile(templateHtml);
+    //         const htmlContent = compiledTemplate(data);
+
+    //         // Launch Puppeteer
+    //         const browser = await puppeteer.launch({
+    //             headless: true,
+    //             args: [
+    //                 '--no-sandbox',
+    //                 '--disable-setuid-sandbox',
+    //                 '--disable-dev-shm-usage',
+    //                 '--disable-gpu',
+    //             ],
+    //         });
+
+    //         const page = await browser.newPage();
+    //         await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
+
+    //         // Generate PDF path
+    //         const currentTimestamp = Date.now();
+    //         const pdfPath = join(uploadDir, `${file}_${data.user_code}_${currentTimestamp}.pdf`);
+
+    //         // Generate and save PDF
+    //         await page.pdf({ path: pdfPath, format: 'A4', printBackground: true });
+    //         await browser.close();
+
+    //         // Encode PDF to Base64
+    //         const pdfBuffer = await fsPromises.readFile(pdfPath);
+    //         const pdfBase64 = pdfBuffer.toString('base64');
+
+    //         // Delete temporary PDF
+    //         await fsPromises.unlink(pdfPath).catch((err) => console.warn('Failed to delete PDF:', err));
+
+    //         // Return as Data URL
+    //         return `data:application/pdf;base64,${pdfBase64}`;
+    //     } catch (error) {
+    //         console.error('Error generating PDF:', error);
+    //         throw new Error('PDF generation failed');
+    //     }
+    // }
+
     async generatePdfFromTemplate(uploadDir: string, templateName: string, data: any, file: string): Promise<any> {
-        try {
-            // Ensure directory exists
-            const quotationDir = `${uploadDir}`;
-            if (!existsSync(quotationDir)) {
-                mkdirSync(quotationDir, { recursive: true });
-                console.log('Directory created successfully!');
-            }
+        try{
 
-            // Load and compile Handlebars template
-            // const templateHtml = readFileSync(`/app/dist/modules/Mail/templates/letter/${templateName}.hbs`, 'utf-8');
-            const templateHtml = readFileSync(`src/modules/Mail/templates/letter/${templateName}.hbs`, 'utf-8');
-            const compiledTemplate = handlebars.compile(templateHtml);
-            const htmlContent = compiledTemplate(data);
+        // const companyLogoPath = await fsPromises.readFile('src/assets/client_logo.png');
+        // const logo = `data:image/png;base64,${companyLogoPath.toString('base64')}`;
+        const quotationDir = `${uploadDir}`;
+        if (!existsSync(quotationDir)) {
+            mkdirSync(quotationDir, { recursive: true });
+            console.log('Directory created successfully!');
+        }
+        // Load the Handlebars template
+        const templateHtml = readFileSync(`src/modules/Mail/templates/letter/${templateName}.hbs`, 'utf-8');
+        // Compile the template
+        const compiledTemplate = handlebars.compile(templateHtml);
+        // Render HTML content from the template
+        const htmlContent = compiledTemplate(data);
 
-            // Launch Puppeteer
-            const browser = await puppeteer.launch({
-                headless: true,
+        // Generate PDF
+        const browser = await puppeteer.launch(
+            {
+                executablePath: '/usr/bin/chromium-browser', // Adjust path if needed
                 args: [
                     '--no-sandbox',
                     '--disable-setuid-sandbox',
                     '--disable-dev-shm-usage',
                     '--disable-gpu',
                 ],
-            });
+            }
+        );
+        const page = await browser.newPage();
+        await page.setContent(htmlContent);
 
-            const page = await browser.newPage();
-            await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
+        const currentTimestamp = new Date().getTime();
+        const pdfPath = `${uploadDir}/${file}_${data.user_code}_${currentTimestamp}.pdf`;
 
-            // Generate PDF path
-            const currentTimestamp = Date.now();
-            const pdfPath = join(uploadDir, `${file}_${data.user_code}_${currentTimestamp}.pdf`);
+        // const finalPdfPath = `${file}_${data.user_code}_${currentTimestamp}.pdf`;
 
-            // Generate and save PDF
-            await page.pdf({ path: pdfPath, format: 'A4', printBackground: true });
-            await browser.close();
+        await page.pdf({ path: pdfPath, format: 'A4', printBackground: true, });
+        await browser.close();
 
-            // Encode PDF to Base64
-            const pdfBuffer = await fsPromises.readFile(pdfPath);
-            const pdfBase64 = pdfBuffer.toString('base64');
+        // Read the PDF file into a buffer
+        const pdfBuffer = await fsPromises.readFile(pdfPath);
+        //    return pdfBuffer
+        // Convert the buffer to a base64 string
+        const pdfBase64 = pdfBuffer.toString('base64');
+        const pdfDataUrl = `data:application/pdf;base64,${pdfBase64}`;
 
-            // Delete temporary PDF
-            await fsPromises.unlink(pdfPath).catch((err) => console.warn('Failed to delete PDF:', err));
+        // Delete the PDF file after reading it 
+        await fsPromises.unlink(pdfPath);
 
-            // Return as Data URL
-            return `data:application/pdf;base64,${pdfBase64}`;
-        } catch (error) {
-            console.error('Error generating PDF:', error);
-            throw new Error('PDF generation failed');
-        }
+        return pdfDataUrl;
+     }catch(error){
+        console.log(error);
+    }
     }
     async getUserDetails(user_id: number): Promise<ApiResponse> {
         try {
