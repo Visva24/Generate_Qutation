@@ -87,17 +87,17 @@ export class HelperService {
         const htmlContent = compiledTemplate(data);
 
         // Generate PDF
-        const browser = await puppeteer.launch(
-            // {
-            //     executablePath: '/usr/bin/chromium-browser', // Adjust path if needed
-            //     args: [
-            //         '--no-sandbox',
-            //         '--disable-setuid-sandbox',
-            //         '--disable-dev-shm-usage',
-            //         '--disable-gpu',
-            //     ],
-            // }
-        );
+        const browser = await puppeteer.launch({
+            headless: true,
+            executablePath: '/snap/bin/chromium', // Use Snap's Chromium
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-gpu',
+            ],
+
+        });
         const page = await browser.newPage();
         await page.setContent(htmlContent);
 
