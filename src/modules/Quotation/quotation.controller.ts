@@ -145,6 +145,10 @@ export class QuotationController {
   async getUserProfileDetails(@Query('user_id') user_id: number) {
     return this.quotationService.getUserProfileDetails(user_id)
   }
+  @Get("duplicate-quotation-item-records")
+  async duplicateRecord(@Query('id') id: number,@Query('count') count: number) {
+    return this.quotationService.duplicateRecord(id,count)
+  }
 
   @ApiBody({
     schema: {
