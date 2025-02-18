@@ -252,6 +252,11 @@ export class QuotationService {
     }
     async generateDynamicDocNumber(doc_type: string): Promise<any> {
         try {
+
+            const generateInvoiceNumber = (baseNumber: string) => {
+                const yearMonth = moment().format('YYMM'); // Formats to '2502' for Feb 2025
+                return baseNumber.replace(/\d{4}/, yearMonth); // Replaces '2501' with '2502'
+              };
             let docNumber
             let getDocumentData = await this.documentDetailModel.findOne({ where: { doc_type: doc_type } })
 
@@ -267,7 +272,7 @@ export class QuotationService {
                 if (doc_type == "delivery" && Quotation?.is_form_move_forward && Quotation?.is_record_saved == false) {
                     docNumber = Quotation?.doc_number
                 } else if (doc_type == "sales" && Quotation?.is_form_move_forward && Quotation?.is_record_saved == false) {
-                    docNumber = Quotation?.doc_number
+                    docNumber = generateInvoiceNumber(Quotation?.doc_number)
                 } else {
                     let incrementDocNumber
                     if (Quotation.doc_number != null) {
@@ -281,10 +286,20 @@ export class QuotationService {
                         */
                         incrementDocNumber = await this.incrementLastDigit(docNum)
                     }
-                    docNumber = incrementDocNumber
+                    if(doc_type == "sales"){
+                        docNumber = generateInvoiceNumber(incrementDocNumber)
+                    }else{
+                        docNumber =incrementDocNumber
+                    }
+                    
                 }
             } else {
-                docNumber = getDocumentData?.doc_number
+                if(doc_type == "sales"){
+                    docNumber = generateInvoiceNumber(Quotation?.doc_number)
+                }else{
+                    docNumber = getDocumentData?.doc_number
+                }
+               
             }
 
 
@@ -297,6 +312,8 @@ export class QuotationService {
 
         }
     }
+
+  
     async incrementLastDigit(invoiceNumber: string): Promise<any> {
         try {
 
@@ -345,7 +362,7 @@ export class QuotationService {
 
         }
     }
-    async generateQuotationTemplate(res: any, id: number): Promise<any> {
+    async generateQuotationTemplate(res: any, id: number,user_id:number =1): Promise<any> {
         try {
 
 
@@ -366,6 +383,7 @@ export class QuotationService {
             let numberInWords = await this.helperService.numberToWord(QuotationData.data.grand_total, QuotationData.data.currency)
               let itemsLength = (QuotationData.data.quotation_items).length
                 
+              let userData = await this.userModel.findOne({where:{id:user_id}})
             //  return res.json(itemsLength)
              let  quotation_items = QuotationData.data.quotation_items
           
@@ -440,7 +458,8 @@ export class QuotationService {
                 watermark: watermark, 
                 is_vat_enable:singleData.currency  == cashType.SAR  ? true:false,
                 quotation_items:quotation_items,
-                formatted_items:formattedItems
+                formatted_items:formattedItems,
+                user_sign:userData?.user_signature
             }))
             // return res.json(formData) 
             let fileName = (QuotationData.data.customer_name?.trim()?.replace(/ /g, '_')) + "_" + QuotationData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
@@ -470,7 +489,7 @@ export class QuotationService {
 
         }
     }
-    async downloadQuotationTemplate(id: number): Promise<any> {
+    async downloadQuotationTemplate(id: number,user_id:number): Promise<any> {
         try {
 
 
@@ -510,28 +529,28 @@ export class QuotationService {
                    if(singleItem.serial_no <= 15){
                      lessThan15.push(singleItem)
                    }
-                   if(singleItem.serial_no >= 16 && singleItem.serial_no <=40 ){
+                   if(singleItem.serial_no >= 16 && singleItem.serial_no <=37 ){
                     lessThan40.push(singleItem)
                    }
-                   if( singleItem.serial_no >= 41 && singleItem.serial_no <=65){
+                   if( singleItem.serial_no >= 38 && singleItem.serial_no <=62){
                     lessThan65.push(singleItem)
                    }
-                   if(singleItem.serial_no >= 66 && singleItem.serial_no <=90){
+                   if(singleItem.serial_no >= 63 && singleItem.serial_no <=87){
                     lessThan90.push(singleItem)
                    }
-                   if(singleItem.serial_no >= 91 && singleItem.serial_no <=115){
+                   if(singleItem.serial_no >= 88 && singleItem.serial_no <=112){
                     lessThan115.push(singleItem)
                    }
-                   if(singleItem.serial_no >=116 && singleItem.serial_no <=140){
+                   if(singleItem.serial_no >=113 && singleItem.serial_no <=137){
                     lessThan140.push(singleItem)
                    }
-                   if(singleItem.serial_no >=141 && singleItem.serial_no <=165){
+                   if(singleItem.serial_no >=138 && singleItem.serial_no <=162){
                     lessThan165.push(singleItem)
                    }
-                   if(singleItem.serial_no >=166 && singleItem.serial_no <= 190){
+                   if(singleItem.serial_no >=163 && singleItem.serial_no <= 187){
                     lessThan190.push(singleItem)
                    }
-                   if(singleItem.serial_no >=191 && singleItem.serial_no <= 225){
+                   if(singleItem.serial_no >=188 && singleItem.serial_no <= 215){
                     lessThan215.push(singleItem)
                    }
              }
@@ -556,7 +575,9 @@ export class QuotationService {
                 "lessThan215":lessThan215,
                 "is_value_exist_215":lessThan215.length > 0 ? true :false
              }
-            //    return res.json(formattedItems)
+             let userData = await this.userModel.findOne({where:{id:user_id}})
+             let sign = await this.getSignatureAsBase64(userData?.user_signature)
+              
             let formData = [QuotationData.data].map(singleData => ({
                 ...singleData,
                 amount_in_words: numberInWords,
@@ -566,7 +587,8 @@ export class QuotationService {
                 watermark: watermark, 
                 is_vat_enable:singleData.currency  == cashType.SAR  ? true:false,
                 quotation_items:quotation_items,
-                formatted_items:formattedItems
+                formatted_items:formattedItems,
+                user_sign: sign.data
             }))
                
             let fileName =  (QuotationData.data.customer_name?.trim()?.replace(/ /g, '_')) + "_" + QuotationData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"

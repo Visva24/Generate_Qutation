@@ -133,8 +133,8 @@ export class QuotationController {
   }
 
   @Get("download-quotation-template")
-  async downloadQuotationTemplate(@Query('id') id: number) {
-    return this.quotationService.downloadQuotationTemplate(id)
+  async downloadQuotationTemplate(@Query('id') id: number,@Query('user_id') user_id: number) {
+    return this.quotationService.downloadQuotationTemplate(id,user_id)
   }
 
   @Get("reset-quotation-list")
