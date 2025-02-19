@@ -302,7 +302,7 @@ export class SalesInvoiceService {
         try {
 
 
-            let templateName = "quotation_template"
+            let templateName = "sale_invoice"
             let invoiceData = await this.getSalesInvoiceFormData(id, "view")
             if (invoiceData.status == "failure") {
                 return invoiceData
@@ -318,6 +318,87 @@ export class SalesInvoiceService {
             const watermark = `data:image/png;base64,${waterMarkBase64Image}`;
 
             let numberInWords = await this.helperService.numberToWord(invoiceData.data.grand_total, invoiceData.data.currency)
+            let itemsLength = (invoiceData.data.sales_items).length
+                
+            //  return res.json(itemsLength)
+             let  invoice_items = invoiceData.data.sales_items
+           
+             let lessThan15 =[]
+             let lessThan40 =[]
+             let lessThan65 =[]
+             let lessThan90 =[]
+             let lessThan115 =[]
+             let lessThan140 =[]
+             let lessThan165 =[]
+             let lessThan190 =[]
+             let lessThan215 =[]
+             let lessThan235 =[]
+             let lessThan255 =[]
+
+             for(let singleItem of invoiceData.data.sales_items){
+
+                   if(singleItem.serial_no <= 15){
+                     lessThan15.push(singleItem)
+                   }
+                   if(singleItem.serial_no >= 16 && singleItem.serial_no <=35 ){
+                    lessThan40.push(singleItem)
+                   }
+                   if( singleItem.serial_no >= 36 && singleItem.serial_no <=55){
+                    lessThan65.push(singleItem)
+                   }
+                   if(singleItem.serial_no >= 56 && singleItem.serial_no <=75){
+                    lessThan90.push(singleItem)
+                   }
+                   if(singleItem.serial_no >= 76 && singleItem.serial_no <=95){
+                    lessThan115.push(singleItem)
+                   }
+                   if(singleItem.serial_no >=95 && singleItem.serial_no <=115){
+                    lessThan140.push(singleItem)
+                   }
+                   if(singleItem.serial_no >=116 && singleItem.serial_no <=135){
+                    lessThan165.push(singleItem)
+                   }
+                   if(singleItem.serial_no >=136 && singleItem.serial_no <= 155){
+                    lessThan190.push(singleItem)
+                   }
+                   if(singleItem.serial_no >=156 && singleItem.serial_no <= 175){
+                    lessThan215.push(singleItem)
+                   }
+                   if(singleItem.serial_no >=176 && singleItem.serial_no <= 195){
+                    lessThan235.push(singleItem)
+                   }
+                   if(singleItem.serial_no >=196 && singleItem.serial_no <= 215){
+                    lessThan255.push(singleItem)
+                   }
+                   
+             }
+                
+             let formattedItems = {
+                "lessThan15":lessThan15,
+                "is_value_exist_15":lessThan15.length > 0 ? true :false,
+                "lessThan40":lessThan40,
+                "is_value_exist_40":lessThan40.length > 0 ? true :false,
+                "lessThan65":lessThan65,
+                "is_value_exist_65":lessThan65.length > 0 ? true :false,
+                "lessThan90":lessThan90,
+                "is_value_exist_90":lessThan90.length > 0 ? true :false,
+                "lessThan115":lessThan115,
+                "is_value_exist_115":lessThan115.length > 0 ? true :false,
+                "lessThan140":lessThan140,
+                "is_value_exist_140":lessThan140.length > 0 ? true :false,
+                "lessThan165":lessThan165,
+                "is_value_exist_165":lessThan165.length > 0 ? true :false,
+                "lessThan190":lessThan190,
+                "is_value_exist_190":lessThan190.length > 0 ? true :false,
+                "lessThan215":lessThan215,
+                "is_value_exist_215":lessThan215.length > 0 ? true :false,
+                "lessThan235":lessThan235,
+                "is_value_exist_235":lessThan235.length > 0 ? true :false,
+                "lessThan255":lessThan255,
+                "is_value_exist_255":lessThan255.length > 0 ? true :false
+             }
+            //  return  formattedItems.lessThan215
+              
             let formData = [invoiceData.data].map(singleData => ({
                 ...singleData,
                 amount_in_words: numberInWords,
@@ -325,6 +406,7 @@ export class SalesInvoiceService {
                 footer: footer,
                 sidelogo: sidelogo,
                 watermark: watermark, 
+                formatted_items:formattedItems
             }))
 
             let fileName =(invoiceData.data.customer_name?.trim()?.replace(/ /g, '_'))  + "_" + invoiceData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
@@ -609,6 +691,41 @@ export class SalesInvoiceService {
 
         return convertToWords(num) + " rupees only";
 
+    }
+
+    
+    async duplicateRecord(record_id: number,count:number): Promise<any> {
+        try {
+
+            let getInvoiceList:any = await this.SalesItemModel.findOne({ where: { id: record_id }, attributes: {
+                exclude: ['createdAt', 'updatedAt','id'] // Exclude the columns you don't want
+            } })
+            let createInvoiceList;
+          
+            while(count != 0){
+              let payload =  {
+                    "invoice_id": getInvoiceList.invoice_id,
+                    "item_number": getInvoiceList.item_number,
+                    "description": getInvoiceList.description,
+                    "quantity": getInvoiceList.quantity,
+                    "units": getInvoiceList.units,
+                    "price": getInvoiceList.price,
+                    "discount": getInvoiceList.discount,
+                    "amount": getInvoiceList.amount
+                  }
+                  createInvoiceList = await this.SalesItemModel.create(payload)
+                count--;
+            }
+           
+           
+            return responseMessageGenerator('success', 'data fetched successfully', createInvoiceList)
+
+        } catch (error) {
+            console.log(error);
+            return responseMessageGenerator('failure', 'something went wrong', error.message)
+
+
+        }
     }
 
 

@@ -14,6 +14,7 @@ export class EmployeeSignUpDto {
     user_email: string
     phone_number: string;
     user_password: string
+    passcode: string
 }
 export class EmployeeSignInDto {  
     @IsNotEmpty({ message: 'Email is required.' })

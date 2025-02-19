@@ -523,58 +523,71 @@ export class QuotationService {
              let lessThan165 =[]
              let lessThan190 =[]
              let lessThan215 =[]
+             let lessThan235 =[]
+             let lessThan255 =[]
 
              for(let singleItem of QuotationData.data.quotation_items){
 
-                   if(singleItem.serial_no <= 15){
-                     lessThan15.push(singleItem)
-                   }
-                   if(singleItem.serial_no >= 16 && singleItem.serial_no <=37 ){
-                    lessThan40.push(singleItem)
-                   }
-                   if( singleItem.serial_no >= 38 && singleItem.serial_no <=62){
-                    lessThan65.push(singleItem)
-                   }
-                   if(singleItem.serial_no >= 63 && singleItem.serial_no <=87){
-                    lessThan90.push(singleItem)
-                   }
-                   if(singleItem.serial_no >= 88 && singleItem.serial_no <=112){
-                    lessThan115.push(singleItem)
-                   }
-                   if(singleItem.serial_no >=113 && singleItem.serial_no <=137){
-                    lessThan140.push(singleItem)
-                   }
-                   if(singleItem.serial_no >=138 && singleItem.serial_no <=162){
-                    lessThan165.push(singleItem)
-                   }
-                   if(singleItem.serial_no >=163 && singleItem.serial_no <= 187){
-                    lessThan190.push(singleItem)
-                   }
-                   if(singleItem.serial_no >=188 && singleItem.serial_no <= 215){
-                    lessThan215.push(singleItem)
-                   }
-             }
-                 
-             let formattedItems = {
-                "lessThan15":lessThan15,
-                "is_value_exist_15":lessThan15.length > 0 ? true :false,
-                "lessThan40":lessThan40,
-                "is_value_exist_40":lessThan40.length > 0 ? true :false,
-                "lessThan65":lessThan65,
-                "is_value_exist_65":lessThan65.length > 0 ? true :false,
-                "lessThan90":lessThan90,
-                "is_value_exist_90":lessThan90.length > 0 ? true :false,
-                "lessThan115":lessThan115,
-                "is_value_exist_115":lessThan115.length > 0 ? true :false,
-                "lessThan140":lessThan140,
-                "is_value_exist_140":lessThan140.length > 0 ? true :false,
-                "lessThan165":lessThan165,
-                "is_value_exist_165":lessThan165.length > 0 ? true :false,
-                "lessThan190":lessThan190,
-                "is_value_exist_190":lessThan190.length > 0 ? true :false,
-                "lessThan215":lessThan215,
-                "is_value_exist_215":lessThan215.length > 0 ? true :false
-             }
+                if(singleItem.serial_no <= 15){
+                  lessThan15.push(singleItem)
+                }
+                if(singleItem.serial_no >= 16 && singleItem.serial_no <=35 ){
+                 lessThan40.push(singleItem)
+                }
+                if( singleItem.serial_no >= 36 && singleItem.serial_no <=55){
+                 lessThan65.push(singleItem)
+                }
+                if(singleItem.serial_no >= 56 && singleItem.serial_no <=75){
+                 lessThan90.push(singleItem)
+                }
+                if(singleItem.serial_no >= 76 && singleItem.serial_no <=95){
+                 lessThan115.push(singleItem)
+                }
+                if(singleItem.serial_no >=95 && singleItem.serial_no <=115){
+                 lessThan140.push(singleItem)
+                }
+                if(singleItem.serial_no >=116 && singleItem.serial_no <=135){
+                 lessThan165.push(singleItem)
+                }
+                if(singleItem.serial_no >=136 && singleItem.serial_no <= 155){
+                 lessThan190.push(singleItem)
+                }
+                if(singleItem.serial_no >=156 && singleItem.serial_no <= 175){
+                 lessThan215.push(singleItem)
+                }
+                if(singleItem.serial_no >=176 && singleItem.serial_no <= 195){
+                 lessThan235.push(singleItem)
+                }
+                if(singleItem.serial_no >=196 && singleItem.serial_no <= 215){
+                 lessThan255.push(singleItem)
+                }
+                
+          }
+             
+          let formattedItems = {
+             "lessThan15":lessThan15,
+             "is_value_exist_15":lessThan15.length > 0 ? true :false,
+             "lessThan40":lessThan40,
+             "is_value_exist_40":lessThan40.length > 0 ? true :false,
+             "lessThan65":lessThan65,
+             "is_value_exist_65":lessThan65.length > 0 ? true :false,
+             "lessThan90":lessThan90,
+             "is_value_exist_90":lessThan90.length > 0 ? true :false,
+             "lessThan115":lessThan115,
+             "is_value_exist_115":lessThan115.length > 0 ? true :false,
+             "lessThan140":lessThan140,
+             "is_value_exist_140":lessThan140.length > 0 ? true :false,
+             "lessThan165":lessThan165,
+             "is_value_exist_165":lessThan165.length > 0 ? true :false,
+             "lessThan190":lessThan190,
+             "is_value_exist_190":lessThan190.length > 0 ? true :false,
+             "lessThan215":lessThan215,
+             "is_value_exist_215":lessThan215.length > 0 ? true :false,
+             "lessThan235":lessThan235,
+             "is_value_exist_235":lessThan235.length > 0 ? true :false,
+             "lessThan255":lessThan255,
+             "is_value_exist_255":lessThan255.length > 0 ? true :false
+          }
              let userData = await this.userModel.findOne({where:{id:user_id}})
              let sign = await this.getSignatureAsBase64(userData?.user_signature)
               
