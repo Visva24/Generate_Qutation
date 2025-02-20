@@ -611,7 +611,7 @@ export class QuotationService {
 
 
             const generatePayslip = await this.helperService.generatePdfFromTemplate(QUOTATION_UPLOAD_DIRECTORY, templateName, plainContext, 'payslip');
-
+           
             const base64Data = generatePayslip.replace(/^data:application\/pdf;base64,/, '');
             return responseMessageGenerator('success', 'Quotation downloaded successfully', { "base64Data": base64Data, "fileName": fileName })
 
