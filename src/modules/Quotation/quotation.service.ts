@@ -252,6 +252,11 @@ export class QuotationService {
     }
     async generateDynamicDocNumber(doc_type: string): Promise<any> {
         try {
+
+            const generateInvoiceNumber = (baseNumber: string) => {
+                const yearMonth = moment().format('YYMM'); // Formats to '2502' for Feb 2025
+                return baseNumber.replace(/\d{4}/, yearMonth); // Replaces '2501' with '2502'
+              };
             let docNumber
             let getDocumentData = await this.documentDetailModel.findOne({ where: { doc_type: doc_type } })
 
@@ -267,7 +272,7 @@ export class QuotationService {
                 if (doc_type == "delivery" && Quotation?.is_form_move_forward && Quotation?.is_record_saved == false) {
                     docNumber = Quotation?.doc_number
                 } else if (doc_type == "sales" && Quotation?.is_form_move_forward && Quotation?.is_record_saved == false) {
-                    docNumber = Quotation?.doc_number
+                    docNumber = generateInvoiceNumber(Quotation?.doc_number)
                 } else {
                     let incrementDocNumber
                     if (Quotation.doc_number != null) {
@@ -281,10 +286,20 @@ export class QuotationService {
                         */
                         incrementDocNumber = await this.incrementLastDigit(docNum)
                     }
-                    docNumber = incrementDocNumber
+                    if(doc_type == "sales"){
+                        docNumber = generateInvoiceNumber(incrementDocNumber)
+                    }else{
+                        docNumber =incrementDocNumber
+                    }
+                    
                 }
             } else {
-                docNumber = getDocumentData?.doc_number
+                if(doc_type == "sales"){
+                    docNumber = generateInvoiceNumber(Quotation?.doc_number)
+                }else{
+                    docNumber = getDocumentData?.doc_number
+                }
+               
             }
 
 
@@ -297,6 +312,8 @@ export class QuotationService {
 
         }
     }
+
+  
     async incrementLastDigit(invoiceNumber: string): Promise<any> {
         try {
 
@@ -345,7 +362,7 @@ export class QuotationService {
 
         }
     }
-    async generateQuotationTemplate(res: any, id: number): Promise<any> {
+    async generateQuotationTemplate(res: any, id: number,user_id:number =1): Promise<any> {
         try {
 
 
@@ -364,6 +381,74 @@ export class QuotationService {
             const sidelogo = `data:image/png;base64,${sideLogoBase64Image}`;
             const watermark = `data:image/png;base64,${waterMarkBase64Image}`;
             let numberInWords = await this.helperService.numberToWord(QuotationData.data.grand_total, QuotationData.data.currency)
+              let itemsLength = (QuotationData.data.quotation_items).length
+                
+              let userData = await this.userModel.findOne({where:{id:user_id}})
+            //  return res.json(itemsLength)
+             let  quotation_items = QuotationData.data.quotation_items
+          
+             let lessThan15 =[]
+             let lessThan40 =[]
+             let lessThan65 =[]
+             let lessThan90 =[]
+             let lessThan115 =[]
+             let lessThan140 =[]
+             let lessThan165 =[]
+             let lessThan190 =[]
+             let lessThan215 =[]
+
+             for(let singleItem of QuotationData.data.quotation_items){
+
+                   if(singleItem.serial_no <= 15){
+                     lessThan15.push(singleItem)
+                   }
+                   if(singleItem.serial_no >= 16 && singleItem.serial_no <=40 ){
+                    lessThan40.push(singleItem)
+                   }
+                   if( singleItem.serial_no >= 41 && singleItem.serial_no <=65){
+                    lessThan65.push(singleItem)
+                   }
+                   if(singleItem.serial_no >= 66 && singleItem.serial_no <=90){
+                    lessThan90.push(singleItem)
+                   }
+                   if(singleItem.serial_no >= 91 && singleItem.serial_no <=115){
+                    lessThan115.push(singleItem)
+                   }
+                   if(singleItem.serial_no >=116 && singleItem.serial_no <=140){
+                    lessThan140.push(singleItem)
+                   }
+                   if(singleItem.serial_no >=141 && singleItem.serial_no <=165){
+                    lessThan165.push(singleItem)
+                   }
+                   if(singleItem.serial_no >=166 && singleItem.serial_no <= 190){
+                    lessThan190.push(singleItem)
+                   }
+                   if(singleItem.serial_no >=191 && singleItem.serial_no <= 225){
+                    lessThan215.push(singleItem)
+                   }
+             }
+                 
+             let formattedItems = {
+                "lessThan15":lessThan15,
+                "is_value_exist_15":lessThan15.length > 0 ? true :false,
+                "lessThan40":lessThan40,
+                "is_value_exist_40":lessThan40.length > 0 ? true :false,
+                "lessThan65":lessThan65,
+                "is_value_exist_65":lessThan65.length > 0 ? true :false,
+                "lessThan90":lessThan90,
+                "is_value_exist_90":lessThan90.length > 0 ? true :false,
+                "lessThan115":lessThan115,
+                "is_value_exist_115":lessThan115.length > 0 ? true :false,
+                "lessThan140":lessThan140,
+                "is_value_exist_140":lessThan140.length > 0 ? true :false,
+                "lessThan165":lessThan165,
+                "is_value_exist_165":lessThan165.length > 0 ? true :false,
+                "lessThan190":lessThan190,
+                "is_value_exist_190":lessThan190.length > 0 ? true :false,
+                "lessThan215":lessThan215,
+                "is_value_exist_215":lessThan215.length > 0 ? true :false
+             }
+            //    return res.json(formattedItems)
             let formData = [QuotationData.data].map(singleData => ({
                 ...singleData,
                 amount_in_words: numberInWords,
@@ -371,7 +456,10 @@ export class QuotationService {
                 footer: footer,
                 sidelogo: sidelogo,
                 watermark: watermark, 
-                is_vat_enable:singleData.currency  == cashType.SAR  ? true:false
+                is_vat_enable:singleData.currency  == cashType.SAR  ? true:false,
+                quotation_items:quotation_items,
+                formatted_items:formattedItems,
+                user_sign:userData?.user_signature
             }))
             // return res.json(formData) 
             let fileName = (QuotationData.data.customer_name?.trim()?.replace(/ /g, '_')) + "_" + QuotationData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
@@ -382,8 +470,6 @@ export class QuotationService {
             //   return res.json(plainContext) 
 
             const generatePayslip = await this.helperService.generatePdfFromTemplate(QUOTATION_UPLOAD_DIRECTORY, templateName, plainContext, 'payslip');
-
-            console.log("generatePayslip "+generatePayslip);
            
             const base64Data = generatePayslip.replace(/^data:application\/pdf;base64,/, '');
 
@@ -403,7 +489,7 @@ export class QuotationService {
 
         }
     }
-    async downloadQuotationTemplate(id: number): Promise<any> {
+    async downloadQuotationTemplate(id: number,user_id:number): Promise<any> {
         try {
 
 
@@ -423,6 +509,88 @@ export class QuotationService {
             const watermark = `data:image/png;base64,${waterMarkBase64Image}`;
 
             let numberInWords = await this.helperService.numberToWord(QuotationData.data.grand_total, QuotationData.data.currency)
+            let itemsLength = (QuotationData.data.quotation_items).length
+                
+            //  return res.json(itemsLength)
+             let  quotation_items = QuotationData.data.quotation_items
+          
+             let lessThan15 =[]
+             let lessThan40 =[]
+             let lessThan65 =[]
+             let lessThan90 =[]
+             let lessThan115 =[]
+             let lessThan140 =[]
+             let lessThan165 =[]
+             let lessThan190 =[]
+             let lessThan215 =[]
+             let lessThan235 =[]
+             let lessThan255 =[]
+
+             for(let singleItem of QuotationData.data.quotation_items){
+
+                if(singleItem.serial_no <= 15){
+                  lessThan15.push(singleItem)
+                }
+                if(singleItem.serial_no >= 16 && singleItem.serial_no <=35 ){
+                 lessThan40.push(singleItem)
+                }
+                if( singleItem.serial_no >= 36 && singleItem.serial_no <=55){
+                 lessThan65.push(singleItem)
+                }
+                if(singleItem.serial_no >= 56 && singleItem.serial_no <=75){
+                 lessThan90.push(singleItem)
+                }
+                if(singleItem.serial_no >= 76 && singleItem.serial_no <=95){
+                 lessThan115.push(singleItem)
+                }
+                if(singleItem.serial_no >=95 && singleItem.serial_no <=115){
+                 lessThan140.push(singleItem)
+                }
+                if(singleItem.serial_no >=116 && singleItem.serial_no <=135){
+                 lessThan165.push(singleItem)
+                }
+                if(singleItem.serial_no >=136 && singleItem.serial_no <= 155){
+                 lessThan190.push(singleItem)
+                }
+                if(singleItem.serial_no >=156 && singleItem.serial_no <= 175){
+                 lessThan215.push(singleItem)
+                }
+                if(singleItem.serial_no >=176 && singleItem.serial_no <= 195){
+                 lessThan235.push(singleItem)
+                }
+                if(singleItem.serial_no >=196 && singleItem.serial_no <= 215){
+                 lessThan255.push(singleItem)
+                }
+                
+          }
+             
+          let formattedItems = {
+             "lessThan15":lessThan15,
+             "is_value_exist_15":lessThan15.length > 0 ? true :false,
+             "lessThan40":lessThan40,
+             "is_value_exist_40":lessThan40.length > 0 ? true :false,
+             "lessThan65":lessThan65,
+             "is_value_exist_65":lessThan65.length > 0 ? true :false,
+             "lessThan90":lessThan90,
+             "is_value_exist_90":lessThan90.length > 0 ? true :false,
+             "lessThan115":lessThan115,
+             "is_value_exist_115":lessThan115.length > 0 ? true :false,
+             "lessThan140":lessThan140,
+             "is_value_exist_140":lessThan140.length > 0 ? true :false,
+             "lessThan165":lessThan165,
+             "is_value_exist_165":lessThan165.length > 0 ? true :false,
+             "lessThan190":lessThan190,
+             "is_value_exist_190":lessThan190.length > 0 ? true :false,
+             "lessThan215":lessThan215,
+             "is_value_exist_215":lessThan215.length > 0 ? true :false,
+             "lessThan235":lessThan235,
+             "is_value_exist_235":lessThan235.length > 0 ? true :false,
+             "lessThan255":lessThan255,
+             "is_value_exist_255":lessThan255.length > 0 ? true :false
+          }
+             let userData = await this.userModel.findOne({where:{id:user_id}})
+             let sign = await this.getSignatureAsBase64(userData?.user_signature)
+              
             let formData = [QuotationData.data].map(singleData => ({
                 ...singleData,
                 amount_in_words: numberInWords,
@@ -430,7 +598,10 @@ export class QuotationService {
                 footer: footer,
                 sidelogo: sidelogo,
                 watermark: watermark, 
-                is_vat_enable:singleData.currency  == cashType.SAR  ? true:false
+                is_vat_enable:singleData.currency  == cashType.SAR  ? true:false,
+                quotation_items:quotation_items,
+                formatted_items:formattedItems,
+                user_sign: sign.data
             }))
                
             let fileName =  (QuotationData.data.customer_name?.trim()?.replace(/ /g, '_')) + "_" + QuotationData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
@@ -796,6 +967,41 @@ export class QuotationService {
     //     return convertToWords(num) + " rupees only";
 
     // }
+
+    async duplicateRecord(record_id: number,count:number): Promise<any> {
+        try {
+
+            let getQuotationList:any = await this.QuotationListModel.findOne({ where: { id: record_id }, attributes: {
+                exclude: ['createdAt', 'updatedAt','id'] // Exclude the columns you don't want
+            } })
+            let createQuotationList;
+          
+            while(count != 0){
+              let payload =  {
+                    "quotation_id": getQuotationList.quotation_id,
+                    "item_number": getQuotationList.item_number,
+                    "description": getQuotationList.description,
+                    "quantity": getQuotationList.quantity,
+                    "units": getQuotationList.units,
+                    "price": getQuotationList.price,
+                    "discount": getQuotationList.discount,
+                    "tax": getQuotationList.tax,
+                    "amount": getQuotationList.amount
+                  }
+                 createQuotationList = await this.QuotationListModel.create(payload)
+                count--;
+            }
+           
+           
+            return responseMessageGenerator('success', 'data fetched successfully', createQuotationList)
+
+        } catch (error) {
+            console.log(error);
+            return responseMessageGenerator('failure', 'something went wrong', error.message)
+
+
+        }
+    }
 
 
 

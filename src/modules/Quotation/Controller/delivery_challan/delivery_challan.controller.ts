@@ -125,5 +125,10 @@ export class DeliveryChallanController {
           async moveForwardDeliveryChallan(@Query('quotation_id') quotation_id:number,@Query('current_user_id') current_user_id:number):Promise<any> {
             return this.deliveryChallanService.moveForwardDeliveryChallan(quotation_id,current_user_id)
           }
+          @Get("duplicate-challan-item-records")
+          async duplicateRecord(@Query('id') id: number,@Query('count') count: number) {
+            return this.deliveryChallanService.duplicateRecord(id,count)
+          }
+        
 
 }

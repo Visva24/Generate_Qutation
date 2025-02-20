@@ -9,6 +9,8 @@ import { ApiResponse, responseMessageGenerator } from 'src/common/util/helper.co
 import puppeteer from 'puppeteer';
 import { UserRepository } from 'src/modules/Authentication/entity/users.entity';
 import { cashType } from 'src/modules/Quotation/enum/quotation.enum';
+import * as hbs from 'handlebars';
+
 
 
 @Injectable()
@@ -16,6 +18,12 @@ export class HelperService {
     constructor(@InjectModel(UserRepository) private userModel: typeof UserRepository) {
 
     }
+
+
+   
+       
+
+   
 
     // async generatePdfFromTemplate(uploadDir: string, templateName: string, data: any, file: string): Promise<any> {
     //     try {
@@ -72,6 +80,10 @@ export class HelperService {
     async generatePdfFromTemplate(uploadDir: string, templateName: string, data: any, file: string): Promise<any> {
         try{
 
+         hbs.registerHelper('lte', (a, b) => a <= b)
+         hbs.registerHelper('eq', (a, b) => a === b)
+         hbs.registerHelper('gte', (a, b) => a >= b)
+
         // const companyLogoPath = await fsPromises.readFile('src/assets/client_logo.png');
         // const logo = `data:image/png;base64,${companyLogoPath.toString('base64')}`;
         const quotationDir = `${uploadDir}`;
@@ -89,7 +101,7 @@ export class HelperService {
         // Generate PDF
         const browser = await puppeteer.launch({
             headless: true,
-            executablePath: '/snap/bin/chromium', // Use Snap's Chromium
+            // executablePath: '/snap/bin/chromium', // Use Snap's Chromium
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',

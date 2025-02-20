@@ -133,8 +133,8 @@ export class QuotationController {
   }
 
   @Get("download-quotation-template")
-  async downloadQuotationTemplate(@Query('id') id: number) {
-    return this.quotationService.downloadQuotationTemplate(id)
+  async downloadQuotationTemplate(@Query('id') id: number,@Query('user_id') user_id: number) {
+    return this.quotationService.downloadQuotationTemplate(id,user_id)
   }
 
   @Get("reset-quotation-list")
@@ -144,6 +144,10 @@ export class QuotationController {
   @Get("get-user-Profile-details")
   async getUserProfileDetails(@Query('user_id') user_id: number) {
     return this.quotationService.getUserProfileDetails(user_id)
+  }
+  @Get("duplicate-quotation-item-records")
+  async duplicateRecord(@Query('id') id: number,@Query('count') count: number) {
+    return this.quotationService.duplicateRecord(id,count)
   }
 
   @ApiBody({

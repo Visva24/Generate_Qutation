@@ -125,5 +125,11 @@ export class SalesInvoiceController {
               async moveForwardSalesInvoice(@Query('quotation_id') quotation_id:number,@Query('current_user_id') current_user_id:number):Promise<any> {
                 return this.SalesInvoiceService.moveForwardSalesInvoice(quotation_id,current_user_id)
               }
+
+              @Get("duplicate-sales-item-records")
+              async duplicateRecord(@Query('id') id: number,@Query('count') count: number) {
+                return this.SalesInvoiceService.duplicateRecord(id,count)
+              }
+            
     
 }

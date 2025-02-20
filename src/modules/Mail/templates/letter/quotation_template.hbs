@@ -25,17 +25,17 @@
             <img src={{sidelogo}} alt="">
         </div>
         <div style="position: absolute; bottom:0;left:0;">
-            <img src={{footer}} alt="" width="794px">
+            <img src={{footer}} alt="" height="140px" width="794px">
         </div>
-        <div style="position: absolute; top: 20%; left: 14%;  ">
-            <img src={{watermark}} width="600px" height="700px">
+        <div style="position: absolute; top: 36%; right:0;">
+            <img src={{watermark}} width="610px" height="600px">
         </div>
         <table style=" width:100%;border-bottom:none;">
             <tr style="height: 60px;">
                 <td style=" width: 40%;text-align: left;padding-left:40px">
                     <div style="display: flex;align-items: center; gap: 30px;">
                         <img src={{logo}} alt="logo">
-                        <p style="font-size: 22px;font-weight: 600;">New Shadow Trading And Classy Events W.L.L</p>
+                        <p style="font-size: 20px;font-weight: 600;">NEW SHADOW TRADING AND CLASSY EVENTS W.L.L</p>
                     </div>
                 </td>
             </tr>
@@ -105,68 +105,69 @@
                 </tr>
                 <tr style="width: 100%;text-align: left;">
                     <td style="width: 33%;">{{address}}</td>
-                    <td style="width: 33%;">{{quotation_validity}}</td>
-                    <td style="width: 33%;"></td>
+                    <td style="width: 33%;">{{payment_terms}}</td>
+                    <td style="width: 33%;">{{}}</td>
 
                 </tr>
             </tbody>
         </table>
         <hr style="margin-left: 20px; color:#000 !important">
-
-        <table style="width: 100%;  border-bottom:none; margin-top:10px !important;">
+         
+        <table style="width: 100%;  border-bottom:none; margin-top:14px !important;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
-                        style="width: 5%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;">
+                        style="width: 5%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;">
                         S.No.</th>
                     <th
-                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;">
+                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Item No.</th>
                     <th
-                        style="width: 35%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;">
+                        style="width: 35%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Description</th>
                     <th
-                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;">
+                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
                         Quantity</th>
                     <th
-                        style="width: 4%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;">
+                        style="width: 4%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
                         Unit</th>
                     <th
-                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;">
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
                         Price</th>
                     {{#if is_vat_enable}}
                     <th
-                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;">
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
                         VAT(%)</th>
                     {{else}}
                     <th
-                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;">
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
                         Tax(%)</th>
                     {{/if}}
                     <th
-                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;">
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
                         Dis(%)</th>
                     <th
-                        style="width: 7%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;">
+                        style="width: 7%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-left:none;">
                         Total</th>
                 </tr>
 
-                {{#each quotation_items}}
-                <tr>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.serial_no}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.item_number}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;font-size:10px;">
-                        {{this.description}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.quantity}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.units}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.price}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.tax}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.discount}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.amount}}</td>
+                {{#each formatted_items.lessThan15}}
+                 <tr>
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.serial_no}}</td>
+                        <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.item_number}}</td>
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;font-size:10px;">{{this.description}}</td>
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.quantity}}</td>
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.units}}</td>
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.price}}</td>
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.tax}}</td>
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.discount}}</td>
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
                 </tr>
+            
                 {{/each}}
             </tbody>
         </table>
+      {{#unless formatted_items.is_value_exist_40}}
         <table style="width: 100%; margin-top:10px !important;">
             <tr>
                 <td style="width: 80%; vertical-align: top;">
@@ -182,6 +183,12 @@
                         <tr style="height: 25px;padding-left: 4px;">
                             <td>Total In Words: <span
                                     style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</span></td>
+                        </tr>
+                         <tr style="height: 25px;padding-left: 4px;">
+                            <td align="center"> 
+                                <img src={{ user_sign }} alt="signature" height="50px" width="100px">
+                                <span style="font-weight: 600;padding-left: 4px;">Prepared By</span>
+                            </td>
                         </tr>
                     </table>
                 </td>
@@ -230,26 +237,28 @@
                 </td>
             </tr>
         </table>
+      {{/unless}}
     </div>
 
     {{!-- next page --}}
 
+    {{#if formatted_items.is_value_exist_40}}
     <div style="padding: 40px; height:1040px;position:relative;">
         <div style="position: absolute; top:0;left:0;">
             <img src={{sidelogo}} alt="">
         </div>
         <div style="position: absolute; bottom:0;left:0;">
-            <img src={{footer}} alt="" width="794px">
+            <img src={{footer}} alt="" height="140px" width="794px">
         </div>
-        <div style="position: absolute; top: 20%; left: 14%;  ">
-            <img src={{watermark}} width="600px" height="700px">
+        <div style="position: absolute; top: 36%; right:0;">
+            <img src={{watermark}}  width="610px" height="600px">
         </div>
         <table style=" width:100%;border-bottom:none;">
             <tr style="height: 60px;">
                 <td style=" width: 40%;text-align: left;padding-left:40px">
                     <div style="display: flex;align-items: center; gap: 30px;">
                         <img src={{logo}} alt="logo">
-                        <p style="font-size: 22px;font-weight: 600;">New Shadow Trading And Classy Events W.L.L</p>
+                        <p style="font-size: 20px;font-weight: 600;">NEW SHADOW TRADING AND CLASSY EVENTS W.L.L</p>
                     </div>
                 </td>
             </tr>
@@ -263,9 +272,1578 @@
                     </div>
                 </td>
             </tr>
+
+              <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+            <tbody>
+                <tr style="background-color: #f2f3f4">
+                    <th
+                        style="width: 5%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;">
+                        S.No.</th>
+                    <th
+                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Item No.</th>
+                    <th
+                        style="width: 35%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Description</th>
+                    <th
+                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Quantity</th>
+                    <th
+                        style="width: 4%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Unit</th>
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Price</th>
+                    {{#if is_vat_enable}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        VAT(%)</th>
+                    {{else}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Tax(%)</th>
+                    {{/if}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Dis(%)</th>
+                    <th
+                        style="width: 7%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-left:none;">
+                        Total</th>
+                </tr>
+
+                {{#each formatted_items.lessThan40}}
+                <tr>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.serial_no}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.item_number}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">
+                        {{this.description}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.quantity}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.units}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.price}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.tax}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.discount}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.amount}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        {{#unless formatted_items.is_value_exist_65}}
+        <table style="width: 100%; margin-top:10px !important;">
+            <tr>
+                <td style="width: 80%; vertical-align: top;">
+                    <table>
+                        <tr style="height: 25px;padding-left: 4px;">
+                            <td>Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
+                        </tr>
+
+                        <tr style="height: 25px;padding-left: 4px;">
+                            <td>Delivery: <span style="font-weight: 600;padding-left: 4px;">{{delivery}}</span></td>
+                        </tr>
+
+                        <tr style="height: 25px;padding-left: 4px;">
+                            <td>Total In Words: <span
+                                    style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</span></td>
+                        </tr>
+                            <tr style="height: 25px;padding-left: 4px;">
+                            <td align="center"> 
+                                <img src={{ user_sign }} alt="signature" height="50px" width="100px">
+                                <span style="font-weight: 600;padding-left: 4px;">Prepared By</span>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="width: 20%;">
+                    <table>
+                        <tr style="height: 20px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                Sub Total
+                            </td>
+                            <td style="width: 20%;text-align: right;">
+                                {{sub_total}}
+                            </td>
+                        </tr>
+                        <tr style="height: 20px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                Discount
+                            </td>
+                            <td style="width: 20%;text-align: right;">
+                                {{total_discount}}%
+                            </td>
+                        </tr>
+                        <tr style="height: 20px;">
+                            {{#if is_vat_enable}}
+                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                VAT
+                            </td>
+                            {{else}}
+                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                TAX
+                            </td>
+
+                            {{/if}}
+                            <td style="width: 20%;text-align: right;">
+                                {{total_tax}}%
+                            </td>
+                        </tr>
+                        <tr style="height: 20px;">
+                            <td style="width: 20%;text-align: right;font-weight: 600;padding-left: 4px;">
+                                Total
+                            </td>
+                            <td style="width: 20%;text-align: right;font-weight: 600;">
+                                {{grand_total}}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        {{/unless}}
+        </table>
         </table>
 
     </div>
+    {{/if }}
+    {{#if formatted_items.is_value_exist_65}}
+    <div style="padding: 40px; height:1040px;position:relative;">
+        <div style="position: absolute; top:0;left:0;">
+            <img src={{sidelogo}} alt="">
+        </div>
+        <div style="position: absolute; bottom:0;left:0;">
+            <img src={{footer}} alt=""  height="140px" width="794px">
+        </div>
+        <div style="position: absolute;top: 36%; right:0;  ">
+            <img src={{watermark}}  width="610px" height="600px">
+        </div>
+        <table style=" width:100%;border-bottom:none;">
+            <tr style="height: 60px;">
+                <td style=" width: 40%;text-align: left;padding-left:40px">
+                    <div style="display: flex;align-items: center; gap: 30px;">
+                        <img src={{logo}} alt="logo">
+                        <p style="font-size: 20px;font-weight: 600;">NEW SHADOW TRADING AND CLASSY EVENTS W.L.L</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%; border-bottom:none;">
+            <tr style="height: 40px;">
+                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
+                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+                        <p style="height: 20px;width:4px;background-color:#fca524;"></p>
+                        <p> QUOTATION</p>
+                    </div>
+                </td>
+            </tr>
+
+              <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+            <tbody>
+                <tr style="background-color: #f2f3f4">
+                    <th
+                        style="width: 5%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;">
+                        S.No.</th>
+                    <th
+                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Item No.</th>
+                    <th
+                        style="width: 35%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Description</th>
+                    <th
+                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Quantity</th>
+                    <th
+                        style="width: 4%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Unit</th>
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Price</th>
+                    {{#if is_vat_enable}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        VAT(%)</th>
+                    {{else}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Tax(%)</th>
+                    {{/if}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Dis(%)</th>
+                    <th
+                        style="width: 7%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-left:none;">
+                        Total</th>
+                </tr>
+
+                {{#each formatted_items.lessThan65}}
+                <tr>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.serial_no}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.item_number}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">
+                        {{this.description}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.quantity}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.units}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.price}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.tax}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.discount}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.amount}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+            {{#unless formatted_items.is_value_exist_90}}
+            <table style="width: 100%; margin-top:10px !important;">
+                <tr>
+                    <td style="width: 80%; vertical-align: top;">
+                        <table>
+                            <tr style="height: 25px;padding-left: 4px;">
+                                <td>Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
+                            </tr>
+
+                            <tr style="height: 25px;padding-left: 4px;">
+                                <td>Delivery: <span style="font-weight: 600;padding-left: 4px;">{{delivery}}</span></td>
+                            </tr>
+
+                            <tr style="height: 25px;padding-left: 4px;">
+                                <td>Total In Words: <span
+                                        style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</span></td>
+                            </tr>
+                                <tr style="height: 25px;padding-left: 4px;">
+                            <td align="center"> 
+                                <img src={{ user_sign }} alt="signature" height="50px" width="100px">
+                                <span style="font-weight: 600;padding-left: 4px;">Prepared By</span>
+                            </td>
+                        </tr>
+                        </table>
+                    </td>
+                    <td style="width: 20%;">
+                        <table>
+                            <tr style="height: 20px;">
+                                <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                    Sub Total
+                                </td>
+                                <td style="width: 20%;text-align: right;">
+                                    {{sub_total}}
+                                </td>
+                            </tr>
+                            <tr style="height: 20px;">
+                                <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                    Discount
+                                </td>
+                                <td style="width: 20%;text-align: right;">
+                                    {{total_discount}}%
+                                </td>
+                            </tr>
+                            <tr style="height: 20px;">
+                                {{#if is_vat_enable}}
+                                <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                    VAT
+                                </td>
+                                {{else}}
+                                <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                    TAX
+                                </td>
+
+                                {{/if}}
+                                <td style="width: 20%;text-align: right;">
+                                    {{total_tax}}%
+                                </td>
+                            </tr>
+                            <tr style="height: 20px;">
+                                <td style="width: 20%;text-align: right;font-weight: 600;padding-left: 4px;">
+                                    Total
+                                </td>
+                                <td style="width: 20%;text-align: right;font-weight: 600;">
+                                    {{grand_total}}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            {{/unless}}
+        </table>
+        </table>
+
+    </div>
+    {{/if }}
+    {{#if formatted_items.is_value_exist_90}}
+    <div style="padding: 40px; height:1040px;position:relative;">
+        <div style="position: absolute; top:0;left:0;">
+            <img src={{sidelogo}} alt="">
+        </div>
+        <div style="position: absolute; bottom:0;left:0;">
+            <img src={{footer}} alt=""  height="140px" width="794px">
+        </div>
+        <div style="position: absolute; top: 36%; right:0;  ">
+            <img src={{watermark}}  width="610px" height="600px">
+        </div>
+        <table style=" width:100%;border-bottom:none;">
+            <tr style="height: 60px;">
+                <td style=" width: 40%;text-align: left;padding-left:40px">
+                    <div style="display: flex;align-items: center; gap: 30px;">
+                        <img src={{logo}} alt="logo">
+                        <p style="font-size: 20px;font-weight: 600;">NEW SHADOW TRADING AND CLASSY EVENTS W.L.L</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%; border-bottom:none;">
+            <tr style="height: 40px;">
+                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
+                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+                        <p style="height: 20px;width:4px;background-color:#fca524;"></p>
+                        <p> QUOTATION</p>
+                    </div>
+                </td>
+            </tr>
+
+              <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+            <tbody>
+                <tr style="background-color: #f2f3f4">
+                    <th
+                        style="width: 5%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        S.No.</th>
+                    <th
+                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Item No.</th>
+                    <th
+                        style="width: 35%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;">
+                        Description</th>
+                    <th
+                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Quantity</th>
+                    <th
+                        style="width: 4%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Unit</th>
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Price</th>
+                    {{#if is_vat_enable}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        VAT(%)</th>
+                    {{else}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Tax(%)</th>
+                    {{/if}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Dis(%)</th>
+                    <th
+                        style="width: 7%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-left:none;">
+                        Total</th>
+                </tr>
+
+                {{#each formatted_items.lessThan90}}
+                <tr>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.serial_no}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.item_number}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">
+                        {{this.description}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.quantity}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.units}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.price}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.tax}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.discount}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.amount}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+             {{#unless formatted_items.is_value_exist_115}}
+            <table style="width: 100%; margin-top:10px !important;">
+                <tr>
+                    <td style="width: 80%; vertical-align: top;">
+                        <table>
+                            <tr style="height: 25px;padding-left: 4px;">
+                                <td>Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
+                            </tr>
+
+                            <tr style="height: 25px;padding-left: 4px;">
+                                <td>Delivery: <span style="font-weight: 600;padding-left: 4px;">{{delivery}}</span></td>
+                            </tr>
+
+                            <tr style="height: 25px;padding-left: 4px;">
+                                <td>Total In Words: <span
+                                        style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</span></td>
+                            </tr>
+                                <tr style="height: 25px;padding-left: 4px;">
+                            <td align="center"> 
+                                <img src={{ user_sign }} alt="signature" height="50px" width="100px">
+                                <span style="font-weight: 600;padding-left: 4px;">Prepared By</span>
+                            </td>
+                        </tr>
+                        </table>
+                    </td>
+                    <td style="width: 20%;">
+                        <table>
+                            <tr style="height: 20px;">
+                                <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                    Sub Total
+                                </td>
+                                <td style="width: 20%;text-align: right;">
+                                    {{sub_total}}
+                                </td>
+                            </tr>
+                            <tr style="height: 20px;">
+                                <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                    Discount
+                                </td>
+                                <td style="width: 20%;text-align: right;">
+                                    {{total_discount}}%
+                                </td>
+                            </tr>
+                            <tr style="height: 20px;">
+                                {{#if is_vat_enable}}
+                                <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                    VAT
+                                </td>
+                                {{else}}
+                                <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                    TAX
+                                </td>
+
+                                {{/if}}
+                                <td style="width: 20%;text-align: right;">
+                                    {{total_tax}}%
+                                </td>
+                            </tr>
+                            <tr style="height: 20px;">
+                                <td style="width: 20%;text-align: right;font-weight: 600;padding-left: 4px;">
+                                    Total
+                                </td>
+                                <td style="width: 20%;text-align: right;font-weight: 600;">
+                                    {{grand_total}}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            {{/unless}}
+        </table>
+        </table>
+
+    </div>
+    {{/if }}
+    {{#if formatted_items.is_value_exist_115}}
+    <div style="padding: 40px; height:1040px;position:relative;">
+        <div style="position: absolute; top:0;left:0;">
+            <img src={{sidelogo}} alt="">
+        </div>
+        <div style="position: absolute; bottom:0;left:0;">
+            <img src={{footer}} alt="" height="140px" width="794px">
+        </div>
+        <div style="position: absolute; top: 36%; right:0; ">
+            <img src={{watermark}}  width="610px" height="600px">
+        </div>
+        <table style=" width:100%;border-bottom:none;">
+            <tr style="height: 60px;">
+                <td style=" width: 40%;text-align: left;padding-left:40px">
+                    <div style="display: flex;align-items: center; gap: 30px;">
+                        <img src={{logo}} alt="logo">
+                        <p style="font-size: 20px;font-weight: 600;">NEW SHADOW TRADING AND CLASSY EVENTS W.L.L</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%; border-bottom:none;">
+            <tr style="height: 40px;">
+                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
+                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+                        <p style="height: 20px;width:4px;background-color:#fca524;"></p>
+                        <p> QUOTATION</p>
+                    </div>
+                </td>
+            </tr>
+
+              <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+            <tbody>
+                <tr style="background-color: #f2f3f4">
+                    <th
+                        style="width: 5%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;">
+                        S.No.</th>
+                    <th
+                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Item No.</th>
+                    <th
+                        style="width: 35%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Description</th>
+                    <th
+                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Quantity</th>
+                    <th
+                        style="width: 4%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Unit</th>
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Price</th>
+                    {{#if is_vat_enable}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        VAT(%)</th>
+                    {{else}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Tax(%)</th>
+                    {{/if}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Dis(%)</th>
+                    <th
+                        style="width: 7%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;;border-left:none;">
+                        Total</th>
+                </tr>
+
+                {{#each formatted_items.lessThan115}}
+                <tr>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;  border-right:none;border-left:none;">{{this.serial_no}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;  border-right:none;border-left:none;">{{this.item_number}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;  border-right:none;border-left:none;font-size:10px;">
+                        {{this.description}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;  border-right:none;border-left:none;">{{this.quantity}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;  border-right:none;border-left:none;">{{this.units}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px;  border-right:none;border-left:none;">{{this.price}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;  border-right:none;border-left:none;">{{this.tax}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;  border-right:none;border-left:none;">{{this.discount}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px;  border-right:none;border-left:none;">{{this.amount}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+            {{#unless formatted_items.is_value_exist_140}}
+            <table style="width: 100%; margin-top:10px !important;">
+                <tr>
+                    <td style="width: 80%; vertical-align: top;">
+                        <table>
+                            <tr style="height: 25px;padding-left: 4px;">
+                                <td>Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
+                            </tr>
+
+                            <tr style="height: 25px;padding-left: 4px;">
+                                <td>Delivery: <span style="font-weight: 600;padding-left: 4px;">{{delivery}}</span></td>
+                            </tr>
+
+                            <tr style="height: 25px;padding-left: 4px;">
+                                <td>Total In Words: <span
+                                        style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</span></td>
+                            </tr>
+                                <tr style="height: 25px;padding-left: 4px;">
+                            <td align="center"> 
+                                <img src={{ user_sign }} alt="signature" height="50px" width="100px">
+                                <span style="font-weight: 600;padding-left: 4px;">Prepared By</span>
+                            </td>
+                        </tr>
+                        </table>
+                    </td>
+                    <td style="width: 20%;">
+                        <table>
+                            <tr style="height: 20px;">
+                                <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                    Sub Total
+                                </td>
+                                <td style="width: 20%;text-align: right;">
+                                    {{sub_total}}
+                                </td>
+                            </tr>
+                            <tr style="height: 20px;">
+                                <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                    Discount
+                                </td>
+                                <td style="width: 20%;text-align: right;">
+                                    {{total_discount}}%
+                                </td>
+                            </tr>
+                            <tr style="height: 20px;">
+                                {{#if is_vat_enable}}
+                                <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                    VAT
+                                </td>
+                                {{else}}
+                                <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                    TAX
+                                </td>
+
+                                {{/if}}
+                                <td style="width: 20%;text-align: right;">
+                                    {{total_tax}}%
+                                </td>
+                            </tr>
+                            <tr style="height: 20px;">
+                                <td style="width: 20%;text-align: right;font-weight: 600;padding-left: 4px;">
+                                    Total
+                                </td>
+                                <td style="width: 20%;text-align: right;font-weight: 600;">
+                                    {{grand_total}}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            {{/unless}}
+        </table>
+        </table>
+
+    </div>
+    {{/if }}
+    {{#if formatted_items.is_value_exist_140}}
+    <div style="padding: 40px; height:1040px;position:relative;">
+        <div style="position: absolute; top:0;left:0;">
+            <img src={{sidelogo}} alt="">
+        </div>
+        <div style="position: absolute; bottom:0;left:0;">
+            <img src={{footer}} alt="" height="140px" width="794px">
+        </div>
+        <div style="position: absolute; top: 36%; right:0;  ">
+            <img src={{watermark}}  width="610px" height="600px">
+        </div>
+        <table style=" width:100%;border-bottom:none;">
+            <tr style="height: 60px;">
+                <td style=" width: 40%;text-align: left;padding-left:40px">
+                    <div style="display: flex;align-items: center; gap: 30px;">
+                        <img src={{logo}} alt="logo">
+                        <p style="font-size: 20px;font-weight: 600;">NEW SHADOW TRADING AND CLASSY EVENTS W.L.L</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%; border-bottom:none;">
+            <tr style="height: 40px;">
+                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
+                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+                        <p style="height: 20px;width:4px;background-color:#fca524;"></p>
+                        <p> QUOTATION</p>
+                    </div>
+                </td>
+            </tr>
+
+              <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+            <tbody>
+                <tr style="background-color: #f2f3f4">
+                    <th
+                        style="width: 5%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;">
+                        S.No.</th>
+                    <th
+                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Item No.</th>
+                    <th
+                        style="width: 35%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Description</th>
+                    <th
+                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Quantity</th>
+                    <th
+                        style="width: 4%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Unit</th>
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Price</th>
+                    {{#if is_vat_enable}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        VAT(%)</th>
+                    {{else}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Tax(%)</th>
+                    {{/if}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        Dis(%)</th>
+                    <th
+                        style="width: 7%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-left:none;">
+                        Total</th>
+                </tr>
+
+                {{#each formatted_items.lessThan140}}
+                <tr>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.serial_no}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.item_number}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">
+                        {{this.description}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.quantity}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.units}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.price}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.tax}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.discount}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.amount}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+            {{#unless formatted_items.is_value_exist_165}}
+                <table style="width: 100%; margin-top:10px !important;">
+                    <tr>
+                        <td style="width: 80%; vertical-align: top;">
+                            <table>
+                                <tr style="height: 25px;padding-left: 4px;">
+                                    <td>Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
+                                </tr>
+
+                                <tr style="height: 25px;padding-left: 4px;">
+                                    <td>Delivery: <span style="font-weight: 600;padding-left: 4px;">{{delivery}}</span></td>
+                                </tr>
+
+                                <tr style="height: 25px;padding-left: 4px;">
+                                    <td>Total In Words: <span
+                                            style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</span></td>
+                                </tr>
+                                    <tr style="height: 25px;padding-left: 4px;">
+                            <td align="center"> 
+                                <img src={{ user_sign }} alt="signature" height="50px" width="100px">
+                                <span style="font-weight: 600;padding-left: 4px;">Prepared By</span>
+                            </td>
+                        </tr>
+                            </table>
+                        </td>
+                        <td style="width: 20%;">
+                            <table>
+                                <tr style="height: 20px;">
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        Sub Total
+                                    </td>
+                                    <td style="width: 20%;text-align: right;">
+                                        {{sub_total}}
+                                    </td>
+                                </tr>
+                                <tr style="height: 20px;">
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        Discount
+                                    </td>
+                                    <td style="width: 20%;text-align: right;">
+                                        {{total_discount}}%
+                                    </td>
+                                </tr>
+                                <tr style="height: 20px;">
+                                    {{#if is_vat_enable}}
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        VAT
+                                    </td>
+                                    {{else}}
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        TAX
+                                    </td>
+
+                                    {{/if}}
+                                    <td style="width: 20%;text-align: right;">
+                                        {{total_tax}}%
+                                    </td>
+                                </tr>
+                                <tr style="height: 20px;">
+                                    <td style="width: 20%;text-align: right;font-weight: 600;padding-left: 4px;">
+                                        Total
+                                    </td>
+                                    <td style="width: 20%;text-align: right;font-weight: 600;">
+                                        {{grand_total}}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            {{/unless}}
+        </table>
+        </table>
+
+    </div>
+    {{/if }}
+    {{#if formatted_items.is_value_exist_165}}
+    <div style="padding: 40px; height:1040px;position:relative;">
+        <div style="position: absolute; top:0;left:0;">
+            <img src={{sidelogo}} alt="">
+        </div>
+        <div style="position: absolute; bottom:0;left:0;">
+            <img src={{footer}} alt=""  height="140px" width="794px">
+        </div>
+        <div style="position: absolute;top: 36%; right:0; ">
+            <img src={{watermark}}  width="610px" height="600px">
+        </div>
+        <table style=" width:100%;border-bottom:none;">
+            <tr style="height: 60px;">
+                <td style=" width: 40%;text-align: left;padding-left:40px">
+                    <div style="display: flex;align-items: center; gap: 30px;">
+                        <img src={{logo}} alt="logo">
+                        <p style="font-size: 20px;font-weight: 600;">NEW SHADOW TRADING AND CLASSY EVENTS W.L.L</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%; border-bottom:none;">
+            <tr style="height: 40px;">
+                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
+                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+                        <p style="height: 20px;width:4px;background-color:#fca524;"></p>
+                        <p> QUOTATION</p>
+                    </div>
+                </td>
+            </tr>
+
+              <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+            <tbody>
+                <tr style="background-color: #f2f3f4">
+                    <th
+                        style="width: 5%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;">
+                        S.No.</th>
+                    <th
+                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Item No.</th>
+                    <th
+                        style="width: 35%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Description</th>
+                    <th
+                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Quantity</th>
+                    <th
+                        style="width: 4%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Unit</th>
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Price</th>
+                    {{#if is_vat_enable}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        VAT(%)</th>
+                    {{else}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Tax(%)</th>
+                    {{/if}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Dis(%)</th>
+                    <th
+                        style="width: 7%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-left:none;">
+                        Total</th>
+                </tr>
+
+                {{#each formatted_items.lessThan165}}
+                <tr>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.serial_no}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.item_number}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">
+                        {{this.description}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.quantity}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.units}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.price}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.tax}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.discount}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.amount}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+             {{#unless formatted_items.is_value_exist_190}}
+                <table style="width: 100%; margin-top:10px !important;">
+                    <tr>
+                        <td style="width: 80%; vertical-align: top;">
+                            <table>
+                                <tr style="height: 25px;padding-left: 4px;">
+                                    <td>Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
+                                </tr>
+
+                                <tr style="height: 25px;padding-left: 4px;">
+                                    <td>Delivery: <span style="font-weight: 600;padding-left: 4px;">{{delivery}}</span></td>
+                                </tr>
+
+                                <tr style="height: 25px;padding-left: 4px;">
+                                    <td>Total In Words: <span
+                                            style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</span></td>
+                                </tr>
+                                    <tr style="height: 25px;padding-left: 4px;">
+                            <td align="center"> 
+                                <img src={{ user_sign }} alt="signature" height="50px" width="100px">
+                                <span style="font-weight: 600;padding-left: 4px;">Prepared By</span>
+                            </td>
+                        </tr>
+                            </table>
+                        </td>
+                        <td style="width: 20%;">
+                            <table>
+                                <tr style="height: 20px;">
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        Sub Total
+                                    </td>
+                                    <td style="width: 20%;text-align: right;">
+                                        {{sub_total}}
+                                    </td>
+                                </tr>
+                                <tr style="height: 20px;">
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        Discount
+                                    </td>
+                                    <td style="width: 20%;text-align: right;">
+                                        {{total_discount}}%
+                                    </td>
+                                </tr>
+                                <tr style="height: 20px;">
+                                    {{#if is_vat_enable}}
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        VAT
+                                    </td>
+                                    {{else}}
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        TAX
+                                    </td>
+
+                                    {{/if}}
+                                    <td style="width: 20%;text-align: right;">
+                                        {{total_tax}}%
+                                    </td>
+                                </tr>
+                                <tr style="height: 20px;">
+                                    <td style="width: 20%;text-align: right;font-weight: 600;padding-left: 4px;">
+                                        Total
+                                    </td>
+                                    <td style="width: 20%;text-align: right;font-weight: 600;">
+                                        {{grand_total}}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            {{/unless}}
+        </table>
+        </table>
+
+    </div>
+    {{/if }}
+    {{#if formatted_items.is_value_exist_190}}
+    <div style="padding: 40px; height:1040px;position:relative;">
+        <div style="position: absolute; top:0;left:0;">
+            <img src={{sidelogo}} alt="">
+        </div>
+        <div style="position: absolute; bottom:0;left:0;">
+            <img src={{footer}} alt=""  height="140px" width="794px">
+        </div>
+        <div style="position: absolute;top: 36%; right:0;  ">
+            <img src={{watermark}}  width="610px" height="600px">
+        </div>
+        <table style=" width:100%;border-bottom:none;">
+            <tr style="height: 60px;">
+                <td style=" width: 40%;text-align: left;padding-left:40px">
+                    <div style="display: flex;align-items: center; gap: 30px;">
+                        <img src={{logo}} alt="logo">
+                        <p style="font-size: 20px;font-weight: 600;">NEW SHADOW TRADING AND CLASSY EVENTS W.L.L</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%; border-bottom:none;">
+            <tr style="height: 40px;">
+                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
+                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+                        <p style="height: 20px;width:4px;background-color:#fca524;"></p>
+                        <p> QUOTATION</p>
+                    </div>
+                </td>
+            </tr>
+
+              <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+            <tbody>
+                <tr style="background-color: #f2f3f4">
+                    <th
+                        style="width: 5%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;">
+                        S.No.</th>
+                    <th
+                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Item No.</th>
+                    <th
+                        style="width: 35%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Description</th>
+                    <th
+                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Quantity</th>
+                    <th
+                        style="width: 4%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Unit</th>
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Price</th>
+                    {{#if is_vat_enable}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        VAT(%)</th>
+                    {{else}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Tax(%)</th>
+                    {{/if}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Dis(%)</th>
+                    <th
+                        style="width: 7%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-left:none;">
+                        Total</th>
+                </tr>
+
+                {{#each formatted_items.lessThan190}}
+                <tr>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.serial_no}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.item_number}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">
+                        {{this.description}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.quantity}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.units}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.price}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.tax}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.discount}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.amount}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+              {{#unless formatted_items.is_value_exist_215}}
+                <table style="width: 100%; margin-top:10px !important;">
+                    <tr>
+                        <td style="width: 80%; vertical-align: top;">
+                            <table>
+                                <tr style="height: 25px;padding-left: 4px;">
+                                    <td>Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
+                                </tr>
+
+                                <tr style="height: 25px;padding-left: 4px;">
+                                    <td>Delivery: <span style="font-weight: 600;padding-left: 4px;">{{delivery}}</span></td>
+                                </tr>
+
+                                <tr style="height: 25px;padding-left: 4px;">
+                                    <td>Total In Words: <span
+                                            style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</span></td>
+                                </tr>
+                                    <tr style="height: 25px;padding-left: 4px;">
+                            <td align="center"> 
+                                <img src={{ user_sign }} alt="signature" height="50px" width="100px">
+                                <span style="font-weight: 600;padding-left: 4px;">Prepared By</span>
+                            </td>
+                        </tr>
+                            </table>
+                        </td>
+                        <td style="width: 20%;">
+                            <table>
+                                <tr style="height: 20px;">
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        Sub Total
+                                    </td>
+                                    <td style="width: 20%;text-align: right;">
+                                        {{sub_total}}
+                                    </td>
+                                </tr>
+                                <tr style="height: 20px;">
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        Discount
+                                    </td>
+                                    <td style="width: 20%;text-align: right;">
+                                        {{total_discount}}%
+                                    </td>
+                                </tr>
+                                <tr style="height: 20px;">
+                                    {{#if is_vat_enable}}
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        VAT
+                                    </td>
+                                    {{else}}
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        TAX
+                                    </td>
+
+                                    {{/if}}
+                                    <td style="width: 20%;text-align: right;">
+                                        {{total_tax}}%
+                                    </td>
+                                </tr>
+                                <tr style="height: 20px;">
+                                    <td style="width: 20%;text-align: right;font-weight: 600;padding-left: 4px;">
+                                        Total
+                                    </td>
+                                    <td style="width: 20%;text-align: right;font-weight: 600;">
+                                        {{grand_total}}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            {{/unless}}
+        </table>
+        </table>
+
+    </div>
+    {{/if }}
+    {{#if formatted_items.is_value_exist_215}}
+    <div style="padding: 40px; height:1040px;position:relative;">
+        <div style="position: absolute; top:0;left:0;">
+            <img src={{sidelogo}} alt="">
+        </div>
+        <div style="position: absolute; bottom:0;left:0;">
+            <img src={{footer}} alt=""  height="140px" width="794px">
+        </div>
+        <div style="position: absolute;top: 36%; right:0;  ">
+            <img src={{watermark}}  width="610px" height="600px">
+        </div>
+        <table style=" width:100%;border-bottom:none;">
+            <tr style="height: 60px;">
+                <td style=" width: 40%;text-align: left;padding-left:40px">
+                    <div style="display: flex;align-items: center; gap: 30px;">
+                        <img src={{logo}} alt="logo">
+                        <p style="font-size: 20px;font-weight: 600;">NEW SHADOW TRADING AND CLASSY EVENTS W.L.L</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%; border-bottom:none;">
+            <tr style="height: 40px;">
+                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
+                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+                        <p style="height: 20px;width:4px;background-color:#fca524;"></p>
+                        <p> QUOTATION</p>
+                    </div>
+                </td>
+            </tr>
+
+              <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+            <tbody>
+                <tr style="background-color: #f2f3f4">
+                    <th
+                        style="width: 5%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;">
+                        S.No.</th>
+                    <th
+                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Item No.</th>
+                    <th
+                        style="width: 35%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Description</th>
+                    <th
+                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Quantity</th>
+                    <th
+                        style="width: 4%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Unit</th>
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Price</th>
+                    {{#if is_vat_enable}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        VAT(%)</th>
+                    {{else}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Tax(%)</th>
+                    {{/if}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Dis(%)</th>
+                    <th
+                        style="width: 7%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-left:none;">
+                        Total</th>
+                </tr>
+
+                {{#each formatted_items.lessThan215}}
+                <tr>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.serial_no}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.item_number}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">
+                        {{this.description}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.quantity}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.units}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.price}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.tax}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.discount}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.amount}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+
+              {{#unless formatted_items.is_value_exist_235}}
+                <table style="width: 100%; margin-top:10px !important;">
+                    <tr>
+                        <td style="width: 80%; vertical-align: top;">
+                            <table>
+                                <tr style="height: 25px;padding-left: 4px;">
+                                    <td>Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
+                                </tr>
+
+                                <tr style="height: 25px;padding-left: 4px;">
+                                    <td>Delivery: <span style="font-weight: 600;padding-left: 4px;">{{delivery}}</span></td>
+                                </tr>
+
+                                <tr style="height: 25px;padding-left: 4px;">
+                                    <td>Total In Words: <span
+                                            style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</span></td>
+                                </tr>
+                                    <tr style="height: 25px;padding-left: 4px;">
+                            <td align="center"> 
+                                <img src={{ user_sign }} alt="signature" height="50px" width="100px">
+                                <span style="font-weight: 600;padding-left: 4px;">Prepared By</span>
+                            </td>
+                        </tr>
+                            </table>
+                        </td>
+                        <td style="width: 20%;">
+                            <table>
+                                <tr style="height: 20px;">
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        Sub Total
+                                    </td>
+                                    <td style="width: 20%;text-align: right;">
+                                        {{sub_total}}
+                                    </td>
+                                </tr>
+                                <tr style="height: 20px;">
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        Discount
+                                    </td>
+                                    <td style="width: 20%;text-align: right;">
+                                        {{total_discount}}%
+                                    </td>
+                                </tr>
+                                <tr style="height: 20px;">
+                                    {{#if is_vat_enable}}
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        VAT
+                                    </td>
+                                    {{else}}
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        TAX
+                                    </td>
+
+                                    {{/if}}
+                                    <td style="width: 20%;text-align: right;">
+                                        {{total_tax}}%
+                                    </td>
+                                </tr>
+                                <tr style="height: 20px;">
+                                    <td style="width: 20%;text-align: right;font-weight: 600;padding-left: 4px;">
+                                        Total
+                                    </td>
+                                    <td style="width: 20%;text-align: right;font-weight: 600;">
+                                        {{grand_total}}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            {{/unless}}
+        </table>
+        </table>
+
+    </div>
+    {{/if }}
+    {{#if formatted_items.is_value_exist_235}}
+    <div style="padding: 40px; height:1040px;position:relative;">
+        <div style="position: absolute; top:0;left:0;">
+            <img src={{sidelogo}} alt="">
+        </div>
+        <div style="position: absolute; bottom:0;left:0;">
+            <img src={{footer}} alt=""  height="140px" width="794px">
+        </div>
+        <div style="position: absolute;top: 36%; right:0;  ">
+            <img src={{watermark}}  width="610px" height="600px">
+        </div>
+        <table style=" width:100%;border-bottom:none;">
+            <tr style="height: 60px;">
+                <td style=" width: 40%;text-align: left;padding-left:40px">
+                    <div style="display: flex;align-items: center; gap: 30px;">
+                        <img src={{logo}} alt="logo">
+                        <p style="font-size: 20px;font-weight: 600;">NEW SHADOW TRADING AND CLASSY EVENTS W.L.L</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%; border-bottom:none;">
+            <tr style="height: 40px;">
+                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
+                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+                        <p style="height: 20px;width:4px;background-color:#fca524;"></p>
+                        <p> QUOTATION</p>
+                    </div>
+                </td>
+            </tr>
+
+              <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+            <tbody>
+                <tr style="background-color: #f2f3f4">
+                    <th
+                        style="width: 5%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;">
+                        S.No.</th>
+                    <th
+                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Item No.</th>
+                    <th
+                        style="width: 35%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Description</th>
+                    <th
+                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Quantity</th>
+                    <th
+                        style="width: 4%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Unit</th>
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Price</th>
+                    {{#if is_vat_enable}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        VAT(%)</th>
+                    {{else}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Tax(%)</th>
+                    {{/if}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Dis(%)</th>
+                    <th
+                        style="width: 7%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-left:none;">
+                        Total</th>
+                </tr>
+
+                {{#each formatted_items.lessThan235}}
+                <tr>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.serial_no}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.item_number}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">
+                        {{this.description}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.quantity}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.units}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.price}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.tax}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.discount}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.amount}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+              {{#unless formatted_items.is_value_exist_255}}
+                <table style="width: 100%; margin-top:10px !important;">
+                    <tr>
+                        <td style="width: 80%; vertical-align: top;">
+                            <table>
+                                <tr style="height: 25px;padding-left: 4px;">
+                                    <td>Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
+                                </tr>
+
+                                <tr style="height: 25px;padding-left: 4px;">
+                                    <td>Delivery: <span style="font-weight: 600;padding-left: 4px;">{{delivery}}</span></td>
+                                </tr>
+
+                                <tr style="height: 25px;padding-left: 4px;">
+                                    <td>Total In Words: <span
+                                            style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</span></td>
+                                </tr>
+                                    <tr style="height: 25px;padding-left: 4px;">
+                            <td align="center"> 
+                                <img src={{ user_sign }} alt="signature" height="50px" width="100px">
+                                <span style="font-weight: 600;padding-left: 4px;">Prepared By</span>
+                            </td>
+                        </tr>
+                            </table>
+                        </td>
+                        <td style="width: 20%;">
+                            <table>
+                                <tr style="height: 20px;">
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        Sub Total
+                                    </td>
+                                    <td style="width: 20%;text-align: right;">
+                                        {{sub_total}}
+                                    </td>
+                                </tr>
+                                <tr style="height: 20px;">
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        Discount
+                                    </td>
+                                    <td style="width: 20%;text-align: right;">
+                                        {{total_discount}}%
+                                    </td>
+                                </tr>
+                                <tr style="height: 20px;">
+                                    {{#if is_vat_enable}}
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        VAT
+                                    </td>
+                                    {{else}}
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        TAX
+                                    </td>
+
+                                    {{/if}}
+                                    <td style="width: 20%;text-align: right;">
+                                        {{total_tax}}%
+                                    </td>
+                                </tr>
+                                <tr style="height: 20px;">
+                                    <td style="width: 20%;text-align: right;font-weight: 600;padding-left: 4px;">
+                                        Total
+                                    </td>
+                                    <td style="width: 20%;text-align: right;font-weight: 600;">
+                                        {{grand_total}}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            {{/unless}}
+        </table>
+        </table>
+
+    </div>
+    {{/if }}
+    {{#if formatted_items.is_value_exist_255}}
+    <div style="padding: 40px; height:1040px;position:relative;">
+        <div style="position: absolute; top:0;left:0;">
+            <img src={{sidelogo}} alt="">
+        </div>
+        <div style="position: absolute; bottom:0;left:0;">
+            <img src={{footer}} alt=""  height="140px" width="794px">
+        </div>
+        <div style="position: absolute;top: 36%; right:0;  ">
+            <img src={{watermark}}  width="610px" height="600px">
+        </div>
+        <table style=" width:100%;border-bottom:none;">
+            <tr style="height: 60px;">
+                <td style=" width: 40%;text-align: left;padding-left:40px">
+                    <div style="display: flex;align-items: center; gap: 30px;">
+                        <img src={{logo}} alt="logo">
+                        <p style="font-size: 20px;font-weight: 600;">NEW SHADOW TRADING AND CLASSY EVENTS W.L.L</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%; border-bottom:none;">
+            <tr style="height: 40px;">
+                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
+                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+                        <p style="height: 20px;width:4px;background-color:#fca524;"></p>
+                        <p> QUOTATION</p>
+                    </div>
+                </td>
+            </tr>
+
+              <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+            <tbody>
+                <tr style="background-color: #f2f3f4">
+                    <th
+                        style="width: 5%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;">
+                        S.No.</th>
+                    <th
+                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Item No.</th>
+                    <th
+                        style="width: 35%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Description</th>
+                    <th
+                        style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Quantity</th>
+                    <th
+                        style="width: 4%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Unit</th>
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Price</th>
+                    {{#if is_vat_enable}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        VAT(%)</th>
+                    {{else}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Tax(%)</th>
+                    {{/if}}
+                    <th
+                        style="width: 5%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px; border-right:none;border-left:none;">
+                        Dis(%)</th>
+                    <th
+                        style="width: 7%;text-align: center;border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-left:none;">
+                        Total</th>
+                </tr>
+
+                {{#each formatted_items.lessThan255}}
+                <tr>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.serial_no}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.item_number}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">
+                        {{this.description}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.quantity}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.units}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.price}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.tax}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.discount}}</td>
+                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.amount}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+
+                <table style="width: 100%; margin-top:10px !important;">
+                    <tr>
+                        <td style="width: 80%; vertical-align: top;">
+                            <table>
+                                <tr style="height: 25px;padding-left: 4px;">
+                                    <td>Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
+                                </tr>
+
+                                <tr style="height: 25px;padding-left: 4px;">
+                                    <td>Delivery: <span style="font-weight: 600;padding-left: 4px;">{{delivery}}</span></td>
+                                </tr>
+
+                                <tr style="height: 25px;padding-left: 4px;">
+                                    <td>Total In Words: <span
+                                            style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</span></td>
+                                </tr>
+                                <tr style="height: 25px;padding-left: 4px;">
+                                    <td>
+                                        <img src={{ user_sign }} alt="signature" height="50px" width="100px"><br>
+                                        <span style="font-weight: 600;padding-left: 4px;">Prepared By</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 20%;">
+                            <table>
+                                <tr style="height: 20px;">
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        Sub Total
+                                    </td>
+                                    <td style="width: 20%;text-align: right;">
+                                        {{sub_total}}
+                                    </td>
+                                </tr>
+                                <tr style="height: 20px;">
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        Discount
+                                    </td>
+                                    <td style="width: 20%;text-align: right;">
+                                        {{total_discount}}%
+                                    </td>
+                                </tr>
+                                <tr style="height: 20px;">
+                                    {{#if is_vat_enable}}
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        VAT
+                                    </td>
+                                    {{else}}
+                                    <td style="width: 20%;text-align: right; padding-left: 4px;">
+                                        TAX
+                                    </td>
+
+                                    {{/if}}
+                                    <td style="width: 20%;text-align: right;">
+                                        {{total_tax}}%
+                                    </td>
+                                </tr>
+                                <tr style="height: 20px;">
+                                    <td style="width: 20%;text-align: right;font-weight: 600;padding-left: 4px;">
+                                        Total
+                                    </td>
+                                    <td style="width: 20%;text-align: right;font-weight: 600;">
+                                        {{grand_total}}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+           
+        </table>
+        </table>
+
+    </div>
+    {{/if }}
+    
 </body>
 
 </html>

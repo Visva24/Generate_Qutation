@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ApiResponse, jwtConstants, responseMessageGenerator } from 'src/common/util/helper.config';
-import { UserRepository } from './entity/users.entity';
+import { clientRepository, UserRepository } from './entity/users.entity';
 import { InjectModel } from '@nestjs/sequelize';
 import { genSaltSync, hashSync, compareSync } from "bcrypt";
 import { EmployeeSignUpDto } from './dto/create-user.dto';
@@ -14,6 +14,7 @@ export class AuthenticationService {
 
     constructor(
         @InjectModel(UserRepository) private userModel : typeof UserRepository,
+        @InjectModel(clientRepository) private clientModel : typeof clientRepository,
         private readonly JwtService :JwtService,
         private readonly helperService :HelperService
     ){
@@ -29,10 +30,19 @@ export class AuthenticationService {
               user_email: signUpDetails.user_email
             }
           })
+          const clientData = await this.clientModel.findOne()
     
+
           if (userData) {
             return await responseMessageGenerator('failure',
               "Email already exists. Please try logging in or use a different email.",
+              []
+            )
+          }
+         
+          if (clientData.pass_code != signUpDetails.passcode) {
+            return await responseMessageGenerator('failure',
+              "passcode is mismatch, Please try again with correct passcode",
               []
             )
           }

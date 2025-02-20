@@ -47,3 +47,16 @@ export class UserRepository extends Model<InferCreationAttributes<UserRepository
     is_deleted: boolean;
 
 }
+
+@Table({tableName:"client_company"})
+export class clientRepository extends Model<InferCreationAttributes<clientRepository>,InferAttributes<clientRepository>>{
+    @Column({ autoIncrement: true, primaryKey: true })
+    id: number;
+  
+    @Column
+    client_name: string;
+  
+    @Column
+    pass_code: string;
+
+}
