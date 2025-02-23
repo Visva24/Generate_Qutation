@@ -80,7 +80,7 @@ export class HelperService {
 
     async generatePdfFromTemplate(uploadDir: string, templateName: string, data: any, file: string): Promise<any> {
         try{
-
+        const fs = require('fs');
          hbs.registerHelper('lte', (a, b) => a <= b)
          hbs.registerHelper('eq', (a, b) => a === b)
          hbs.registerHelper('gte', (a, b) => a >= b)
@@ -98,19 +98,22 @@ export class HelperService {
         const compiledTemplate = handlebars.compile(templateHtml);
         // Render HTML content from the template
         const htmlContent = compiledTemplate(data);
-
+        fs.writeFileSync('debug.html', htmlContent);
         // Generate PDF
         const browser = await puppeteer.launch({
             // headless: true,
             executablePath: '/snap/bin/chromium', // Use Snap's Chromium
+            // executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', // Use Snap's Chromium
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
                 '--disable-dev-shm-usage',
                 '--disable-gpu',
+                '--font-render-hinting=none'
             ],
 
         });
+        console.log(await browser.version());
         const page = await browser.newPage();
         await page.setContent(htmlContent);
 
@@ -124,6 +127,7 @@ export class HelperService {
 
         // Read the PDF file into a buffer
         const pdfBuffer = await fsPromises.readFile(pdfPath);
+        
         //    return pdfBuffer
         // Convert the buffer to a base64 string
         const pdfBase64 = pdfBuffer.toString('base64');
@@ -131,6 +135,7 @@ export class HelperService {
 
         // Delete the PDF file after reading it 
         await fsPromises.unlink(pdfPath);
+      
 
         return pdfDataUrl;
      }catch(error){
