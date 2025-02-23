@@ -56,7 +56,7 @@ export class SalesInvoiceService {
             return responseMessageGenerator('failure', 'something went wrong', error.message)
         }
     }
-    async getSalesInvoiceFormData(Invoice_id: number, type: string): Promise<ApiResponse> {
+    async getSalesInvoiceFormData(user_id:number,Invoice_id: number, type: string): Promise<ApiResponse> {
         try {
 
             let revisedDocNumber = null
@@ -152,13 +152,14 @@ export class SalesInvoiceService {
             return responseMessageGenerator('failure', 'something went wrong', error.message)
         }
     }
-    async createSalesInvoiceForm(InvoiceForm: InvoiceFormDto): Promise<any> {
+    async createSalesInvoiceForm(user_id:number,InvoiceForm: InvoiceFormDto): Promise<any> {
         try {
             let getTempInvoiceList = await this.TempSalesItemModel.findAll({
-                where: { doc_number: InvoiceForm.doc_number },
+                where: {user_id:user_id, doc_number: InvoiceForm.doc_number },
                 attributes: ["item_number", "description", "quantity", "units", "price", "discount", "amount"],
                 order: [["id", "ASC"]]
             })
+            let resetDocNumber = InvoiceForm.doc_number
             InvoiceForm.is_record_saved = true;
             let SalesInvoiceData = await this.SalesInvoiceFormModel.findOne({ where: { doc_number: InvoiceForm.doc_number } })
             let doc_number =  await this.quotationService.generateDynamicDocNumber('sales')
@@ -192,7 +193,7 @@ export class SalesInvoiceService {
                 }
             }
             //reset the temp data
-            await this.resetTempSalesInvoiceData(InvoiceForm.doc_number)
+            await this.resetTempSalesInvoiceData(user_id,resetDocNumber)
             return responseMessageGenerator('success', 'data saved successfully', [])
 
         } catch (error) {
@@ -202,11 +203,11 @@ export class SalesInvoiceService {
 
         }
     }
-    async updateSalesInvoiceForm(id: number, UpdateInvoiceForm: UpdateInvoiceFormDto): Promise<any> {
+    async updateSalesInvoiceForm(user_id:number,id: number, UpdateInvoiceForm: UpdateInvoiceFormDto): Promise<any> {
         try {
 
             let getTempInvoiceList = await this.TempSalesItemModel.findAll({
-                where: { doc_number: UpdateInvoiceForm.doc_number },
+                where: {user_id:user_id, doc_number: UpdateInvoiceForm.doc_number },
                 attributes: ["item_number", "description", "quantity", "units"],
                 order: [["id", "ASC"]]
             })
@@ -233,7 +234,7 @@ export class SalesInvoiceService {
                     let update = await this.SalesItemModel.create(obj)
                 }
             }
-            await this.resetTempSalesInvoiceData(UpdateInvoiceForm.doc_number)
+            await this.resetTempSalesInvoiceData(user_id,UpdateInvoiceForm.doc_number)
             return responseMessageGenerator('success', 'data updated successfully', [])
 
         } catch (error) {
@@ -248,7 +249,7 @@ export class SalesInvoiceService {
 
 
             let templateName = "sale_invoice"
-            let invoiceData = await this.getSalesInvoiceFormData(id, "view")
+            let invoiceData = await this.getSalesInvoiceFormData(1,id, "view")
             if (invoiceData.status == "failure") {
                 return res.json(invoiceData)
             }
@@ -298,12 +299,12 @@ export class SalesInvoiceService {
 
         }
     }
-    async downloadSalesInvoiceTemplate(id: number): Promise<any> {
+    async downloadSalesInvoiceTemplate(user_id:number,id: number): Promise<any> {
         try {
 
 
             let templateName = "sale_invoice"
-            let invoiceData = await this.getSalesInvoiceFormData(id, "view")
+            let invoiceData = await this.getSalesInvoiceFormData(user_id,id, "view")
             if (invoiceData.status == "failure") {
                 return invoiceData
             }
@@ -427,7 +428,7 @@ export class SalesInvoiceService {
 
         }
     }
-    async SaveOrUpdateSalesInvoiceList(doc_number: string, invoice_list: InvoiceListDto[], record_id?: number): Promise<any> {
+    async SaveOrUpdateSalesInvoiceList(user_id:number,doc_number: string, invoice_list: InvoiceListDto[], record_id?: number): Promise<any> {
         try {
             if (record_id) {
 
@@ -443,7 +444,8 @@ export class SalesInvoiceService {
                 let formatedData = invoice_list.map(singleData => ({
                     ...singleData,
                     doc_number: doc_number,
-                    amount: totalAmount
+                    amount: totalAmount,
+                    user_id:user_id
                 }))
 
                 let updateInvoice = await this.TempSalesItemModel.update(formatedData[0], { where: { id: record_id } })
@@ -461,7 +463,8 @@ export class SalesInvoiceService {
                 let formatedData = invoice_list.map(singleData => ({
                     ...singleData,
                     doc_number: doc_number,
-                    amount: totalAmount
+                    amount: totalAmount,
+                    user_id:user_id
                 }))
                 let createInvoice = await this.TempSalesItemModel.bulkCreate(formatedData)
             }
@@ -475,10 +478,10 @@ export class SalesInvoiceService {
 
         }
     }
-    async getAllSalesInvoiceList(doc_number: string, currency: string): Promise<any> {
+    async getAllSalesInvoiceList(user_id:number,doc_number: string, currency: string): Promise<any> {
         try {
 
-            let getInvoiceList = await this.TempSalesItemModel.findAll({ where: { doc_number: doc_number }, order: [["id", "ASC"]] })
+            let getInvoiceList = await this.TempSalesItemModel.findAll({ where: { user_id:user_id,doc_number: doc_number }, order: [["id", "ASC"]] })
             let modifiedData = []
             let totalAmount = getInvoiceList.reduce((acc, sum) => acc + +sum.amount, 0)
             let i = 1
@@ -536,11 +539,15 @@ export class SalesInvoiceService {
 
         }
     }
-    async resetTempSalesInvoiceData(doc_number: string): Promise<any> {
+    async resetTempSalesInvoiceData(user_id:number,doc_number: string): Promise<any> {
         try {
 
-            let dropTempInvoiceList = await this.TempSalesItemModel.destroy({ where: { doc_number: doc_number } })
-            let dropInvoiceFormAgainstDoc = await this.SalesInvoiceFormModel.destroy({ where: { doc_number: doc_number } })
+            let dropTempInvoiceList = await this.TempSalesItemModel.destroy({ where: {user_id:user_id, doc_number: doc_number } })
+            let getInvoiceFormAgainstDoc = await this.SalesInvoiceFormModel.findOne({ where: { doc_number: doc_number,is_form_move_forward:true,is_record_saved:false } })
+            if(getInvoiceFormAgainstDoc){
+                await this.SalesInvoiceFormModel.destroy({ where: { doc_number: doc_number ,is_form_move_forward:true,is_record_saved:false } })
+            }
+            // let dropInvoiceFormAgainstDoc = await this.SalesInvoiceFormModel.destroy({ where: { doc_number: doc_number } })
             return responseMessageGenerator('success', 'data reset successfully', dropTempInvoiceList)
 
         } catch (error) {
@@ -550,7 +557,7 @@ export class SalesInvoiceService {
 
         }
     }
-    async moveForwardSalesInvoice(quotation_id: number, current_user_id: number): Promise<any> {
+    async moveForwardSalesInvoice(user_id:number,quotation_id: number, current_user_id: number): Promise<any> {
         try {
 
 
@@ -591,7 +598,7 @@ export class SalesInvoiceService {
                 }
                 let existingQuotationItem = await this.TempSalesItemModel.findOne({ where: { doc_number: doc_number, item_number: singleData.item_number, description: singleData.description } })
                 if (existingQuotationItem == null) {
-                    let savedData = await this.SaveOrUpdateSalesInvoiceList(doc_number, [object], null)
+                    let savedData = await this.SaveOrUpdateSalesInvoiceList(user_id,doc_number, [object], null)
                 }
             }
 

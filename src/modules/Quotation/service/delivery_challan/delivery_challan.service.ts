@@ -53,7 +53,7 @@ export class DeliveryChallanService {
             return responseMessageGenerator('failure', 'something went wrong', error.message)
         }
     }
-    async getDeliveryChallanFormData(challan_id: number, type: string): Promise<ApiResponse> {
+    async getDeliveryChallanFormData(user_id:number,challan_id: number, type: string): Promise<ApiResponse> {
         try {
 
             let revisedDocNumber = null
@@ -148,13 +148,14 @@ export class DeliveryChallanService {
             return responseMessageGenerator('failure', 'something went wrong', error.message)
         }
     }
-    async createDeliveryChallanForm(ChallanForm: deliveryChallanFormDto): Promise<any> {
+    async createDeliveryChallanForm(user_id:number,ChallanForm: deliveryChallanFormDto): Promise<any> {
         try {
             let getTempDeliveryList = await this.TempDeliveryItemModel.findAll({
-                where: { doc_number: ChallanForm.doc_number },
+                where: {user_id:user_id, doc_number: ChallanForm.doc_number },
                 attributes: ["item_number", "description", "quantity", "units"],
                 order: [["id", "ASC"]]
             })
+            let resetDocNumber =ChallanForm.doc_number
             ChallanForm.is_record_saved = true;
             let doc_number =  await this.quotationService.generateDynamicDocNumber('delivery')
             if(doc_number?.data != null && doc_number?.data != ChallanForm.doc_number){
@@ -180,7 +181,7 @@ export class DeliveryChallanService {
                 }
             }
             //reset the temp data
-            await this.resetTempDeliveryChallanData(ChallanForm.doc_number)
+            await this.resetTempDeliveryChallanData(user_id,resetDocNumber)
             return responseMessageGenerator('success', 'data saved successfully', [])
 
         } catch (error) {
@@ -190,11 +191,11 @@ export class DeliveryChallanService {
 
         }
     }
-    async updateDeliveryChallanForm(id: number, UpdateDeliveryChallanForm: UpdateDeliveryChallanFormDto): Promise<any> {
+    async updateDeliveryChallanForm(user_id:number,id: number, UpdateDeliveryChallanForm: UpdateDeliveryChallanFormDto): Promise<any> {
         try {
 
             let getTempDeliveryList = await this.TempDeliveryItemModel.findAll({
-                where: { doc_number: UpdateDeliveryChallanForm.doc_number },
+                where: {user_id:user_id, doc_number: UpdateDeliveryChallanForm.doc_number },
                 attributes: ["item_number", "description", "quantity", "units"],
                 order: [["id", "ASC"]]
             })
@@ -213,7 +214,7 @@ export class DeliveryChallanService {
                     let update = await this.DeliveryItemModel.create(obj)
                 }
             }
-            await this.resetTempDeliveryChallanData(UpdateDeliveryChallanForm.doc_number)
+            await this.resetTempDeliveryChallanData(user_id,UpdateDeliveryChallanForm.doc_number)
             return responseMessageGenerator('success', 'data updated successfully', [])
 
         } catch (error) {
@@ -228,7 +229,7 @@ export class DeliveryChallanService {
 
 
             let templateName = "delivery_challan"
-            let deliveryChalanData = await this.getDeliveryChallanFormData(id, "view")
+            let deliveryChalanData = await this.getDeliveryChallanFormData(1,id, "view")
             if (deliveryChalanData.status == "failure") {
                 return res.json(deliveryChalanData)
             }
@@ -341,12 +342,12 @@ export class DeliveryChallanService {
 
         }
     }
-    async downloadDeliveryChallanTemplate(id: number): Promise<any> {
+    async downloadDeliveryChallanTemplate(user_id:number,id: number): Promise<any> {
         try {
 
 
             let templateName = "delivery_challan"
-            let deliveryChalanData = await this.getDeliveryChallanFormData(id, "view")
+            let deliveryChalanData = await this.getDeliveryChallanFormData(user_id,id, "view")
             if (deliveryChalanData.status == "failure") {
                 return deliveryChalanData
             }
@@ -465,7 +466,7 @@ export class DeliveryChallanService {
 
         }
     }
-    async SaveOrUpdateDeliveryChallanList(doc_number: string, challan_list: ChallanListDto[], record_id?: number): Promise<any> {
+    async SaveOrUpdateDeliveryChallanList(user_id:number,doc_number: string, challan_list: ChallanListDto[], record_id?: number): Promise<any> {
         try {
             if (record_id) {
 
@@ -473,6 +474,7 @@ export class DeliveryChallanService {
                 let formatedData = challan_list.map(singleData => ({
                     ...singleData,
                     doc_number: doc_number,
+                    user_id:user_id
                 }))
 
                 let updateQuotation = await this.TempDeliveryItemModel.update(formatedData[0], { where: { id: record_id } })
@@ -482,6 +484,7 @@ export class DeliveryChallanService {
                 let formatedData = challan_list.map(singleData => ({
                     ...singleData,
                     doc_number: doc_number,
+                    user_id:user_id
                 }))
                 let createQuotation = await this.TempDeliveryItemModel.bulkCreate(formatedData)
             }
@@ -495,10 +498,10 @@ export class DeliveryChallanService {
 
         }
     }
-    async getAllDeliveryChallanList(doc_number: string): Promise<any> {
+    async getAllDeliveryChallanList(user_id:number,doc_number: string): Promise<any> {
         try {
 
-            let getTempChallanList = await this.TempDeliveryItemModel.findAll({ where: { doc_number: doc_number }, order: [["id", "ASC"]] })
+            let getTempChallanList = await this.TempDeliveryItemModel.findAll({ where: {user_id:user_id, doc_number: doc_number }, order: [["id", "ASC"]] })
             let modifiedData = []
             let i = 1
             for (let singleData of getTempChallanList) {
@@ -549,11 +552,15 @@ export class DeliveryChallanService {
 
         }
     }
-    async resetTempDeliveryChallanData(doc_number: string): Promise<any> {
+    async resetTempDeliveryChallanData(user_id:number,doc_number: string): Promise<any> {
         try {
 
-            let getTempChallanList = await this.TempDeliveryItemModel.destroy({ where: { doc_number: doc_number } })
-            let dropChallanFormAgainstDoc = await this.deliveryChallanModel.destroy({ where: { doc_number: doc_number } })
+            let getTempChallanList = await this.TempDeliveryItemModel.destroy({ where: {user_id:user_id, doc_number: doc_number } })
+            let getChallanFormAgainstDoc = await this.deliveryChallanModel.destroy({ where: { doc_number: doc_number,is_form_move_forward:true,is_record_saved:false } })
+            if(getChallanFormAgainstDoc){
+                   await this.deliveryChallanModel.destroy({ where: { doc_number: doc_number,is_form_move_forward:true,is_record_saved:false  } })
+            }
+            // let dropChallanFormAgainstDoc = await this.deliveryChallanModel.destroy({ where: { doc_number: doc_number } })
             return responseMessageGenerator('success', 'data reset successfully', getTempChallanList)
 
         } catch (error) {
@@ -563,7 +570,7 @@ export class DeliveryChallanService {
 
         }
     }
-    async moveForwardDeliveryChallan(quotation_id: number, current_user_id: number): Promise<any> {
+    async moveForwardDeliveryChallan(user_id:number,quotation_id: number, current_user_id: number): Promise<any> {
         try {
 
             let getQuotationData: any = await this.QuotationFormModel.findAll({
@@ -606,7 +613,7 @@ export class DeliveryChallanService {
                 }
                 let existingQuotationItem = await this.TempDeliveryItemModel.findOne({ where: { doc_number: doc_number, item_number: singleData.item_number, description: singleData.description } })
                 if (existingQuotationItem == null) {
-                    let savedData = await this.SaveOrUpdateDeliveryChallanList(doc_number, [object], null)
+                    let savedData = await this.SaveOrUpdateDeliveryChallanList(user_id,doc_number, [object], null)
                 }
             }
 

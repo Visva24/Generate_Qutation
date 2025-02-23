@@ -189,6 +189,9 @@ export class TempQuotationItemRepository extends Model<InferCreationAttributes<T
   })
   item_number: string;
 
+  @Column
+  user_id: number;
+
   @Column({
     type: DataType.STRING
   })

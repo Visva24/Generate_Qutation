@@ -167,6 +167,9 @@ export class TempSalesItemRepository extends Model<InferCreationAttributes<TempS
     @Column({ type: DataType.STRING })
     item_number: string;
 
+    @Column
+    user_id: number;
+
     @Column({ type: DataType.STRING })
     doc_number: string;
 

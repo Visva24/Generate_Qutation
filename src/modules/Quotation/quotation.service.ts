@@ -58,7 +58,7 @@ export class QuotationService {
             return responseMessageGenerator('failure', 'something went wrong', error.message)
         }
     }
-    async getQuotationFormData(quotation_id: number, type: string): Promise<ApiResponse> {
+    async getQuotationFormData(user_id:number,quotation_id: number, type: string): Promise<ApiResponse> {
         try {
 
             let revisedDocNumber = null
@@ -92,9 +92,9 @@ export class QuotationService {
                     delete revisionObj.updatedAt
 
                     // return obj
-                    let existingQuotationItem = await this.tempQuotationItemModel.findOne({ where: { doc_number: revisedDocNumber, item_number: revisionObj.item_number, description: revisionObj.description } })
+                    let existingQuotationItem = await this.tempQuotationItemModel.findOne({ where: {user_id:user_id, doc_number: revisedDocNumber, item_number: revisionObj.item_number, description: revisionObj.description } })
                     if (existingQuotationItem == null) {
-                        let savedData = await this.SaveOrUpdateQuotationList(revisedDocNumber, [revisionObj], null)
+                        let savedData = await this.SaveOrUpdateQuotationList(user_id,revisedDocNumber, [revisionObj], null)
                     }
 
                 }
@@ -155,13 +155,14 @@ export class QuotationService {
             return responseMessageGenerator('failure', 'something went wrong', error.message)
         }
     }
-    async createQuotationForm(QuotationForm: QuotationFormDto): Promise<any> {
+    async createQuotationForm(user_id:number,QuotationForm: QuotationFormDto): Promise<any> {
         try {
             let getTempQuotationList = await this.tempQuotationItemModel.findAll({
-                where: { doc_number: QuotationForm.doc_number },
+                where: {user_id:user_id, doc_number: QuotationForm.doc_number },
                 attributes: ["item_number", "description", "quantity", "units", "price", "discount", "tax", "amount"],
                 order: [["id", "ASC"]]
             })
+            let resetDocNumber = QuotationForm.doc_number
 
             let totalAmount = getTempQuotationList.reduce((acc, sum) => acc + +sum.amount, 0)
             
@@ -170,7 +171,7 @@ export class QuotationService {
             // QuotationForm.total_discount = 0
             // QuotationForm.total_tax = 0
             let doc_number =  await this.generateDynamicDocNumber('quotation')
-          
+           
             if(doc_number?.data != null && doc_number?.data != QuotationForm.doc_number){
                 QuotationForm.doc_number = doc_number?.data
                 QuotationForm.is_doc_num_differ = true
@@ -194,8 +195,10 @@ export class QuotationService {
 
                 }
             }
+            
             //reset the temp data
-            await this.resetTempQuotationData(QuotationForm.doc_number)
+             await this.resetTempQuotationData(user_id,resetDocNumber)
+              
             return responseMessageGenerator('success', 'data saved successfully', [])
 
         } catch (error) {
@@ -205,11 +208,11 @@ export class QuotationService {
 
         }
     }
-    async updateQuotationForm(id: number, UpdateQuotationForm: UpdateQuotationFormDto): Promise<any> {
+    async updateQuotationForm(user_id:number,id: number, UpdateQuotationForm: UpdateQuotationFormDto): Promise<any> {
         try {
 
             let getTempQuotationList = await this.tempQuotationItemModel.findAll({
-                where: { doc_number: UpdateQuotationForm.doc_number },
+                where: {user_id:user_id, doc_number: UpdateQuotationForm.doc_number },
                 attributes: ["item_number", "description", "quantity", "units", "price", "discount", "tax", "amount"],
                 order: [["id", "ASC"]]
             })
@@ -240,7 +243,7 @@ export class QuotationService {
                     let update = await this.QuotationListModel.create(obj)
                 }
             }
-            await this.resetTempQuotationData(UpdateQuotationForm.doc_number)
+            await this.resetTempQuotationData(user_id,UpdateQuotationForm.doc_number)
             return responseMessageGenerator('success', 'data updated successfully', [])
 
         } catch (error) {
@@ -295,7 +298,7 @@ export class QuotationService {
                 }
             } else {
                 if(doc_type == "sales"){
-                    docNumber = generateInvoiceNumber(Quotation?.doc_number)
+                    docNumber = generateInvoiceNumber(getDocumentData?.doc_number)
                 }else{
                     docNumber = getDocumentData?.doc_number
                 }
@@ -367,7 +370,7 @@ export class QuotationService {
 
 
             let templateName = "quotation_template"
-            let QuotationData = await this.getQuotationFormData(id, "view")
+            let QuotationData = await this.getQuotationFormData(user_id,id, "view")
             if (QuotationData.status == "failure") {
                 return res.json(QuotationData)
             }
@@ -494,7 +497,7 @@ export class QuotationService {
 
 
             let templateName = "quotation_template"
-            let QuotationData = await this.getQuotationFormData(id, "view")
+            let QuotationData = await this.getQuotationFormData(user_id,id, "view")
             if (QuotationData.status == "failure") {
                 return QuotationData
             }
@@ -622,7 +625,7 @@ export class QuotationService {
 
         }
     }
-    async SaveOrUpdateQuotationList(doc_number: string, Quotation_list: QuotationListDto[], record_id?: number): Promise<any> {
+    async SaveOrUpdateQuotationList(user_id:number,doc_number: string, Quotation_list: QuotationListDto[], record_id?: number): Promise<any> {
         try {
             if (record_id) {
                 let getListTotalAmount = (row) => {
@@ -636,7 +639,8 @@ export class QuotationService {
                 let formatedData = Quotation_list.map(singleData => ({
                     ...singleData,
                     doc_number: doc_number,
-                    amount: totalAmount
+                    amount: totalAmount,
+                    user_id:user_id
                 }))
 
                 let updateQuotation = await this.tempQuotationItemModel.update(formatedData[0], { where: { id: record_id } })
@@ -654,7 +658,8 @@ export class QuotationService {
                 let formatedData = Quotation_list.map(singleData => ({
                     ...singleData,
                     doc_number: doc_number,
-                    amount: totalAmount
+                    amount: totalAmount,
+                    user_id:user_id
                 }))
                 let createQuotation = await this.tempQuotationItemModel.bulkCreate(formatedData)
             }
@@ -665,13 +670,12 @@ export class QuotationService {
             console.log(error);
             return responseMessageGenerator('failure', 'something went wrong', error.message)
 
-
         }
     }
-    async getAllQuotationList(doc_number: string, currency: string): Promise<any> {
+    async getAllQuotationList(user_id:number,doc_number: string, currency: string): Promise<any> {
         try {
 
-            let getTempQuotationList = await this.tempQuotationItemModel.findAll({ where: { doc_number: doc_number }, order: [["id", "ASC"]] })
+            let getTempQuotationList = await this.tempQuotationItemModel.findAll({ where: {user_id:user_id, doc_number: doc_number }, order: [["id", "ASC"]] })
             let totalAmount = getTempQuotationList.reduce((acc, sum) => acc + +sum.amount, 0)
             // let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
             // let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
@@ -705,7 +709,7 @@ export class QuotationService {
 
         }
     }
-    async deleteQuotationList(record_id: number): Promise<any> {
+    async deleteQuotationList(user_id:number,record_id: number): Promise<any> {
         try {
 
             let dropTempQuotationList = await this.tempQuotationItemModel.destroy({ where: { id: record_id } })
@@ -719,7 +723,7 @@ export class QuotationService {
         }
     }
 
-    async getSingleQuotationList(record_id: number): Promise<any> {
+    async getSingleQuotationList(user_id :number,record_id: number): Promise<any> {
         try {
 
             let getTempQuotationList = await this.tempQuotationItemModel.findOne({ where: { id: record_id } })
@@ -732,10 +736,11 @@ export class QuotationService {
 
         }
     }
-    async resetTempQuotationData(doc_number: string): Promise<any> {
+    async resetTempQuotationData(user_id:number,doc_number: string): Promise<any> {
         try {
-
-            let getTempQuotationList = await this.tempQuotationItemModel.destroy({ where: { doc_number: doc_number } })
+          
+            let getTempQuotationList = await this.tempQuotationItemModel.destroy({ where: {user_id:user_id, doc_number: doc_number } })
+           
             return responseMessageGenerator('success', 'data reset successfully', getTempQuotationList)
 
         } catch (error) {

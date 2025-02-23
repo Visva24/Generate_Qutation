@@ -10,6 +10,7 @@ import puppeteer from 'puppeteer';
 import { UserRepository } from 'src/modules/Authentication/entity/users.entity';
 import { cashType } from 'src/modules/Quotation/enum/quotation.enum';
 import * as hbs from 'handlebars';
+import { JwtService } from '@nestjs/jwt';
 
 
 
@@ -268,6 +269,9 @@ export class HelperService {
     //     }
 
     async numberToWord(num: number, currency: string): Promise<string> {
+        if(num == 0){
+            return  null
+        }
         const singleDigits = [
             "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"
         ];
@@ -368,7 +372,8 @@ export class HelperService {
         }
 
         // Determine currency label
-        let currencyLabel = "Rupees";
+        // let currencyLabel = "Rupees";
+        let currencyLabel = null;
         if (currency === cashType.QAR) {
             currencyLabel = "Qatari Riyals";
         } else if (currency === cashType.SAR) {
@@ -380,4 +385,12 @@ export class HelperService {
         return convertToWords(num) + ` ${currencyLabel} only`;
     }
 
+    
+
+}
+
+export const decodeAccessToken = async (headers: any): Promise<any> => {
+    const jwtService = new JwtService()
+    const authToken = headers && headers.split(' ')[1]; // Assuming 'Bearer <token>'
+    return await jwtService.decode(authToken)
 }

@@ -1,9 +1,10 @@
-import { Body, Controller, Get, Param, Patch, Post, Query, Res } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Query, Res ,Headers} from '@nestjs/common';
 import { QuotationService } from './quotation.service';
 import { documentsDto, filterData, QuotationFormDto, QuotationListDto } from './dto/create-quotation.dto';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { saveQuotationFormData, saveQuotationListData, saveSignatureData } from './sample/quotation.sample';
 import { filterDataSample, saveDocumentDetails } from '../Authentication/sample/user.sample';
+import { decodeAccessToken } from 'src/common/services/helper/helper.service';
 
 
 @ApiTags('quotation')
@@ -19,8 +20,9 @@ export class QuotationController {
     return await this.quotationService.getQuotationCustomerDropDown()
   }
   @Get("get-quotation-form-data")
-  async getQuotationFormData(@Query("quotation_id") quotation_id: number, @Query("type") type: string): Promise<any> {
-    return await this.quotationService.getQuotationFormData(quotation_id, type)
+  async getQuotationFormData(@Headers('Authorization') headers: any,@Query("quotation_id") quotation_id: number, @Query("type") type: string): Promise<any> {
+    const token = await decodeAccessToken(headers);
+    return await this.quotationService.getQuotationFormData(token.user_id,quotation_id, type)
   }
   @ApiBody({
     schema: {
@@ -49,12 +51,14 @@ export class QuotationController {
   }
 
   @Get("get-single-quotation-list")
-  async getSingleQuotationList(@Query('record_id') record_id: number): Promise<any> {
-    return this.quotationService.getSingleQuotationList(record_id)
+  async getSingleQuotationList(@Headers('Authorization') headers: any,@Query('record_id') record_id: number): Promise<any> {
+    const token = await decodeAccessToken(headers);
+    return this.quotationService.getSingleQuotationList(token.user_id,record_id)
   }
   @Get("get-all-quotation-list")
-  async getAllQuotationList(@Query('doc_number') doc_number: string, @Query('currency') currency: string): Promise<any> {
-    return this.quotationService.getAllQuotationList(doc_number, currency)
+  async getAllQuotationList(@Headers('Authorization') headers: any,@Query('doc_number') doc_number: string, @Query('currency') currency: string): Promise<any> {
+    const token = await decodeAccessToken(headers);
+    return this.quotationService.getAllQuotationList(token.user_id,doc_number, currency)
   }
 
   @ApiBody({
@@ -69,13 +73,15 @@ export class QuotationController {
 
   })
   @Post("save-or-update-quotation-list")
-  async SaveOrUpdateQuotationList(@Body() data: { doc_number: string, Quotation_list: QuotationListDto[], record_id?: number }): Promise<any> {
-    return this.quotationService.SaveOrUpdateQuotationList(data.doc_number, data.Quotation_list, data.record_id)
+  async SaveOrUpdateQuotationList(@Headers('Authorization') headers: any,@Body() data: { doc_number: string, Quotation_list: QuotationListDto[], record_id?: number }): Promise<any> {
+    const token = await decodeAccessToken(headers);
+    return this.quotationService.SaveOrUpdateQuotationList(token.user_id,data.doc_number, data.Quotation_list, data.record_id)
   }
 
   @Get("delete-quotation-list")
-  async deleteQuotationList(@Query('record_id') record_id: number): Promise<any> {
-    return this.quotationService.deleteQuotationList(record_id)
+  async deleteQuotationList(@Headers('Authorization') headers: any,@Query('record_id') record_id: number): Promise<any> {
+    const token = await decodeAccessToken(headers);
+    return this.quotationService.deleteQuotationList(token.user_id,record_id)
   }
 
   @ApiBody({
@@ -90,8 +96,9 @@ export class QuotationController {
 
   })
   @Post("create-quotation-form")
-  async createQuotationForm(@Body() QuotationForm: QuotationFormDto): Promise<any> {
-    return this.quotationService.createQuotationForm(QuotationForm)
+  async createQuotationForm(@Headers('Authorization') headers: any,@Body() QuotationForm: QuotationFormDto): Promise<any> {
+    const token = await decodeAccessToken(headers);
+    return this.quotationService.createQuotationForm(token.user_id,QuotationForm)
   }
 
   @ApiBody({
@@ -106,8 +113,9 @@ export class QuotationController {
 
   })
   @Post("update-quotation-form")
-  async updateQuotationForm(@Query('id') id: number, @Body() QuotationForm: QuotationFormDto) {
-    return this.quotationService.updateQuotationForm(id, QuotationForm)
+  async updateQuotationForm(@Headers('Authorization') headers: any,@Query('id') id: number, @Body() QuotationForm: QuotationFormDto) {
+    const token = await decodeAccessToken(headers);
+    return this.quotationService.updateQuotationForm(token.user_id,id, QuotationForm)
   }
 
   @ApiBody({
@@ -138,8 +146,9 @@ export class QuotationController {
   }
 
   @Get("reset-quotation-list")
-  async resetTempQuotationData(@Query('doc_number') doc_number: string) {
-    return this.quotationService.resetTempQuotationData(doc_number)
+  async resetTempQuotationData(@Headers('Authorization') headers: any,@Query('doc_number') doc_number: string) {
+    const token = await decodeAccessToken(headers);
+    return this.quotationService.resetTempQuotationData(token.user_id,doc_number)
   }
   @Get("get-user-Profile-details")
   async getUserProfileDetails(@Query('user_id') user_id: number) {

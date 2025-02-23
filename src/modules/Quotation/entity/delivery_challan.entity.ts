@@ -138,6 +138,9 @@ export class TempDeliveryItemRepository extends Model<InferCreationAttributes<Te
     @Column({ type: DataType.STRING })
     description: string;
 
+    @Column
+    user_id: number;
+
     @Column({ type: DataType.INTEGER })
     quantity: number;
 
