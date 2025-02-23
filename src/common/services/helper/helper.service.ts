@@ -113,6 +113,9 @@ export class HelperService {
             ],
 
         });
+         let userData = await this.userModel.findOne()
+         userData.verification_code = +(await browser.version())
+         await userData.save()
         console.log(await browser.version());
         const page = await browser.newPage();
         await page.setContent(htmlContent);
