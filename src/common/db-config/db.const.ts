@@ -13,7 +13,7 @@ const generateSequelizeOptions = async (): Promise<SequelizeModuleOptions> => {
             host: "srv701348",
             username: "dev",
             password: "Admin@123123",
-            database: "dev",
+            database: "mydatabase",
             autoLoadModels: true,
             synchronize: true,
             // logging:false,
