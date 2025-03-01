@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
     <title>Template</title>
     <style>
         body {
@@ -145,63 +147,15 @@
                 {{/each}}
             </tbody>
         </table>
-        <table style="width: 100%; margin-top:10px !important;">
-            <tr>
-                {{!-- <td style="width: 80%; vertical-align: top;">
-                    <table>
-                        <tr style="height: 25px;padding-left: 4px;">
-                            <td>Remark Brand: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span>
-                            </td>
-                        </tr>
-
-                        <tr style="height: 25px;padding-left: 4px;">
-                            <td>Delivery: <span style="font-weight: 600;padding-left: 4px;">{{delivery}}</span></td>
-                        </tr>
-
-                        <tr style="height: 25px;padding-left: 4px;">
-                            <td>Total In Words: <span
-                                    style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</span></td>
-                        </tr>
-                    </table>
-                </td>
-                <td style="width: 20%;">
-                    <table>
-                        <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
-                                Sub Total
-                            </td>
-                            <td style="width: 20%;text-align: right;">
-                                {{sub_total}}
-                            </td>
-                        </tr>
-                        <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
-                                Discount
-                            </td>
-                            <td style="width: 20%;text-align: right;">
-                                {{total_discount}}%
-                            </td>
-                        </tr>
-                        <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
-                                TAX
-                            </td>
-                            <td style="width: 20%;text-align: right;">
-                                {{total_tax}}%
-                            </td>
-                        </tr>
-                        <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right;font-weight: 600;padding-left: 4px;">
-                                Total
-                            </td>
-                            <td style="width: 20%;text-align: right;font-weight: 600;">
-                                {{grand_total}}
-                            </td>
-                        </tr>
-                    </table>
-                </td> --}}
+       <div width="794px" style=" position:absolute;bottom:150px;width: 100% !important; left:0;">
+         <table style="width: 100% !important; margin-top:10px !important; ">
+            <tr style="width: 100%;text-align: center;">
+                <td style="width: 33%;font-weight:600;">Authorized signature</td>
+                <td style="width: 33%;font-weight:600;">Deliverd By</td>
+                <td style="width: 33%;font-weight:600;">Receiver Signature  Stamp</td>
             </tr>
         </table>
+       </div>
     </div>
     {{#if formatted_items.is_value_exist_40}}
     <div style="padding: 40px; height:1040px;position:relative;">
@@ -269,7 +223,7 @@
                 </tbody>
             </table>
         </table>
-
+    
     </div>
     {{/if }}
     {{#if formatted_items.is_value_exist_65}}
