@@ -1,0 +1,640 @@
+
+> quotation_gen@0.0.1 start
+> nest start
+
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:38 AM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:38 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSequelizeModule dependencies initialized[39m[38;5;3m +104ms[39m
+Executing (default): SELECT 1+1 AS result
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'users' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `users`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'users' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `users` CHANGE `user_name` `user_name` VARCHAR(255);
+Executing (default): ALTER TABLE `users` CHANGE `user_email` `user_email` VARCHAR(255);
+Executing (default): ALTER TABLE `users` CHANGE `phone_number` `phone_number` VARCHAR(15) NOT NULL;
+Executing (default): ALTER TABLE `users` CHANGE `password` `password` VARCHAR(255);
+Executing (default): ALTER TABLE `users` CHANGE `user_temp_password` `user_temp_password` VARCHAR(255);
+Executing (default): ALTER TABLE `users` CHANGE `verification_code` `verification_code` INTEGER;
+Executing (default): ALTER TABLE `users` CHANGE `avatar` `avatar` JSON;
+Executing (default): ALTER TABLE `users` CHANGE `is_default_password_updated` `is_default_password_updated` TINYINT(1) DEFAULT false;
+Executing (default): ALTER TABLE `users` CHANGE `is_owner` `is_owner` TINYINT(1) DEFAULT false;
+Executing (default): ALTER TABLE `users` CHANGE `user_signature` `user_signature` VARCHAR(255);
+Executing (default): ALTER TABLE `users` CHANGE `is_deleted` `is_deleted` TINYINT(1) DEFAULT false;
+Executing (default): ALTER TABLE `users` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `users` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SHOW INDEX FROM `users` FROM `testing`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'client_company' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `client_company`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'client_company' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `client_company` CHANGE `client_name` `client_name` VARCHAR(255);
+Executing (default): ALTER TABLE `client_company` CHANGE `pass_code` `pass_code` VARCHAR(255);
+Executing (default): ALTER TABLE `client_company` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `client_company` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SHOW INDEX FROM `client_company` FROM `testing`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'quotation_form' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `quotation_form`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'quotation_form' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `quotation_form` CHANGE `customer_name` `customer_name` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `customer_reference_id` `customer_reference_id` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `doc_number` `doc_number` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `doc_date` `doc_date` DATETIME;
+Executing (default): ALTER TABLE `quotation_form` CHANGE `contact_person` `contact_person` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `email` `email` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `contact_number` `contact_number` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `customer_reference` `customer_reference` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `payment_mode` `payment_mode` ENUM('Bank_transfer', 'Cheque', 'Cash', 'Credit');
+Executing (default): ALTER TABLE `quotation_form` CHANGE `currency` `currency` ENUM('QAR', 'SAR', 'USD');
+Executing (default): ALTER TABLE `quotation_form` CHANGE `quotation_validity` `quotation_validity` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `address` `address` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `remark_brand` `remark_brand` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `delivery` `delivery` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `payment_terms` `payment_terms` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `sub_total` `sub_total` DECIMAL;
+Executing (default): ALTER TABLE `quotation_form` CHANGE `total_discount` `total_discount` DECIMAL;
+Executing (default): ALTER TABLE `quotation_form` CHANGE `total_tax` `total_tax` DECIMAL;
+Executing (default): ALTER TABLE `quotation_form` CHANGE `grand_total` `grand_total` DECIMAL;
+Executing (default): ALTER TABLE `quotation_form` CHANGE `is_revised` `is_revised` TINYINT(1) DEFAULT false;
+Executing (default): ALTER TABLE `quotation_form` CHANGE `revision_count` `revision_count` INTEGER DEFAULT 0;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='quotation_form' AND constraint_name = 'quotation_form_ibfk_1' AND TABLE_SCHEMA = 'testing';
+Executing (default): ALTER TABLE `quotation_form` DROP FOREIGN KEY `quotation_form_ibfk_1`;
+Executing (default): ALTER TABLE `quotation_form` ADD FOREIGN KEY (`created_user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+Executing (default): ALTER TABLE `quotation_form` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `quotation_form` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `quotation_form` CHANGE `is_doc_num_differ` `is_doc_num_differ` TINYINT(1) DEFAULT false;
+Executing (default): SHOW INDEX FROM `quotation_form` FROM `testing`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'document_details' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `document_details`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'document_details' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `document_details` CHANGE `doc_number` `doc_number` VARCHAR(255);
+Executing (default): ALTER TABLE `document_details` CHANGE `doc_type` `doc_type` ENUM('quotation', 'sales', 'delivery');
+Executing (default): ALTER TABLE `document_details` CHANGE `is_deleted` `is_deleted` TINYINT(1);
+Executing (default): ALTER TABLE `document_details` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `document_details` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SHOW INDEX FROM `document_details` FROM `testing`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'quotation_items' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `quotation_items`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'quotation_items' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='quotation_items' AND constraint_name = 'quotation_items_ibfk_1' AND TABLE_SCHEMA = 'testing';
+Executing (default): ALTER TABLE `quotation_items` DROP FOREIGN KEY `quotation_items_ibfk_1`;
+Executing (default): ALTER TABLE `quotation_items` ADD FOREIGN KEY (`quotation_id`) REFERENCES `quotation_form` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+Executing (default): ALTER TABLE `quotation_items` CHANGE `item_number` `item_number` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_items` CHANGE `description` `description` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_items` CHANGE `quantity` `quantity` INTEGER;
+Executing (default): ALTER TABLE `quotation_items` CHANGE `units` `units` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_items` CHANGE `price` `price` DECIMAL(10,2);
+Executing (default): ALTER TABLE `quotation_items` CHANGE `discount` `discount` DECIMAL(5,2) DEFAULT 0;
+Executing (default): ALTER TABLE `quotation_items` CHANGE `tax` `tax` DECIMAL(5,2) DEFAULT 0;
+Executing (default): ALTER TABLE `quotation_items` CHANGE `amount` `amount` DECIMAL(10,2);
+Executing (default): ALTER TABLE `quotation_items` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `quotation_items` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SHOW INDEX FROM `quotation_items` FROM `testing`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'temp_quotation_items' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `temp_quotation_items`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'temp_quotation_items' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `temp_quotation_items` CHANGE `item_number` `item_number` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_quotation_items` CHANGE `doc_number` `doc_number` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_quotation_items` CHANGE `description` `description` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_quotation_items` CHANGE `quantity` `quantity` INTEGER;
+Executing (default): ALTER TABLE `temp_quotation_items` CHANGE `units` `units` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_quotation_items` CHANGE `price` `price` DECIMAL(10,2);
+Executing (default): ALTER TABLE `temp_quotation_items` CHANGE `discount` `discount` DECIMAL(5,2) DEFAULT 0;
+Executing (default): ALTER TABLE `temp_quotation_items` CHANGE `tax` `tax` DECIMAL(5,2) DEFAULT 0;
+Executing (default): ALTER TABLE `temp_quotation_items` CHANGE `amount` `amount` DECIMAL(10,2);
+Executing (default): ALTER TABLE `temp_quotation_items` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `temp_quotation_items` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SHOW INDEX FROM `temp_quotation_items` FROM `testing`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'delivery_challan' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `delivery_challan`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'delivery_challan' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `customer_name` `customer_name` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `customer_reference_id` `customer_reference_id` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `doc_number` `doc_number` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `doc_date` `doc_date` DATETIME;
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `contact_person` `contact_person` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `email` `email` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `contact_number` `contact_number` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `customer_reference` `customer_reference` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `address` `address` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `remark_brand` `remark_brand` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `reference_date` `reference_date` DATETIME;
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `auth_signature` `auth_signature` JSON;
+
+> quotation_gen@0.0.1 start
+> nest start
+
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `receiver_sign_stamp` `receiver_sign_stamp` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `is_revised` `is_revised` TINYINT(1) DEFAULT false;
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `revision_count` `revision_count` INTEGER DEFAULT 0;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='delivery_challan' AND constraint_name = 'delivery_challan_ibfk_153' AND TABLE_SCHEMA = 'testing';
+Executing (default): ALTER TABLE `delivery_challan` DROP FOREIGN KEY `delivery_challan_ibfk_153`;
+Executing (default): ALTER TABLE `delivery_challan` ADD FOREIGN KEY (`created_user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='delivery_challan' AND constraint_name = 'delivery_challan_ibfk_154' AND TABLE_SCHEMA = 'testing';
+Executing (default): ALTER TABLE `delivery_challan` DROP FOREIGN KEY `delivery_challan_ibfk_154`;
+Executing (default): ALTER TABLE `delivery_challan` ADD FOREIGN KEY (`quotation_id`) REFERENCES `quotation_form` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `is_form_move_forward` `is_form_move_forward` TINYINT(1) DEFAULT false;
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `is_record_saved` `is_record_saved` TINYINT(1) DEFAULT false;
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `is_doc_num_differ` `is_doc_num_differ` TINYINT(1) DEFAULT false;
+Executing (default): SHOW INDEX FROM `delivery_challan` FROM `testing`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'sales_invoice' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `sales_invoice`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'sales_invoice' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `customer_name` `customer_name` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `customer_reference_id` `customer_reference_id` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `doc_number` `doc_number` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `doc_date` `doc_date` DATETIME;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `contact_person` `contact_person` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `email` `email` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `contact_number` `contact_number` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `customer_reference` `customer_reference` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `payment_mode` `payment_mode` ENUM('Bank_transfer', 'Cheque', 'Cash', 'Credit');
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `currency` `currency` ENUM('QAR', 'SAR', 'USD');
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `reference_date` `reference_date` DATETIME;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `dn_number` `dn_number` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `quotation_validity` `quotation_validity` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `address` `address` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `remark_brand` `remark_brand` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `payment_terms` `payment_terms` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `sales_employee` `sales_employee` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `amount_in_words` `amount_in_words` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `sub_total` `sub_total` DECIMAL;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `total_discount` `total_discount` DECIMAL;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `total_tax` `total_tax` DECIMAL;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `grand_total` `grand_total` DECIMAL;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `auth_signature` `auth_signature` JSON;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `delivery` `delivery` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `receiver_sign_stamp` `receiver_sign_stamp` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `is_revised` `is_revised` TINYINT(1) DEFAULT false;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `revision_count` `revision_count` INTEGER DEFAULT 0;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='sales_invoice' AND constraint_name = 'sales_invoice_ibfk_226' AND TABLE_SCHEMA = 'testing';
+Executing (default): ALTER TABLE `sales_invoice` DROP FOREIGN KEY `sales_invoice_ibfk_226`;
+Executing (default): ALTER TABLE `sales_invoice` ADD FOREIGN KEY (`created_user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='sales_invoice' AND constraint_name = 'sales_invoice_ibfk_227' AND TABLE_SCHEMA = 'testing';
+Executing (default): ALTER TABLE `sales_invoice` DROP FOREIGN KEY `sales_invoice_ibfk_227`;
+Executing (default): ALTER TABLE `sales_invoice` ADD FOREIGN KEY (`quotation_id`) REFERENCES `quotation_form` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='sales_invoice' AND constraint_name = 'sales_invoice_ibfk_228' AND TABLE_SCHEMA = 'testing';
+Executing (default): ALTER TABLE `sales_invoice` DROP FOREIGN KEY `sales_invoice_ibfk_228`;
+Executing (default): ALTER TABLE `sales_invoice` ADD FOREIGN KEY (`delivery_challan_id`) REFERENCES `delivery_challan` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `is_form_move_forward` `is_form_move_forward` TINYINT(1) DEFAULT false;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `is_record_saved` `is_record_saved` TINYINT(1) DEFAULT false;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `is_doc_num_differ` `is_doc_num_differ` TINYINT(1) DEFAULT false;
+Executing (default): SHOW INDEX FROM `sales_invoice` FROM `testing`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'sales_items' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `sales_items`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'sales_items' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='sales_items' AND constraint_name = 'sales_items_ibfk_1' AND TABLE_SCHEMA = 'testing';
+Executing (default): ALTER TABLE `sales_items` DROP FOREIGN KEY `sales_items_ibfk_1`;
+Executing (default): ALTER TABLE `sales_items` ADD FOREIGN KEY (`invoice_id`) REFERENCES `sales_invoice` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+Executing (default): ALTER TABLE `sales_items` CHANGE `item_number` `item_number` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_items` CHANGE `description` `description` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_items` CHANGE `quantity` `quantity` INTEGER;
+Executing (default): ALTER TABLE `sales_items` CHANGE `units` `units` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_items` CHANGE `price` `price` DECIMAL(10,2);
+Executing (default): ALTER TABLE `sales_items` CHANGE `discount` `discount` DECIMAL(10,2);
+Executing (default): ALTER TABLE `sales_items` CHANGE `amount` `amount` DECIMAL(10,2);
+Executing (default): ALTER TABLE `sales_items` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `sales_items` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SHOW INDEX FROM `sales_items` FROM `testing`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'temp_sales_items' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `temp_sales_items`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'temp_sales_items' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `temp_sales_items` CHANGE `item_number` `item_number` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_sales_items` CHANGE `doc_number` `doc_number` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_sales_items` CHANGE `description` `description` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_sales_items` CHANGE `quantity` `quantity` INTEGER;
+Executing (default): ALTER TABLE `temp_sales_items` CHANGE `units` `units` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_sales_items` CHANGE `price` `price` DECIMAL(10,2);
+Executing (default): ALTER TABLE `temp_sales_items` CHANGE `discount` `discount` DECIMAL(10,2);
+Executing (default): ALTER TABLE `temp_sales_items` CHANGE `amount` `amount` DECIMAL(10,2);
+Executing (default): ALTER TABLE `temp_sales_items` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `temp_sales_items` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SHOW INDEX FROM `temp_sales_items` FROM `testing`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'temp_delivery_items' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `temp_delivery_items`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'temp_delivery_items' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `temp_delivery_items` CHANGE `item_number` `item_number` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_delivery_items` CHANGE `doc_number` `doc_number` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_delivery_items` CHANGE `description` `description` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_delivery_items` CHANGE `quantity` `quantity` INTEGER;
+Executing (default): ALTER TABLE `temp_delivery_items` CHANGE `units` `units` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_delivery_items` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `temp_delivery_items` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SHOW INDEX FROM `temp_delivery_items` FROM `testing`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'delivery_items' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `delivery_items`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'delivery_items' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='delivery_items' AND constraint_name = 'delivery_items_ibfk_1' AND TABLE_SCHEMA = 'testing';
+Executing (default): ALTER TABLE `delivery_items` DROP FOREIGN KEY `delivery_items_ibfk_1`;
+Executing (default): ALTER TABLE `delivery_items` ADD FOREIGN KEY (`delivery_id`) REFERENCES `delivery_challan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+Executing (default): ALTER TABLE `delivery_items` CHANGE `item_number` `item_number` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_items` CHANGE `description` `description` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_items` CHANGE `quantity` `quantity` INTEGER;
+Executing (default): ALTER TABLE `delivery_items` CHANGE `units` `units` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_items` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `delivery_items` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SHOW INDEX FROM `delivery_items` FROM `testing`
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSequelizeCoreModule dependencies initialized[39m[38;5;3m +3329ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSequelizeModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSequelizeModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSequelizeModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthenticationModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mQuotationModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +50ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/, GET} route[39m[38;5;3m +6ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthenticationController {/authentication}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/authentication/sign-in, POST} route[39m[38;5;3m +5ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/authentication/sign-up, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mQuotationController {/quotation}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/get-customer-dropdown, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/get-quotation-form-data, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/get-quotation-form-history, POST} route[39m[38;5;3m +4ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/generate-dynamic-doc-number, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/generate-revision-doc-number, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/get-single-quotation-list, GET} route[39m[38;5;3m +2ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/get-all-quotation-list, GET} route[39m[38;5;3m +4ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/save-or-update-quotation-list, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/delete-quotation-list, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/create-quotation-form, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/update-quotation-form, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/create-or-update-document, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/generate-quotation-template, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/download-quotation-template, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/reset-quotation-list, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/get-user-Profile-details, GET} route[39m[38;5;3m +3ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/duplicate-quotation-item-records, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/upload-user-details, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mDeliveryChallanController {/delivery-challan}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/delivery-challan-customer-dropdown, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/get-delivery-challan-form-data, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/get-delivery-challan-form-history, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/create-delivery-challan-form, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/update-delivery-challan-form/:id, PATCH} route[39m[38;5;3m +4ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/generate-delivery-challan-template, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/download-delivery-challan-template, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/save-or-update-challan-list, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/get-all-challan-list, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/delete-challan-list, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/get-single-challan-list, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/reset-temp-Challan-list, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/move-forward-delivery-challan, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/duplicate-challan-item-records, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mSalesInvoiceController {/sales-invoice}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/invoice-customer-dropdown, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/get-sales-invoice-form-data, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/get-sales-invoice-form-history, POST} route[39m[38;5;3m +2ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/create-sales-invoice-form, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/update-sales-invoice-form/:id, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/generate-sales-invoice-template, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/download-sales-invoice-template, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/save-or-update-invoice-list, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/get-all-sales-invoice-list, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/delete-sales-invoice-list, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/get-single-invoice-list, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/reset-temp-sales-invoice-list, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/move-forward-sales-invoice, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/duplicate-sales-item-records, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +5ms[39m
+[31m[Nest] 5444  - [39m02/23/2025, 8:37:41 AM [31m  ERROR[39m [38;5;3m[NestApplication] [39m[31mError: listen EADDRINUSE: address already in use :::5000[39m[38;5;3m +7ms[39m
+node:internal/errors:496
+    ErrorCaptureStackTrace(err);
+    ^
+
+Error: listen EADDRINUSE: address already in use :::5000
+    at __node_internal_captureLargerStackTrace (node:internal/errors:496:5)
+    at __node_internal_uvExceptionWithHostPort (node:internal/errors:593:12)
+    at Server.setupListenHandle [as _listen2] (node:net:1811:16)
+    at listenInCluster (node:net:1859:12)
+    at Server.listen (node:net:1947:7)
+    at ExpressAdapter.listen (/var/www/api.shadowgroupqatar.com/node_modules/@nestjs/platform-express/adapters/express-adapter.js:95:32)
+    at /var/www/api.shadowgroupqatar.com/node_modules/@nestjs/core/nest-application.js:183:30
+    at new Promise (<anonymous>)
+    at NestApplication.listen (/var/www/api.shadowgroupqatar.com/node_modules/@nestjs/core/nest-application.js:173:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at bootstrap (/var/www/api.shadowgroupqatar.com/src/main.ts:40:3) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 5000
+}
+
+Node.js v18.19.1
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:47 AM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:47 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSequelizeModule dependencies initialized[39m[38;5;3m +104ms[39m
+Executing (default): SELECT 1+1 AS result
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'users' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `users`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'users' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `users` CHANGE `user_name` `user_name` VARCHAR(255);
+Executing (default): ALTER TABLE `users` CHANGE `user_email` `user_email` VARCHAR(255);
+Executing (default): ALTER TABLE `users` CHANGE `phone_number` `phone_number` VARCHAR(15) NOT NULL;
+Executing (default): ALTER TABLE `users` CHANGE `password` `password` VARCHAR(255);
+Executing (default): ALTER TABLE `users` CHANGE `user_temp_password` `user_temp_password` VARCHAR(255);
+Executing (default): ALTER TABLE `users` CHANGE `verification_code` `verification_code` INTEGER;
+Executing (default): ALTER TABLE `users` CHANGE `avatar` `avatar` JSON;
+Executing (default): ALTER TABLE `users` CHANGE `is_default_password_updated` `is_default_password_updated` TINYINT(1) DEFAULT false;
+Executing (default): ALTER TABLE `users` CHANGE `is_owner` `is_owner` TINYINT(1) DEFAULT false;
+Executing (default): ALTER TABLE `users` CHANGE `user_signature` `user_signature` VARCHAR(255);
+Executing (default): ALTER TABLE `users` CHANGE `is_deleted` `is_deleted` TINYINT(1) DEFAULT false;
+Executing (default): ALTER TABLE `users` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `users` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SHOW INDEX FROM `users` FROM `testing`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'client_company' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `client_company`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'client_company' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `client_company` CHANGE `client_name` `client_name` VARCHAR(255);
+Executing (default): ALTER TABLE `client_company` CHANGE `pass_code` `pass_code` VARCHAR(255);
+Executing (default): ALTER TABLE `client_company` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `client_company` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SHOW INDEX FROM `client_company` FROM `testing`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'quotation_form' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `quotation_form`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'quotation_form' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `quotation_form` CHANGE `customer_name` `customer_name` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `customer_reference_id` `customer_reference_id` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `doc_number` `doc_number` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `doc_date` `doc_date` DATETIME;
+Executing (default): ALTER TABLE `quotation_form` CHANGE `contact_person` `contact_person` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `email` `email` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `contact_number` `contact_number` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `customer_reference` `customer_reference` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `payment_mode` `payment_mode` ENUM('Bank_transfer', 'Cheque', 'Cash', 'Credit');
+Executing (default): ALTER TABLE `quotation_form` CHANGE `currency` `currency` ENUM('QAR', 'SAR', 'USD');
+Executing (default): ALTER TABLE `quotation_form` CHANGE `quotation_validity` `quotation_validity` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `address` `address` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `remark_brand` `remark_brand` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `delivery` `delivery` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `payment_terms` `payment_terms` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_form` CHANGE `sub_total` `sub_total` DECIMAL;
+Executing (default): ALTER TABLE `quotation_form` CHANGE `total_discount` `total_discount` DECIMAL;
+Executing (default): ALTER TABLE `quotation_form` CHANGE `total_tax` `total_tax` DECIMAL;
+Executing (default): ALTER TABLE `quotation_form` CHANGE `grand_total` `grand_total` DECIMAL;
+Executing (default): ALTER TABLE `quotation_form` CHANGE `is_revised` `is_revised` TINYINT(1) DEFAULT false;
+Executing (default): ALTER TABLE `quotation_form` CHANGE `revision_count` `revision_count` INTEGER DEFAULT 0;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='quotation_form' AND constraint_name = 'quotation_form_ibfk_1' AND TABLE_SCHEMA = 'testing';
+Executing (default): ALTER TABLE `quotation_form` DROP FOREIGN KEY `quotation_form_ibfk_1`;
+Executing (default): ALTER TABLE `quotation_form` ADD FOREIGN KEY (`created_user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+Executing (default): ALTER TABLE `quotation_form` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `quotation_form` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `quotation_form` CHANGE `is_doc_num_differ` `is_doc_num_differ` TINYINT(1) DEFAULT false;
+Executing (default): SHOW INDEX FROM `quotation_form` FROM `testing`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'document_details' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `document_details`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'document_details' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `document_details` CHANGE `doc_number` `doc_number` VARCHAR(255);
+Executing (default): ALTER TABLE `document_details` CHANGE `doc_type` `doc_type` ENUM('quotation', 'sales', 'delivery');
+Executing (default): ALTER TABLE `document_details` CHANGE `is_deleted` `is_deleted` TINYINT(1);
+Executing (default): ALTER TABLE `document_details` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `document_details` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SHOW INDEX FROM `document_details` FROM `testing`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'quotation_items' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `quotation_items`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'quotation_items' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='quotation_items' AND constraint_name = 'quotation_items_ibfk_1' AND TABLE_SCHEMA = 'testing';
+Executing (default): ALTER TABLE `quotation_items` DROP FOREIGN KEY `quotation_items_ibfk_1`;
+Executing (default): ALTER TABLE `quotation_items` ADD FOREIGN KEY (`quotation_id`) REFERENCES `quotation_form` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+Executing (default): ALTER TABLE `quotation_items` CHANGE `item_number` `item_number` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_items` CHANGE `description` `description` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_items` CHANGE `quantity` `quantity` INTEGER;
+Executing (default): ALTER TABLE `quotation_items` CHANGE `units` `units` VARCHAR(255);
+Executing (default): ALTER TABLE `quotation_items` CHANGE `price` `price` DECIMAL(10,2);
+Executing (default): ALTER TABLE `quotation_items` CHANGE `discount` `discount` DECIMAL(5,2) DEFAULT 0;
+Executing (default): ALTER TABLE `quotation_items` CHANGE `tax` `tax` DECIMAL(5,2) DEFAULT 0;
+Executing (default): ALTER TABLE `quotation_items` CHANGE `amount` `amount` DECIMAL(10,2);
+Executing (default): ALTER TABLE `quotation_items` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `quotation_items` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SHOW INDEX FROM `quotation_items` FROM `testing`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'temp_quotation_items' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `temp_quotation_items`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'temp_quotation_items' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `temp_quotation_items` CHANGE `item_number` `item_number` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_quotation_items` CHANGE `doc_number` `doc_number` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_quotation_items` CHANGE `description` `description` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_quotation_items` CHANGE `quantity` `quantity` INTEGER;
+Executing (default): ALTER TABLE `temp_quotation_items` CHANGE `units` `units` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_quotation_items` CHANGE `price` `price` DECIMAL(10,2);
+Executing (default): ALTER TABLE `temp_quotation_items` CHANGE `discount` `discount` DECIMAL(5,2) DEFAULT 0;
+Executing (default): ALTER TABLE `temp_quotation_items` CHANGE `tax` `tax` DECIMAL(5,2) DEFAULT 0;
+Executing (default): ALTER TABLE `temp_quotation_items` CHANGE `amount` `amount` DECIMAL(10,2);
+Executing (default): ALTER TABLE `temp_quotation_items` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `temp_quotation_items` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SHOW INDEX FROM `temp_quotation_items` FROM `testing`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'delivery_challan' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `delivery_challan`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'delivery_challan' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `customer_name` `customer_name` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `customer_reference_id` `customer_reference_id` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `doc_number` `doc_number` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `doc_date` `doc_date` DATETIME;
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `contact_person` `contact_person` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `email` `email` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `contact_number` `contact_number` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `customer_reference` `customer_reference` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `address` `address` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `remark_brand` `remark_brand` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `reference_date` `reference_date` DATETIME;
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `auth_signature` `auth_signature` JSON;
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `receiver_sign_stamp` `receiver_sign_stamp` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `is_revised` `is_revised` TINYINT(1) DEFAULT false;
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `revision_count` `revision_count` INTEGER DEFAULT 0;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='delivery_challan' AND constraint_name = 'delivery_challan_ibfk_155' AND TABLE_SCHEMA = 'testing';
+Executing (default): ALTER TABLE `delivery_challan` DROP FOREIGN KEY `delivery_challan_ibfk_155`;
+Executing (default): ALTER TABLE `delivery_challan` ADD FOREIGN KEY (`created_user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='delivery_challan' AND constraint_name = 'delivery_challan_ibfk_156' AND TABLE_SCHEMA = 'testing';
+Executing (default): ALTER TABLE `delivery_challan` DROP FOREIGN KEY `delivery_challan_ibfk_156`;
+Executing (default): ALTER TABLE `delivery_challan` ADD FOREIGN KEY (`quotation_id`) REFERENCES `quotation_form` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `is_form_move_forward` `is_form_move_forward` TINYINT(1) DEFAULT false;
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `is_record_saved` `is_record_saved` TINYINT(1) DEFAULT false;
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `delivery_challan` CHANGE `is_doc_num_differ` `is_doc_num_differ` TINYINT(1) DEFAULT false;
+Executing (default): SHOW INDEX FROM `delivery_challan` FROM `testing`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'sales_invoice' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `sales_invoice`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'sales_invoice' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `customer_name` `customer_name` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `customer_reference_id` `customer_reference_id` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `doc_number` `doc_number` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `doc_date` `doc_date` DATETIME;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `contact_person` `contact_person` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `email` `email` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `contact_number` `contact_number` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `customer_reference` `customer_reference` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `payment_mode` `payment_mode` ENUM('Bank_transfer', 'Cheque', 'Cash', 'Credit');
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `currency` `currency` ENUM('QAR', 'SAR', 'USD');
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `reference_date` `reference_date` DATETIME;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `dn_number` `dn_number` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `quotation_validity` `quotation_validity` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `address` `address` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `remark_brand` `remark_brand` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `payment_terms` `payment_terms` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `sales_employee` `sales_employee` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `amount_in_words` `amount_in_words` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `sub_total` `sub_total` DECIMAL;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `total_discount` `total_discount` DECIMAL;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `total_tax` `total_tax` DECIMAL;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `grand_total` `grand_total` DECIMAL;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `auth_signature` `auth_signature` JSON;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `delivery` `delivery` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `receiver_sign_stamp` `receiver_sign_stamp` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `is_revised` `is_revised` TINYINT(1) DEFAULT false;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `revision_count` `revision_count` INTEGER DEFAULT 0;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='sales_invoice' AND constraint_name = 'sales_invoice_ibfk_229' AND TABLE_SCHEMA = 'testing';
+Executing (default): ALTER TABLE `sales_invoice` DROP FOREIGN KEY `sales_invoice_ibfk_229`;
+Executing (default): ALTER TABLE `sales_invoice` ADD FOREIGN KEY (`created_user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='sales_invoice' AND constraint_name = 'sales_invoice_ibfk_230' AND TABLE_SCHEMA = 'testing';
+Executing (default): ALTER TABLE `sales_invoice` DROP FOREIGN KEY `sales_invoice_ibfk_230`;
+Executing (default): ALTER TABLE `sales_invoice` ADD FOREIGN KEY (`quotation_id`) REFERENCES `quotation_form` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='sales_invoice' AND constraint_name = 'sales_invoice_ibfk_231' AND TABLE_SCHEMA = 'testing';
+Executing (default): ALTER TABLE `sales_invoice` DROP FOREIGN KEY `sales_invoice_ibfk_231`;
+Executing (default): ALTER TABLE `sales_invoice` ADD FOREIGN KEY (`delivery_challan_id`) REFERENCES `delivery_challan` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `is_form_move_forward` `is_form_move_forward` TINYINT(1) DEFAULT false;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `is_record_saved` `is_record_saved` TINYINT(1) DEFAULT false;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `sales_invoice` CHANGE `is_doc_num_differ` `is_doc_num_differ` TINYINT(1) DEFAULT false;
+Executing (default): SHOW INDEX FROM `sales_invoice` FROM `testing`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'sales_items' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `sales_items`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'sales_items' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='sales_items' AND constraint_name = 'sales_items_ibfk_1' AND TABLE_SCHEMA = 'testing';
+Executing (default): ALTER TABLE `sales_items` DROP FOREIGN KEY `sales_items_ibfk_1`;
+Executing (default): ALTER TABLE `sales_items` ADD FOREIGN KEY (`invoice_id`) REFERENCES `sales_invoice` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+Executing (default): ALTER TABLE `sales_items` CHANGE `item_number` `item_number` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_items` CHANGE `description` `description` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_items` CHANGE `quantity` `quantity` INTEGER;
+Executing (default): ALTER TABLE `sales_items` CHANGE `units` `units` VARCHAR(255);
+Executing (default): ALTER TABLE `sales_items` CHANGE `price` `price` DECIMAL(10,2);
+Executing (default): ALTER TABLE `sales_items` CHANGE `discount` `discount` DECIMAL(10,2);
+Executing (default): ALTER TABLE `sales_items` CHANGE `amount` `amount` DECIMAL(10,2);
+Executing (default): ALTER TABLE `sales_items` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `sales_items` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SHOW INDEX FROM `sales_items` FROM `testing`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'temp_sales_items' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `temp_sales_items`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'temp_sales_items' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `temp_sales_items` CHANGE `item_number` `item_number` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_sales_items` CHANGE `doc_number` `doc_number` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_sales_items` CHANGE `description` `description` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_sales_items` CHANGE `quantity` `quantity` INTEGER;
+Executing (default): ALTER TABLE `temp_sales_items` CHANGE `units` `units` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_sales_items` CHANGE `price` `price` DECIMAL(10,2);
+Executing (default): ALTER TABLE `temp_sales_items` CHANGE `discount` `discount` DECIMAL(10,2);
+Executing (default): ALTER TABLE `temp_sales_items` CHANGE `amount` `amount` DECIMAL(10,2);
+Executing (default): ALTER TABLE `temp_sales_items` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `temp_sales_items` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SHOW INDEX FROM `temp_sales_items` FROM `testing`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'temp_delivery_items' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `temp_delivery_items`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'temp_delivery_items' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `temp_delivery_items` CHANGE `item_number` `item_number` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_delivery_items` CHANGE `doc_number` `doc_number` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_delivery_items` CHANGE `description` `description` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_delivery_items` CHANGE `quantity` `quantity` INTEGER;
+Executing (default): ALTER TABLE `temp_delivery_items` CHANGE `units` `units` VARCHAR(255);
+Executing (default): ALTER TABLE `temp_delivery_items` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `temp_delivery_items` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SHOW INDEX FROM `temp_delivery_items` FROM `testing`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'delivery_items' AND TABLE_SCHEMA = 'testing'
+Executing (default): SHOW FULL COLUMNS FROM `delivery_items`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'delivery_items' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='testing' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='delivery_items' AND constraint_name = 'delivery_items_ibfk_1' AND TABLE_SCHEMA = 'testing';
+Executing (default): ALTER TABLE `delivery_items` DROP FOREIGN KEY `delivery_items_ibfk_1`;
+Executing (default): ALTER TABLE `delivery_items` ADD FOREIGN KEY (`delivery_id`) REFERENCES `delivery_challan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+Executing (default): ALTER TABLE `delivery_items` CHANGE `item_number` `item_number` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_items` CHANGE `description` `description` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_items` CHANGE `quantity` `quantity` INTEGER;
+Executing (default): ALTER TABLE `delivery_items` CHANGE `units` `units` VARCHAR(255);
+Executing (default): ALTER TABLE `delivery_items` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+Executing (default): ALTER TABLE `delivery_items` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+Executing (default): SHOW INDEX FROM `delivery_items` FROM `testing`
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSequelizeCoreModule dependencies initialized[39m[38;5;3m +2216ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSequelizeModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSequelizeModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSequelizeModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthenticationModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mQuotationModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +34ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/, GET} route[39m[38;5;3m +2ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthenticationController {/authentication}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/authentication/sign-in, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/authentication/sign-up, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mQuotationController {/quotation}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/get-customer-dropdown, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/get-quotation-form-data, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/get-quotation-form-history, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/generate-dynamic-doc-number, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/generate-revision-doc-number, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/get-single-quotation-list, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/get-all-quotation-list, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/save-or-update-quotation-list, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/delete-quotation-list, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/create-quotation-form, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/update-quotation-form, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/create-or-update-document, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/generate-quotation-template, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/download-quotation-template, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/reset-quotation-list, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/get-user-Profile-details, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/duplicate-quotation-item-records, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/quotation/upload-user-details, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mDeliveryChallanController {/delivery-challan}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/delivery-challan-customer-dropdown, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/get-delivery-challan-form-data, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/get-delivery-challan-form-history, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/create-delivery-challan-form, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/update-delivery-challan-form/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/generate-delivery-challan-template, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/download-delivery-challan-template, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/save-or-update-challan-list, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/get-all-challan-list, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/delete-challan-list, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/get-single-challan-list, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/reset-temp-Challan-list, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/move-forward-delivery-challan, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/delivery-challan/duplicate-challan-item-records, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mSalesInvoiceController {/sales-invoice}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/invoice-customer-dropdown, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/get-sales-invoice-form-data, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/get-sales-invoice-form-history, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/create-sales-invoice-form, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/update-sales-invoice-form/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/generate-sales-invoice-template, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/download-sales-invoice-template, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/save-or-update-invoice-list, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/get-all-sales-invoice-list, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/delete-sales-invoice-list, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/get-single-invoice-list, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/reset-temp-sales-invoice-list, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/move-forward-sales-invoice, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales-invoice/duplicate-sales-item-records, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +4ms[39m
+[31m[Nest] 5498  - [39m02/23/2025, 8:37:49 AM [31m  ERROR[39m [38;5;3m[NestApplication] [39m[31mError: listen EADDRINUSE: address already in use :::5000[39m[38;5;3m +2ms[39m
+node:internal/errors:496
+    ErrorCaptureStackTrace(err);
+    ^
+
+Error: listen EADDRINUSE: address already in use :::5000
+    at __node_internal_captureLargerStackTrace (node:internal/errors:496:5)
+    at __node_internal_uvExceptionWithHostPort (node:internal/errors:593:12)
+    at Server.setupListenHandle [as _listen2] (node:net:1811:16)
+    at listenInCluster (node:net:1859:12)
+    at Server.listen (node:net:1947:7)
+    at ExpressAdapter.listen (/var/www/api.shadowgroupqatar.com/node_modules/@nestjs/platform-express/adapters/express-adapter.js:95:32)
+    at /var/www/api.shadowgroupqatar.com/node_modules/@nestjs/core/nest-application.js:183:30
+    at new Promise (<anonymous>)
+    at NestApplication.listen (/var/www/api.shadowgroupqatar.com/node_modules/@nestjs/core/nest-application.js:173:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at bootstrap (/var/www/api.shadowgroupqatar.com/src/main.ts:40:3) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 5000
+}
+
+Node.js v18.19.1
