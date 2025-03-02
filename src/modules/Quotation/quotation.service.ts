@@ -106,6 +106,8 @@ export class QuotationService {
                     doc_date: moment(singleData.doc_date).format('DD-MMM-YYYY'),
                     ...(type == "revised" && { doc_number: revisedDocNumber }),
                     quotation_items: modifiedListData,
+                    sub_total: await this.helperService.formatAmount(singleData.sub_total,singleData.currency),
+                    grand_total: await this.helperService.formatAmount(singleData.grand_total,singleData.currency),
                     amount_in_words: await this.helperService.numberToWord(singleData.grand_total, singleData.currency)
                 }
             }))
@@ -383,7 +385,7 @@ export class QuotationService {
             const footer = `data:image/png;base64,${footerBase64Image}`;
             const sidelogo = `data:image/png;base64,${sideLogoBase64Image}`;
             const watermark = `data:image/png;base64,${waterMarkBase64Image}`;
-            let numberInWords = await this.helperService.numberToWord(QuotationData.data.grand_total, QuotationData.data.currency)
+            let numberInWords = await this.helperService.numberToWord(Number(QuotationData.data.grand_total.replace(/,/g, '')), QuotationData.data.currency)
               let itemsLength = (QuotationData.data.quotation_items).length
                 
               let userData = await this.userModel.findOne({where:{id:user_id}})
@@ -451,10 +453,14 @@ export class QuotationService {
                 "lessThan215":lessThan215,
                 "is_value_exist_215":lessThan215.length > 0 ? true :false
              }
+             let grand_total=  await this.helperService.formatAmount(Number(QuotationData.data.grand_total.replace(/,/g, '')),QuotationData.data.currency)
+             let  sub_total = await this.helperService.formatAmount(Number(QuotationData.data.sub_total.replace(/,/g, '')),QuotationData.data.currency)
             //    return res.json(formattedItems)
             let formData = [QuotationData.data].map(singleData => ({
                 ...singleData,
                 amount_in_words: numberInWords,
+                grand_total: grand_total,
+                sub_total: sub_total,
                 logo: logo,
                 footer: footer,
                 sidelogo: sidelogo,
@@ -511,7 +517,7 @@ export class QuotationService {
             const sidelogo = `data:image/png;base64,${sideLogoBase64Image}`;
             const watermark = `data:image/png;base64,${waterMarkBase64Image}`;
 
-            let numberInWords = await this.helperService.numberToWord(QuotationData.data.grand_total, QuotationData.data.currency)
+            let numberInWords = await this.helperService.numberToWord(Number(QuotationData.data.grand_total.replace(/,/g, '')), QuotationData.data.currency)
             let itemsLength = (QuotationData.data.quotation_items).length
                 
             //  return res.json(itemsLength)
@@ -593,10 +599,14 @@ export class QuotationService {
           }
              let userData = await this.userModel.findOne({where:{id:user_id}})
              let sign = await this.getSignatureAsBase64(userData?.user_signature)
-              
+            
+             let grand_total=  await this.helperService.formatAmount(Number(QuotationData.data.grand_total.replace(/,/g, '')),QuotationData.data.currency)
+            let  sub_total = await this.helperService.formatAmount(Number(QuotationData.data.sub_total.replace(/,/g, '')),QuotationData.data.currency)
             let formData = [QuotationData.data].map(singleData => ({
                 ...singleData,
                 amount_in_words: numberInWords,
+                grand_total: grand_total,
+                sub_total: sub_total,
                 logo: logo,
                 footer: footer,
                 sidelogo: sidelogo,
@@ -694,8 +704,8 @@ export class QuotationService {
             let objData = {
                 "total_discount": "0.00",
                 "total_tax": "0.00",
-                "sub_total": totalAmount,
-                "grand_total": totalAmount,
+                "sub_total": await this.helperService.formatAmount(totalAmount,currency),
+                "grand_total": await this.helperService.formatAmount(totalAmount,currency),
                 "amount_in_words": amountInWords,
                 list: modifiedData,
             }

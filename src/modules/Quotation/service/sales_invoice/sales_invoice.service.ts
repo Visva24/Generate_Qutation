@@ -103,6 +103,8 @@ export class SalesInvoiceService {
                     ...singleData.dataValues,
                     reference_date: moment(singleData.reference_date).format('DD-MMM-YYYY'),
                     doc_date: moment(singleData.doc_date).format('DD-MMM-YYYY'),
+                    sub_total: await this.helperService.formatAmount(singleData.sub_total,singleData.currency),
+                    grand_total: await this.helperService.formatAmount(singleData.grand_total,singleData.currency),
                     // doc_number:singleData.doc_number,
                     sales_items: modifiedListData,
                     amount_in_words: await this.helperService.numberToWord(singleData.grand_total, singleData.currency)
@@ -262,11 +264,14 @@ export class SalesInvoiceService {
             const footer = `data:image/png;base64,${footerBase64Image}`;
             const sidelogo = `data:image/png;base64,${sideLogoBase64Image}`;
             const watermark = `data:image/png;base64,${waterMarkBase64Image}`;
-
+            let grand_total=  await this.helperService.formatAmount((Number(invoiceData.data.grand_total.replace(/,/g, ''))),invoiceData.data.currency)
+            let  sub_total = await this.helperService.formatAmount((Number(invoiceData.data.sub_total.replace(/,/g, ''))),invoiceData.data.currency)
             let numberInWords = await this.helperService.numberToWord(invoiceData.data.grand_total, invoiceData.data.currency)
             let formData = [invoiceData.data].map(singleData => ({
                 ...singleData,
                 amount_in_words: numberInWords,
+                grand_total: grand_total,
+                sub_total: sub_total,
                 logo: logo,
                 footer: footer,
                 sidelogo: sidelogo,
@@ -399,10 +404,13 @@ export class SalesInvoiceService {
                 "is_value_exist_255":lessThan255.length > 0 ? true :false
              }
             //  return  formattedItems.lessThan215
-              
+            let grand_total=  await this.helperService.formatAmount((Number(invoiceData.data.grand_total.replace(/,/g, ''))),invoiceData.data.currency)
+            let  sub_total = await this.helperService.formatAmount((Number(invoiceData.data.sub_total.replace(/,/g, ''))),invoiceData.data.currency)
             let formData = [invoiceData.data].map(singleData => ({
                 ...singleData,
                 amount_in_words: numberInWords,
+                grand_total: grand_total,
+                sub_total: sub_total,
                 logo: logo,
                 footer: footer,
                 sidelogo: sidelogo,
@@ -498,8 +506,8 @@ export class SalesInvoiceService {
             let objData = {
                 "total_discount": "0.00",
                 "total_tax": "0.00",
-                "sub_total": totalAmount,
-                "grand_total": totalAmount,
+                "sub_total": await this.helperService.formatAmount(totalAmount,currency),
+                "grand_total": await this.helperService.formatAmount(totalAmount,currency),
                 "amount_in_words": amountInWords,
                 list: modifiedData,
             }
