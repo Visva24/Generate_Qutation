@@ -136,8 +136,8 @@ export class QuotationService {
                 return employee
             }
             let condition = {}
-            filter?.date && ( condition['doc_date'] =  filter.date )
-            let getQuotationData = await this.QuotationFormModel.findAll({where:condition, order: [['id', 'DESC']] })
+            // filter?.date && ( condition['doc_date'] =  await this.helperService.extractDate(filter.date) )
+            let getQuotationData = await this.QuotationFormModel.findAll({where:filter?.date && Sequelize.literal(`DATE(doc_date) = '${filter.date}'`), order: [['id', 'DESC']] })
             let modifiedData = await Promise.all(getQuotationData.map(async singleData => {
                 return {
                     id: singleData.id,
@@ -498,7 +498,7 @@ export class QuotationService {
 
         }
     }
-    async downloadQuotationTemplate(id: number,user_id:number): Promise<any> {
+    async downloadQuotationTemplate(id: number,user_id:number,access_token :any): Promise<any> {
         try {
 
 
@@ -537,41 +537,174 @@ export class QuotationService {
 
              for(let singleItem of QuotationData.data.quotation_items){
 
-                if(singleItem.serial_no <= 15){
-                  lessThan15.push(singleItem)
+                if(itemsLength > 15){
+                 
+                    if(singleItem.serial_no <= 15){
+                        lessThan15.push(singleItem)
+                      }
+                   
+                }else{
+                    if(singleItem.serial_no <= 14){
+                        lessThan15.push(singleItem)
+                    }
+
                 }
-                if(singleItem.serial_no >= 16 && singleItem.serial_no <=35 ){
-                 lessThan40.push(singleItem)
-                }
-                if( singleItem.serial_no >= 36 && singleItem.serial_no <=55){
-                 lessThan65.push(singleItem)
-                }
-                if(singleItem.serial_no >= 56 && singleItem.serial_no <=75){
-                 lessThan90.push(singleItem)
-                }
-                if(singleItem.serial_no >= 76 && singleItem.serial_no <=95){
-                 lessThan115.push(singleItem)
-                }
-                if(singleItem.serial_no >=95 && singleItem.serial_no <=115){
-                 lessThan140.push(singleItem)
-                }
-                if(singleItem.serial_no >=116 && singleItem.serial_no <=135){
-                 lessThan165.push(singleItem)
-                }
-                if(singleItem.serial_no >=136 && singleItem.serial_no <= 155){
-                 lessThan190.push(singleItem)
-                }
-                if(singleItem.serial_no >=156 && singleItem.serial_no <= 175){
-                 lessThan215.push(singleItem)
-                }
-                if(singleItem.serial_no >=176 && singleItem.serial_no <= 195){
-                 lessThan235.push(singleItem)
-                }
-                if(singleItem.serial_no >=196 && singleItem.serial_no <= 215){
-                 lessThan255.push(singleItem)
+               
+                if(itemsLength > 35){
+                    if(singleItem.serial_no >= 16 && singleItem.serial_no <=35 ){
+                        lessThan40.push(singleItem)
+                       }
+                  
+                }else{
+                    if(singleItem.serial_no >= 15 && singleItem.serial_no <=32 ){
+                        lessThan40.push(singleItem)
+                    }
                 }
                 
-          }
+                if(itemsLength > 36){
+                
+                    if( singleItem.serial_no >= 36 && singleItem.serial_no <=55){
+                        lessThan65.push(singleItem)
+                       }
+
+                }else{
+                    if( singleItem.serial_no >= 33 && singleItem.serial_no <=50){
+                        lessThan65.push(singleItem)
+                    }
+                }
+
+                if(itemsLength > 56){
+                       if(singleItem.serial_no >= 56 && singleItem.serial_no <=75){
+                        lessThan90.push(singleItem)
+                       }
+                }else{
+                    if( singleItem.serial_no >= 51 && singleItem.serial_no <=68){
+                        lessThan65.push(singleItem)
+                    }
+                }
+
+                if(itemsLength > 76){
+                    if(singleItem.serial_no >= 76 && singleItem.serial_no <=95){
+                        lessThan115.push(singleItem)
+                       }
+                }else{
+                    if( singleItem.serial_no >= 69 && singleItem.serial_no <=86){
+                        lessThan65.push(singleItem)
+                       }
+                }
+
+                if(itemsLength > 95){
+                   
+                       if(singleItem.serial_no >=95 && singleItem.serial_no <=115){
+                        lessThan140.push(singleItem)
+                    }
+                }else{
+                    if( singleItem.serial_no >= 87 && singleItem.serial_no <=104){
+                        lessThan65.push(singleItem)
+                       }
+                }
+              
+                if(itemsLength > 116){
+                   
+                       if(singleItem.serial_no >=116 && singleItem.serial_no <=135){
+                        lessThan165.push(singleItem)
+                       }
+                }else{
+                    if( singleItem.serial_no >= 105 && singleItem.serial_no <=122){
+                        lessThan65.push(singleItem)
+                       }
+                }
+
+                if(itemsLength > 136){
+                    if(singleItem.serial_no >=136 && singleItem.serial_no <= 155){
+                        lessThan190.push(singleItem)
+                       }
+                }else{
+                    if( singleItem.serial_no >= 123 && singleItem.serial_no <=140){
+                        lessThan65.push(singleItem)
+                       }
+                }
+              
+                if(itemsLength > 156){
+                    if(singleItem.serial_no >=156 && singleItem.serial_no <= 175){
+                        lessThan215.push(singleItem)
+                       }
+                }else{
+                    if( singleItem.serial_no >= 141 && singleItem.serial_no <=168){
+                        lessThan65.push(singleItem)
+                       }
+                }
+              
+              
+                if(itemsLength > 176){
+                    if(singleItem.serial_no >=176 && singleItem.serial_no <= 195){
+                        lessThan235.push(singleItem)
+                       }
+                }else{
+                    if( singleItem.serial_no >= 169 && singleItem.serial_no <=186){
+                        lessThan65.push(singleItem)
+                       }
+                  
+                }
+              
+                if(itemsLength > 196){
+                    if(singleItem.serial_no >=196 && singleItem.serial_no <= 215){
+                        lessThan255.push(singleItem)
+                       }
+                  
+                }else{ 
+                    if( singleItem.serial_no >= 187 && singleItem.serial_no <=194){
+                        lessThan65.push(singleItem)
+                       }
+                }
+              
+                
+               
+              
+               
+                
+                
+             
+              
+                
+            }
+            //  for(let singleItem of QuotationData.data.quotation_items){
+
+            //     if(singleItem.serial_no <= 15){
+            //       lessThan15.push(singleItem)
+            //     }
+            //     if(singleItem.serial_no >= 16 && singleItem.serial_no <=35 ){
+            //      lessThan40.push(singleItem)
+            //     }
+            //     if( singleItem.serial_no >= 36 && singleItem.serial_no <=55){
+            //      lessThan65.push(singleItem)
+            //     }
+            //     if(singleItem.serial_no >= 56 && singleItem.serial_no <=75){
+            //      lessThan90.push(singleItem)
+            //     }
+            //     if(singleItem.serial_no >= 76 && singleItem.serial_no <=95){
+            //      lessThan115.push(singleItem)
+            //     }
+            //     if(singleItem.serial_no >=95 && singleItem.serial_no <=115){
+            //      lessThan140.push(singleItem)
+            //     }
+            //     if(singleItem.serial_no >=116 && singleItem.serial_no <=135){
+            //      lessThan165.push(singleItem)
+            //     }
+            //     if(singleItem.serial_no >=136 && singleItem.serial_no <= 155){
+            //      lessThan190.push(singleItem)
+            //     }
+            //     if(singleItem.serial_no >=156 && singleItem.serial_no <= 175){
+            //      lessThan215.push(singleItem)
+            //     }
+            //     if(singleItem.serial_no >=176 && singleItem.serial_no <= 195){
+            //      lessThan235.push(singleItem)
+            //     }
+            //     if(singleItem.serial_no >=196 && singleItem.serial_no <= 215){
+            //      lessThan255.push(singleItem)
+            //     }
+                
+            // }
              
           let formattedItems = {
              "lessThan15":lessThan15,

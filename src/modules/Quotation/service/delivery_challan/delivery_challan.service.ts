@@ -130,7 +130,7 @@ export class DeliveryChallanService {
             let condition ={}
 
             filter?.date && ( condition['doc_date'] =  filter.date )
-            let getQuotationData = await this.deliveryChallanModel.findAll({where:condition, order: [['id', 'DESC']] })
+            let getQuotationData = await this.deliveryChallanModel.findAll({where:filter?.date && Sequelize.literal(`DATE(doc_date) = '${filter.date}'`), order: [['id', 'DESC']] })
             let modifiedData = await Promise.all(getQuotationData.map(async singleData => {
                 return {
                     id: singleData.id,

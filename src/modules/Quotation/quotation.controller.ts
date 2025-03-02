@@ -141,8 +141,9 @@ export class QuotationController {
   }
 
   @Get("download-quotation-template")
-  async downloadQuotationTemplate(@Query('id') id: number,@Query('user_id') user_id: number) {
-    return this.quotationService.downloadQuotationTemplate(id,user_id)
+  async downloadQuotationTemplate(@Headers('Authorization') headers: any,@Query('id') id: number,@Query('user_id') user_id: number) {
+    const token = await decodeAccessToken(headers);
+    return this.quotationService.downloadQuotationTemplate(id,user_id,token)
   }
 
   @Get("reset-quotation-list")

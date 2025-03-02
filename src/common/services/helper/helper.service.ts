@@ -78,7 +78,16 @@ export class HelperService {
     //     }
     // }
 
-    async generatePdfFromTemplate(uploadDir: string, templateName: string, data: any, file: string): Promise<any> {
+    async extractDate(datetime: any):Promise<any> {
+        // Create a new Date object from the string
+        const date = new Date(datetime);
+    
+        // Extract the date part
+        const formattedDate = date.toISOString().split('T')[0];
+    
+        return formattedDate;
+      }
+    async generatePdfFromTemplate(uploadDir: string, templateName: string, data: any, file: string,access_token?:any): Promise<any> {
         try{
         const fs = require('fs');
          hbs.registerHelper('lte', (a, b) => a <= b)
@@ -98,10 +107,10 @@ export class HelperService {
         const compiledTemplate = handlebars.compile(templateHtml);
         // Render HTML content from the template
         const htmlContent = compiledTemplate(data);
-        fs.writeFileSync('debug.html', htmlContent);
+        // fs.writeFileSync('debug.html', htmlContent);
         // Generate PDF
         const browser = await puppeteer.launch({
-            // headless: true,
+            // // headless: true,
             executablePath: '/snap/bin/chromium', // Use Snap's Chromium
             // executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', // Use Snap's Chromium
             args: [
@@ -113,12 +122,16 @@ export class HelperService {
             ],
 
         });
-         let userData = await this.userModel.findOne()
-         userData.user_temp_password = (await browser.version())
-         await userData.save()
-        console.log(await browser.version());
+        //  let userData = await this.userModel.findOne()
+        //  userData.user_temp_password = (await browser.version())
+        //  await userData.save()
+        // console.log(await browser.version());
         const page = await browser.newPage();
         await page.setContent(htmlContent);
+          
+          // Debug screenshot to check if the page loaded correctly
+        //   await page.screenshot({ path: 'debug.png', fullPage: true });
+          
 
         const currentTimestamp = new Date().getTime();
         const pdfPath = `${uploadDir}/${file}_${data.user_code}_${currentTimestamp}.pdf`;

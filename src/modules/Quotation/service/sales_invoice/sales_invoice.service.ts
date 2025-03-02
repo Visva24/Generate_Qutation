@@ -134,8 +134,8 @@ export class SalesInvoiceService {
             }
             let condition ={}
 
-            filter?.date && ( condition['doc_date'] =  filter.date )
-            let getInvoiceData = await this.SalesInvoiceFormModel.findAll({where:condition, order: [['id', 'DESC']] })
+            // filter?.date && ( condition['doc_date'] =  filter.date )
+            let getInvoiceData = await this.SalesInvoiceFormModel.findAll({where:filter?.date && Sequelize.literal(`DATE(doc_date) = '${filter.date}'`), order: [['id', 'DESC']] })
             let modifiedData = await Promise.all(getInvoiceData.map(async singleData => {
                 return {
                     id: singleData.id,
