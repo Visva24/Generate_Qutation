@@ -6,18 +6,32 @@ const generateSequelizeOptions = async (): Promise<SequelizeModuleOptions> => {
 
         const databaseConfig: SequelizeModuleOptions = {
 
+
             dialect: "mysql",
             timezone: '+05:30', // Indian Standard Time (IST) timezone offset
             port: 3306,
-            username: "root",
-            password: "",
-            database: "quotation_1",
+            host: "srv701348",
+            username: "test",
+            password: "Admin@123123",
+            database: "testing",
             autoLoadModels: true,
             synchronize: true,
-            // logging:false,
-            // synchronize: true,
-            // logging:false,
-            // sync: { alter: true }, // Uncomment if needed for migrations
+          //  logging:false,
+            sync: { alter: true }, // Uncomment if needed for migrations
+
+
+            // dialect: "mysql",
+            // timezone: '+05:30', // Indian Standard Time (IST) timezone offset
+            // port: 3306,
+            // username: "root",
+            // password: "",
+            // database: "test_quotation",
+            // autoLoadModels: true,
+            // // synchronize: true,
+            // // logging:false,
+            // // synchronize: true,
+            // // logging:false,
+            // // sync: { alter: true }, // U
         };
         return databaseConfig;
     } catch (error) {
