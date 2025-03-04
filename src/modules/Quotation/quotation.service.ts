@@ -258,7 +258,7 @@ export class QuotationService {
     async generateDynamicDocNumber(doc_type: string): Promise<any> {
         try {
 
-            const generateInvoiceNumber = (baseNumber: string) => {
+            const generateDocNumber = (baseNumber: string) => {
                 const yearMonth = moment().format('YYMM'); // Formats to '2502' for Feb 2025
                 return baseNumber.replace(/\d{4}/, yearMonth); // Replaces '2501' with '2502'
               };
@@ -275,10 +275,11 @@ export class QuotationService {
             if (Quotation) {
 
                 if (doc_type == "delivery" && Quotation?.is_form_move_forward && Quotation?.is_record_saved == false) {
-                    docNumber = Quotation?.doc_number
+                    docNumber = generateDocNumber(Quotation?.doc_number)
                 } else if (doc_type == "sales" && Quotation?.is_form_move_forward && Quotation?.is_record_saved == false) {
-                    docNumber = generateInvoiceNumber(Quotation?.doc_number)
-                } else {
+                    docNumber = generateDocNumber(Quotation?.doc_number)
+                } 
+                else {
                     let incrementDocNumber
                     if (Quotation.doc_number != null) {
 
@@ -291,16 +292,16 @@ export class QuotationService {
                         */
                         incrementDocNumber = await this.incrementLastDigit(docNum)
                     }
-                    if(doc_type == "sales"){
-                        docNumber = generateInvoiceNumber(incrementDocNumber)
+                    if(doc_type == "sales" ||doc_type == "delivery"){
+                        docNumber = generateDocNumber(incrementDocNumber)
                     }else{
                         docNumber =incrementDocNumber
                     }
                     
                 }
             } else {
-                if(doc_type == "sales"){
-                    docNumber = generateInvoiceNumber(getDocumentData?.doc_number)
+                if(doc_type == "sales"||doc_type == "delivery"){
+                    docNumber = generateDocNumber(getDocumentData?.doc_number)
                 }else{
                     docNumber = getDocumentData?.doc_number
                 }
