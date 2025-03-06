@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
-    <title>Template</title>
+    <title>Quotation</title>
     <style>
 
         body {
@@ -44,27 +44,24 @@
                 </td>
             </tr>
         </table>
-        <table style="width: 100%; border-bottom:none;">
-            <tr style="height: 40px;">
-                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
-                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+        
+                   <div style="position: absolute;top: 100px; right:30px;">
+                     <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
                         <p style="height: 20px;width:4px;background-color:#fca524;"></p>
-                        <p> QUOTATION</p>
+                        <p style="font-weight: 700;font-size:18px;">QUOTATION</p>
                     </div>
-                </td>
-            </tr>
-        </table>
-        <table style="margin-left: 20px; width: 100%;">
+                   </div>
+        <table style="margin-left: 20px; width: 100%;margin-top:20px;">
             <tbody>
                 <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;font-weight:600;">Customer:</td>
-                    <td style="width: 33%;font-weight:600;">Document Number:</td>
-                    <td style="width: 33%;font-weight:600;">Document Date:</td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Customer:</td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Document Number:</td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Document Date:</td>
                 </tr>
                 <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;">{{customer_name}}</td>
-                    <td style="width: 33%;">{{doc_number}}</td>
-                    <td style="width: 33%;">{{doc_date}}</td>
+                    <td style="width: 33%;padding-left:35px;">{{customer_name}}</td>
+                    <td style="width: 33%;padding-left:35px;">{{doc_number}}</td>
+                    <td style="width: 33%;padding-left:35px;">{{doc_date}}</td>
                 </tr>
             </tbody>
         </table>
@@ -72,29 +69,14 @@
         <table style="margin-left: 20px; width: 100%; border-bottom:none;">
             <tbody>
                 <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;font-weight:600;">Contact Person:</td>
-                    <td style="width: 33%;font-weight:600;">Email:</td>
-                    <td style="width: 33%;font-weight:600;">Contact Number:</td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Contact Person:</td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Email:</td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Contact Number:</td>
                 </tr>
                 <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;">{{contact_person}}</td>
-                    <td style="width: 33%;">{{email}}</td>
-                    <td style="width: 33%;">{{contact_number}}</td>
-                </tr>
-            </tbody>
-        </table>
-        <hr style="margin-left: 20px; color:#000 !important">
-        <table style="margin-left: 20px; width: 100%; border-bottom:none;">
-            <tbody>
-                <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;font-weight:600;">Contact Reference:</td>
-                    <td style="width: 33%;font-weight:600;">Payment Method:</td>
-                    <td style="width: 33%;font-weight:600;">Currency:</td>
-                </tr>
-                <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;">{{customer_reference}}</td>
-                    <td style="width: 33%;">{{payment_mode}}</td>
-                    <td style="width: 33%;">{{currency}}</td>
+                    <td style="width: 33%;padding-left:35px;">{{contact_person}}</td>
+                    <td style="width: 33%;padding-left:35px;">{{email}}</td>
+                    <td style="width: 33%;padding-left:35px;">{{contact_number}}</td>
                 </tr>
             </tbody>
         </table>
@@ -102,15 +84,29 @@
         <table style="margin-left: 20px; width: 100%; border-bottom:none;">
             <tbody>
                 <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;font-weight:600;">Address:</td>
-                    <td style="width: 33%;font-weight:600;">Validity:</td>
-                    <td style="width: 33%;font-weight:600;">Payment Terms:</td>
-                    <td style="width: 33%;"></td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Contact Reference:</td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Payment Method:</td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Currency:</td>
                 </tr>
                 <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;">{{address}}</td>
-                    <td style="width: 33%;">{{Validity}}</td>
-                    <td style="width: 33%;">{{payment_terms}}</td>
+                    <td style="width: 33%;padding-left:35px;">{{customer_reference}}</td>
+                    <td style="width: 33%;padding-left:35px;">{{payment_mode}}</td>
+                    <td style="width: 33%;padding-left:35px;">{{currency}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr style="margin-left: 20px; color:#000 !important">
+        <table style="margin-left: 20px; width: 100%; border-bottom:none;">
+            <tbody>
+                <tr style="width: 100%;text-align: left;">
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Address:</td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Validity:</td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Payment Terms:</td>
+                </tr>
+                <tr style="width: 100%;text-align: left;">
+                    <td style="width: 33%;padding-left:35px;">{{address}}</td>
+                    <td style="width: 33%;padding-left:35px;">{{Validity}}</td>
+                    <td style="width: 33%;padding-left:35px;">{{payment_terms}}</td>
 
                 </tr>
             </tbody>
@@ -271,17 +267,14 @@
                 </td>
             </tr>
         </table>
-        <table style="width: 100%; border-bottom:none;">
-            <tr style="height: 40px;">
-                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
-                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+                    <div style="position: absolute;top: 100px; right:30px;">
+                     <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
                         <p style="height: 20px;width:4px;background-color:#fca524;"></p>
-                        <p> QUOTATION</p>
+                        <p style="font-weight: 700;font-size:18px;">QUOTATION</p>
                     </div>
-                </td>
-            </tr>
-
-              <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+                   </div>
+        <table style="width: 100%; border-bottom:none;">
+              <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -435,17 +428,15 @@
                 </td>
             </tr>
         </table>
-        <table style="width: 100%; border-bottom:none;">
-            <tr style="height: 40px;">
-                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
-                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+         <div style="position: absolute;top: 100px; right:30px;">
+                     <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
                         <p style="height: 20px;width:4px;background-color:#fca524;"></p>
-                        <p> QUOTATION</p>
+                        <p style="font-weight: 700;font-size:18px;">QUOTATION</p>
                     </div>
-                </td>
-            </tr>
-
-              <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+                   </div>
+        <table style="width: 100%; border-bottom:none;">
+            
+              <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -599,17 +590,14 @@
                 </td>
             </tr>
         </table>
-        <table style="width: 100%; border-bottom:none;">
-            <tr style="height: 40px;">
-                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
-                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+                    <div style="position: absolute;top: 100px; right:30px;">
+                     <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
                         <p style="height: 20px;width:4px;background-color:#fca524;"></p>
-                        <p> QUOTATION</p>
+                        <p style="font-weight: 700;font-size:18px;">QUOTATION</p>
                     </div>
-                </td>
-            </tr>
-
-              <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+                   </div>
+        <table style="width: 100%; border-bottom:none;">
+              <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -763,17 +751,16 @@
                 </td>
             </tr>
         </table>
-        <table style="width: 100%; border-bottom:none;">
-            <tr style="height: 40px;">
-                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
-                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+         <div style="position: absolute;top: 100px; right:30px;">
+                     <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
                         <p style="height: 20px;width:4px;background-color:#fca524;"></p>
-                        <p> QUOTATION</p>
+                        <p style="font-weight: 700;font-size:18px;">QUOTATION</p>
                     </div>
-                </td>
-            </tr>
+                   </div>
 
-              <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+        <table style="width: 100%; border-bottom:none;">
+
+              <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -928,16 +915,14 @@
                 </td>
             </tr>
         </table>
-        <table style="width: 100%; border-bottom:none;">
-            <tr style="height: 40px;">
-                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
-                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+         <div style="position: absolute;top: 100px; right:30px;">
+                     <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
                         <p style="height: 20px;width:4px;background-color:#fca524;"></p>
-                        <p> QUOTATION</p>
+                        <p style="font-weight: 700;font-size:18px;">QUOTATION</p>
                     </div>
-                </td>
-            </tr>
+                   </div>
 
+        <table style="width: 100%; border-bottom:none;">
               <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
@@ -1094,17 +1079,14 @@
                 </td>
             </tr>
         </table>
-        <table style="width: 100%; border-bottom:none;">
-            <tr style="height: 40px;">
-                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
-                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+         <div style="position: absolute;top: 100px; right:30px;">
+                     <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
                         <p style="height: 20px;width:4px;background-color:#fca524;"></p>
-                        <p> QUOTATION</p>
+                        <p style="font-weight: 700;font-size:18px;">QUOTATION</p>
                     </div>
-                </td>
-            </tr>
-
-              <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+                   </div>
+        <table style="width: 100%; border-bottom:none;">
+              <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -1259,17 +1241,17 @@
                 </td>
             </tr>
         </table>
-        <table style="width: 100%; border-bottom:none;">
-            <tr style="height: 40px;">
-                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
-                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+         <div style="position: absolute;top: 100px; right:30px;">
+                     <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
                         <p style="height: 20px;width:4px;background-color:#fca524;"></p>
-                        <p> QUOTATION</p>
+                        <p style="font-weight: 700;font-size:18px;">QUOTATION</p>
                     </div>
-                </td>
-            </tr>
+                   </div>
 
-              <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+        <table style="width: 100%; border-bottom:none;">
+            
+
+              <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -1424,17 +1406,16 @@
                 </td>
             </tr>
         </table>
-        <table style="width: 100%; border-bottom:none;">
-            <tr style="height: 40px;">
-                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
-                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+         <div style="position: absolute;top: 100px; right:30px;">
+                     <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
                         <p style="height: 20px;width:4px;background-color:#fca524;"></p>
-                        <p> QUOTATION</p>
+                        <p style="font-weight: 700;font-size:18px;">QUOTATION</p>
                     </div>
-                </td>
-            </tr>
+                   </div>
 
-              <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+        <table style="width: 100%; border-bottom:none;">
+
+              <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -1590,17 +1571,17 @@
                 </td>
             </tr>
         </table>
-        <table style="width: 100%; border-bottom:none;">
-            <tr style="height: 40px;">
-                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
-                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+         <div style="position: absolute;top: 100px; right:30px;">
+                     <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
                         <p style="height: 20px;width:4px;background-color:#fca524;"></p>
-                        <p> QUOTATION</p>
+                        <p style="font-weight: 700;font-size:18px;">QUOTATION</p>
                     </div>
-                </td>
-            </tr>
+                   </div>
 
-              <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+        <table style="width: 100%; border-bottom:none;">
+            
+
+              <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -1755,17 +1736,16 @@
                 </td>
             </tr>
         </table>
-        <table style="width: 100%; border-bottom:none;">
-            <tr style="height: 40px;">
-                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
-                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+         <div style="position: absolute;top: 100px; right:30px;">
+                     <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
                         <p style="height: 20px;width:4px;background-color:#fca524;"></p>
-                        <p> QUOTATION</p>
+                        <p style="font-weight: 700;font-size:18px;">QUOTATION</p>
                     </div>
-                </td>
-            </tr>
+                   </div>
 
-              <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+        <table style="width: 100%; border-bottom:none;">
+            
+              <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th

@@ -255,7 +255,7 @@ export class SalesInvoiceService {
             if (invoiceData.status == "failure") {
                 return res.json(invoiceData)
             }
-
+                  
             const logBase64Image = readFileSync('public/images/logo.png', 'base64');
             const footerBase64Image = readFileSync('public/images/shadow-trading-footer-with-data.png', 'base64');
             const sideLogoBase64Image = readFileSync('public/images/sideLogo.png', 'base64');
@@ -313,7 +313,7 @@ export class SalesInvoiceService {
             if (invoiceData.status == "failure") {
                 return invoiceData
             }
-
+        
             const logBase64Image = readFileSync('public/images/logo.png', 'base64');
             const footerBase64Image = readFileSync('public/images/shadow-trading-footer-with-data.png', 'base64');
             const sideLogoBase64Image = readFileSync('public/images/sideLogo.png', 'base64');

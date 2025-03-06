@@ -44,27 +44,24 @@
                 </td>
             </tr>
         </table>
-        <table style="width: 100%; border-bottom:none;">
-            <tr style="height: 40px;">
-                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
-                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+        <div style="position: absolute;top: 100px; right:30px;">
+                     <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
                         <p style="height: 20px;width:4px;background-color:#fca524;"></p>
-                        <p>SALES INVOICE</p>
+                        <p style="font-weight: 700;font-size:18px;">SALES INVOICE</p>
                     </div>
-                </td>
-            </tr>
-        </table>
-        <table style="margin-left: 20px; width: 100%;">
+                   </div>
+
+        <table style="margin-left: 20px; margin-top:20px; width: 100%;">
             <tbody>
                 <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;font-weight:600;">Customer:</td>
-                    <td style="width: 33%;font-weight:600;">Document Number:</td>
-                    <td style="width: 33%;font-weight:600;">Document Date:</td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Customer:</td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Document Number:</td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Document Date:</td>
                 </tr>
                 <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;">{{customer_name}}</td>
-                    <td style="width: 33%;">{{doc_number}}</td>
-                    <td style="width: 33%;">{{doc_date}}</td>
+                    <td style="width: 33%;padding-left:35px;">{{customer_name}}</td>
+                    <td style="width: 33%;padding-left:35px;">{{doc_number}}</td>
+                    <td style="width: 33%;padding-left:35px;">{{doc_date}}</td>
                 </tr>
             </tbody>
         </table>
@@ -72,29 +69,14 @@
         <table style="margin-left: 20px; width: 100%; border-bottom:none;">
             <tbody>
                 <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;font-weight:600;">Contact Person:</td>
-                    <td style="width: 33%;font-weight:600;">Email:</td>
-                    <td style="width: 33%;font-weight:600;">Contact Number:</td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Contact Person:</td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Email:</td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Contact Number:</td>
                 </tr>
                 <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;">{{contact_person}}</td>
-                    <td style="width: 33%;">{{email}}</td>
-                    <td style="width: 33%;">{{contact_number}}</td>
-                </tr>
-            </tbody>
-        </table>
-        <hr style="margin-left: 20px; color:#000 !important">
-        <table style="margin-left: 20px; width: 100%; border-bottom:none;">
-            <tbody>
-                <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;font-weight:600;">Address:</td>
-                    <td style="width: 33%;font-weight:600;">Payment Method:</td>
-                    <td style="width: 33%;font-weight:600;">Currency:</td>
-                </tr>
-                <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;">{{address}}</td>
-                    <td style="width: 33%;">{{payment_mode}}</td>
-                    <td style="width: 33%;">{{currency}}</td>
+                    <td style="width: 33%;padding-left:35px;">{{contact_person}}</td>
+                    <td style="width: 33%;padding-left:35px;">{{email}}</td>
+                    <td style="width: 33%;padding-left:35px;">{{contact_number}}</td>
                 </tr>
             </tbody>
         </table>
@@ -102,17 +84,32 @@
         <table style="margin-left: 20px; width: 100%; border-bottom:none;">
             <tbody>
                 <tr style="width: 100%;text-align: left;">
-                    <td style="width: 25%;font-weight:600;">Contact Reference:</td>
-                    <td style="width: 25%;font-weight:600;">Reference date:</td>
-                    <td style="width: 25%;font-weight:600;">DN Number:</td>
-                    <td style="width: 25%;font-weight:600;">Validity:</td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Address:</td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Payment Method:</td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Currency:</td>
+                </tr>
+                <tr style="width: 100%;text-align: left;">
+                    <td style="width: 33%;padding-left:35px;">{{address}}</td>
+                    <td style="width: 33%;padding-left:35px;">{{payment_mode}}</td>
+                    <td style="width: 33%;padding-left:35px;">{{currency}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr style="margin-left: 20px; color:#000 !important">
+        <table style="margin-left: 20px; width: 100%; border-bottom:none;">
+            <tbody>
+                <tr style="width: 100%;text-align: left;">
+                    <td style="width: 25%;font-weight:600;padding-left:35px;">Contact Reference:</td>
+                    <td style="width: 25%;font-weight:600;padding-left:35px;">Reference date:</td>
+                    <td style="width: 25%;font-weight:600;padding-left:35px;">DN Number:</td>
+                    <td style="width: 25%;font-weight:600;padding-left:35px;">Validity:</td>
 
                 </tr>
                 <tr style="width: 100%;text-align: left;">
-                    <td style="width: 25%;">{{customer_reference}}</td>
-                    <td style="width: 25%;">{{reference_date}}</td>
-                    <td style="width: 25%;">{{dn_number}}</td>
-                    <td style="width: 25%;">{{quotation_validity}}</td>
+                    <td style="width: 25%;padding-left:35px;">{{customer_reference}}</td>
+                    <td style="width: 25%;padding-left:35px;">{{reference_date}}</td>
+                    <td style="width: 25%;padding-left:35px;">{{dn_number}}</td>
+                    <td style="width: 25%;padding-left:35px;">{{quotation_validity}}</td>
 
 
                 </tr>
@@ -251,18 +248,14 @@
                 </td>
             </tr>
         </table>
-        <table style="width: 100%; border-bottom:none;">
-            <tr style="height: 40px;">
-                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
-                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+         <div style="position: absolute;top: 100px; right:30px;">
+                     <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
                         <p style="height: 20px;width:4px;background-color:#fca524;"></p>
-                        <p>SALES INVOICE</p>
+                        <p style="font-weight: 700;font-size:18px;">SALES INVOICE</p>
                     </div>
-                </td>
-            </tr>
-        </table>
+                   </div>
 
-        <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -391,18 +384,14 @@
                 </td>
             </tr>
         </table>
-        <table style="width: 100%; border-bottom:none;">
-            <tr style="height: 40px;">
-                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
-                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+         <div style="position: absolute;top: 100px; right:30px;">
+                     <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
                         <p style="height: 20px;width:4px;background-color:#fca524;"></p>
-                        <p>SALES INVOICE</p>
+                        <p style="font-weight: 700;font-size:18px;">SALES INVOICE</p>
                     </div>
-                </td>
-            </tr>
-        </table>
+                   </div>
 
-        <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -531,18 +520,14 @@
                 </td>
             </tr>
         </table>
-        <table style="width: 100%; border-bottom:none;">
-            <tr style="height: 40px;">
-                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
-                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+         <div style="position: absolute;top: 100px; right:30px;">
+                     <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
                         <p style="height: 20px;width:4px;background-color:#fca524;"></p>
-                        <p>SALES INVOICE</p>
+                        <p style="font-weight: 700;font-size:18px;">SALES INVOICE</p>
                     </div>
-                </td>
-            </tr>
-        </table>
+                   </div>
 
-        <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -671,18 +656,14 @@
                 </td>
             </tr>
         </table>
-        <table style="width: 100%; border-bottom:none;">
-            <tr style="height: 40px;">
-                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
-                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+         <div style="position: absolute;top: 100px; right:30px;">
+                     <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
                         <p style="height: 20px;width:4px;background-color:#fca524;"></p>
-                        <p>SALES INVOICE</p>
+                        <p style="font-weight: 700;font-size:18px;">SALES INVOICE</p>
                     </div>
-                </td>
-            </tr>
-        </table>
+                   </div>
 
-        <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -805,18 +786,14 @@
                 </td>
             </tr>
         </table>
-        <table style="width: 100%; border-bottom:none;">
-            <tr style="height: 40px;">
-                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
-                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+         <div style="position: absolute;top: 100px; right:30px;">
+                     <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
                         <p style="height: 20px;width:4px;background-color:#fca524;"></p>
-                        <p>SALES INVOICE</p>
+                        <p style="font-weight: 700;font-size:18px;">SALES INVOICE</p>
                     </div>
-                </td>
-            </tr>
-        </table>
+                   </div>
 
-        <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -938,18 +915,14 @@
                 </td>
             </tr>
         </table>
-        <table style="width: 100%; border-bottom:none;">
-            <tr style="height: 40px;">
-                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
-                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+         <div style="position: absolute;top: 100px; right:30px;">
+                     <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
                         <p style="height: 20px;width:4px;background-color:#fca524;"></p>
-                        <p>SALES INVOICE</p>
+                        <p style="font-weight: 700;font-size:18px;">SALES INVOICE</p>
                     </div>
-                </td>
-            </tr>
-        </table>
+                   </div>
 
-        <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -1073,18 +1046,14 @@
                 </td>
             </tr>
         </table>
-        <table style="width: 100%; border-bottom:none;">
-            <tr style="height: 40px;">
-                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
-                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+         <div style="position: absolute;top: 100px; right:30px;">
+                     <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
                         <p style="height: 20px;width:4px;background-color:#fca524;"></p>
-                        <p>SALES INVOICE</p>
+                        <p style="font-weight: 700;font-size:18px;">SALES INVOICE</p>
                     </div>
-                </td>
-            </tr>
-        </table>
+                   </div>
 
-        <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -1207,18 +1176,14 @@
                 </td>
             </tr>
         </table>
-        <table style="width: 100%; border-bottom:none;">
-            <tr style="height: 40px;">
-                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
-                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+         <div style="position: absolute;top: 100px; right:30px;">
+                     <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
                         <p style="height: 20px;width:4px;background-color:#fca524;"></p>
-                        <p>SALES INVOICE</p>
+                        <p style="font-weight: 700;font-size:18px;">SALES INVOICE</p>
                     </div>
-                </td>
-            </tr>
-        </table>
+                   </div>
 
-        <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -1342,18 +1307,14 @@
                 </td>
             </tr>
         </table>
-        <table style="width: 100%; border-bottom:none;">
-            <tr style="height: 40px;">
-                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
-                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+         <div style="position: absolute;top: 100px; right:30px;">
+                     <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
                         <p style="height: 20px;width:4px;background-color:#fca524;"></p>
-                        <p>SALES INVOICE</p>
+                        <p style="font-weight: 700;font-size:18px;">SALES INVOICE</p>
                     </div>
-                </td>
-            </tr>
-        </table>
+                   </div>
 
-        <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -1478,18 +1439,14 @@
                 </td>
             </tr>
         </table>
-        <table style="width: 100%; border-bottom:none;">
-            <tr style="height: 40px;">
-                <td style="text-align: right; color:#000 !important; font-size: 18px; width: 30%; font-weight: 600;">
-                    <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
+         <div style="position: absolute;top: 100px; right:30px;">
+                     <div style="display: flex; justify-content: end;align-items: center; gap:10px;text-align: right;">
                         <p style="height: 20px;width:4px;background-color:#fca524;"></p>
-                        <p>SALES INVOICE</p>
+                        <p style="font-weight: 700;font-size:18px;">SALES INVOICE</p>
                     </div>
-                </td>
-            </tr>
-        </table>
+                   </div>
 
-        <table style="width: 100%;  border-bottom:none; margin-top:5px !important;margin-left:10px;">
+        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
