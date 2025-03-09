@@ -68,9 +68,9 @@ export class SalesInvoiceService {
             })
             let modifiedListData = []
             let i = 1
-            // if(type =="revision"){
-            //      revisedDocNumber =  (await this.generateRevisionDocNumber(getQuotationData[0].id)).data
-            // }
+            if(type =="revision"){
+                await this.TempSalesItemModel.findOne({where:{doc_number:getInvoiceData[0]['doc_number']}})
+            }
             for (let singleData of getInvoiceData[0].sales_items) {
                 let obj: any = {}
                 Object.assign(obj, {
@@ -79,23 +79,19 @@ export class SalesInvoiceService {
                 obj['serial_no'] = i
                 i++
                 modifiedListData.push(obj)
-                // if(revisedDocNumber){
-                //      let revisionObj:any ={}
-                //      Object.assign(revisionObj, {
-                //         ...singleData.dataValues
-                //     })
-                //     revisionObj['doc_number']=revisedDocNumber
-                //     delete revisionObj.id
-                //     delete revisionObj.createdAt
-                //     delete revisionObj.updatedAt
+                if(type =="revision"){
+                     let revisionObj:any ={}
+                     Object.assign(revisionObj, {
+                        ...singleData.dataValues
+                    })
+                    let docNumber =getInvoiceData[0]['doc_number']
+                    delete revisionObj.id
+                    delete revisionObj.createdAt
+                    delete revisionObj.updatedAt
 
-                //     // return obj
-                //     let existingQuotationItem = await this.TempDeliveryItemModel.findOne({where:{doc_number:revisedDocNumber,item_number:revisionObj.item_number,description:revisionObj.description}})
-                //     if(existingQuotationItem == null){
-                //         let savedData =   await this.SaveOrUpdateDeliveryChallanList(revisedDocNumber,[revisionObj],null)
-                //     }
-
-                // }
+                    // return obj
+                        let savedData =   await this.SaveOrUpdateSalesInvoiceList(user_id,docNumber,[revisionObj],null)
+                }
             }
 
             let modifiedOverAllData = await Promise.all(getInvoiceData.map(async singleData => {
@@ -116,7 +112,7 @@ export class SalesInvoiceService {
 
         } catch (error) {
             console.log(error);
-            return responseMessageGenerator('failure', 'something went wrong', error.message)
+            return responseMessageGenerator('failure', 'somethiiing went wrong', error.message)
         }
     }
     async getSalesInvoiceFormHistory(filter:filterData): Promise<ApiResponse> {

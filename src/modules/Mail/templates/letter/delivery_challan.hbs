@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
-    <title>Template</title>
+    <title>Delivery note</title>
     <style>
         body {
             font-family: "Roboto", sans-serif;
@@ -83,30 +83,14 @@
         <table style="margin-left: 20px; width: 100%; border-bottom:none;">
             <tbody>
                 <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;font-weight:600;padding-left:35px;">Contact Reference:</td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Customer Reference:</td>
                     <td style="width: 33%;font-weight:600;padding-left:35px;">Reference Date:</td>
-                    <td style="width: 33%;font-weight:600;padding-left:35px;">Remarks:</td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Address:</td>
                 </tr>
                 <tr style="width: 100%;text-align: left;">
                     <td style="width: 33%;padding-left:35px;">{{customer_reference}}</td>
                     <td style="width: 33%;padding-left:35px;">{{reference_date}}</td>
-                    <td style="width: 33%;padding-left:35px;">{{remark_brand}}</td>
-                </tr>
-            </tbody>
-        </table>
-        <hr style="margin-left: 20px; color:#000 !important">
-        <table style="margin-left: 20px; width: 100%; border-bottom:none;">
-            <tbody>
-                <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;font-weight:600;padding-left:35px;">Address:</td>
-                    {{!-- <td style="width: 33%;font-weight:600;">Validity:</td> --}}
-                    <td style="width: 33%;padding-left:35px;"></td>
-                </tr>
-                <tr style="width: 100%;text-align: left;">
                     <td style="width: 33%;padding-left:35px;">{{address}}</td>
-                    {{!-- <td style="width: 33%;padding-left:35px;">{{DELIVERY NOTE_validity}}</td> --}}
-                    <td style="width: 33%;padding-left:35px;"></td>
-
                 </tr>
             </tbody>
         </table>
@@ -144,11 +128,20 @@
             </tbody>
         </table>
         {{#unless formatted_items.is_value_exist_40}}
+        <table style="width: 100%; margin-top:10px !important;">
+            <tbody>
+            <tr>
+                <td style="width: 100%; vertical-align: top;">
+                    Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
        <div width="794px" style=" position:absolute;bottom:150px;width: 100% !important; left:0;">
          <table style="width: 100% !important; margin-top:10px !important; ">
             <tr style="width: 100%;text-align: center;">
                 <td style="width: 33%;font-weight:600;">Authorized signature</td>
-                <td style="width: 33%;font-weight:600;">Deliverd By</td>
+                <td style="width: 33%;font-weight:600;">Delivered By</td>
                 <td style="width: 33%;font-weight:600;">Receiver Signature  Stamp</td>
             </tr>
         </table>
@@ -183,7 +176,7 @@
                     </div>
                    </div>
         <table style="width: 100%; border-bottom:none;">
-            <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
+            <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:15px;">
                 <tbody>
                      <tr style="background-color: #f2f3f4">
                     <th
@@ -219,11 +212,20 @@
             </table>
         </table>
          {{#unless formatted_items.is_value_exist_65}}
+          <table style="width: 100%; margin-top:10px !important;">
+            <tbody>
+            <tr>
+                <td style="width: 100%; vertical-align: top;">
+                    Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
        <div width="794px" style=" position:absolute;bottom:150px;width: 100% !important; left:0;">
          <table style="width: 100% !important; margin-top:10px !important; ">
             <tr style="width: 100%;text-align: center;">
                 <td style="width: 33%;font-weight:600;">Authorized signature</td>
-                <td style="width: 33%;font-weight:600;">Deliverd By</td>
+                <td style="width: 33%;font-weight:600;">Delivered By</td>
                 <td style="width: 33%;font-weight:600;">Receiver Signature  Stamp</td>
             </tr>
         </table>
@@ -238,10 +240,10 @@
             <img src={{sidelogo}} alt="">
         </div>
         <div style="position: absolute; bottom:0;left:0;">
-            <img src={{footer}} alt="" width="794px">
+            <img src={{footer}} alt=""  height="140px" width="794px">
         </div>
-        <div style="position: absolute; top: 20%; left: 14%;  ">
-            <img src={{watermark}} width="600px" height="700px">
+        <div style="position: absolute; top: 36%; right:0;   ">
+            <img src={{watermark}} width="610px" height="600px">
         </div>
         <table style=" width:100%;border-bottom:none;">
             <tr style="height: 60px;">
@@ -262,7 +264,7 @@
         <table style="width: 100%; border-bottom:none;">
         
 
-            <table style="width: 100%;  border-bottom:none; margin-top:20px !important;">
+            <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:15px;">
                 <tbody>
                      <tr style="background-color: #f2f3f4">
                     <th
@@ -284,25 +286,34 @@
 
                     {{#each formatted_items.lessThan65}}
                     <tr>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.serial_no}}
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.serial_no}}
                         </td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.item_number}}
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.item_number}}
                         </td>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.description}}
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.description}}
                         </td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.units}}</td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.quantity}}</td>
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.units}}</td>
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.quantity}}</td>
                     </tr>
                     {{/each}}
                 </tbody>
             </table>
         </table>
       {{#unless formatted_items.is_value_exist_90}}
+       <table style="width: 100%; margin-top:10px !important;">
+            <tbody>
+            <tr>
+                <td style="width: 100%; vertical-align: top;">
+                    Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
        <div width="794px" style=" position:absolute;bottom:150px;width: 100% !important; left:0;">
          <table style="width: 100% !important; margin-top:10px !important; ">
             <tr style="width: 100%;text-align: center;">
                 <td style="width: 33%;font-weight:600;">Authorized signature</td>
-                <td style="width: 33%;font-weight:600;">Deliverd By</td>
+                <td style="width: 33%;font-weight:600;">Delivered By</td>
                 <td style="width: 33%;font-weight:600;">Receiver Signature  Stamp</td>
             </tr>
         </table>
@@ -317,10 +328,10 @@
             <img src={{sidelogo}} alt="">
         </div>
         <div style="position: absolute; bottom:0;left:0;">
-            <img src={{footer}} alt="" width="794px">
+            <img src={{footer}} alt=""  height="140px" width="794px">
         </div>
-        <div style="position: absolute; top: 20%; left: 14%;  ">
-            <img src={{watermark}} width="600px" height="700px">
+        <div style="position: absolute; top: 36%; right:0;   ">
+            <img src={{watermark}} width="610px" height="600px">
         </div>
         <table style=" width:100%;border-bottom:none;">
             <tr style="height: 60px;">
@@ -341,7 +352,7 @@
         <table style="width: 100%; border-bottom:none;">
         
 
-            <table style="width: 100%;  border-bottom:none; margin-top:20px !important;">
+            <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:20px;">
                 <tbody>
                       <tr style="background-color: #f2f3f4">
                     <th
@@ -363,25 +374,34 @@
 
                     {{#each formatted_items.lessThan90}}
                     <tr>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.serial_no}}
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px; border-right:none;border-left:none;">{{this.serial_no}}
                         </td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.item_number}}
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px; border-right:none;border-left:none;">{{this.item_number}}
                         </td>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.description}}
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px; border-right:none;border-left:none;">{{this.description}}
                         </td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.units}}</td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.quantity}}</td>
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px; border-right:none;border-left:none;">{{this.units}}</td>
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px; border-right:none;border-left:none;">{{this.quantity}}</td>
                     </tr>
                     {{/each}}
                 </tbody>
             </table>
         </table>
          {{#unless formatted_items.is_value_exist_115}}
+          <table style="width: 100%; margin-top:10px !important;">
+            <tbody>
+            <tr>
+                <td style="width: 100%; vertical-align: top;">
+                    Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
        <div width="794px" style=" position:absolute;bottom:150px;width: 100% !important; left:0;">
          <table style="width: 100% !important; margin-top:10px !important; ">
             <tr style="width: 100%;text-align: center;">
                 <td style="width: 33%;font-weight:600;">Authorized signature</td>
-                <td style="width: 33%;font-weight:600;">Deliverd By</td>
+                <td style="width: 33%;font-weight:600;">Delivered By</td>
                 <td style="width: 33%;font-weight:600;">Receiver Signature  Stamp</td>
             </tr>
         </table>
@@ -396,10 +416,10 @@
             <img src={{sidelogo}} alt="">
         </div>
         <div style="position: absolute; bottom:0;left:0;">
-            <img src={{footer}} alt="" width="794px">
+            <img src={{footer}} alt=""  height="140px" width="794px">
         </div>
-        <div style="position: absolute; top: 20%; left: 14%;  ">
-            <img src={{watermark}} width="600px" height="700px">
+        <div style="position: absolute; top: 36%; right:0;   ">
+            <img src={{watermark}} width="610px" height="600px">
         </div>
         <table style=" width:100%;border-bottom:none;">
             <tr style="height: 60px;">
@@ -420,7 +440,7 @@
         <table style="width: 100%; border-bottom:none;">
         
 
-            <table style="width: 100%;  border-bottom:none; margin-top:20px !important;">
+            <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:15px;">
                 <tbody>
                      <tr style="background-color: #f2f3f4">
                     <th
@@ -442,25 +462,34 @@
 
                     {{#each formatted_items.lessThan115}}
                     <tr>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.serial_no}}
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.serial_no}}
                         </td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.item_number}}
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.item_number}}
                         </td>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.description}}
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.description}}
                         </td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.units}}</td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.quantity}}</td>
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.units}}</td>
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.quantity}}</td>
                     </tr>
                     {{/each}}
                 </tbody>
             </table>
         </table>
          {{#unless formatted_items.is_value_exist_140}}
+          <table style="width: 100%; margin-top:10px !important;">
+            <tbody>
+            <tr>
+                <td style="width: 100%; vertical-align: top;">
+                    Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
        <div width="794px" style=" position:absolute;bottom:150px;width: 100% !important; left:0;">
          <table style="width: 100% !important; margin-top:10px !important; ">
             <tr style="width: 100%;text-align: center;">
                 <td style="width: 33%;font-weight:600;">Authorized signature</td>
-                <td style="width: 33%;font-weight:600;">Deliverd By</td>
+                <td style="width: 33%;font-weight:600;">Delivered By</td>
                 <td style="width: 33%;font-weight:600;">Receiver Signature  Stamp</td>
             </tr>
         </table>
@@ -475,10 +504,10 @@
             <img src={{sidelogo}} alt="">
         </div>
         <div style="position: absolute; bottom:0;left:0;">
-            <img src={{footer}} alt="" width="794px">
+            <img src={{footer}} alt=""  height="140px" width="794px">
         </div>
-        <div style="position: absolute; top: 20%; left: 14%;  ">
-            <img src={{watermark}} width="600px" height="700px">
+        <div style="position: absolute; top: 36%; right:0;   ">
+            <img src={{watermark}} width="610px" height="600px">
         </div>
         <table style=" width:100%;border-bottom:none;">
             <tr style="height: 60px;">
@@ -499,7 +528,7 @@
         <table style="width: 100%; border-bottom:none;">
         
 
-            <table style="width: 100%;  border-bottom:none; margin-top:20px !important;">
+            <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:15px;">
                 <tbody>
                       <tr style="background-color: #f2f3f4">
                     <th
@@ -521,25 +550,34 @@
 
                     {{#each formatted_items.lessThan140}}
                     <tr>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.serial_no}}
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.serial_no}}
                         </td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.item_number}}
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.item_number}}
                         </td>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.description}}
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.description}}
                         </td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.units}}</td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.quantity}}</td>
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.units}}</td>
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.quantity}}</td>
                     </tr>
                     {{/each}}
                 </tbody>
             </table>
         </table>
     {{#unless formatted_items.is_value_exist_165}}
+     <table style="width: 100%; margin-top:10px !important;">
+            <tbody>
+            <tr>
+                <td style="width: 100%; vertical-align: top;">
+                    Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
        <div width="794px" style=" position:absolute;bottom:150px;width: 100% !important; left:0;">
          <table style="width: 100% !important; margin-top:10px !important; ">
             <tr style="width: 100%;text-align: center;">
                 <td style="width: 33%;font-weight:600;">Authorized signature</td>
-                <td style="width: 33%;font-weight:600;">Deliverd By</td>
+                <td style="width: 33%;font-weight:600;">Delivered By</td>
                 <td style="width: 33%;font-weight:600;">Receiver Signature  Stamp</td>
             </tr>
         </table>
@@ -553,10 +591,10 @@
             <img src={{sidelogo}} alt="">
         </div>
         <div style="position: absolute; bottom:0;left:0;">
-            <img src={{footer}} alt="" width="794px">
+            <img src={{footer}} alt=""  height="140px" width="794px">
         </div>
-        <div style="position: absolute; top: 20%; left: 14%;  ">
-            <img src={{watermark}} width="600px" height="700px">
+        <div style="position: absolute; top: 36%; right:0;   ">
+            <img src={{watermark}} width="610px" height="600px">
         </div>
         <table style=" width:100%;border-bottom:none;">
             <tr style="height: 60px;">
@@ -577,7 +615,7 @@
         <table style="width: 100%; border-bottom:none;">
         
 
-            <table style="width: 100%;  border-bottom:none; margin-top:20px !important;">
+            <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:15px;">
                 <tbody>
                      <tr style="background-color: #f2f3f4">
                     <th
@@ -599,25 +637,34 @@
 
                     {{#each formatted_items.lessThan165}}
                     <tr>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.serial_no}}
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.serial_no}}
                         </td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.item_number}}
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.item_number}}
                         </td>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.description}}
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.description}}
                         </td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.units}}</td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.quantity}}</td>
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.units}}</td>
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.quantity}}</td>
                     </tr>
                     {{/each}}
                 </tbody>
             </table>
         </table>
       {{#unless formatted_items.is_value_exist_190}}
+       <table style="width: 100%; margin-top:10px !important;">
+            <tbody>
+            <tr>
+                <td style="width: 100%; vertical-align: top;">
+                    Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
        <div width="794px" style=" position:absolute;bottom:150px;width: 100% !important; left:0;">
          <table style="width: 100% !important; margin-top:10px !important; ">
             <tr style="width: 100%;text-align: center;">
                 <td style="width: 33%;font-weight:600;">Authorized signature</td>
-                <td style="width: 33%;font-weight:600;">Deliverd By</td>
+                <td style="width: 33%;font-weight:600;">Delivered By</td>
                 <td style="width: 33%;font-weight:600;">Receiver Signature  Stamp</td>
             </tr>
         </table>
@@ -631,10 +678,10 @@
             <img src={{sidelogo}} alt="">
         </div>
         <div style="position: absolute; bottom:0;left:0;">
-            <img src={{footer}} alt="" width="794px">
+            <img src={{footer}} alt=""  height="140px" width="794px">
         </div>
-        <div style="position: absolute; top: 20%; left: 14%;  ">
-            <img src={{watermark}} width="600px" height="700px">
+        <div style="position: absolute; top: 36%; right:0;   ">
+            <img src={{watermark}} width="610px" height="600px">
         </div>
         <table style=" width:100%;border-bottom:none;">
             <tr style="height: 60px;">
@@ -655,7 +702,7 @@
         <table style="width: 100%; border-bottom:none;">
         
 
-            <table style="width: 100%;  border-bottom:none; margin-top:20px !important;">
+            <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:15px;">
                 <tbody>
                    <tr style="background-color: #f2f3f4">
                     <th
@@ -677,25 +724,34 @@
 
                     {{#each formatted_items.lessThan190}}
                     <tr>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.serial_no}}
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.serial_no}}
                         </td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.item_number}}
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.item_number}}
                         </td>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.description}}
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.description}}
                         </td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.units}}</td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.quantity}}</td>
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.units}}</td>
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.quantity}}</td>
                     </tr>
                     {{/each}}
                 </tbody>
             </table>
         </table>
          {{#unless formatted_items.is_value_exist_215}}
+          <table style="width: 100%; margin-top:10px !important;">
+            <tbody>
+            <tr>
+                <td style="width: 100%; vertical-align: top;">
+                    Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
        <div width="794px" style=" position:absolute;bottom:150px;width: 100% !important; left:0;">
          <table style="width: 100% !important; margin-top:10px !important; ">
             <tr style="width: 100%;text-align: center;">
                 <td style="width: 33%;font-weight:600;">Authorized signature</td>
-                <td style="width: 33%;font-weight:600;">Deliverd By</td>
+                <td style="width: 33%;font-weight:600;">Delivered By</td>
                 <td style="width: 33%;font-weight:600;">Receiver Signature  Stamp</td>
             </tr>
         </table>
@@ -710,10 +766,10 @@
             <img src={{sidelogo}} alt="">
         </div>
         <div style="position: absolute; bottom:0;left:0;">
-            <img src={{footer}} alt="" width="794px">
+            <img src={{footer}} alt=""  height="140px" width="794px">
         </div>
-        <div style="position: absolute; top: 20%; left: 14%;  ">
-            <img src={{watermark}} width="600px" height="700px">
+        <div style="position: absolute; top: 36%; right:0;   ">
+            <img src={{watermark}} width="610px" height="600px">
         </div>
         <table style=" width:100%;border-bottom:none;">
             <tr style="height: 60px;">
@@ -734,7 +790,7 @@
         <table style="width: 100%; border-bottom:none;">
         
 
-            <table style="width: 100%;  border-bottom:none; margin-top:20px !important;">
+            <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:15px;">
                 <tbody>
                       <tr style="background-color: #f2f3f4">
                     <th
@@ -756,25 +812,34 @@
 
                     {{#each formatted_items.lessThan215}}
                     <tr>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.serial_no}}
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.serial_no}}
                         </td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.item_number}}
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.item_number}}
                         </td>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.description}}
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.description}}
                         </td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.units}}</td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.quantity}}</td>
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.units}}</td>
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.quantity}}</td>
                     </tr>
                     {{/each}}
                 </tbody>
             </table>
         </table>
         {{#unless formatted_items.is_value_exist_235}}
+         <table style="width: 100%; margin-top:10px !important;">
+            <tbody>
+            <tr>
+                <td style="width: 100%; vertical-align: top;">
+                    Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
        <div width="794px" style=" position:absolute;bottom:150px;width: 100% !important; left:0;">
          <table style="width: 100% !important; margin-top:10px !important; ">
             <tr style="width: 100%;text-align: center;">
                 <td style="width: 33%;font-weight:600;">Authorized signature</td>
-                <td style="width: 33%;font-weight:600;">Deliverd By</td>
+                <td style="width: 33%;font-weight:600;">Delivered By</td>
                 <td style="width: 33%;font-weight:600;">Receiver Signature  Stamp</td>
             </tr>
         </table>
@@ -789,10 +854,10 @@
             <img src={{sidelogo}} alt="">
         </div>
         <div style="position: absolute; bottom:0;left:0;">
-            <img src={{footer}} alt="" width="794px">
+            <img src={{footer}} alt=""  height="140px" width="794px">
         </div>
-        <div style="position: absolute; top: 20%; left: 14%;  ">
-            <img src={{watermark}} width="600px" height="700px">
+        <div style="position: absolute; top: 36%; right:0;   ">
+            <img src={{watermark}} width="610px" height="600px">
         </div>
         <table style=" width:100%;border-bottom:none;">
             <tr style="height: 60px;">
@@ -813,7 +878,7 @@
         <table style="width: 100%; border-bottom:none;">
         
 
-            <table style="width: 100%;  border-bottom:none; margin-top:20px !important;">
+            <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:15px;">
                 <tbody>
                    <tr style="background-color: #f2f3f4">
                     <th
@@ -835,25 +900,34 @@
 
                     {{#each formatted_items.lessThan235}}
                     <tr>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.serial_no}}
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.serial_no}}
                         </td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.item_number}}
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.item_number}}
                         </td>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.description}}
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.description}}
                         </td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.units}}</td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.quantity}}</td>
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.units}}</td>
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.quantity}}</td>
                     </tr>
                     {{/each}}
                 </tbody>
             </table>
         </table>
          {{#unless formatted_items.is_value_exist_255}}
+          <table style="width: 100%; margin-top:10px !important;">
+            <tbody>
+            <tr>
+                <td style="width: 100%; vertical-align: top;">
+                    Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
        <div width="794px" style=" position:absolute;bottom:150px;width: 100% !important; left:0;">
          <table style="width: 100% !important; margin-top:10px !important; ">
             <tr style="width: 100%;text-align: center;">
                 <td style="width: 33%;font-weight:600;">Authorized signature</td>
-                <td style="width: 33%;font-weight:600;">Deliverd By</td>
+                <td style="width: 33%;font-weight:600;">Delivered By</td>
                 <td style="width: 33%;font-weight:600;">Receiver Signature  Stamp</td>
             </tr>
         </table>
@@ -868,10 +942,10 @@
             <img src={{sidelogo}} alt="">
         </div>
         <div style="position: absolute; bottom:0;left:0;">
-            <img src={{footer}} alt="" width="794px">
+            <img src={{footer}} alt=""  height="140px" width="794px">
         </div>
-        <div style="position: absolute; top: 20%; left: 14%;  ">
-            <img src={{watermark}} width="600px" height="700px">
+        <div style="position: absolute; top: 36%; right:0;   ">
+            <img src={{watermark}} width="610px" height="600px">
         </div>
         <table style=" width:100%;border-bottom:none;">
             <tr style="height: 60px;">
@@ -892,7 +966,7 @@
         <table style="width: 100%; border-bottom:none;">
         
 
-            <table style="width: 100%;  border-bottom:none; margin-top:20px !important;">
+            <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:15px;">
                 <tbody>
                       <tr style="background-color: #f2f3f4">
                     <th
@@ -914,14 +988,14 @@
 
                     {{#each formatted_items.lessThan255}}
                     <tr>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.serial_no}}
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.serial_no}}
                         </td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.item_number}}
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.item_number}}
                         </td>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.description}}
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.description}}
                         </td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.units}}</td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;">{{this.quantity}}</td>
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.units}}</td>
+                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:5px 0px;border-right:none;border-left:none;">{{this.quantity}}</td>
                     </tr>
                     {{/each}}
                 </tbody>
@@ -931,7 +1005,7 @@
          <table style="width: 100% !important; margin-top:10px !important; ">
             <tr style="width: 100%;text-align: center;">
                 <td style="width: 33%;font-weight:600;">Authorized signature</td>
-                <td style="width: 33%;font-weight:600;">Deliverd By</td>
+                <td style="width: 33%;font-weight:600;">Delivered By</td>
                 <td style="width: 33%;font-weight:600;">Receiver Signature  Stamp</td>
             </tr>
         </table>

@@ -85,21 +85,21 @@
             <tbody>
                 <tr style="width: 100%;text-align: left;">
                     <td style="width: 33%;font-weight:600;padding-left:35px;">Address:</td>
-                    <td style="width: 33%;font-weight:600;padding-left:35px;">Payment Method:</td>
-                    <td style="width: 33%;font-weight:600;padding-left:35px;">Currency:</td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">Customer Reference:</td>
+                    <td style="width: 33%;font-weight:600;padding-left:35px;">DN Number:</td>
                 </tr>
                 <tr style="width: 100%;text-align: left;">
                     <td style="width: 33%;padding-left:35px;">{{address}}</td>
-                    <td style="width: 33%;padding-left:35px;">{{payment_mode}}</td>
-                    <td style="width: 33%;padding-left:35px;">{{currency}}</td>
+                    <td style="width: 33%;padding-left:35px;">{{customer_reference}}</td>
+                    <td style="width: 33%;padding-left:35px;">{{dn_number}}</td>
                 </tr>
             </tbody>
         </table>
         <hr style="margin-left: 20px; color:#000 !important">
-        <table style="margin-left: 20px; width: 100%; border-bottom:none;">
+        {{!-- <table style="margin-left: 20px; width: 100%; border-bottom:none;">
             <tbody>
                 <tr style="width: 100%;text-align: left;">
-                    <td style="width: 25%;font-weight:600;padding-left:35px;">Contact Reference:</td>
+                    <td style="width: 25%;font-weight:600;padding-left:35px;">Customer Reference:</td>
                     <td style="width: 25%;font-weight:600;padding-left:35px;">Reference date:</td>
                     <td style="width: 25%;font-weight:600;padding-left:35px;">DN Number:</td>
                     <td style="width: 25%;font-weight:600;padding-left:35px;">Validity:</td>
@@ -114,8 +114,8 @@
 
                 </tr>
             </tbody>
-        </table>
-        <hr style="margin-left: 20px; color:#000 !important">
+        </table> --}}
+        {{!-- <hr style="margin-left: 20px; color:#000 !important"> --}}
 
         <table style="width: 100%;  border-bottom:none; margin-top:5px !important;">
             <tbody>
@@ -187,26 +187,26 @@
                 <td style="width: 20%;">
                     <table>
                         <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
                                 Sub Total
                             </td>
-                            <td style="width: 20%;text-align: right;">
+                            <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{sub_total}}
                             </td>
                         </tr>
                         <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
                                 Discount
                             </td>
-                            <td style="width: 20%;text-align: right;">
+                            <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{total_discount}}%
                             </td>
                         </tr>
                         <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right;font-weight: 600;padding-left: 4px;">
+                            <td style="width: 20%;text-align: right;font-weight: 600;padding-left: 4px;border-bottom:1px solid #c7c7c7;">
                                 Total
                             </td>
-                            <td style="width: 20%;text-align: right;font-weight: 600;">
+                            <td style="width: 20%;text-align: right;font-weight: 600;border-bottom:1px solid #c7c7c7;">
                                 {{grand_total}}
                             </td>
                         </tr>
@@ -218,7 +218,7 @@
          <table style="width: 100% !important; margin-top:10px !important; ">
             <tr style="width: 100%;text-align: center;">
                 <td style="width: 33%;font-weight:600;">Authorized signature</td>
-                <td style="width: 33%;font-weight:600;">Deliverd By</td>
+                <td style="width: 33%;font-weight:600;">Delivered By</td>
                 <td style="width: 33%;font-weight:600;">Receiver Signature  Stamp</td>
             </tr>
         </table>
@@ -255,7 +255,7 @@
                     </div>
                    </div>
 
-        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
+        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:15px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -324,18 +324,18 @@
                 <td style="width: 20%;">
                     <table>
                         <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
                                 Sub Total
                             </td>
-                            <td style="width: 20%;text-align: right;">
+                            <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{sub_total}}
                             </td>
                         </tr>
                         <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
                                 Discount
                             </td>
-                            <td style="width: 20%;text-align: right;">
+                            <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{total_discount}}%
                             </td>
                         </tr>
@@ -355,7 +355,7 @@
          <table style="width: 100% !important; margin-top:10px !important; ">
             <tr style="width: 100%;text-align: center;">
                 <td style="width: 33%;font-weight:600;">Authorized signature</td>
-                <td style="width: 33%;font-weight:600;">Deliverd By</td>
+                <td style="width: 33%;font-weight:600;">Delivered By</td>
                 <td style="width: 33%;font-weight:600;">Receiver Signature  Stamp</td>
             </tr>
         </table>
@@ -391,7 +391,7 @@
                     </div>
                    </div>
 
-        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
+        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:15px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -460,18 +460,18 @@
                 <td style="width: 20%;">
                     <table>
                         <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
                                 Sub Total
                             </td>
-                            <td style="width: 20%;text-align: right;">
+                            <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{sub_total}}
                             </td>
                         </tr>
                         <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
                                 Discount
                             </td>
-                            <td style="width: 20%;text-align: right;">
+                            <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{total_discount}}%
                             </td>
                         </tr>
@@ -527,7 +527,7 @@
                     </div>
                    </div>
 
-        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
+        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:15px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -596,18 +596,18 @@
                 <td style="width: 20%;">
                     <table>
                         <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
                                 Sub Total
                             </td>
-                            <td style="width: 20%;text-align: right;">
+                            <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{sub_total}}
                             </td>
                         </tr>
                         <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
                                 Discount
                             </td>
-                            <td style="width: 20%;text-align: right;">
+                            <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{total_discount}}%
                             </td>
                         </tr>
@@ -663,7 +663,7 @@
                     </div>
                    </div>
 
-        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
+        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:15px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -726,18 +726,18 @@
                 <td style="width: 20%;">
                     <table>
                         <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
                                 Sub Total
                             </td>
-                            <td style="width: 20%;text-align: right;">
+                            <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{sub_total}}
                             </td>
                         </tr>
                         <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
                                 Discount
                             </td>
-                            <td style="width: 20%;text-align: right;">
+                            <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{total_discount}}%
                             </td>
                         </tr>
@@ -793,7 +793,7 @@
                     </div>
                    </div>
 
-        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
+        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:15px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -855,18 +855,18 @@
                 <td style="width: 20%;">
                     <table>
                         <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
                                 Sub Total
                             </td>
-                            <td style="width: 20%;text-align: right;">
+                            <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{sub_total}}
                             </td>
                         </tr>
                         <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
                                 Discount
                             </td>
-                            <td style="width: 20%;text-align: right;">
+                            <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{total_discount}}%
                             </td>
                         </tr>
@@ -922,7 +922,7 @@
                     </div>
                    </div>
 
-        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
+        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:15px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -985,18 +985,18 @@
                 <td style="width: 20%;">
                     <table>
                         <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
                                 Sub Total
                             </td>
-                            <td style="width: 20%;text-align: right;">
+                            <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{sub_total}}
                             </td>
                         </tr>
                         <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
                                 Discount
                             </td>
-                            <td style="width: 20%;text-align: right;">
+                            <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{total_discount}}%
                             </td>
                         </tr>
@@ -1053,7 +1053,7 @@
                     </div>
                    </div>
 
-        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
+        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:15px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -1116,18 +1116,18 @@
                 <td style="width: 20%;">
                     <table>
                         <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
                                 Sub Total
                             </td>
-                            <td style="width: 20%;text-align: right;">
+                            <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{sub_total}}
                             </td>
                         </tr>
                         <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
                                 Discount
                             </td>
-                            <td style="width: 20%;text-align: right;">
+                            <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{total_discount}}%
                             </td>
                         </tr>
@@ -1183,7 +1183,7 @@
                     </div>
                    </div>
 
-        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
+        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:15px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -1246,18 +1246,18 @@
                 <td style="width: 20%;">
                     <table>
                         <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
                                 Sub Total
                             </td>
-                            <td style="width: 20%;text-align: right;">
+                            <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{sub_total}}
                             </td>
                         </tr>
                         <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
                                 Discount
                             </td>
-                            <td style="width: 20%;text-align: right;">
+                            <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{total_discount}}%
                             </td>
                         </tr>
@@ -1314,7 +1314,7 @@
                     </div>
                    </div>
 
-        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
+        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:15px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -1378,18 +1378,18 @@
                 <td style="width: 20%;">
                     <table>
                         <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
                                 Sub Total
                             </td>
-                            <td style="width: 20%;text-align: right;">
+                            <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{sub_total}}
                             </td>
                         </tr>
                         <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
                                 Discount
                             </td>
-                            <td style="width: 20%;text-align: right;">
+                            <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{total_discount}}%
                             </td>
                         </tr>
@@ -1446,7 +1446,7 @@
                     </div>
                    </div>
 
-        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:10px;">
+        <table style="width: 100%;  border-bottom:none; margin-top:20px !important;margin-left:15px;">
             <tbody>
                 <tr style="background-color: #f2f3f4">
                     <th
@@ -1508,18 +1508,18 @@
                 <td style="width: 20%;">
                     <table>
                         <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
                                 Sub Total
                             </td>
-                            <td style="width: 20%;text-align: right;">
+                            <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{sub_total}}
                             </td>
                         </tr>
                         <tr style="height: 20px;">
-                            <td style="width: 20%;text-align: right; padding-left: 4px;">
+                            <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
                                 Discount
                             </td>
-                            <td style="width: 20%;text-align: right;">
+                            <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{total_discount}}%
                             </td>
                         </tr>

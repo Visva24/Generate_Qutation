@@ -70,7 +70,7 @@ export class DeliveryChallanController {
             }
         
           })
-          @Patch("update-delivery-challan-form/:id")
+          @Post("update-delivery-challan-form/:id")
           async updateDeliveryChallanForm(@Headers('Authorization') headers: any,@Param('id')id :number,@Body() UpdateDeliveryChallanForm:UpdateDeliveryChallanFormDto) {
             const token = await decodeAccessToken(headers);
             return this.deliveryChallanService.updateDeliveryChallanForm(token.user_id,id,UpdateDeliveryChallanForm)

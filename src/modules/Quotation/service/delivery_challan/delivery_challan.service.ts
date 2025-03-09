@@ -57,7 +57,7 @@ export class DeliveryChallanService {
         try {
 
             let revisedDocNumber = null
-            let getQuotationData = await this.deliveryChallanModel.findAll({
+            let getChallanData = await this.deliveryChallanModel.findAll({
                 where: { id: challan_id },
                 include: [
                     { association: "delivery_items" }
@@ -65,10 +65,10 @@ export class DeliveryChallanService {
             })
             let modifiedListData = []
             let i = 1
-            // if(type =="revision"){
-            //      revisedDocNumber =  (await this.generateRevisionDocNumber(getQuotationData[0].id)).data
-            // }
-            for (let singleData of getQuotationData[0].delivery_items) {
+            if(type =="revision"){
+                await this.TempDeliveryItemModel.destroy({where:{doc_number:getChallanData[0]['doc_number']}})
+            }
+            for (let singleData of getChallanData[0].delivery_items) {
                 let obj: any = {}
                 Object.assign(obj, {
                     ...singleData.dataValues
@@ -76,26 +76,22 @@ export class DeliveryChallanService {
                 obj['serial_no'] = i
                 i++
                 modifiedListData.push(obj)
-                // if(revisedDocNumber){
-                //      let revisionObj:any ={}
-                //      Object.assign(revisionObj, {
-                //         ...singleData.dataValues
-                //     })
-                //     revisionObj['doc_number']=revisedDocNumber
-                //     delete revisionObj.id
-                //     delete revisionObj.createdAt
-                //     delete revisionObj.updatedAt
+                if(type =="revision"){
+                     let revisionObj:any ={}
+                     Object.assign(revisionObj, {
+                        ...singleData.dataValues
+                    })
+                   let docNumber =getChallanData[0]['doc_number']
+                    delete revisionObj.id
+                    delete revisionObj.createdAt
+                    delete revisionObj.updatedAt
 
-                //     // return obj
-                //     let existingQuotationItem = await this.TempDeliveryItemModel.findOne({where:{doc_number:revisedDocNumber,item_number:revisionObj.item_number,description:revisionObj.description}})
-                //     if(existingQuotationItem == null){
-                //         let savedData =   await this.SaveOrUpdateDeliveryChallanList(revisedDocNumber,[revisionObj],null)
-                //     }
-
-                // }
+                    // return obj
+                  let savedData =   await this.SaveOrUpdateDeliveryChallanList(user_id,docNumber,[revisionObj],null)
+                }
             }
 
-            let modifiedOverAllData = await Promise.all(getQuotationData.map(async singleData => {
+            let modifiedOverAllData = await Promise.all(getChallanData.map(async singleData => {
                 return {
                     ...singleData.dataValues,
                     doc_date: moment(singleData.doc_date).format('DD-MMM-YYYY'),
@@ -110,7 +106,7 @@ export class DeliveryChallanService {
 
         } catch (error) {
             console.log(error);
-            return responseMessageGenerator('failure', 'something went wrong', error.message)
+            return responseMessageGenerator('failure', 'somethiiing went wrong', error.message)
         }
     }
     async getDeliveryChallanFormHistory(filter:filterData): Promise<ApiResponse> {
