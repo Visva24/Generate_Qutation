@@ -70,10 +70,10 @@ export class DeliveryChallanController {
             }
         
           })
-          @Post("update-delivery-challan-form/:id")
-          async updateDeliveryChallanForm(@Headers('Authorization') headers: any,@Param('id')id :number,@Body() UpdateDeliveryChallanForm:UpdateDeliveryChallanFormDto) {
+          @Post("update-delivery-challan-form")
+          async updateDeliveryChallanForm(@Headers('Authorization') headers: any,@Body() UpdateDeliveryChallanForm:UpdateDeliveryChallanFormDto) {
             const token = await decodeAccessToken(headers);
-            return this.deliveryChallanService.updateDeliveryChallanForm(token.user_id,id,UpdateDeliveryChallanForm)
+            return this.deliveryChallanService.updateDeliveryChallanForm(token.user_id,UpdateDeliveryChallanForm.id,UpdateDeliveryChallanForm)
           }
           
        

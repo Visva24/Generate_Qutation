@@ -69,7 +69,7 @@ export class SalesInvoiceService {
             let modifiedListData = []
             let i = 1
             if(type =="revision"){
-                await this.TempSalesItemModel.findOne({where:{doc_number:getInvoiceData[0]['doc_number']}})
+                await this.TempSalesItemModel.destroy({where:{doc_number:getInvoiceData[0]['doc_number']}})
             }
             for (let singleData of getInvoiceData[0].sales_items) {
                 let obj: any = {}
@@ -206,10 +206,9 @@ export class SalesInvoiceService {
 
             let getTempInvoiceList = await this.TempSalesItemModel.findAll({
                 where: {user_id:user_id, doc_number: UpdateInvoiceForm.doc_number },
-                attributes: ["item_number", "description", "quantity", "units"],
+                attributes: ["item_number", "description", "quantity", "units", "price", "discount", "amount"],
                 order: [["id", "ASC"]]
             })
-
             let totalAmount = getTempInvoiceList.reduce((acc, sum) => acc + +sum.amount, 0)
             // let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
             // let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
@@ -218,17 +217,19 @@ export class SalesInvoiceService {
             UpdateInvoiceForm.sub_total = totalAmount
             UpdateInvoiceForm.grand_total = totalAmount
 
-            let updateInvoice = await this.deliveryChallanModel.update({ ...UpdateInvoiceForm }, { where: { id: id } })
+            let updateInvoice = await this.SalesInvoiceFormModel.update({ ...UpdateInvoiceForm }, { where: { id: id } })
             //  let itemCount = getTempQuotationList.length
             if (updateInvoice && getTempInvoiceList.length > 0) {
                 await this.SalesItemModel.destroy({ where: { invoice_id: id } })
+                 
                 for (let singleData of getTempInvoiceList) {
                     /* destroy previous data*/
                     let obj = {}
                     Object.assign(obj, {
                         ...singleData.dataValues,
-                        delivery_id: id
+                        invoice_id: id
                     })
+                   
                     let update = await this.SalesItemModel.create(obj)
                 }
             }

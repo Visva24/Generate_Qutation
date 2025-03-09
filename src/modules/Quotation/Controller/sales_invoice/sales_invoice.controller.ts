@@ -71,10 +71,10 @@ export class SalesInvoiceController {
                 }
             
               })
-              @Patch("update-sales-invoice-form/:id")
-              async updateSalesInvoiceForm(@Headers('Authorization') headers: any,@Param('id')id :number,@Body() UpdateInvoiceForm:UpdateInvoiceFormDto) {
+              @Post("update-sales-invoice-form")
+              async updateSalesInvoiceForm(@Headers('Authorization') headers: any,@Body() UpdateInvoiceForm:UpdateInvoiceFormDto) {
                 const token = await decodeAccessToken(headers);
-                return this.SalesInvoiceService.updateSalesInvoiceForm(token.user_id,id,UpdateInvoiceForm)
+                return this.SalesInvoiceService.updateSalesInvoiceForm(token.user_id,UpdateInvoiceForm.id,UpdateInvoiceForm)
               }
               
            

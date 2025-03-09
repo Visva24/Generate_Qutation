@@ -49,6 +49,7 @@ export class documentsDto {
 /*challan*/
 
 export class deliveryChallanFormDto {
+            id?:number
             customer_name:string
             customer_reference_id:string
             doc_number:string
@@ -72,6 +73,7 @@ export class deliveryChallanFormDto {
             is_record_saved:boolean
 }
 export class InvoiceFormDto {
+            id?:number
             customer_name:string
             customer_reference_id:string
             doc_number:string
