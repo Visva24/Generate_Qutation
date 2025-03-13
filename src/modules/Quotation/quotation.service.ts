@@ -275,9 +275,11 @@ export class QuotationService {
             if (Quotation) {
 
                 if (doc_type == "delivery" && Quotation?.is_form_move_forward && Quotation?.is_record_saved == false) {
-                    docNumber = generateDocNumber(Quotation?.doc_number)
+                    // docNumber = generateDocNumber(Quotation?.doc_number)
+                    docNumber = Quotation?.doc_number
                 } else if (doc_type == "sales" && Quotation?.is_form_move_forward && Quotation?.is_record_saved == false) {
-                    docNumber = generateDocNumber(Quotation?.doc_number)
+                    // docNumber = generateDocNumber(Quotation?.doc_number)
+                    docNumber =Quotation?.doc_number
                 } 
                 else {
                     let incrementDocNumber
@@ -293,7 +295,8 @@ export class QuotationService {
                         incrementDocNumber = await this.incrementLastDigit(docNum)
                     }
                     if(doc_type == "sales" ||doc_type == "delivery"){
-                        docNumber = generateDocNumber(incrementDocNumber)
+                        // docNumber = generateDocNumber(incrementDocNumber)
+                        docNumber = incrementDocNumber
                     }else{
                         docNumber =incrementDocNumber
                     }
@@ -301,7 +304,8 @@ export class QuotationService {
                 }
             } else {
                 if(doc_type == "sales"||doc_type == "delivery"){
-                    docNumber = generateDocNumber(getDocumentData?.doc_number)
+                    // docNumber = generateDocNumber(getDocumentData?.doc_number)
+                    docNumber = getDocumentData?.doc_number
                 }else{
                     docNumber = getDocumentData?.doc_number
                 }
