@@ -84,33 +84,16 @@
         <table style="margin-left: 20px; width: 100%; border-bottom:none;">
             <tbody>
                 <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;font-weight:600;padding-left:35px;">Customer Reference:</td>
-                    {{!-- <td style="width: 33%;font-weight:600;padding-left:35px;">Payment Method:</td> --}}
-                    <td style="width: 33%;font-weight:600;padding-left:35px;">Payment Terms:</td>
-                    <td style="width: 33%;font-weight:600;padding-left:35px;">Currency:</td>
+                    <td style="width: 25%;font-weight:600;padding-left:35px;">Address:</td>
+                    <td style="width: 25%;font-weight:600;padding-left:35px;">Customer Reference:</td>
+                    <td style="width: 25%;font-weight:600;padding-left:35px;">Payment Terms:</td>
+                    <td style="width: 25%;font-weight:600;padding-left:35px;">Currency:</td>
                 </tr>
                 <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;padding-left:35px;">{{customer_reference}}</td>
-                    {{!-- <td style="width: 33%;padding-left:35px;">{{payment_mode}}</td> --}}
-                    <td style="width: 33%;padding-left:35px;">{{payment_terms}}</td>
-                    <td style="width: 33%;padding-left:35px;">{{currency}}</td>
-                </tr>
-            </tbody>
-        </table>
-        <hr style="margin-left: 20px; color:#000 !important">
-        <table style="margin-left: 20px; width: 100%; border-bottom:none;">
-            <tbody>
-                <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;font-weight:600;padding-left:35px;">Address:</td>
-                    <td style="width: 33%;font-weight:600;padding-left:35px;">Validity:</td>
-                     <td style="width: 33%;font-weight:600;padding-left:35px;"></td>
-                   
-                </tr>
-                <tr style="width: 100%;text-align: left;">
-                    <td style="width: 33%;padding-left:35px;">{{address}}</td>
-                    <td style="width: 33%;padding-left:35px;">{{Validity}}</td>
-                   <td style="width: 33%;padding-left:35px;"></td>
-                   
+                    <td style="width: 25%;padding-left:35px;">{{address}}</td>
+                    <td style="width: 25%;padding-left:35px;">{{customer_reference}}</td>
+                    <td style="width: 25%;padding-left:35px;">{{payment_terms}}</td>
+                    <td style="width: 25%;padding-left:35px;">{{currency}}</td>
                 </tr>
             </tbody>
         </table>
@@ -171,19 +154,22 @@
             </tbody>
         </table>
       {{#unless formatted_items.is_value_exist_40}}
-        <table style="width: 100%; margin-top:10px !important;">
+        <table style="width: 100%;margin-left:15px; margin-top:10px !important;">
             <tr>
                 <td style="width: 80%; vertical-align: top;">
                     <table>
-                        <tr style="height: 25px;padding-left: 4px;">
+                        <tr style="height: 20px;padding-left: 4px;">
+                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{Validity}}</span></td>
+                        </tr>
+                        <tr style="height: 20px;padding-left: 4px;">
                             <td>Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
                         </tr>
 
-                        <tr style="height: 25px;padding-left: 4px;">
+                        <tr style="height: 20px;padding-left: 4px;">
                             <td>Delivery: <span style="font-weight: 600;padding-left: 4px;">{{delivery}}</span></td>
                         </tr>
 
-                        <tr style="height: 25px;padding-left: 4px;">
+                        <tr style="height: 20px;padding-left: 4px;">
                             <td>Total In Words: <span
                                     style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</span></td>
                         </tr>
@@ -237,7 +223,7 @@
         <div  width="794px" style=" position:absolute;bottom:150px;width: 100% !important; left:0;">
          <table style="margin-top: 5px; width:100%;">
             <tbody>
-                <tr style="height: 25px;padding-left: 4px;">
+                <tr style="height: 20px;padding-left: 4px;">
                     <td style="padding-left: 40px;">
                         <img src={{ user_sign }} alt="signature" height="50px" width="100px" style="object-fit: contain !important;"><br>
                         <span style="font-weight: 600;padding-left: 4px;">Prepared By</span>
@@ -332,20 +318,24 @@
                 </tr>
                 {{/each}}
             </tbody>
+              </table>
         {{#unless formatted_items.is_value_exist_65}}
-        <table style="width: 100%; margin-top:10px !important;">
+        <table style="width: 100%;margin-left:15px; margin-top:10px !important;">
             <tr>
                 <td style="width: 80%; vertical-align: top;">
                     <table>
-                        <tr style="height: 25px;padding-left: 4px;">
+                        <tr style="height: 20px;padding-left: 4px;">
+                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{Validity}}</span></td>
+                        </tr>
+                        <tr style="height: 20px;padding-left: 4px;">
                             <td>Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
                         </tr>
 
-                        <tr style="height: 25px;padding-left: 4px;">
+                        <tr style="height: 20px;padding-left: 4px;">
                             <td>Delivery: <span style="font-weight: 600;padding-left: 4px;">{{delivery}}</span></td>
                         </tr>
 
-                        <tr style="height: 25px;padding-left: 4px;">
+                        <tr style="height: 20px;padding-left: 4px;">
                             <td>Total In Words: <span
                                     style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</span></td>
                         </tr>
@@ -399,7 +389,7 @@
          <div  width="794px" style=" position:absolute;bottom:150px;width: 100% !important; left:0;">
          <table style="margin-top: 5px; width:100%;">
             <tbody>
-                <tr style="height: 25px;padding-left: 4px;">
+                <tr style="height: 20px;padding-left: 4px;">
                     <td style="padding-left: 40px;">
                         <img src={{ user_sign }} alt="signature" height="50px" width="100px" style="object-fit: contain !important;"><br>
                         <span style="font-weight: 600;padding-left: 4px;">Prepared By</span>
@@ -496,20 +486,24 @@
                 </tr>
                 {{/each}}
             </tbody>
+              </table>
             {{#unless formatted_items.is_value_exist_90}}
-            <table style="width: 100%; margin-top:10px !important;">
+            <table style="width: 100%;margin-left:15px; margin-top:10px !important;">
                 <tr>
                     <td style="width: 80%; vertical-align: top;">
                         <table>
-                            <tr style="height: 25px;padding-left: 4px;">
+                            <tr style="height: 20px;padding-left: 4px;">
+                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{Validity}}</span></td>
+                           </tr>
+                            <tr style="height: 20px;padding-left: 4px;">
                                 <td>Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
                             </tr>
 
-                            <tr style="height: 25px;padding-left: 4px;">
+                            <tr style="height: 20px;padding-left: 4px;">
                                 <td>Delivery: <span style="font-weight: 600;padding-left: 4px;">{{delivery}}</span></td>
                             </tr>
 
-                            <tr style="height: 25px;padding-left: 4px;">
+                            <tr style="height: 20px;padding-left: 4px;">
                                 <td>Total In Words: <span
                                         style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</span></td>
                             </tr>
@@ -563,7 +557,7 @@
              <div  width="794px" style=" position:absolute;bottom:150px;width: 100% !important; left:0;">
          <table style="margin-top: 5px; width:100%;">
             <tbody>
-                <tr style="height: 25px;padding-left: 4px;">
+                <tr style="height: 20px;padding-left: 4px;">
                     <td style="padding-left: 40px;">
                         <img src={{ user_sign }} alt="signature" height="50px" width="100px" style="object-fit: contain !important;"><br>
                         <span style="font-weight: 600;padding-left: 4px;">Prepared By</span>
@@ -659,20 +653,24 @@
                 </tr>
                 {{/each}}
             </tbody>
+            </table>
              {{#unless formatted_items.is_value_exist_115}}
-            <table style="width: 100%; margin-top:10px !important;">
+            <table style="width: 100%;margin-left:15px; margin-top:10px !important;">
                 <tr>
                     <td style="width: 80%; vertical-align: top;">
                         <table>
-                            <tr style="height: 25px;padding-left: 4px;">
+                            <tr style="height: 20px;padding-left: 4px;">
+                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{Validity}}</span></td>
+                            </tr>
+                            <tr style="height: 20px;padding-left: 4px;">
                                 <td>Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
                             </tr>
 
-                            <tr style="height: 25px;padding-left: 4px;">
+                            <tr style="height: 20px;padding-left: 4px;">
                                 <td>Delivery: <span style="font-weight: 600;padding-left: 4px;">{{delivery}}</span></td>
                             </tr>
 
-                            <tr style="height: 25px;padding-left: 4px;">
+                            <tr style="height: 20px;padding-left: 4px;">
                                 <td>Total In Words: <span
                                         style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</span></td>
                             </tr>
@@ -726,7 +724,7 @@
              <div  width="794px" style=" position:absolute;bottom:150px;width: 100% !important; left:0;">
          <table style="margin-top: 5px; width:100%;">
             <tbody>
-                <tr style="height: 25px;padding-left: 4px;">
+                <tr style="height: 20px;padding-left: 4px;">
                     <td style="padding-left: 40px;">
                         <img src={{ user_sign }} alt="signature" height="50px" width="100px" style="object-fit: contain !important;"><br>
                         <span style="font-weight: 600;padding-left: 4px;">Prepared By</span>
@@ -825,19 +823,22 @@
                 {{/each}}
             </tbody>
             {{#unless formatted_items.is_value_exist_140}}
-            <table style="width: 100%; margin-top:10px !important;">
+            <table style="width: 100%;margin-left:15px; margin-top:10px !important;">
                 <tr>
                     <td style="width: 80%; vertical-align: top;">
                         <table>
-                            <tr style="height: 25px;padding-left: 4px;">
+                            <tr style="height: 20px;padding-left: 4px;">
+                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{Validity}}</span></td>
+                            </tr>
+                            <tr style="height: 20px;padding-left: 4px;">
                                 <td>Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
                             </tr>
 
-                            <tr style="height: 25px;padding-left: 4px;">
+                            <tr style="height: 20px;padding-left: 4px;">
                                 <td>Delivery: <span style="font-weight: 600;padding-left: 4px;">{{delivery}}</span></td>
                             </tr>
 
-                            <tr style="height: 25px;padding-left: 4px;">
+                            <tr style="height: 20px;padding-left: 4px;">
                                 <td>Total In Words: <span
                                         style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</span></td>
                             </tr>
@@ -892,7 +893,7 @@
              <div  width="794px" style=" position:absolute;bottom:150px;width: 100% !important; left:0;">
          <table style="margin-top: 5px; width:100%;">
             <tbody>
-                <tr style="height: 25px;padding-left: 4px;">
+                <tr style="height: 20px;padding-left: 4px;">
                     <td style="padding-left: 40px;">
                         <img src={{ user_sign }} alt="signature" height="50px" width="100px" style="object-fit: contain !important;"><br>
                         <span style="font-weight: 600;padding-left: 4px;">Prepared By</span>
@@ -988,21 +989,24 @@
                     <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.amount}}</td>
                 </tr>
                 {{/each}}
-            </tbody>
+            </table>
             {{#unless formatted_items.is_value_exist_165}}
-                <table style="width: 100%; margin-top:10px !important;">
+                <table style="width: 100%;margin-left:15px; margin-top:10px !important;">
                     <tr>
                         <td style="width: 80%; vertical-align: top;">
                             <table>
-                                <tr style="height: 25px;padding-left: 4px;">
+                                <tr style="height: 20px;padding-left: 4px;">
+                                <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{Validity}}</span></td>
+                                 </tr>
+                                <tr style="height: 20px;padding-left: 4px;">
                                     <td>Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
                                 </tr>
 
-                                <tr style="height: 25px;padding-left: 4px;">
+                                <tr style="height: 20px;padding-left: 4px;">
                                     <td>Delivery: <span style="font-weight: 600;padding-left: 4px;">{{delivery}}</span></td>
                                 </tr>
 
-                                <tr style="height: 25px;padding-left: 4px;">
+                                <tr style="height: 20px;padding-left: 4px;">
                                     <td>Total In Words: <span
                                             style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</span></td>
                                 </tr>
@@ -1057,7 +1061,7 @@
                   <div  width="794px" style=" position:absolute;bottom:150px;width: 100% !important; left:0;">
          <table style="margin-top: 5px; width:100%;">
             <tbody>
-                <tr style="height: 25px;padding-left: 4px;">
+                <tr style="height: 20px;padding-left: 4px;">
                     <td style="padding-left: 40px;">
                         <img src={{ user_sign }} alt="signature" height="50px" width="100px" style="object-fit: contain !important;"><br>
                         <span style="font-weight: 600;padding-left: 4px;">Prepared By</span>
@@ -1155,19 +1159,22 @@
                 {{/each}}
             </tbody>
              {{#unless formatted_items.is_value_exist_190}}
-                <table style="width: 100%; margin-top:10px !important;">
+                <table style="width: 100%;margin-left:15px; margin-top:10px !important;">
                     <tr>
                         <td style="width: 80%; vertical-align: top;">
                             <table>
-                                <tr style="height: 25px;padding-left: 4px;">
+                                <tr style="height: 20px;padding-left: 4px;">
+                                 <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{Validity}}</span></td>
+                               </tr>
+                                <tr style="height: 20px;padding-left: 4px;">
                                     <td>Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
                                 </tr>
 
-                                <tr style="height: 25px;padding-left: 4px;">
+                                <tr style="height: 20px;padding-left: 4px;">
                                     <td>Delivery: <span style="font-weight: 600;padding-left: 4px;">{{delivery}}</span></td>
                                 </tr>
 
-                                <tr style="height: 25px;padding-left: 4px;">
+                                <tr style="height: 20px;padding-left: 4px;">
                                     <td>Total In Words: <span
                                             style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</span></td>
                                 </tr>
@@ -1222,7 +1229,7 @@
                  <div  width="794px" style=" position:absolute;bottom:150px;width: 100% !important; left:0;">
          <table style="margin-top: 5px; width:100%;">
             <tbody>
-                <tr style="height: 25px;padding-left: 4px;">
+                <tr style="height: 20px;padding-left: 4px;">
                     <td style="padding-left: 40px;">
                         <img src={{ user_sign }} alt="signature" height="50px" width="100px" style="object-fit: contain !important;"><br>
                         <span style="font-weight: 600;padding-left: 4px;">Prepared By</span>
@@ -1322,19 +1329,22 @@
                 {{/each}}
             </tbody>
               {{#unless formatted_items.is_value_exist_215}}
-                <table style="width: 100%; margin-top:10px !important;">
+                <table style="width: 100%;margin-left:15px; margin-top:10px !important;">
                     <tr>
                         <td style="width: 80%; vertical-align: top;">
                             <table>
-                                <tr style="height: 25px;padding-left: 4px;">
+                                <tr style="height: 20px;padding-left: 4px;">
+                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{Validity}}</span></td>
+                             </tr>
+                                <tr style="height: 20px;padding-left: 4px;">
                                     <td>Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
                                 </tr>
 
-                                <tr style="height: 25px;padding-left: 4px;">
+                                <tr style="height: 20px;padding-left: 4px;">
                                     <td>Delivery: <span style="font-weight: 600;padding-left: 4px;">{{delivery}}</span></td>
                                 </tr>
 
-                                <tr style="height: 25px;padding-left: 4px;">
+                                <tr style="height: 20px;padding-left: 4px;">
                                     <td>Total In Words: <span
                                             style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</span></td>
                                 </tr>
@@ -1389,7 +1399,7 @@
                  <div  width="794px" style=" position:absolute;bottom:150px;width: 100% !important; left:0;">
          <table style="margin-top: 5px; width:100%;">
             <tbody>
-                <tr style="height: 25px;padding-left: 4px;">
+                <tr style="height: 20px;padding-left: 4px;">
                     <td style="padding-left: 40px;">
                         <img src={{ user_sign }} alt="signature" height="50px" width="100px" style="object-fit: contain !important;"><br>
                         <span style="font-weight: 600;padding-left: 4px;">Prepared By</span>
@@ -1487,21 +1497,24 @@
                 </tr>
                 {{/each}}
             </tbody>
-
+</table>
               {{#unless formatted_items.is_value_exist_235}}
-                <table style="width: 100%; margin-top:10px !important;">
+                <table style="width: 100%;margin-left:15px; margin-top:10px !important;">
                     <tr>
                         <td style="width: 80%; vertical-align: top;">
                             <table>
-                                <tr style="height: 25px;padding-left: 4px;">
+                                <tr style="height: 20px;padding-left: 4px;">
+                                <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{Validity}}</span></td>
+                               </tr>
+                                <tr style="height: 20px;padding-left: 4px;">
                                     <td>Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
                                 </tr>
 
-                                <tr style="height: 25px;padding-left: 4px;">
+                                <tr style="height: 20px;padding-left: 4px;">
                                     <td>Delivery: <span style="font-weight: 600;padding-left: 4px;">{{delivery}}</span></td>
                                 </tr>
 
-                                <tr style="height: 25px;padding-left: 4px;">
+                                <tr style="height: 20px;padding-left: 4px;">
                                     <td>Total In Words: <span
                                             style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</span></td>
                                 </tr>
@@ -1556,7 +1569,7 @@
                  <div  width="794px" style=" position:absolute;bottom:150px;width: 100% !important; left:0;">
          <table style="margin-top: 5px; width:100%;">
             <tbody>
-                <tr style="height: 25px;padding-left: 4px;">
+                <tr style="height: 20px;padding-left: 4px;">
                     <td style="padding-left: 40px;">
                         <img src={{ user_sign }} alt="signature" height="50px" width="100px" style="object-fit: contain !important;"><br>
                         <span style="font-weight: 600;padding-left: 4px;">Prepared By</span>
@@ -1656,19 +1669,22 @@
                 {{/each}}
             </tbody>
               {{#unless formatted_items.is_value_exist_255}}
-                <table style="width: 100%; margin-top:10px !important;">
+                <table style="width: 100%;margin-left:15px; margin-top:10px !important;">
                     <tr>
                         <td style="width: 80%; vertical-align: top;">
                             <table>
-                                <tr style="height: 25px;padding-left: 4px;">
+                                <tr style="height: 20px;padding-left: 4px;">
+                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{Validity}}</span></td>
+                        </tr>
+                                <tr style="height: 20px;padding-left: 4px;">
                                     <td>Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
                                 </tr>
 
-                                <tr style="height: 25px;padding-left: 4px;">
+                                <tr style="height: 20px;padding-left: 4px;">
                                     <td>Delivery: <span style="font-weight: 600;padding-left: 4px;">{{delivery}}</span></td>
                                 </tr>
 
-                                <tr style="height: 25px;padding-left: 4px;">
+                                <tr style="height: 20px;padding-left: 4px;">
                                     <td>Total In Words: <span
                                             style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</span></td>
                                 </tr>
@@ -1723,7 +1739,7 @@
                  <div  width="794px" style=" position:absolute;bottom:150px;width: 100% !important; left:0;">
          <table style="margin-top: 5px; width:100%;">
             <tbody>
-                <tr style="height: 25px;padding-left: 4px;">
+                <tr style="height: 20px;padding-left: 4px;">
                     <td style="padding-left: 40px;">
                         <img src={{ user_sign }} alt="signature" height="50px" width="100px" style="object-fit: contain !important;"><br>
                         <span style="font-weight: 600;padding-left: 4px;">Prepared By</span>
@@ -1821,20 +1837,23 @@
                 </tr>
                 {{/each}}
             </tbody>
-
-                <table style="width: 100%; margin-top:10px !important;">
+</table>
+                <table style="width: 100%;margin-left:15px; margin-top:10px !important;">
                     <tr>
                         <td style="width: 80%; vertical-align: top;">
                             <table>
-                                <tr style="height: 25px;padding-left: 4px;">
+                                <tr style="height: 20px;padding-left: 4px;">
+                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{Validity}}</span></td>
+                        </tr>
+                                <tr style="height: 20px;padding-left: 4px;">
                                     <td>Remark: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
                                 </tr>
 
-                                <tr style="height: 25px;padding-left: 4px;">
+                                <tr style="height: 20px;padding-left: 4px;">
                                     <td>Delivery: <span style="font-weight: 600;padding-left: 4px;">{{delivery}}</span></td>
                                 </tr>
 
-                                <tr style="height: 25px;padding-left: 4px;">
+                                <tr style="height: 20px;padding-left: 4px;">
                                     <td>Total In Words: <span
                                             style="font-weight: 600;padding-left: 4px;">{{amount_in_words}}</span></td>
                                 </tr>
@@ -1889,7 +1908,7 @@
             <div  width="794px" style=" position:absolute;bottom:150px;width: 100% !important; left:0;">
          <table style="margin-top: 5px; width:100%;">
             <tbody>
-                <tr style="height: 25px;padding-left: 4px;">
+                <tr style="height: 20px;padding-left: 4px;">
                     <td style="padding-left: 40px;">
                         <img src={{ user_sign }} alt="signature" height="50px" width="100px" style="object-fit: contain !important;"><br>
                         <span style="font-weight: 600;padding-left: 4px;">Prepared By</span>
