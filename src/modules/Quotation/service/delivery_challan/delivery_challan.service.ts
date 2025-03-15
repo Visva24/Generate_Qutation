@@ -701,7 +701,7 @@ export class DeliveryChallanService {
             }
             // return getQuotationData
             await this.TempDeliveryItemModel.destroy({ where: { doc_number: createDeliveryChallan.doc_number } })
-            return getQuotationData[0].quotation_items
+           
             for (let singleData of getQuotationData[0].quotation_items) {
                 let doc_number = createDeliveryChallan.doc_number
                 let object = {
