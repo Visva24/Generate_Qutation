@@ -127,7 +127,7 @@
                         style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Item No.</th>
                     <th
-                        style="width: 35%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        style="width: 35%;text-align: left;padding-left:30px !important; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Description</th>
                     <th
                         style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
@@ -151,12 +151,12 @@
                 <tr>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.serial_no}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.item_number}}</td>
-                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.description}}</td>
+                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;font-size:10px !important;">{{this.description}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.quantity}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.units}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.price}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.discount}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -164,7 +164,7 @@
         {{#unless formatted_items.is_value_exist_40}}
         <table style="width: 100%; margin-top:10px !important;">
             <tr>
-                <td style="width: 80%; vertical-align: top;">
+                <td style="width: 70%; vertical-align: top;">
                     <table>
                         <tr style="height: 25px;padding-left: 4px;">
                             <td>Payment Terms: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span>
@@ -184,7 +184,7 @@
                         </tr>
                     </table>
                 </td>
-                <td style="width: 20%;">
+                <td style="width: 30%;">
                     <table>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
@@ -196,7 +196,7 @@
                         </tr>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
-                                Discount
+                               Overall Discount
                             </td>
                             <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{total_discount}}%
@@ -265,7 +265,7 @@
                         style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Item No.</th>
                     <th
-                        style="width: 35%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        style="width: 35%;text-align: left;padding-left:30px !important; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Description</th>
                     <th
                         style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
@@ -288,12 +288,12 @@
                 <tr>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.serial_no}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.item_number}}</td>
-                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.description}}</td>
+                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;font-size:10px !important;">{{this.description}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.quantity}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.units}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.price}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.discount}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -301,7 +301,7 @@
          {{#unless formatted_items.is_value_exist_65}}
         <table style="width: 100%; margin-top:10px !important;">
             <tr>
-                <td style="width: 80%; vertical-align: top;">
+                <td style="width: 70%; vertical-align: top;">
                     <table>
                         <tr style="height: 25px;padding-left: 4px;">
                             <td>Payment Terms: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span>
@@ -321,7 +321,7 @@
                         </tr>
                     </table>
                 </td>
-                <td style="width: 20%;">
+                <td style="width: 30%;">
                     <table>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
@@ -333,7 +333,7 @@
                         </tr>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
-                                Discount
+                               Overall Discount
                             </td>
                             <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{total_discount}}%
@@ -401,7 +401,7 @@
                         style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Item No.</th>
                     <th
-                        style="width: 35%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        style="width: 35%;text-align: left;padding-left:30px !important; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Description</th>
                     <th
                         style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
@@ -424,12 +424,12 @@
                 <tr>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.serial_no}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.item_number}}</td>
-                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.description}}</td>
+                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;font-size:10px !important;">{{this.description}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.quantity}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.units}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.price}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.discount}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -437,7 +437,7 @@
         {{#unless formatted_items.is_value_exist_90}}
         <table style="width: 100%; margin-top:10px !important;">
             <tr>
-                <td style="width: 80%; vertical-align: top;">
+                <td style="width: 70%; vertical-align: top;">
                     <table>
                         <tr style="height: 25px;padding-left: 4px;">
                             <td>Payment Terms: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span>
@@ -457,7 +457,7 @@
                         </tr>
                     </table>
                 </td>
-                <td style="width: 20%;">
+                <td style="width: 30%;">
                     <table>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
@@ -469,7 +469,7 @@
                         </tr>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
-                                Discount
+                               Overall Discount
                             </td>
                             <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{total_discount}}%
@@ -537,7 +537,7 @@
                         style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Item No.</th>
                     <th
-                        style="width: 35%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        style="width: 35%;text-align: left;padding-left:30px !important; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Description</th>
                     <th
                         style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
@@ -560,12 +560,12 @@
                 <tr>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.serial_no}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.item_number}}</td>
-                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.description}}</td>
+                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;font-size:10px !important;">{{this.description}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.quantity}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.units}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.price}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.discount}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -573,7 +573,7 @@
       {{#unless formatted_items.is_value_exist_115}}
         <table style="width: 100%; margin-top:10px !important;">
             <tr>
-                <td style="width: 80%; vertical-align: top;">
+                <td style="width: 70%; vertical-align: top;">
                     <table>
                         <tr style="height: 25px;padding-left: 4px;">
                             <td>Payment Terms: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span>
@@ -593,7 +593,7 @@
                         </tr>
                     </table>
                 </td>
-                <td style="width: 20%;">
+                <td style="width: 30%;">
                     <table>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
@@ -605,7 +605,7 @@
                         </tr>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
-                                Discount
+                               Overall Discount
                             </td>
                             <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{total_discount}}%
@@ -673,7 +673,7 @@
                         style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Item No.</th>
                     <th
-                        style="width: 35%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        style="width: 35%;text-align: left;padding-left:30px !important; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Description</th>
                     <th
                         style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
@@ -696,12 +696,12 @@
                 <tr>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.serial_no}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.item_number}}</td>
-                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.description}}</td>
+                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;font-size:10px !important;">{{this.description}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.quantity}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.units}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.price}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.discount}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -709,7 +709,7 @@
        {{#unless formatted_items.is_value_exist_140}}
         <table style="width: 100%; margin-top:10px !important;">
             <tr>
-                <td style="width: 80%; vertical-align: top;">
+                <td style="width: 70%; vertical-align: top;">
                     <table>
                         <tr style="height: 25px;padding-left: 4px;">
                             <td>Payment Terms: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span>
@@ -723,7 +723,7 @@
                         </tr>
                     </table>
                 </td>
-                <td style="width: 20%;">
+                <td style="width: 30%;">
                     <table>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
@@ -735,7 +735,7 @@
                         </tr>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
-                                Discount
+                               Overall Discount
                             </td>
                             <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{total_discount}}%
@@ -803,7 +803,7 @@
                         style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Item No.</th>
                     <th
-                        style="width: 35%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        style="width: 35%;text-align: left;padding-left:30px !important; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Description</th>
                     <th
                         style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
@@ -826,12 +826,12 @@
                 <tr>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.serial_no}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.item_number}}</td>
-                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.description}}</td>
+                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;font-size:10px !important;">{{this.description}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.quantity}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.units}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.price}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.discount}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -839,7 +839,7 @@
           {{#unless formatted_items.is_value_exist_165}}
         <table style="width: 100%; margin-top:10px !important;">
             <tr>
-                <td style="width: 80%; vertical-align: top;">
+                <td style="width: 70%; vertical-align: top;">
                     <table>
                         <tr style="height: 25px;padding-left: 4px;">
                             <td>Payment Terms: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span>
@@ -852,7 +852,7 @@
                         </tr>
                     </table>
                 </td>
-                <td style="width: 20%;">
+                <td style="width: 30%;">
                     <table>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
@@ -864,7 +864,7 @@
                         </tr>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
-                                Discount
+                               Overall Discount
                             </td>
                             <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{total_discount}}%
@@ -932,7 +932,7 @@
                         style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Item No.</th>
                     <th
-                        style="width: 35%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        style="width: 35%;text-align: left;padding-left:30px !important; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Description</th>
                     <th
                         style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
@@ -955,12 +955,12 @@
                 <tr>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.serial_no}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.item_number}}</td>
-                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.description}}</td>
+                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;font-size:10px !important;">{{this.description}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.quantity}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.units}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.price}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.discount}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -968,7 +968,7 @@
          {{#unless formatted_items.is_value_exist_190}}
         <table style="width: 100%; margin-top:10px !important;">
             <tr>
-                <td style="width: 80%; vertical-align: top;">
+                <td style="width: 70%; vertical-align: top;">
                     <table>
                         <tr style="height: 25px;padding-left: 4px;">
                             <td>Payment Terms: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span>
@@ -982,7 +982,7 @@
                         </tr>
                     </table>
                 </td>
-                <td style="width: 20%;">
+                <td style="width: 30%;">
                     <table>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
@@ -994,7 +994,7 @@
                         </tr>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
-                                Discount
+                               Overall Discount
                             </td>
                             <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{total_discount}}%
@@ -1063,7 +1063,7 @@
                         style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Item No.</th>
                     <th
-                        style="width: 35%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        style="width: 35%;text-align: left;padding-left:30px !important; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Description</th>
                     <th
                         style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
@@ -1086,12 +1086,12 @@
                 <tr>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.serial_no}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.item_number}}</td>
-                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.description}}</td>
+                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;font-size:10px !important;">{{this.description}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.quantity}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.units}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.price}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.discount}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -1099,7 +1099,7 @@
       {{#unless formatted_items.is_value_exist_215}}
         <table style="width: 100%; margin-top:10px !important;">
             <tr>
-                <td style="width: 80%; vertical-align: top;">
+                <td style="width: 70%; vertical-align: top;">
                     <table>
                         <tr style="height: 25px;padding-left: 4px;">
                             <td>Payment Terms: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span>
@@ -1113,7 +1113,7 @@
                         </tr>
                     </table>
                 </td>
-                <td style="width: 20%;">
+                <td style="width: 30%;">
                     <table>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
@@ -1125,7 +1125,7 @@
                         </tr>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
-                                Discount
+                               Overall Discount
                             </td>
                             <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{total_discount}}%
@@ -1193,7 +1193,7 @@
                         style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Item No.</th>
                     <th
-                        style="width: 35%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        style="width: 35%;text-align: left;padding-left:30px !important; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Description</th>
                     <th
                         style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
@@ -1216,12 +1216,12 @@
                 <tr>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.serial_no}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.item_number}}</td>
-                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.description}}</td>
+                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;font-size:10px !important;">{{this.description}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.quantity}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.units}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.price}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.discount}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -1230,7 +1230,7 @@
      {{#unless formatted_items.is_value_exist_235}}
         <table style="width: 100%; margin-top:10px !important;">
             <tr>
-                <td style="width: 80%; vertical-align: top;">
+                <td style="width: 70%; vertical-align: top;">
                     <table>
                         <tr style="height: 25px;padding-left: 4px;">
                             <td>Payment Terms: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span>
@@ -1243,7 +1243,7 @@
                         </tr>
                     </table>
                 </td>
-                <td style="width: 20%;">
+                <td style="width: 30%;">
                     <table>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
@@ -1255,7 +1255,7 @@
                         </tr>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
-                                Discount
+                               Overall Discount
                             </td>
                             <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{total_discount}}%
@@ -1324,7 +1324,7 @@
                         style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Item No.</th>
                     <th
-                        style="width: 35%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        style="width: 35%;text-align: left;padding-left:30px !important; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Description</th>
                     <th
                         style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
@@ -1347,12 +1347,12 @@
                 <tr>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.serial_no}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.item_number}}</td>
-                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.description}}</td>
+                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;font-size:10px !important;">{{this.description}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.quantity}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.units}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.price}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.discount}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -1361,7 +1361,7 @@
          {{#unless formatted_items.is_value_exist_255}}
         <table style="width: 100%; margin-top:10px !important;">
             <tr>
-                <td style="width: 80%; vertical-align: top;">
+                <td style="width: 70%; vertical-align: top;">
                     <table>
                         <tr style="height: 25px;padding-left: 4px;">
                             <td>Payment Terms: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span>
@@ -1375,7 +1375,7 @@
                         </tr>
                     </table>
                 </td>
-                <td style="width: 20%;">
+                <td style="width: 30%;">
                     <table>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
@@ -1387,7 +1387,7 @@
                         </tr>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
-                                Discount
+                               Overall Discount
                             </td>
                             <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{total_discount}}%
@@ -1456,7 +1456,7 @@
                         style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Item No.</th>
                     <th
-                        style="width: 35%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
+                        style="width: 35%;text-align: left;padding-left:30px !important; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
                         Description</th>
                     <th
                         style="width: 6%;text-align: center; border: 1px solid #c7c7c7;border-bottom: none;padding:7px 0px;border-right:none;border-left:none;">
@@ -1479,12 +1479,12 @@
                 <tr>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.serial_no}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.item_number}}</td>
-                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.description}}</td>
+                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;font-size:10px !important;">{{this.description}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.quantity}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.units}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.price}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.discount}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -1492,7 +1492,7 @@
       
         <table style="width: 100%; margin-top:10px !important;">
             <tr>
-                <td style="width: 80%; vertical-align: top;">
+                <td style="width: 70%; vertical-align: top;">
                     <table>
                         <tr style="height: 25px;padding-left: 4px;">
                             <td>Payment Terms: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span>
@@ -1505,7 +1505,7 @@
                         </tr>
                     </table>
                 </td>
-                <td style="width: 20%;">
+                <td style="width: 30%;">
                     <table>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
@@ -1517,7 +1517,7 @@
                         </tr>
                         <tr style="height: 20px;">
                             <td style="width: 20%;text-align: right; padding-left: 4px;border-bottom:1px solid #c7c7c7;">
-                                Discount
+                               Overall Discount
                             </td>
                             <td style="width: 20%;text-align: right;border-bottom:1px solid #c7c7c7;">
                                 {{total_discount}}%
