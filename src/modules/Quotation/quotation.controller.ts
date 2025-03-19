@@ -73,9 +73,9 @@ export class QuotationController {
 
   })
   @Post("save-or-update-quotation-list")
-  async SaveOrUpdateQuotationList(@Headers('Authorization') headers: any,@Body() data: { doc_number: string, Quotation_list: QuotationListDto[], record_id?: number }): Promise<any> {
+  async SaveOrUpdateQuotationList(@Headers('Authorization') headers: any,@Body() data: { doc_number: string,total_discount:number, Quotation_list: QuotationListDto[], record_id?: number }): Promise<any> {
     const token = await decodeAccessToken(headers);
-    return this.quotationService.SaveOrUpdateQuotationList(token.user_id,data.doc_number, data.Quotation_list, data.record_id)
+    return this.quotationService.SaveOrUpdateQuotationList(token.user_id,data.doc_number,data.total_discount, data.Quotation_list, data.record_id)
   }
 
   @Get("delete-quotation-list")

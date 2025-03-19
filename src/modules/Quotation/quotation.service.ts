@@ -95,7 +95,7 @@ export class QuotationService {
                     // return obj
                     let existingQuotationItem = await this.tempQuotationItemModel.findOne({ where: {user_id:user_id, doc_number: revisedDocNumber, item_number: revisionObj.item_number, description: revisionObj.description } })
                     if (existingQuotationItem == null) {
-                        let savedData = await this.SaveOrUpdateQuotationList(user_id,revisedDocNumber, [revisionObj], null)
+                        let savedData = await this.SaveOrUpdateQuotationList(user_id,revisedDocNumber, null,[revisionObj], null)
                     }
 
                 }
@@ -936,7 +936,7 @@ export class QuotationService {
 
         }
     }
-    async SaveOrUpdateQuotationList(user_id:number,doc_number: string, Quotation_list: QuotationListDto[], record_id?: number): Promise<any> {
+    async SaveOrUpdateQuotationList(user_id:number,doc_number: string,total_discount: number, Quotation_list: QuotationListDto[], record_id?: number): Promise<any> {
         try {
             if (record_id) {
                 let getListTotalAmount = (row) => {
@@ -947,6 +947,10 @@ export class QuotationService {
 
                 let totalAmount = getListTotalAmount(Quotation_list[0])
 
+                if(total_discount != null){
+                    
+                    totalAmount =  ((totalAmount *  total_discount)/ 100 )
+                }
                 let formatedData = Quotation_list.map(singleData => ({
                     ...singleData,
                     doc_number: doc_number,
@@ -965,6 +969,10 @@ export class QuotationService {
                 }
 
                 let totalAmount = getListTotalAmount(Quotation_list[0])
+                if(total_discount != null){
+                    
+                    totalAmount =  ((totalAmount *  total_discount)/ 100 )
+                }
 
                 let formatedData = Quotation_list.map(singleData => ({
                     ...singleData,
