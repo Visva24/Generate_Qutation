@@ -947,10 +947,10 @@ export class QuotationService {
 
                 let totalAmount = getListTotalAmount(Quotation_list[0])
 
-                if(total_discount != null){
+                // if(total_discount != null){
                     
-                    totalAmount =  ((totalAmount *  total_discount)/ 100 )
-                }
+                //     totalAmount =  ( totalAmount -((totalAmount *  total_discount)/ 100) )
+                // }
                 let formatedData = Quotation_list.map(singleData => ({
                     ...singleData,
                     doc_number: doc_number,
@@ -969,10 +969,10 @@ export class QuotationService {
                 }
 
                 let totalAmount = getListTotalAmount(Quotation_list[0])
-                if(total_discount != null){
+                // if(total_discount != null){
                     
-                    totalAmount =  ((totalAmount *  total_discount)/ 100 )
-                }
+                //     totalAmount =  ( totalAmount -((totalAmount *  total_discount)/ 100) )
+                // }
 
                 let formatedData = Quotation_list.map(singleData => ({
                     ...singleData,
@@ -991,11 +991,13 @@ export class QuotationService {
 
         }
     }
-    async getAllQuotationList(user_id:number,doc_number: string, currency: string): Promise<any> {
+    async getAllQuotationList(user_id:number,doc_number: string, currency: string,total_discount:number): Promise<any> {
         try {
 
             let getTempQuotationList = await this.tempQuotationItemModel.findAll({ where: {user_id:user_id, doc_number: doc_number }, order: [["id", "ASC"]] })
             let totalAmount = getTempQuotationList.reduce((acc, sum) => acc + +sum.amount, 0)
+            let sub_total = totalAmount 
+            totalAmount =  ( totalAmount -((totalAmount *  total_discount)/ 100) )
             // let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
             // let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
             let modifiedData = []
@@ -1011,9 +1013,9 @@ export class QuotationService {
             }
             let amountInWords = await this.helperService.numberToWord(Math.floor(totalAmount), currency)
             let objData = {
-                "total_discount": "0.00",
+                "total_discount": total_discount ? total_discount:"0.00",
                 "total_tax": "0.00",
-                "sub_total": await this.helperService.formatAmount(totalAmount,currency),
+                "sub_total": await this.helperService.formatAmount(sub_total,currency),
                 "grand_total": await this.helperService.formatAmount(totalAmount,currency),
                 "amount_in_words": amountInWords,
                 list: modifiedData,

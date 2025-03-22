@@ -102,15 +102,15 @@ export class SalesInvoiceController {
             
               })
               @Post("save-or-update-invoice-list")
-              async SaveOrUpdateSalesInvoiceList(@Headers('Authorization') headers: any,@Body() data:{doc_number:string,invoice_list:InvoiceListDto[],record_id?:number} ) :Promise<any> {
+              async SaveOrUpdateSalesInvoiceList(@Headers('Authorization') headers: any,@Body() data:{doc_number:string,invoice_list:InvoiceListDto[],record_id?:number,total_discount:number} ) :Promise<any> {
                 const token = await decodeAccessToken(headers);
-                return this.SalesInvoiceService.SaveOrUpdateSalesInvoiceList(token.user_id,data.doc_number,data.invoice_list,data.record_id)
+                return this.SalesInvoiceService.SaveOrUpdateSalesInvoiceList(token.user_id,data.doc_number,data.invoice_list,data.total_discount,data.record_id)
               }
     
               @Get("get-all-sales-invoice-list")
-              async getAllSalesInvoiceList(@Headers('Authorization') headers: any,@Query('doc_number') doc_number:string,@Query('currency') currency:string):Promise<any> {
+              async getAllSalesInvoiceList(@Headers('Authorization') headers: any,@Query('doc_number') doc_number:string,@Query('currency') currency:string,@Query('total_discount') total_discount:number):Promise<any> {
                 const token = await decodeAccessToken(headers);
-                return this.SalesInvoiceService.getAllSalesInvoiceList(token.user_id,doc_number,currency)
+                return this.SalesInvoiceService.getAllSalesInvoiceList(token.user_id,doc_number,currency,total_discount)
               }
         
               

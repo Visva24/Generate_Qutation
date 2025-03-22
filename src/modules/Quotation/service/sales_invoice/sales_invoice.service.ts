@@ -530,7 +530,7 @@ export class SalesInvoiceService {
 
         }
     }
-    async SaveOrUpdateSalesInvoiceList(user_id:number,doc_number: string, invoice_list: InvoiceListDto[], record_id?: number): Promise<any> {
+    async SaveOrUpdateSalesInvoiceList(user_id:number,doc_number: string, invoice_list: InvoiceListDto[],total_discount:number, record_id?: number): Promise<any> {
         try {
             if (record_id) {
 
@@ -543,6 +543,10 @@ export class SalesInvoiceService {
 
                 let totalAmount = getListTotalAmount(invoice_list[0])
 
+                // if(total_discount != null){
+                    
+                //     totalAmount =  ( totalAmount -((totalAmount *  total_discount)/ 100) )
+                // }
                 let formatedData = invoice_list.map(singleData => ({
                     ...singleData,
                     doc_number: doc_number,
@@ -561,7 +565,10 @@ export class SalesInvoiceService {
 
 
                 let totalAmount = getListTotalAmount(invoice_list[0])
-
+                // if(total_discount != null){
+                    
+                //     totalAmount =  ( totalAmount -((totalAmount *  total_discount)/ 100) )
+                // }
                 let formatedData = invoice_list.map(singleData => ({
                     ...singleData,
                     doc_number: doc_number,
@@ -580,12 +587,14 @@ export class SalesInvoiceService {
 
         }
     }
-    async getAllSalesInvoiceList(user_id:number,doc_number: string, currency: string): Promise<any> {
+    async getAllSalesInvoiceList(user_id:number,doc_number: string, currency: string,total_discount:number): Promise<any> {
         try {
 
             let getInvoiceList = await this.TempSalesItemModel.findAll({ where: { user_id:user_id,doc_number: doc_number }, order: [["id", "ASC"]] })
             let modifiedData = []
             let totalAmount = getInvoiceList.reduce((acc, sum) => acc + +sum.amount, 0)
+            let sub_total = totalAmount 
+            totalAmount =  ( totalAmount -((totalAmount *  total_discount)/ 100) )
             let i = 1
             for (let singleData of getInvoiceList) {
                 let obj = {}
@@ -598,9 +607,9 @@ export class SalesInvoiceService {
             }
             let amountInWords = await this.helperService.numberToWord(Math.floor(totalAmount), currency)
             let objData = {
-                "total_discount": "0.00",
+                "total_discount": total_discount ? total_discount :"0.00",
                 "total_tax": "0.00",
-                "sub_total": await this.helperService.formatAmount(totalAmount,currency),
+                "sub_total": await this.helperService.formatAmount(sub_total,currency),
                 "grand_total": await this.helperService.formatAmount(totalAmount,currency),
                 "amount_in_words": amountInWords,
                 list: modifiedData,

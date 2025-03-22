@@ -56,9 +56,9 @@ export class QuotationController {
     return this.quotationService.getSingleQuotationList(token.user_id,record_id)
   }
   @Get("get-all-quotation-list")
-  async getAllQuotationList(@Headers('Authorization') headers: any,@Query('doc_number') doc_number: string, @Query('currency') currency: string): Promise<any> {
+  async getAllQuotationList(@Headers('Authorization') headers: any,@Query('doc_number') doc_number: string, @Query('currency') currency: string, @Query('total_discount') total_discount: number): Promise<any> {
     const token = await decodeAccessToken(headers);
-    return this.quotationService.getAllQuotationList(token.user_id,doc_number, currency)
+    return this.quotationService.getAllQuotationList(token.user_id,doc_number, currency,total_discount)
   }
 
   @ApiBody({
