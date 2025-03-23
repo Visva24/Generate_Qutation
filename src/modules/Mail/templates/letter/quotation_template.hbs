@@ -139,27 +139,27 @@
 
                 {{#each formatted_items.lessThan15}}
                  <tr>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.serial_no}}</td>
-                        <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.item_number}}</td>
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;font-size:10px;">{{this.serial_no}}</td>
+                        <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;font-size:10px;">{{this.item_number}}</td>
                         <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;font-size:10px;">{{this.description}}</td>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.quantity}}</td>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.units}}</td>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.price}}</td>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.tax}}</td>
-                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.discount}}</td>
-                        <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;">{{this.amount}}</td>
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;font-size:10px;">{{this.quantity}}</td>
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;font-size:10px;">{{this.units}}</td>
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;font-size:10px;">{{this.price}}</td>
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;font-size:10px;">{{this.tax}}</td>
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;font-size:10px;">{{this.discount}}</td>
+                        <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;border-right:none;border-left:none;font-size:10px;">{{this.amount}}</td>
                 </tr>
             
                 {{/each}}
             </tbody>
         </table>
       {{#unless formatted_items.is_value_exist_40}}
-        <table style="width: 100%;margin-left:15px; margin-top:10px !important;">
+        <table style="width: 100%;margin-left:0px; margin-top:10px !important;">
             <tr>
                 <td style="width: 70%; vertical-align: top;">
                     <table>
                         <tr style="height: 20px;padding-left: 4px;">
-                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{Validity}}</span></td>
+                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{quotation_validity}}</span></td>
                         </tr>
                         <tr style="height: 20px;padding-left: 4px;">
                             <td>Remarks: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
@@ -305,27 +305,27 @@
 
                 {{#each formatted_items.lessThan40}}
                 <tr>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.serial_no}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.item_number}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.serial_no}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.item_number}}</td>
                     <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">
                         {{this.description}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.quantity}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.units}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.price}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.tax}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.discount}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.amount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.quantity}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.units}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.price}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.tax}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.discount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.amount}}</td>
                 </tr>
                 {{/each}}
             </tbody>
               </table>
         {{#unless formatted_items.is_value_exist_65}}
-        <table style="width: 100%;margin-left:15px; margin-top:10px !important;">
+        <table style="width: 100%;margin-left:0px; margin-top:10px !important;">
             <tr>
                 <td style="width: 70%; vertical-align: top;">
                     <table>
                         <tr style="height: 20px;padding-left: 4px;">
-                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{Validity}}</span></td>
+                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{quotation_validity}}</span></td>
                         </tr>
                         <tr style="height: 20px;padding-left: 4px;">
                             <td>Remarks: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
@@ -473,27 +473,27 @@
 
                 {{#each formatted_items.lessThan65}}
                 <tr>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.serial_no}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.item_number}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.serial_no}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.item_number}}</td>
                     <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">
                         {{this.description}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.quantity}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.units}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.price}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.tax}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.discount}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.amount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.quantity}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.units}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.price}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.tax}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.discount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.amount}}</td>
                 </tr>
                 {{/each}}
             </tbody>
               </table>
             {{#unless formatted_items.is_value_exist_90}}
-            <table style="width: 100%;margin-left:15px; margin-top:10px !important;">
+            <table style="width: 100%;margin-left:0px; margin-top:10px !important;">
                 <tr>
                     <td style="width: 70%; vertical-align: top;">
                         <table>
                             <tr style="height: 20px;padding-left: 4px;">
-                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{Validity}}</span></td>
+                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{quotation_validity}}</span></td>
                            </tr>
                             <tr style="height: 20px;padding-left: 4px;">
                                 <td>Remarks: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
@@ -640,27 +640,27 @@
 
                 {{#each formatted_items.lessThan90}}
                 <tr>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.serial_no}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.item_number}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.serial_no}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.item_number}}</td>
                     <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">
                         {{this.description}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.quantity}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.units}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.price}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.tax}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.discount}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.amount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.quantity}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.units}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.price}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.tax}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.discount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.amount}}</td>
                 </tr>
                 {{/each}}
             </tbody>
             </table>
              {{#unless formatted_items.is_value_exist_115}}
-            <table style="width: 100%;margin-left:15px; margin-top:10px !important;">
+            <table style="width: 100%;margin-left:0px; margin-top:10px !important;">
                 <tr>
                     <td style="width: 70%; vertical-align: top;">
                         <table>
                             <tr style="height: 20px;padding-left: 4px;">
-                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{Validity}}</span></td>
+                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{quotation_validity}}</span></td>
                             </tr>
                             <tr style="height: 20px;padding-left: 4px;">
                                 <td>Remarks: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
@@ -811,24 +811,24 @@
                 <tr>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;  border-right:none;border-left:none;">{{this.serial_no}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;  border-right:none;border-left:none;">{{this.item_number}}</td>
-                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;  border-right:none;border-left:none;font-size:10px;">
+                    <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px;  border-right:none;border-left:none;">
                         {{this.description}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;  border-right:none;border-left:none;">{{this.quantity}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;  border-right:none;border-left:none;">{{this.units}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;  border-right:none;border-left:none;">{{this.price}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;  border-right:none;border-left:none;">{{this.tax}}</td>
                     <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;  border-right:none;border-left:none;">{{this.discount}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px;  border-right:none;border-left:none;">{{this.amount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px;  border-right:none;border-left:none;">{{this.amount}}</td>
                 </tr>
                 {{/each}}
             </tbody>
             {{#unless formatted_items.is_value_exist_140}}
-            <table style="width: 100%;margin-left:15px; margin-top:10px !important;">
+            <table style="width: 100%;margin-left:0px; margin-top:10px !important;">
                 <tr>
                     <td style="width: 70%; vertical-align: top;">
                         <table>
                             <tr style="height: 20px;padding-left: 4px;">
-                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{Validity}}</span></td>
+                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{quotation_validity}}</span></td>
                             </tr>
                             <tr style="height: 20px;padding-left: 4px;">
                                 <td>Remarks: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
@@ -977,26 +977,26 @@
 
                 {{#each formatted_items.lessThan140}}
                 <tr>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.serial_no}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.item_number}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.serial_no}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.item_number}}</td>
                     <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">
                         {{this.description}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.quantity}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.units}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.price}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.tax}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.discount}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.amount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.quantity}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.units}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.price}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.tax}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.discount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.amount}}</td>
                 </tr>
                 {{/each}}
             </table>
             {{#unless formatted_items.is_value_exist_165}}
-                <table style="width: 100%;margin-left:15px; margin-top:10px !important;">
+                <table style="width: 100%;margin-left:0px; margin-top:10px !important;">
                     <tr>
                         <td style="width: 70%; vertical-align: top;">
                             <table>
                                 <tr style="height: 20px;padding-left: 4px;">
-                                <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{Validity}}</span></td>
+                                <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{quotation_validity}}</span></td>
                                  </tr>
                                 <tr style="height: 20px;padding-left: 4px;">
                                     <td>Remarks: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
@@ -1145,26 +1145,26 @@
 
                 {{#each formatted_items.lessThan165}}
                 <tr>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.serial_no}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.item_number}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.serial_no}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.item_number}}</td>
                     <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">
                         {{this.description}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.quantity}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.units}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.price}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.tax}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.discount}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.amount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.quantity}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.units}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.price}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.tax}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.discount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.amount}}</td>
                 </tr>
                 {{/each}}
             </tbody>
              {{#unless formatted_items.is_value_exist_190}}
-                <table style="width: 100%;margin-left:15px; margin-top:10px !important;">
+                <table style="width: 100%;margin-left:0px; margin-top:10px !important;">
                     <tr>
                         <td style="width: 70%; vertical-align: top;">
                             <table>
                                 <tr style="height: 20px;padding-left: 4px;">
-                                 <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{Validity}}</span></td>
+                                 <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{quotation_validity}}</span></td>
                                </tr>
                                 <tr style="height: 20px;padding-left: 4px;">
                                     <td>Remarks: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
@@ -1315,26 +1315,26 @@
 
                 {{#each formatted_items.lessThan190}}
                 <tr>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.serial_no}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.item_number}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.serial_no}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.item_number}}</td>
                     <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">
                         {{this.description}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.quantity}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.units}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.price}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.tax}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.discount}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.amount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.quantity}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.units}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.price}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.tax}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.discount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.amount}}</td>
                 </tr>
                 {{/each}}
             </tbody>
               {{#unless formatted_items.is_value_exist_215}}
-                <table style="width: 100%;margin-left:15px; margin-top:10px !important;">
+                <table style="width: 100%;margin-left:0px; margin-top:10px !important;">
                     <tr>
                         <td style="width: 70%; vertical-align: top;">
                             <table>
                                 <tr style="height: 20px;padding-left: 4px;">
-                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{Validity}}</span></td>
+                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{quotation_validity}}</span></td>
                              </tr>
                                 <tr style="height: 20px;padding-left: 4px;">
                                     <td>Remarks: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
@@ -1484,27 +1484,27 @@
 
                 {{#each formatted_items.lessThan215}}
                 <tr>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.serial_no}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.item_number}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.serial_no}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.item_number}}</td>
                     <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">
                         {{this.description}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.quantity}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.units}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.price}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.tax}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.discount}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.amount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.quantity}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.units}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.price}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.tax}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.discount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.amount}}</td>
                 </tr>
                 {{/each}}
             </tbody>
 </table>
               {{#unless formatted_items.is_value_exist_235}}
-                <table style="width: 100%;margin-left:15px; margin-top:10px !important;">
+                <table style="width: 100%;margin-left:0px; margin-top:10px !important;">
                     <tr>
                         <td style="width: 70%; vertical-align: top;">
                             <table>
                                 <tr style="height: 20px;padding-left: 4px;">
-                                <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{Validity}}</span></td>
+                                <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{quotation_validity}}</span></td>
                                </tr>
                                 <tr style="height: 20px;padding-left: 4px;">
                                     <td>Remarks: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
@@ -1655,26 +1655,26 @@
 
                 {{#each formatted_items.lessThan235}}
                 <tr>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.serial_no}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.item_number}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.serial_no}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.item_number}}</td>
                     <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">
                         {{this.description}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.quantity}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.units}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.price}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.tax}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.discount}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.amount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.quantity}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.units}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.price}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.tax}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.discount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.amount}}</td>
                 </tr>
                 {{/each}}
             </tbody>
               {{#unless formatted_items.is_value_exist_255}}
-                <table style="width: 100%;margin-left:15px; margin-top:10px !important;">
+                <table style="width: 100%;margin-left:0px; margin-top:10px !important;">
                     <tr>
                         <td style="width: 70%; vertical-align: top;">
                             <table>
                                 <tr style="height: 20px;padding-left: 4px;">
-                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{Validity}}</span></td>
+                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{quotation_validity}}</span></td>
                         </tr>
                                 <tr style="height: 20px;padding-left: 4px;">
                                     <td>Remarks: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>
@@ -1824,26 +1824,26 @@
 
                 {{#each formatted_items.lessThan255}}
                 <tr>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.serial_no}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.item_number}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.serial_no}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.item_number}}</td>
                     <td style="text-align: left;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">
                         {{this.description}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.quantity}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.units}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.price}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.tax}}</td>
-                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.discount}}</td>
-                    <td style="text-align: right;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;">{{this.amount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.quantity}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.units}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.price}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.tax}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.discount}}</td>
+                    <td style="text-align: center;border: 1px solid #c7c7c7; padding:6px 0px; border-right:none;border-left:none;font-size:10px;">{{this.amount}}</td>
                 </tr>
                 {{/each}}
             </tbody>
 </table>
-                <table style="width: 100%;margin-left:15px; margin-top:10px !important;">
+                <table style="width: 100%;margin-left:0px; margin-top:10px !important;">
                     <tr>
                         <td style="width: 70%; vertical-align: top;">
                             <table>
                                 <tr style="height: 20px;padding-left: 4px;">
-                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{Validity}}</span></td>
+                            <td>Validity: <span style="font-weight: 600;padding-left: 4px;">{{quotation_validity}}</span></td>
                         </tr>
                                 <tr style="height: 20px;padding-left: 4px;">
                                     <td>Remarks: <span style="font-weight: 600;padding-left: 4px;">{{remark_brand}}</span></td>

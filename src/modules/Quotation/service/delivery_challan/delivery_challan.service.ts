@@ -45,7 +45,14 @@ export class DeliveryChallanService {
                 ],
             })
 
-            return responseMessageGenerator('success', 'data fetched successfully', getChallanData)
+            const uniqueCustomers = Array.from(
+                getChallanData.reduce((map, customer) => {
+                                         map.set(customer.customer_name, customer);
+                                         return map;
+                                       }, new Map()).values()
+                                     );
+                       return responseMessageGenerator('success', 'data fetched successfully', uniqueCustomers)
+                       
 
 
         } catch (error) {

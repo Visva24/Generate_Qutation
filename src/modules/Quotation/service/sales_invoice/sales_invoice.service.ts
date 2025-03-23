@@ -48,8 +48,16 @@ export class SalesInvoiceService {
                 ],
             })
 
-            return responseMessageGenerator('success', 'data fetched successfully', getInvoiceData)
+            const uniqueCustomers = Array.from(
+                getInvoiceData.reduce((map, customer) => {
+                              map.set(customer.customer_name, customer);
+                              return map;
+                            }, new Map()).values()
+                          );
+            return responseMessageGenerator('success', 'data fetched successfully', uniqueCustomers)
+            
 
+           
 
         } catch (error) {
             console.log(error);
@@ -170,8 +178,10 @@ export class SalesInvoiceService {
             // let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
             // QuotationForm.total_discount = 0
             // QuotationForm.total_tax = 0
+            let totalDiscount = InvoiceForm.total_discount
+            let overAllAmount = totalDiscount ? ( totalAmount -((totalAmount *  totalDiscount)/ 100) ): totalAmount
             InvoiceForm.sub_total = totalAmount
-            InvoiceForm.grand_total = totalAmount
+            InvoiceForm.grand_total = overAllAmount
 
             let [createSalesInvoice, update] = await this.SalesInvoiceFormModel.upsert({ id: SalesInvoiceData?.id, ...InvoiceForm })
 
@@ -214,8 +224,10 @@ export class SalesInvoiceService {
             // let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
             // QuotationForm.total_discount = 0
             // QuotationForm.total_tax = 0
+            let totalDiscount = UpdateInvoiceForm.total_discount
+            let overAllAmount = totalDiscount ? ( totalAmount -((totalAmount *  totalDiscount)/ 100) ): totalAmount
             UpdateInvoiceForm.sub_total = totalAmount
-            UpdateInvoiceForm.grand_total = totalAmount
+            UpdateInvoiceForm.grand_total = overAllAmount
 
             let updateInvoice = await this.SalesInvoiceFormModel.update({ ...UpdateInvoiceForm }, { where: { id: id } })
             //  let itemCount = getTempQuotationList.length

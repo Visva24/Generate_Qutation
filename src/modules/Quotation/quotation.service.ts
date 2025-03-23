@@ -43,15 +43,20 @@ export class QuotationService {
     async getQuotationCustomerDropDown(): Promise<ApiResponse> {
         try {
 
-            let revisedDocNumber = null;
+            let responseData = null;
             let getQuotationData = await this.QuotationFormModel.findAll({
                 where: { customer_name: { [Op.not]: null } },
                 attributes: [
                     [Sequelize.fn('DISTINCT', Sequelize.col('customer_name')), 'customer_name'], "id"
                 ],
             })
-
-            return responseMessageGenerator('success', 'data fetched successfully', getQuotationData)
+            const uniqueCustomers = Array.from(
+                getQuotationData.reduce((map, customer) => {
+                  map.set(customer.customer_name, customer);
+                  return map;
+                }, new Map()).values()
+              );
+            return responseMessageGenerator('success', 'data fetched successfully', uniqueCustomers)
 
 
         } catch (error) {
@@ -168,7 +173,8 @@ export class QuotationService {
             let resetDocNumber = QuotationForm.doc_number
 
             let totalAmount = getTempQuotationList.reduce((acc, sum) => acc + +sum.amount, 0)
-            
+             let totalDiscount = QuotationForm.total_discount
+             let overAllAmount = totalDiscount ? ( totalAmount -((totalAmount *  totalDiscount)/ 100) ): totalAmount
             // let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
             // let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
             // QuotationForm.total_discount = 0
@@ -181,7 +187,8 @@ export class QuotationService {
             }
            
             QuotationForm.sub_total = totalAmount
-            QuotationForm.grand_total = totalAmount
+            QuotationForm.grand_total = overAllAmount
+           
             let createQuotation = await this.QuotationFormModel.create(QuotationForm)
 
             if (createQuotation) {
@@ -224,13 +231,14 @@ export class QuotationService {
 
             let totalAmount = getTempQuotationList.reduce((acc, sum) => acc + +sum.amount, 0)
             // let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
-            // let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
+            let totalDiscount = UpdateQuotationForm.total_discount
+            let overAllAmount = totalDiscount ? ( totalAmount -((totalAmount *  totalDiscount)/ 100) ): totalAmount
             // QuotationForm.total_discount = totalDiscount
             // QuotationForm.total_tax = totalTax
             UpdateQuotationForm.revision_count = revisionCount
             UpdateQuotationForm.is_revised = true
             UpdateQuotationForm.sub_total = totalAmount
-            UpdateQuotationForm.grand_total = totalAmount
+            UpdateQuotationForm.grand_total = overAllAmount
 
             let updateQuotation = await this.QuotationFormModel.update({ ...UpdateQuotationForm }, { where: { id: id } })
             //  let itemCount = getTempQuotationList.length
