@@ -179,7 +179,7 @@ export class SalesInvoiceService {
             // QuotationForm.total_discount = 0
             // QuotationForm.total_tax = 0
             let totalDiscount = InvoiceForm.total_discount
-            let overAllAmount = totalDiscount ? ( totalAmount -((totalAmount *  totalDiscount)/ 100) ): totalAmount
+            let overAllAmount = totalDiscount ? ( totalAmount - totalDiscount ): totalAmount
             InvoiceForm.sub_total = totalAmount
             InvoiceForm.grand_total = overAllAmount
 
@@ -225,7 +225,7 @@ export class SalesInvoiceService {
             // QuotationForm.total_discount = 0
             // QuotationForm.total_tax = 0
             let totalDiscount = UpdateInvoiceForm.total_discount
-            let overAllAmount = totalDiscount ? ( totalAmount -((totalAmount *  totalDiscount)/ 100) ): totalAmount
+            let overAllAmount = totalDiscount ? ( totalAmount - totalDiscount ): totalAmount
             UpdateInvoiceForm.sub_total = totalAmount
             UpdateInvoiceForm.grand_total = overAllAmount
 
@@ -562,7 +562,7 @@ export class SalesInvoiceService {
                 let formatedData = invoice_list.map(singleData => ({
                     ...singleData,
                     doc_number: doc_number,
-                    amount: totalAmount,
+                    amount: Math.round(totalAmount),
                     user_id:user_id
                 }))
 
@@ -584,7 +584,7 @@ export class SalesInvoiceService {
                 let formatedData = invoice_list.map(singleData => ({
                     ...singleData,
                     doc_number: doc_number,
-                    amount: totalAmount,
+                    amount: Math.round(totalAmount),
                     user_id:user_id
                 }))
                 let createInvoice = await this.TempSalesItemModel.bulkCreate(formatedData)
@@ -606,7 +606,7 @@ export class SalesInvoiceService {
             let modifiedData = []
             let totalAmount = getInvoiceList.reduce((acc, sum) => acc + +sum.amount, 0)
             let sub_total = totalAmount 
-            totalAmount =  ( totalAmount -((totalAmount *  total_discount)/ 100) )
+            totalAmount =  ( totalAmount - total_discount )
             let i = 1
             for (let singleData of getInvoiceList) {
                 let obj = {}

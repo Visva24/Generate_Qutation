@@ -174,7 +174,7 @@ export class QuotationService {
 
             let totalAmount = getTempQuotationList.reduce((acc, sum) => acc + +sum.amount, 0)
              let totalDiscount = QuotationForm.total_discount
-             let overAllAmount = totalDiscount ? ( totalAmount -((totalAmount *  totalDiscount)/ 100) ): totalAmount
+             let overAllAmount = totalDiscount ? ( totalAmount - totalDiscount ): totalAmount
             // let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
             // let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
             // QuotationForm.total_discount = 0
@@ -200,9 +200,7 @@ export class QuotationService {
                         ...singleData.dataValues,
                         quotation_id: quotationId
                     })
-
                     let createQuotation = await this.QuotationListModel.create(obj)
-
                 }
             }
             
@@ -232,7 +230,7 @@ export class QuotationService {
             let totalAmount = getTempQuotationList.reduce((acc, sum) => acc + +sum.amount, 0)
             // let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
             let totalDiscount = UpdateQuotationForm.total_discount
-            let overAllAmount = totalDiscount ? ( totalAmount -((totalAmount *  totalDiscount)/ 100) ): totalAmount
+            let overAllAmount = totalDiscount ? ( totalAmount - totalDiscount ): totalAmount
             // QuotationForm.total_discount = totalDiscount
             // QuotationForm.total_tax = totalTax
             UpdateQuotationForm.revision_count = revisionCount
@@ -330,9 +328,7 @@ export class QuotationService {
 
 
         }
-    }
-
-  
+    }  
     async incrementLastDigit(invoiceNumber: string): Promise<any> {
         try {
 
@@ -962,7 +958,7 @@ export class QuotationService {
                 let formatedData = Quotation_list.map(singleData => ({
                     ...singleData,
                     doc_number: doc_number,
-                    amount: totalAmount,
+                    amount:Math.round(totalAmount),
                     user_id:user_id
                 }))
 
@@ -985,7 +981,7 @@ export class QuotationService {
                 let formatedData = Quotation_list.map(singleData => ({
                     ...singleData,
                     doc_number: doc_number,
-                    amount: totalAmount,
+                    amount: Math.round(totalAmount),
                     user_id:user_id
                 }))
                 let createQuotation = await this.tempQuotationItemModel.bulkCreate(formatedData)
@@ -1005,7 +1001,7 @@ export class QuotationService {
             let getTempQuotationList = await this.tempQuotationItemModel.findAll({ where: {user_id:user_id, doc_number: doc_number }, order: [["id", "ASC"]] })
             let totalAmount = getTempQuotationList.reduce((acc, sum) => acc + +sum.amount, 0)
             let sub_total = totalAmount 
-            totalAmount =  ( totalAmount -((totalAmount *  total_discount)/ 100) )
+            totalAmount =  ( totalAmount - total_discount )
             // let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
             // let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
             let modifiedData = []
@@ -1051,7 +1047,6 @@ export class QuotationService {
 
         }
     }
-
     async getSingleQuotationList(user_id :number,record_id: number): Promise<any> {
         try {
 
@@ -1113,7 +1108,6 @@ export class QuotationService {
             return responseMessageGenerator('failure', error.message, null)
         }
     }
-
     async getUserProfileDetails(user_id: number): Promise<any> {
         try {
             let userData = await this.userModel.findOne({ where: { id: user_id } })
