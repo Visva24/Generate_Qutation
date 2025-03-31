@@ -619,7 +619,7 @@ export class SalesInvoiceService {
             }
             let amountInWords = await this.helperService.numberToWord(Math.floor(totalAmount), currency)
             let objData = {
-                "total_discount": total_discount ? total_discount :"0.00",
+                "total_discount": modifiedData.length >0 ? (total_discount ? total_discount :"0.00") :"0.00",
                 "total_tax": "0.00",
                 "sub_total": await this.helperService.formatAmount(sub_total,currency),
                 "grand_total": await this.helperService.formatAmount(totalAmount,currency),
