@@ -388,7 +388,7 @@ export class SalesInvoiceService {
                                      overAllObject[`cycleCount_${incrementedCycle + 1}`].push(...arrayData1)
                                     }else{
                                
-                                     let arrayData = await processQuotationItems(invoiceData.data.id,incrementedCycle,25,true);
+                                     let arrayData = await processQuotationItems(invoiceData.data.id,incrementedCycle,overAllObject[`cycleCount_${incrementedCycle - 1}`].length,true);
                                    
                                      let count  =1
                                      for(let singleData of arrayData){

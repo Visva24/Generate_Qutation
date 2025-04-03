@@ -417,7 +417,7 @@ export class DeliveryChallanService {
                                    }else{
                                     console.log("2" + `cycleCount_${incrementedCycle}`);
                                     console.log("2" + `cycleCount_${incrementedCycle + 1}`);
-                                    let arrayData = await processQuotationItems(deliveryChalanData.data.id,incrementedCycle,25,true);
+                                    let arrayData = await processQuotationItems(deliveryChalanData.data.id,incrementedCycle,overAllObject[`cycleCount_${incrementedCycle - 1}`].length,true);
                                   
                                     let count  =1
                                     for(let singleData of arrayData){

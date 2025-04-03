@@ -384,8 +384,10 @@ export class QuotationService {
             let templateName = "quotation_template"
             let QuotationData = await this.getQuotationFormData(user_id,id, "view")
             if (QuotationData.status == "failure") {
-                return res.json(QuotationData)
+                return QuotationData
             }
+    
+        
 
             const logBase64Image = readFileSync('public/images/logo.png', 'base64');
             const footerBase64Image = readFileSync('public/images/shadow-trading-footer-with-data.png', 'base64');
@@ -395,77 +397,122 @@ export class QuotationService {
             const footer = `data:image/png;base64,${footerBase64Image}`;
             const sidelogo = `data:image/png;base64,${sideLogoBase64Image}`;
             const watermark = `data:image/png;base64,${waterMarkBase64Image}`;
+
             let numberInWords = await this.helperService.numberToWord(Number(QuotationData.data.grand_total.replace(/,/g, '')), QuotationData.data.currency)
-              let itemsLength = (QuotationData.data.quotation_items).length
-                
-              let userData = await this.userModel.findOne({where:{id:user_id}})
-            //  return res.json(itemsLength)
+            let itemsLength = (QuotationData.data.quotation_items).length
+             let cycleCount = Math.ceil(itemsLength/25 )
+           
              let  quotation_items = QuotationData.data.quotation_items
-          
-             let lessThan15 =[]
-             let lessThan40 =[]
-             let lessThan65 =[]
-             let lessThan90 =[]
-             let lessThan115 =[]
-             let lessThan140 =[]
-             let lessThan165 =[]
-             let lessThan190 =[]
-             let lessThan215 =[]
-
-             for(let singleItem of QuotationData.data.quotation_items){
-
-                   if(singleItem.serial_no <= 15){
-                     lessThan15.push(singleItem)
-                   }
-                   if(singleItem.serial_no >= 16 && singleItem.serial_no <=40 ){
-                    lessThan40.push(singleItem)
-                   }
-                   if( singleItem.serial_no >= 41 && singleItem.serial_no <=65){
-                    lessThan65.push(singleItem)
-                   }
-                   if(singleItem.serial_no >= 66 && singleItem.serial_no <=90){
-                    lessThan90.push(singleItem)
-                   }
-                   if(singleItem.serial_no >= 91 && singleItem.serial_no <=115){
-                    lessThan115.push(singleItem)
-                   }
-                   if(singleItem.serial_no >=116 && singleItem.serial_no <=140){
-                    lessThan140.push(singleItem)
-                   }
-                   if(singleItem.serial_no >=141 && singleItem.serial_no <=165){
-                    lessThan165.push(singleItem)
-                   }
-                   if(singleItem.serial_no >=166 && singleItem.serial_no <= 190){
-                    lessThan190.push(singleItem)
-                   }
-                   if(singleItem.serial_no >=191 && singleItem.serial_no <= 225){
-                    lessThan215.push(singleItem)
-                   }
-             }
-                 
-             let formattedItems = {
-                "lessThan15":lessThan15,
-                "is_value_exist_15":lessThan15.length > 0 ? true :false,
-                "lessThan40":lessThan40,
-                "is_value_exist_40":lessThan40.length > 0 ? true :false,
-                "lessThan65":lessThan65,
-                "is_value_exist_65":lessThan65.length > 0 ? true :false,
-                "lessThan90":lessThan90,
-                "is_value_exist_90":lessThan90.length > 0 ? true :false,
-                "lessThan115":lessThan115,
-                "is_value_exist_115":lessThan115.length > 0 ? true :false,
-                "lessThan140":lessThan140,
-                "is_value_exist_140":lessThan140.length > 0 ? true :false,
-                "lessThan165":lessThan165,
-                "is_value_exist_165":lessThan165.length > 0 ? true :false,
-                "lessThan190":lessThan190,
-                "is_value_exist_190":lessThan190.length > 0 ? true :false,
-                "lessThan215":lessThan215,
-                "is_value_exist_215":lessThan215.length > 0 ? true :false
-             }
+            let overAllObject ={
+            "cycleCount_1" :[],
+             "cycleCount_2" :[],
+             "cycleCount_3" :[],
+             "cycleCount_4" :[],
+             "cycleCount_5" :[],
+             "cycleCount_6" :[],
+             "cycleCount_7" :[],
+             "cycleCount_8" :[],
+             "cycleCount_9" :[],
+             "cycleCount_10":[],
+             "cycleCount_11":[]
+           }
+        let processQuotationItems = async (id,batchNumber,batchSize,isLastRecord)=>{
+            let offset = (batchNumber - 1) * batchSize 
+            // if(batchNumber == 2){
+            //     return [offset]
+            // }
+           
+            console.log(offset,batchSize);
+            
+             let itemData = await this.QuotationListModel.findAll({where:{quotation_id:id},
+                limit:batchSize,
+                offset:offset
+            })
+            
+            let count = offset 
+            return  Promise.all(itemData.map( singleData =>{
+                count++;
+                return {
+                ...singleData.dataValues,
+                serial_no:count
+                }
+         }))
+        }
+             
+             let incrementedCycle = 1
+             while(cycleCount >= incrementedCycle ){
+    
+                if(incrementedCycle == cycleCount){  
+                    console.log("1");
+                    let startCount = 0
+                        
+                       if(incrementedCycle == 1){
+                        console.log("1");
+                        startCount =  itemsLength > 20 ?  20: 15
+                        let arrayData = await processQuotationItems(QuotationData.data.id,incrementedCycle,startCount,false);
+                       
+                        overAllObject[`cycleCount_${incrementedCycle}`].push(...arrayData)
+                        let arrayData1 = await processQuotationItems(QuotationData.data.id,incrementedCycle+1,startCount,false);
+                        overAllObject[`cycleCount_${incrementedCycle + 1}`].push(...arrayData1)
+                       }else{
+                        console.log("2" + `cycleCount_${incrementedCycle}`);
+                        console.log("2" + `cycleCount_${incrementedCycle + 1}`);
+                        
+                        let arrayData = await processQuotationItems(QuotationData.data.id,incrementedCycle,overAllObject[`cycleCount_${incrementedCycle - 1}`].length,true);
+                        // return res.json( arrayData)
+                        let count  =1
+                        for(let singleData of arrayData){
+                            if(count <=20){
+                                overAllObject[`cycleCount_${incrementedCycle}`].push(singleData)
+                            }else{
+                                overAllObject[`cycleCount_${incrementedCycle + 1}`].push(singleData)
+                            }
+                            count++;
+                        }
+                       
+                       }
+                }else{
+                    console.log("3");
+                    
+                    let startCount = incrementedCycle == 1 ? 20 : 25
+                    let arrayData = await processQuotationItems(QuotationData.data.id,incrementedCycle,startCount,false);
+                    overAllObject[`cycleCount_${incrementedCycle}`].push(...arrayData)
+                     
+                }
+                incrementedCycle++;
+            }
+             
+          let formattedItems = {
+             "lessThan15":overAllObject['cycleCount_1'],
+             "is_value_exist_15":overAllObject['cycleCount_1'].length > 0 ? true :false,
+             "lessThan40":overAllObject['cycleCount_2'],
+             "is_value_exist_40":overAllObject['cycleCount_2'].length > 0 ? true :false,
+             "lessThan65":overAllObject['cycleCount_3'],
+             "is_value_exist_65":overAllObject['cycleCount_3'].length > 0 ? true :false,
+             "lessThan90":overAllObject['cycleCount_4'],
+             "is_value_exist_90":overAllObject['cycleCount_4'].length > 0 ? true :false,
+             "lessThan115":overAllObject['cycleCount_5'],
+             "is_value_exist_115":overAllObject['cycleCount_5'].length > 0 ? true :false,
+             "lessThan140":overAllObject['cycleCount_6'],
+             "is_value_exist_140":overAllObject['cycleCount_6'].length > 0 ? true :false,
+             "lessThan165":overAllObject['cycleCount_7'],
+             "is_value_exist_165":overAllObject['cycleCount_7'].length > 0 ? true :false,
+             "lessThan190":overAllObject['cycleCount_8'],
+             "is_value_exist_190":overAllObject['cycleCount_8'].length > 0 ? true :false,
+             "lessThan215":overAllObject['cycleCount_9'],
+             "is_value_exist_215":overAllObject['cycleCount_9'].length > 0 ? true :false,
+             "lessThan235":overAllObject['cycleCount_10'],
+             "is_value_exist_235":overAllObject['cycleCount_10'].length > 0 ? true :false,
+             "lessThan255":overAllObject['cycleCount_11'],
+             "is_value_exist_255":overAllObject['cycleCount_11'].length > 0 ? true :false
+          }
+        //   return res.json(formattedItems)
+       
+             let userData = await this.userModel.findOne({where:{id:user_id}})
+             let sign = await this.getSignatureAsBase64(userData?.user_signature)
+            
              let grand_total=  await this.helperService.formatAmount(Number(QuotationData.data.grand_total.replace(/,/g, '')),QuotationData.data.currency)
-             let  sub_total = await this.helperService.formatAmount(Number(QuotationData.data.sub_total.replace(/,/g, '')),QuotationData.data.currency)
-            //    return res.json(formattedItems)
+            let  sub_total = await this.helperService.formatAmount(Number(QuotationData.data.sub_total.replace(/,/g, '')),QuotationData.data.currency)
             let formData = [QuotationData.data].map(singleData => ({
                 ...singleData,
                 amount_in_words: numberInWords,
@@ -478,15 +525,14 @@ export class QuotationService {
                 is_vat_enable:singleData.currency  == cashType.SAR  ? true:false,
                 quotation_items:quotation_items,
                 formatted_items:formattedItems,
-                user_sign:userData?.user_signature
+                user_sign: sign.data
             }))
-            // return res.json(formData) 
-            let fileName = (QuotationData.data.customer_name?.trim()?.replace(/ /g, '_')) + "_" + QuotationData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
+               
+            let fileName =  (QuotationData.data.customer_name?.trim()?.replace(/ /g, '_')) + "_" + QuotationData.data.doc_number + "_" + moment().format('MMM_YYYY') + ".pdf"
             /*Handlebars is blocking access to object properties inherited from the prototype chain for security reasons. This behavior was introduced to prevent prototype pollution vulnerabilities.*/
             /*By serializing and deserializing the object, you ensure that only own properties are kept, eliminating any issues with prototype access restrictions*/
             const plainContext = JSON.parse(JSON.stringify(formData[0]));
 
-            //   return res.json(plainContext) 
 
             const generatePayslip = await this.helperService.generatePdfFromTemplate(QUOTATION_UPLOAD_DIRECTORY, templateName, plainContext, 'payslip');
            
@@ -853,7 +899,7 @@ export class QuotationService {
                        }else{
                         console.log("2" + `cycleCount_${incrementedCycle}`);
                         console.log("2" + `cycleCount_${incrementedCycle + 1}`);
-                        let arrayData = await processQuotationItems(QuotationData.data.id,incrementedCycle,25,true);
+                        let arrayData = await processQuotationItems(QuotationData.data.id,incrementedCycle,overAllObject[`cycleCount_${incrementedCycle - 1}`].length,true);
                       
                         let count  =1
                         for(let singleData of arrayData){
