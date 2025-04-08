@@ -948,9 +948,10 @@ export class QuotationService {
              "is_value_exist_255":overAllObject['cycleCount_11'].length > 0 ? true :false
           }
        
-             let userData = await this.userModel.findOne({where:{id:{id:QuotationData?.data?.creator_user_id}}})
+             let userData = await this.userModel.findOne({where:{id:QuotationData?.data?.created_user_id}})
+           
              let sign = await this.getSignatureAsBase64(userData?.user_signature)
-            
+              
              let grand_total=  await this.helperService.formatAmount(Number(QuotationData.data.grand_total.replace(/,/g, '')),QuotationData.data.currency)
             let  sub_total = await this.helperService.formatAmount(Number(QuotationData.data.sub_total.replace(/,/g, '')),QuotationData.data.currency)
             let formData = [QuotationData.data].map(singleData => ({
