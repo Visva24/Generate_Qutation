@@ -332,7 +332,8 @@ export class SalesInvoiceService {
             const sidelogo = `data:image/png;base64,${sideLogoBase64Image}`;
             const watermark = `data:image/png;base64,${waterMarkBase64Image}`;
 
-            let numberInWords = await this.helperService.numberToWord(invoiceData.data.grand_total, invoiceData.data.currency)
+            let numberInWords = await this.helperService.numberToWord(parseFloat(invoiceData.data.grand_total.replace(/,/g, '')), invoiceData.data.currency)
+            
             let itemsLength = (invoiceData.data.sales_items).length
                 
             //  return res.json(itemsLength)
@@ -606,7 +607,7 @@ export class SalesInvoiceService {
             let modifiedData = []
             let totalAmount = getInvoiceList.reduce((acc, sum) => acc + +sum.amount, 0)
             let sub_total = totalAmount 
-            totalAmount =  ( totalAmount - total_discount )
+           
             let i = 1
             for (let singleData of getInvoiceList) {
                 let obj = {}
@@ -617,6 +618,7 @@ export class SalesInvoiceService {
                 i++
                 modifiedData.push(obj)
             }
+            totalAmount =  modifiedData.length >0 ? ( totalAmount - total_discount ) : 0;
             let amountInWords = await this.helperService.numberToWord(Math.floor(totalAmount), currency)
             let objData = {
                 "total_discount": modifiedData.length >0 ? (total_discount ? total_discount :"0.00") :"0.00",
@@ -702,6 +704,7 @@ export class SalesInvoiceService {
                     return {
                         ...singleData.dataValues,
                         doc_number: sales_doc_number,
+                        doc_date: new Date(),
                         quotation_id: singleData.dataValues.id,
                         is_form_move_forward: true,
                         current_user_id: current_user_id

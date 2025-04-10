@@ -1048,7 +1048,7 @@ export class QuotationService {
             let getTempQuotationList = await this.tempQuotationItemModel.findAll({ where: {user_id:user_id, doc_number: doc_number }, order: [["id", "ASC"]] })
             let totalAmount = getTempQuotationList.reduce((acc, sum) => acc + +sum.amount, 0)
             let sub_total = totalAmount 
-            totalAmount =  ( totalAmount - total_discount )
+          
             // let totalTax = getTempQuotationList.reduce((acc, sum) => acc + +sum.tax, 0)
             // let totalDiscount = getTempQuotationList.reduce((acc, sum) => acc + +sum.discount, 0)
             let modifiedData = []
@@ -1062,6 +1062,7 @@ export class QuotationService {
                 i++
                 modifiedData.push(obj)
             }
+            totalAmount =  modifiedData.length >0 ? ( totalAmount - total_discount ) :0
             let amountInWords = await this.helperService.numberToWord(Math.floor(totalAmount), currency)
             let objData = {
                 "total_discount": modifiedData.length >0 ? (total_discount ? total_discount :"0.00") :"0.00",

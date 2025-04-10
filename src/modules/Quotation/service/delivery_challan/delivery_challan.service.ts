@@ -697,6 +697,7 @@ export class DeliveryChallanService {
                     return {
                         ...singleData.dataValues,
                         doc_number: dc_doc_number,
+                        doc_date: new Date(),
                         quotation_id: singleData.dataValues.id,
                         is_form_move_forward: true,
                         current_user_id: current_user_id,
