@@ -99,6 +99,7 @@ export class SalesInvoiceService {
 
                     // return obj
                         let savedData =   await this.SaveOrUpdateSalesInvoiceList(user_id,docNumber,[revisionObj],null)
+                        await this.SalesItemModel.destroy({where:{id:singleData.id}})
                 }
             }
 
@@ -110,6 +111,7 @@ export class SalesInvoiceService {
                     sub_total: await this.helperService.formatAmount(singleData.sub_total,singleData.currency),
                     grand_total: await this.helperService.formatAmount(singleData.grand_total,singleData.currency),
                     // doc_number:singleData.doc_number,
+                    total_discount: modifiedListData.length > 0 ? singleData.total_discount: 0,
                     sales_items: modifiedListData,
                     amount_in_words: await this.helperService.numberToWord(singleData.grand_total, singleData.currency)
                 }

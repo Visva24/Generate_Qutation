@@ -80,6 +80,7 @@ export class QuotationService {
                 revisedDocNumber = (await this.generateRevisionDocNumber(getQuotationData[0].id)).data
             }
             for (let singleData of getQuotationData[0].quotation_items) {
+              
                 let obj: any = {}
                 Object.assign(obj, {
                     ...singleData.dataValues
@@ -101,6 +102,10 @@ export class QuotationService {
                     let existingQuotationItem = await this.tempQuotationItemModel.findOne({ where: {user_id:user_id, doc_number: revisedDocNumber, item_number: revisionObj.item_number, description: revisionObj.description } })
                     if (existingQuotationItem == null) {
                         let savedData = await this.SaveOrUpdateQuotationList(user_id,revisedDocNumber, null,[revisionObj], null)
+                         if(savedData.status == "success"){
+                             let dropData =await this.QuotationListModel.destroy({ where: {id:singleData?.id} })
+                            
+                         }
                     }
 
                 }
@@ -113,6 +118,7 @@ export class QuotationService {
                     ...(type == "revised" && { doc_number: revisedDocNumber }),
                     quotation_items: modifiedListData,
                     sub_total: await this.helperService.formatAmount(singleData.sub_total,singleData.currency),
+                    total_discount: modifiedListData.length > 0 ? singleData.total_discount: 0,
                     grand_total: await this.helperService.formatAmount(singleData.grand_total,singleData.currency),
                     amount_in_words: await this.helperService.numberToWord(singleData.grand_total, singleData.currency)
                 }
