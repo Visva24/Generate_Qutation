@@ -1,24 +1,44 @@
 # Use official Node.js image
+FROM node:18 as build
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy source files
+COPY . .
+
+# Build the app
+RUN npm run build
+
+# === Final image ===
 FROM node:18
 
 # Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package.json package-lock.json ./
+# Install only production dependencies
+COPY package*.json ./
+RUN npm install --only=production
 
-# Install dependencies
-RUN npm install
-RUN npm install puppeteer@latest  # Ensure Puppeteer is installed
+# Copy built app from previous stage
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/public ./public
 
-# Copy project files
-COPY . .
+# If using Swagger static docs or assets
+COPY --from=build /app/swagger-static ./swagger-static
 
-# Set environment variables
+# Environment Variables
+ENV NODE_ENV=production
 ENV PORT=5001
 
-# Expose the correct port
+# Expose port
 EXPOSE 5001
 
-# Start the application on port 5001
-CMD ["npm", "run", "start:dev"]
+# Start app (adjust for your setup)
+CMD ["node", "dist/main"]
