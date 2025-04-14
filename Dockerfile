@@ -8,34 +8,37 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# Copy the rest of the application
+# Copy source code
 COPY . .
 
-# Build the project (if using TypeScript or a bundler)
-RUN npm run build
+# OPTIONAL: Copy Swagger static folder if it exists
+COPY ./swagger-static ./swagger-static
 
+# Build the project (assumes NestJS or TypeScript project)
+RUN npm run build
 
 
 # ----------- Production Stage -----------
 FROM node:18-alpine AS production
 
+# Set working directory
 WORKDIR /app
 
-# Copy only what is needed for production
+# Copy only necessary files from build stage
 COPY package*.json ./
 RUN npm install --omit=dev
 
-# Copy built app from build stage
+# Copy compiled source code
 COPY --from=build /app/dist ./dist
 
-# Copy Swagger static files (ensure this folder exists!)
+# Copy Swagger static assets if present
 COPY --from=build /app/swagger-static ./swagger-static
 
-# Set environment variables (optional)
+# Set environment (optional)
 ENV NODE_ENV=production
 
-# Expose port (adjust based on your app)
-EXPOSE 3000
+# Expose backend port
+EXPOSE 5001
 
-# Start the app
+# Run the backend app
 CMD ["node", "dist/main"]
