@@ -10,7 +10,7 @@ const generateSequelizeOptions = async (): Promise<SequelizeModuleOptions> => {
             dialect: "mysql",
             timezone: '+05:30', // Indian Standard Time (IST) timezone offset
             port: 3306,
-            host: "host.docker.internal",
+            host: "127.0.0.1",
             username: "test",
             password: "Admin@123123",
             database: "mydatabase",
