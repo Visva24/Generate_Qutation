@@ -6,7 +6,7 @@ const generateSequelizeOptions = async (): Promise<SequelizeModuleOptions> => {
       dialect: "mysql",
       timezone: "+05:30", // Indian Standard Time (IST) timezone offset
       port: 3306,
-      host: "127.0.0.1", // Change this to the container name of your MySQL container
+      host: "194.164.149.189", // Change this to the container name of your MySQL container
       username: "test",
       password: "Admin@123123",
       database: "mydatabase",
