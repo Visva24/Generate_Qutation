@@ -1,44 +1,41 @@
-# Use official Node.js image
-FROM node:18 as build
+# ----------- Build Stage -----------
+FROM node:18 AS build
 
 # Set working directory
 WORKDIR /app
 
-# Copy package files
+# Copy package files and install dependencies
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
 
-# Copy source files
+# Copy the rest of the application
 COPY . .
 
-# Build the app
+# Build the project (if using TypeScript or a bundler)
 RUN npm run build
 
-# === Final image ===
-FROM node:18
 
-# Set working directory
+
+# ----------- Production Stage -----------
+FROM node:18-alpine AS production
+
 WORKDIR /app
 
-# Install only production dependencies
+# Copy only what is needed for production
 COPY package*.json ./
-RUN npm install --only=production
+RUN npm install --omit=dev
 
-# Copy built app from previous stage
+# Copy built app from build stage
 COPY --from=build /app/dist ./dist
-COPY --from=build /app/public ./public
 
-# If using Swagger static docs or assets
+# Copy Swagger static files (ensure this folder exists!)
 COPY --from=build /app/swagger-static ./swagger-static
 
-# Environment Variables
+# Set environment variables (optional)
 ENV NODE_ENV=production
-ENV PORT=5001
 
-# Expose port
-EXPOSE 5001
+# Expose port (adjust based on your app)
+EXPOSE 3000
 
-# Start app (adjust for your setup)
+# Start the app
 CMD ["node", "dist/main"]
