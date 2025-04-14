@@ -11,9 +11,6 @@ RUN npm install
 # Copy source code
 COPY . .
 
-# OPTIONAL: Copy Swagger static folder if it exists
-COPY ./swagger-static ./swagger-static
-
 # Build the project (assumes NestJS or TypeScript project)
 RUN npm run build
 
@@ -30,9 +27,6 @@ RUN npm install --omit=dev
 
 # Copy compiled source code
 COPY --from=build /app/dist ./dist
-
-# Copy Swagger static assets if present
-COPY --from=build /app/swagger-static ./swagger-static
 
 # Set environment (optional)
 ENV NODE_ENV=production
