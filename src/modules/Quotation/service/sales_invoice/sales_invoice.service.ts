@@ -536,7 +536,7 @@ export class SalesInvoiceService {
             const generateInvoice = await this.helperService.generatePdfFromTemplate(SALES_INVOICE_UPLOAD_DIRECTORY, templateName, plainContext, 'sales_invoice');
             const base64Data = generateInvoice.replace(/^data:application\/pdf;base64,/, '');
 
-            return responseMessageGenerator('success', 'Delivery Challan downloaded successfully', { "base64Data": base64Data, "fileName": fileName })
+            return responseMessageGenerator('success', 'sales Invoice downloaded successfully', { "base64Data": base64Data, "fileName": fileName })
 
         } catch (error) {
             console.log(error);
