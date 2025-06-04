@@ -145,7 +145,8 @@ export class QuotationItemRepository extends Model<InferCreationAttributes<Quota
   description: string;
 
   @Column({
-    type: DataType.INTEGER
+    type: DataType.DECIMAL(20,6),
+    defaultValue: 0,
   })
   quantity: number;
 
@@ -203,7 +204,8 @@ export class TempQuotationItemRepository extends Model<InferCreationAttributes<T
   description: string;
 
   @Column({
-    type: DataType.INTEGER
+    type: DataType.DECIMAL(20,6),
+    defaultValue: 0,
   })
   quantity: number;
 

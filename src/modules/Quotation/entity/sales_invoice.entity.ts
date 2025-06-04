@@ -144,7 +144,10 @@ export class SalesItemRepository extends Model<InferCreationAttributes<SalesItem
     @Column({ type: DataType.STRING })
     description: string;
 
-    @Column({ type: DataType.INTEGER })
+    @Column({
+    type: DataType.DECIMAL(20,6),
+    defaultValue: 0,
+    })
     quantity: number;
 
     @Column({ type: DataType.STRING })
@@ -176,7 +179,10 @@ export class TempSalesItemRepository extends Model<InferCreationAttributes<TempS
     @Column({ type: DataType.STRING })
     description: string;
 
-    @Column({ type: DataType.INTEGER })
+     @Column({
+    type: DataType.DECIMAL(20,6),
+    defaultValue: 0,
+    })
     quantity: number;
 
     @Column({ type: DataType.STRING })
