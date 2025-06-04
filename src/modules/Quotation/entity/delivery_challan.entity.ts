@@ -118,7 +118,7 @@ export class DeliveryItemRepository extends Model<InferCreationAttributes<Delive
     description: string;
 
      @Column({
-    type: DataType.DECIMAL(20,6),
+    type: DataType.DECIMAL(20,2),
     defaultValue: 0,
     })
     quantity: number;
@@ -145,7 +145,7 @@ export class TempDeliveryItemRepository extends Model<InferCreationAttributes<Te
     user_id: number;
 
      @Column({
-    type: DataType.DECIMAL(20,6),
+    type: DataType.DECIMAL(20,2),
     defaultValue: 0,
     })
     quantity: number;

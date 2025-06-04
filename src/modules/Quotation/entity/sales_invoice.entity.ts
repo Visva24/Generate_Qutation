@@ -144,8 +144,8 @@ export class SalesItemRepository extends Model<InferCreationAttributes<SalesItem
     @Column({ type: DataType.STRING })
     description: string;
 
-    @Column({
-    type: DataType.DECIMAL(20,6),
+     @Column({
+    type: DataType.DECIMAL(20,2),
     defaultValue: 0,
     })
     quantity: number;
@@ -180,7 +180,7 @@ export class TempSalesItemRepository extends Model<InferCreationAttributes<TempS
     description: string;
 
      @Column({
-    type: DataType.DECIMAL(20,6),
+    type: DataType.DECIMAL(20,2),
     defaultValue: 0,
     })
     quantity: number;

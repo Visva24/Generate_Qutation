@@ -144,10 +144,10 @@ export class QuotationItemRepository extends Model<InferCreationAttributes<Quota
   })
   description: string;
 
-  @Column({
-    type: DataType.DECIMAL(20,6),
+    @Column({
+    type: DataType.DECIMAL(20,2),
     defaultValue: 0,
-  })
+    })
   quantity: number;
 
   @Column({
@@ -203,10 +203,10 @@ export class TempQuotationItemRepository extends Model<InferCreationAttributes<T
   })
   description: string;
 
-  @Column({
-    type: DataType.DECIMAL(20,6),
+    @Column({
+    type: DataType.DECIMAL(20,2),
     defaultValue: 0,
-  })
+    })
   quantity: number;
 
   @Column({
