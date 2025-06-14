@@ -73,7 +73,10 @@ export class DeliveryChallanService {
             let modifiedListData = []
             let i = 1
             if(type =="revision"){
-                await this.TempDeliveryItemModel.destroy({where:{doc_number:getChallanData[0]['doc_number']}})
+                if(getChallanData[0].delivery_items.length > 0){
+                  await this.TempDeliveryItemModel.destroy({where:{doc_number:getChallanData[0]['doc_number']}})
+                }
+               
             }
             for (let singleData of getChallanData[0].delivery_items) {
                 let obj: any = {}

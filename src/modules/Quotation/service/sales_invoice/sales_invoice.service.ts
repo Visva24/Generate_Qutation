@@ -77,7 +77,11 @@ export class SalesInvoiceService {
             let modifiedListData = []
             let i = 1
             if(type =="revision"){
-                await this.TempSalesItemModel.destroy({where:{doc_number:getInvoiceData[0]['doc_number']}})
+
+                if(getInvoiceData[0].sales_items.length > 0){
+                    await this.TempSalesItemModel.destroy({where:{doc_number:getInvoiceData[0]['doc_number']}})
+                }
+               
             }
             for (let singleData of getInvoiceData[0].sales_items) {
                 let obj: any = {}
