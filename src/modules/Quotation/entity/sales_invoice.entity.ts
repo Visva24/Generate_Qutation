@@ -69,16 +69,16 @@ export class SalesInvoiceFormRepository extends Model<InferCreationAttributes<Sa
     @Column
     amount_in_words: string
 
-    @Column(DataType.DECIMAL)
+     @Column({ type: DataType.DECIMAL(10, 2) })
     sub_total: number
 
-    @Column(DataType.DECIMAL)
+     @Column({ type: DataType.DECIMAL(10, 2) })
     total_discount: number
 
-    @Column(DataType.DECIMAL)
+     @Column({ type: DataType.DECIMAL(10, 2) })
     total_tax: number
 
-    @Column(DataType.DECIMAL)
+     @Column({ type: DataType.DECIMAL(10, 2) })
     grand_total: number
 
     @Column(DataType.JSON)

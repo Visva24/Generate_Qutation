@@ -188,7 +188,7 @@ export class SalesInvoiceService {
             let overAllAmount = totalDiscount ? ( totalAmount - totalDiscount ): totalAmount
             InvoiceForm.sub_total = totalAmount
             InvoiceForm.grand_total = overAllAmount
-
+        
             let [createSalesInvoice, update] = await this.SalesInvoiceFormModel.upsert({ id: SalesInvoiceData?.id, ...InvoiceForm })
 
 
@@ -566,10 +566,11 @@ export class SalesInvoiceService {
                     
                 //     totalAmount =  ( totalAmount -((totalAmount *  total_discount)/ 100) )
                 // }
+
                 let formatedData = invoice_list.map(singleData => ({
                     ...singleData,
                     doc_number: doc_number,
-                    amount: Math.round(totalAmount),
+                    amount: totalAmount,
                     user_id:user_id
                 }))
 
@@ -588,10 +589,11 @@ export class SalesInvoiceService {
                     
                 //     totalAmount =  ( totalAmount -((totalAmount *  total_discount)/ 100) )
                 // }
+                
                 let formatedData = invoice_list.map(singleData => ({
                     ...singleData,
                     doc_number: doc_number,
-                    amount: Math.round(totalAmount),
+                    amount: totalAmount,
                     user_id:user_id
                 }))
                 let createInvoice = await this.TempSalesItemModel.bulkCreate(formatedData)
@@ -625,7 +627,7 @@ export class SalesInvoiceService {
                 modifiedData.push(obj)
             }
             totalAmount =  modifiedData.length >0 ? ( totalAmount - total_discount ) : 0;
-            let amountInWords = await this.helperService.numberToWord(Math.floor(totalAmount), currency)
+            let amountInWords = await this.helperService.numberToWord(totalAmount, currency)
             let objData = {
                 "total_discount": modifiedData.length >0 ? (total_discount ? total_discount :"0.00") :"0.00",
                 "total_tax": "0.00",

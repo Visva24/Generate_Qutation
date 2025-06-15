@@ -58,16 +58,16 @@ export class QuotationFormRepository extends Model<InferCreationAttributes<Quota
   @Column
   payment_terms: string
 
-  @Column(DataType.DECIMAL)
+   @Column({ type: DataType.DECIMAL(10, 2) })
   sub_total: number
 
-  @Column(DataType.DECIMAL)
+   @Column({ type: DataType.DECIMAL(10, 2) })
   total_discount: number
 
-  @Column(DataType.DECIMAL)
+   @Column({ type: DataType.DECIMAL(10, 2) })
   total_tax: number
 
-  @Column(DataType.DECIMAL)
+   @Column({ type: DataType.DECIMAL(10, 2) })
   grand_total: number
 
   @Column({ defaultValue: false })
